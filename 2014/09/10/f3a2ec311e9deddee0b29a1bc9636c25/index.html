@@ -1,0 +1,244 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【Yum】32位redhat6系统安装yum | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="## 32位redhat6系统安装yum由于&amp;nbsp;redhat的yum在线更新是收费的，如果没有注册的话不能使用，如果要使用，需将redhat的yum卸载后，重启安装，再配置其他源，以下为详细过程：&amp;nbsp;### 一，安装国内在线yum源(网易163提供的)">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【Yum】32位redhat6系统安装yum"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-09-10T00:33:21.000Z"><a href="/2014/09/10/f3a2ec311e9deddee0b29a1bc9636c25/">2014-09-10</a></time>
+      
+      
+  
+    <h1 class="title">【Yum】32位redhat6系统安装yum</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <div><br><br>## <strong>32位redhat6系统安装yum</strong><br><br>由于&nbsp;<a href="http://space.itpub.net/25313300/viewspace-708509" target="_blank" rel="external"><strong>redhat</strong></a>的yum在线更新是收费的，如果没有注册的话不能使用，如果要使用，需将redhat的yum卸载后，重启<a href="http://space.itpub.net/25313300/viewspace-708509" target="_blank" rel="external"><strong>安装</strong></a>，再配置其他源，以下为详细过程：&nbsp;<br><br>### <strong>一，安装国内在线yum源(网易163提供的)</strong><br><a id="more"></a><div><a><a href="http://mirrors.163.com/centos/" target="_blank" rel="external">http://mirrors.163.com/centos/</a></a></div></div>
+
+<h4 id="1-删除redhat原有的yum-nbsp"><a href="#1-删除redhat原有的yum-nbsp" class="headerlink" title="1.删除redhat原有的yum&nbsp;"></a><strong>1.删除redhat原有的yum</strong>&nbsp;</h4><p>rpm -aq|grep yum|xargs rpm -e –nodeps </p>
+<h4 id="2-下载yum安装文件-需要有连接上web"><a href="#2-下载yum安装文件-需要有连接上web" class="headerlink" title="2.下载yum安装文件 (需要有连接上web)"></a><strong>2.下载yum安装文件 (需要有连接上web)</strong></h4><p>wget <a href="http://mirrors.163.com/centos/6/os/i386/Packages/yum-3.2.29-40.el6.centos.noarch.rpm" target="_blank" rel="external">http://mirrors.163.com/centos/6/os/i386/Packages/yum-3.2.29-40.el6.centos.noarch.rpm</a><br>wget <a href="http://mirrors.163.com/centos/6/os/i386/Packages/yum-metadata-parser-1.1.2-16.el6.i686.rpm" target="_blank" rel="external">http://mirrors.163.com/centos/6/os/i386/Packages/yum-metadata-parser-1.1.2-16.el6.i686.rpm</a><br>wget <a href="http://mirrors.163.com/centos/6/os/i386/Packages/yum-plugin-fastestmirror-1.1.30-14.el6.noarch.rpm" target="_blank" rel="external">http://mirrors.163.com/centos/6/os/i386/Packages/yum-plugin-fastestmirror-1.1.30-14.el6.noarch.rpm</a><br>wget <a href="http://mirrors.163.com/centos/6/os/i386/Packages/" target="_blank" rel="external">http://mirrors.163.com/centos/6/os/i386/Packages/</a><span data-wiz-span="data-wiz-span" style="font-size: 13px;">python-iniparse-0.3.1-2.1.el6.noarch.rpm</span></p>
+<h4 id="3-进行安装yum-nbsp"><a href="#3-进行安装yum-nbsp" class="headerlink" title="3.进行安装yum&nbsp;"></a><strong>3.进行安装yum&nbsp;</strong></h4><p>rpm -ivh python-iniparse-0.3.1-2.1.el6.noarch.rpm&nbsp;<br>rpm -ivh yum-metadata-parser-1.1.2-16.1.el6.i686.rpm&nbsp;<br>rpm -ivh yum-3.2.29-40.el6.centos.noarch.rpm yum-plugin-fastestmirror-1.1.30-14.el6.noarch.rpm&nbsp;&nbsp;<br><strong>注意最后两个包必需同时安装，否则会相互依赖 </strong></p>
+<h4 id="4-编辑repo仓库服务器配置文件"><a href="#4-编辑repo仓库服务器配置文件" class="headerlink" title="4.编辑repo仓库服务器配置文件"></a><strong>4.编辑repo仓库服务器配置文件</strong></h4><p>在配置文件中配置如下：/etc/yum.repos.d/rhel-source.repo</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><br></div><div>[base]<br>name=CentOS-<span style="color: #800080;">$releasever</span>&nbsp;-&nbsp;Base<br>baseurl=<a href="http://mirrors" target="_blank" rel="external">http://mirrors</a>.<span style="color: #800000;">163</span>.com/centos/<span style="color: #800000;">6</span>/os/<span style="color: #800080;">$basearch</span>/<br>gpgcheck=<span style="color: #800000;">1</span><br>gpgkey=<a href="http://mirrors" target="_blank" rel="external">http://mirrors</a>.<span style="color: #800000;">163</span>.com/centos/RPM-GPG-KEY-CentOS-<span style="color: #800000;">6</span><br><br><span style="color: #008000;">#</span><span style="color: #008000;">released&nbsp;updates</span><span style="color: #008000;"><br></span>[updates]<br>name=CentOS-<span style="color: #800080;">$releasever</span>&nbsp;-&nbsp;Updates<br>baseurl=<a href="http://mirrors" target="_blank" rel="external">http://mirrors</a>.<span style="color: #800000;">163</span>.com/centos/<span style="color: #800000;">6</span>/updates/<span style="color: #800080;">$basearch</span>/<br>gpgcheck=<span style="color: #800000;">1</span><br>gpgkey=<a href="http://mirrors" target="_blank" rel="external">http://mirrors</a>.<span style="color: #800000;">163</span>.com/centos/RPM-GPG-KEY-CentOS-<span style="color: #800000;">6</span><br><br><span style="color: #008000;">#</span><span style="color: #008000;">packages&nbsp;used/produced&nbsp;in&nbsp;the&nbsp;build&nbsp;but&nbsp;not&nbsp;released<br>#[addons]<br>#name=CentOS-$releasever&nbsp;-&nbsp;Addons<br>#baseurl=<a href="http://mirrors.163.com/centos/$releasever/addons/$basearch/" target="_blank" rel="external">http://mirrors.163.com/centos/$releasever/addons/$basearch/</a><br>#gpgcheck=1<br>#gpgkey=<a href="http://mirrors.163.com/centos/RPM-GPG-KEY-CentOS-6" target="_blank" rel="external">http://mirrors.163.com/centos/RPM-GPG-KEY-CentOS-6</a><br>#additional&nbsp;packages&nbsp;that&nbsp;may&nbsp;be&nbsp;useful</span><span style="color: #008000;"><br></span><br>[extras]<br>name=CentOS-<span style="color: #800080;">$releasever</span>&nbsp;-&nbsp;Extras<br>baseurl=<a href="http://mirrors" target="_blank" rel="external">http://mirrors</a>.<span style="color: #800000;">163</span>.com/centos/<span style="color: #800000;">6</span>/extras/<span style="color: #800080;">$basearch</span>/<br>gpgcheck=<span style="color: #800000;">1</span><br>gpgkey=<a href="http://mirrors" target="_blank" rel="external">http://mirrors</a>.<span style="color: #800000;">163</span>.com/centos/RPM-GPG-KEY-CentOS-<span style="color: #800000;">6</span><br><span style="color: #008000;">#</span><span style="color: #008000;">additional&nbsp;packages&nbsp;that&nbsp;extend&nbsp;functionality&nbsp;of&nbsp;existing&nbsp;packages</span><span style="color: #008000;"><br></span>[centosplus]<br>name=CentOS-<span style="color: #800080;">$releasever</span>&nbsp;-&nbsp;Plus<br>baseurl=<a href="http://mirrors" target="_blank" rel="external">http://mirrors</a>.<span style="color: #800000;">163</span>.com/centos/<span style="color: #800000;">6</span>/centosplus/<span style="color: #800080;">$basearch</span>/<br>gpgcheck=<span style="color: #800000;">1</span><br>gpgkey=<a href="http://mirrors" target="_blank" rel="external">http://mirrors</a>.<span style="color: #800000;">163</span>.com/centos/RPM-GPG-KEY-CentOS-<span style="color: #800000;">6</span></div><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="&quot;复制代码&quot;"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-8038b5bf3528405ad9bb840c5ee69824_6aeeca23-32d1-4e01-bf79-daca79563a56.gif" alt="复制代码"></a></span></div></div>
+
+<h4 id="5-清除yum缓存"><a href="#5-清除yum缓存" class="headerlink" title="5.清除yum缓存"></a><strong>5.清除yum缓存</strong></h4><p>yum clean all</p>
+<h4 id="6-构建数据源基本资料"><a href="#6-构建数据源基本资料" class="headerlink" title="6.构建数据源基本资料"></a><strong>6.构建数据源基本资料</strong></h4><p>yum repolist all</p>
+<p>(如果这时运行正常，且enabld字段为1,那么表示yum源配置成功了)</p>
+<h4 id="7-尝试安装"><a href="#7-尝试安装" class="headerlink" title="7.尝试安装"></a><strong>7.尝试安装</strong></h4><p>yum install vim</p>
+<h3 id="二-配置命令解释"><a href="#二-配置命令解释" class="headerlink" title="二 配置命令解释"></a><strong>二 配置命令解释</strong></h3><div><p>注:当第一次使用yum或yum资源库有更新时,yum会自动下载所有所需的headers放置于/var/cache/yum目录下,所需时间可能较长.<br><br><strong>系统更新(更新所有可以升级的rpm包,包括kernel)</strong><br>#yum -y update<br><br><strong>每天定期执行系统更新</strong><br>#chkconfig yum on<br>#service yum start<br><br><strong>*rpm包的更新，检查可更新的rpm包</strong><br>#yum check-update<br><br><strong>更新所有的rpm包</strong><br>#yum update<br><br><strong>更新指定的rpm包,如更新kernel和kernel source</strong><br>#yum update kernel kernel-source<br><br><strong>大规模的版本升级,与yum update不同的是,连旧的淘汰的包也升级</strong><br>#yum upgrade<br><br><strong>*rpm包的安装和删除</strong><br>安装rpm包,如xmms-mp3<br>#yum install xmms-mp3<br><br><strong>删除rpm包,包括与该包有倚赖性的包</strong><br>#yum remove licq<br>注:同时会提示删除licq-gnome,licq-qt,licq-text<br><br><strong>*yum暂存(/var/cache/yum/)的相关参数</strong><br>清除暂存中rpm包文件<br>#yum clean packages<br><br><strong>清除暂存中rpm头文件</strong><br>#yum clean headers<br><br><strong>清除暂存中旧的rpm头文件</strong><br>#yum clean oldheaders<br><br><strong>清除暂存中旧的rpm头文件和包文件</strong><br>#yum clean 或#yum clean all<br>注:相当于yum clean packages + yum clean oldheaders<br><br><strong>*rpm包列表</strong><br>列出资源库中所有可以安装或更新的rpm包<br>#yum list<br><br><strong>列出资源库中特定的可以安装或更新以及已经安装的rpm包</strong><br>#yum list mozilla<br>#yum list mozilla<em><br>注:可以在rpm包名中使用匹配符,如列出所有以mozilla开头的rpm包<br><br><strong>列出资源库中所有可以更新的rpm包</strong><br>#yum list updates<br><br><strong>列出已经安装的所有的rpm包</strong><br>#yum list installed<br><br><strong>列出已经安装的但是不包含在资源库中的rpm包</strong><br>#yum list extras<br>注:通过其它网站下载安装的rpm包
+</em>rpm包信息显示(info参数同list)<br><br><strong>列出资源库中所有可以安装或更新的rpm包的信息</strong><br>#yum info<br><br><strong>列出资源库中特定的可以安装或更新以及已经安装的rpm包的信息</strong><br>#yum info mozilla<br>#yum info mozilla<em><br>注:可以在rpm包名中使用匹配符,如列出所有以mozilla开头的rpm包的信息<br><br><strong>列出资源库中所有可以更新的rpm包的信息</strong><br>#yum info updates<br><br><strong>列出已经安装的所有的rpm包的信息</strong><br>#yum info installed<br><br><strong>列出已经安装的但是不包含在资源库中的rpm包的信息</strong><br>#yum info extras<br>注:通过其它网站下载安装的rpm包的信息<br><br>**</em>搜索rpm包<strong><br>搜索匹配特定字符的rpm包<br>#yum search mozilla<br>注:在rpm包名,包描述等中搜索
+
+</strong>搜索有包含特定文件名的rpm包<strong><br>#yum provides realplay<br><br>&nbsp;<br><br>### </strong>三 常见问题解决<strong>
+
+</strong>1、如果网速慢的话可以通过增加yum的超时时间，这样就不会总是因为超时而退出。<strong><br>#vi /etc/yum.conf<br>#加上这么一句<br>timeout=120<br><br>&nbsp;
+
+</strong>2、yum Existing lock错误的解决办法<em>*<br>如果系统启动的时候， yum出现Existing lock /var/run/yum.pid: another copy is running as pid 3380. Aborting.可以用下面的办法解决：<br>方法一<br>etc/init.d/yum-updatesd stop<br><br>方法二<br>#rm -f /var/run/yum.pid<br>主要原因就是yum在自动更新，只要关掉它就可以了。<br><br>&nbsp;
+
+</em> <em> </em><br><br>先安装fastestmirror，让系统yum的时候自动选择最快的镜像：<br><br><em>#yum install yum-fastestmirror -y</em><br><br>接下来说说RPMForge。<br><br><a href="http://rpmforge.net/" target="_blank" rel="external">RPMForge</a>是一个安全、稳定并且更新及时的软件仓库，通过安装RPMForge可以是CentOS在进行yum update的时候多一个选择，有时候甚至是唯一的选择，比如想要升级rsync到3.0.x版本，如果懒得自己编译安装，就得依靠RPMForge了。<br><br>1、先安装priority这个yum的插件，这个插件用来设定安装软件时候软件仓库的优先级，一般是默认先从官方base或者镜像安装，然后从社区用户contribute的软件中安装，再从第三方软件仓库中安装。<br><em>#yum install yum-priorities</em><br><br>2、手动编辑 /etc/yum.repos.d/ 目录中后缀为.repos的文件来设置软件仓库的优先级<br><em>priority=N</em>(N是整数，范围从1-99，数字越小代表优先级越高)<br><br>官方推荐配置是<br>[base], [addons], [updates], [extras]&nbsp;这几部分 priority=1<br>[centosplus],[contrib] 这几部分priority=2<br>Third Party Repos such as rpmforge … priority=N&nbsp; (where N is &gt; 10 and based on your preference)<br><br>3、现在开始安装rpmforge的软件仓库<br>先下载rpmforge的安装包<br>&nbsp; &nbsp; &nbsp; i386&nbsp;&nbsp;<em>wget&nbsp;</em><a href="http://apt.sw.be/redhat/el5/en/i386/RPMS.dag/rpmforge-release-0.3.6-1.el5.rf.i386.rpm" target="_blank" rel="external"><em>http://apt.sw.be/redhat/el5/en/i386/RPMS.dag/rpmforge-release-0.3.6-1.el5.rf.i386.rpm</em></a><br><br>&nbsp; &nbsp; &nbsp; x86_64&nbsp;<em>wget&nbsp;</em><a href="http://apt.sw.be/redhat/el5/en/x86_64/RPMS.dag/rpmforge-release-0.3.6-1.el5.rf.x86_64.rpm" target="_blank" rel="external">_http://apt.sw.be/redhat/el5/en/x86_64/RPMS.dag/rpmforge-release-0.3.6-1.el5.rf.x86<em>64.rpm</em></a><br><br>安装<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>rpm -i rpmforge-release-0.3.6-1.el5.rf.*.rpm</em><br><br>更改 /etc/yum.repos.d/rpmforge.repo 配置文件，添加<br><em>priority=1</em>（或者2.3.4….）<br><br><div style="color:gray"><small>来源：&nbsp;&lt;<a href="http://www.cnblogs.com/shuaixf/archive/2011/11/30/2268496.html" target="_blank" rel="external">http://www.cnblogs.com/shuaixf/archive/2011/11/30/2268496.html</a><small>&gt;</small></small></div></p></div><p></p><div style="color:gray"><small>来源：&nbsp;&lt;<a href="http://www.cnblogs.com/mailingfeng/archive/2012/09/01/2666745.html" target="_blank" rel="external">http://www.cnblogs.com/mailingfeng/archive/2012/09/01/2666745.html</a><small>&gt;</small></small></div>
+
+<p><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp;</span>&nbsp;</p>
+<div><a href="http://www.wiz.cn/i/60efacb7" title="来自为知笔记(Wiz)" target="_blank" rel="external">来自为知笔记(Wiz)</a></div>
+
+<div><br><br>### 附件列表<br><br>*   <a href="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-8038b5bf3528405ad9bb840c5ee69824_redhat6_yum安装包.rar" target="_blank" rel="external">redhat6_yum安装包.rar</a></div>
+
+<p>&nbsp;</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/应用服务器/">应用服务器</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Yum/">Yum</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2014/09/10/f3a2ec311e9deddee0b29a1bc9636c25/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Kategorien</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/JAVA设计模式/">JAVA设计模式</a><small>5</small></li>
+  
+    <li><a href="/categories/WEB安全/">WEB安全</a><small>4</small></li>
+  
+    <li><a href="/categories/应用服务器/">应用服务器</a><small>7</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>5</small></li>
+  
+    <li><a href="/categories/数据库知识/">数据库知识</a><small>11</small></li>
+  
+    <li><a href="/categories/系统架构/">系统架构</a><small>4</small></li>
+  
+    <li><a href="/categories/编程语言/">编程语言</a><small>7</small></li>
+  
+    <li><a href="/categories/WEB安全/编程语言/">编程语言</a><small>2</small></li>
+  
+    <li><a href="/categories/JAVA设计模式/编程语言/">编程语言</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Jdk/">Jdk</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>5</small></li>
+  
+    <li><a href="/tags/Memcache/">Memcache</a><small>2</small></li>
+  
+    <li><a href="/tags/Mongodb/">Mongodb</a><small>3</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Oracle/">Oracle</a><small>2</small></li>
+  
+    <li><a href="/tags/Weblogic/">Weblogic</a><small>1</small></li>
+  
+    <li><a href="/tags/Yum/">Yum</a><small>1</small></li>
+  
+    <li><a href="/tags/数据库知识/">数据库知识</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

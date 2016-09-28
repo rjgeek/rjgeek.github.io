@@ -1,0 +1,519 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Seite 3 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-31T06:23:46.000Z"><a href="/2015/03/31/13398c19511b11a7b9ecdfcfc5c5295d/">2015-03-31</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/03/31/13398c19511b11a7b9ecdfcfc5c5295d/">【Mongodb】集群分片环境mongodb的版本升级</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h4 id="背景说明"><a href="#背景说明" class="headerlink" title="背景说明"></a><span style="font-family: 宋体;"><label class="wiz-todo-label wiz-todo-label-unchecked"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/03/wpid-dc9805dbb1b814621a2fc31efaab7c96_unchecked.png" alt="">背景说明</label></span></h4>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2015/03/31/13398c19511b11a7b9ecdfcfc5c5295d/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-06T00:54:17.000Z"><a href="/2015/03/06/fb09177eaf1586b386fa86c99ee81433/">2015-03-06</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/03/06/fb09177eaf1586b386fa86c99ee81433/">【Oracle】利用数据泵迁移数据库，以迁移用户schema为例</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><span style="line-height: 20.997596740722656px; font-size: 10.5pt; font-family: simsun; color: #494949;">Oracle数据泵是Oracle提供的更新、更灵活的数据导入、导出工具，数据泵可以用来导出表，表空间，用户Schema等</span></p>
+<div><span style="color: #494949; font-family: simsun;"><span style="line-height: 20.997596740722656px;">但也有限制，只能在服务器端进行。</span></span>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2015/03/06/fb09177eaf1586b386fa86c99ee81433/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-01T11:12:09.000Z"><a href="/2015/03/01/e3-80-90mongodb-e3-80-91mongodb-e7-9a-84-e8-81-94-e5-90-88-e7-b4-a2-e5-bc-95-e4-b8-8e-e5-86-85-e5-b5-8c-e7-b4-a2-e5-bc-95/">2015-03-01</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/03/01/e3-80-90mongodb-e3-80-91mongodb-e7-9a-84-e8-81-94-e5-90-88-e7-b4-a2-e5-bc-95-e4-b8-8e-e5-86-85-e5-b5-8c-e7-b4-a2-e5-bc-95/">【Mongodb】Mongodb的联合索引与内嵌索引</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><strong>【Mongodb】Mongodb的联合索引与内嵌索引</strong></p>
+<blockquote>
+<p>导读：</p>
+<p>索引是对数据库表中一列或多列的值进行排序的一种结构，使用索引可快速访问数据库表中的特定信息。索引有诸多优点如，通过创建唯一性索引，可以保证数据库表中每一行数据的唯一性； 可以大大加快数据的检索速度，当然使用索引时也存在一些不可避免的问题，本文不在此权衡，下面着重介绍以实验的形式两种常用的常见的索引。</p>
+</blockquote>
+<p><strong>实验条件：</strong></p>
+<div style="background: #DFD;"><br>集合中的数据量约500万条<br>集合存储结构 {<br>             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  “_id” : ObjectId(“54f12a2e46595fd917542d92”),<br>             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “code” : “test0”,<br>             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “age”  : 28,<br>             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  “dog” : { “name”:”d0”}<br>             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>Mongodb的版本为32位linux版<br></div><br><strong>必备知识：</strong><br><div style="background: #DFD;"><br>查询索引 db.users.getIndex();<br>增加索引 db.users.ensureIndex({});<br>删除索引 db.users.dropIndex({});<br>使用索引 db.users.find({}).expalin();<br><br> explain会返回查询使用的索引情况，耗时和扫描文档数的统计信息。<br>“cursor”:”BasicCursor”表示没有使用索引。<br>“nscanned”:1 表示查询了多少个文档。<br>“n”:1 表示返回的文档数量。<br>“millis”:0 表示整个查询的耗时。<br></div><br><strong>实验论证：</strong><br><div style="background: #DFD;"><br>1.在联合索引的情况下，查询条件与索引部分相同时索引能否生效<br>2.嵌入文档的索引在查询时能否起到辅助作用<br></div>
+
+<p><strong>实验步骤一：</strong></p>
+<div style="background: #DFD;"><br>1.验证当前集合中的数据量<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/03/1.png" alt=""><br>2.不使用索引直接查询，此时的执行计划<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/03/2.png" alt=""><br>全表扫描，耗时9223毫秒<br>3.建立联合索引<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/03/3.png" alt=""><br>4.查询条件与索引完全相同时进行查询，此时的执行计划<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/03/4.png" alt=""><br>开始使用B树索引，此时查询耗时仅为1毫秒<br>5.查询条件与索引部分相同时进行查询，此时的执行计划<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/03/5.png" alt=""><br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/03/6.png" alt=""><br>只要查询中含有任一与索引相同的条件时，联合索引在查询时都会生效<br></div><br><strong>实验结论一：</strong><br><div style="background: #DFD;"><br>在联合索引的情况下，查询条件与索引部分相同时，索引会生效<br></div>
+
+<p><strong>实验步骤二：</strong></p>
+<div style="background: #DFD;"><br>1.不使用索引直接查询，此时的执行计划<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/03/7.png" alt=""><br>全表扫描，耗时39062毫秒<br>2.建立内嵌索引<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/03/8.png" alt=""><br>3.查询条件与内嵌索引相同时进行查询，此时的执行计划<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/03/9.png" alt=""><br>使用B树索引，查询时间为0毫秒<br></div><br><strong>实验结论二：</strong><br><div style="background: #DFD;"><br>嵌入文档的索引在查询时能起到辅助作用<br></div>
+
+<p>_</p>
+<p>版权声明：自由转载-非商用-衍生-保持署名（创意共享3.0许可证）<br>引用列表：<br><a href="http://www.cnblogs.com/stephen-liu74/archive/2012/08/01/2561557.html" target="_blank" rel="external">http://www.cnblogs.com/stephen-liu74/archive/2012/08/01/2561557.html</a><br><a href="http://docs.mongodb.org/manual/core/query-optimization/" target="_blank" rel="external">http://docs.mongodb.org/manual/core/query-optimization/</a><br>_</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-02-09T22:10:48.000Z"><a href="/2015/02/09/e3-80-90-e7-bc-96-e7-a8-8b-e8-af-ad-e8-a8-80-e3-80-91-e9-81-bf-e5-85-8d-e5-88-9b-e5-bb-ba-e4-b8-8d-e5-bf-85-e8-a6-81-e7-9a-84-e5-af-b9-e8-b1-a1/">2015-02-09</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/02/09/e3-80-90-e7-bc-96-e7-a8-8b-e8-af-ad-e8-a8-80-e3-80-91-e9-81-bf-e5-85-8d-e5-88-9b-e5-bb-ba-e4-b8-8d-e5-bf-85-e8-a6-81-e7-9a-84-e5-af-b9-e8-b1-a1/">【编程语言】避免创建不必要的对象</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <div>编程时重用最好能重用对象，而不是每次需要的时候都去创建一个同样功能的新对象，如果对象是不可变的，则它可以始终被重用</div><div>除了重用那些不可变的对象外，也可以重用那些已知的不会被修改的可变对象，下面举一个常见的例子说明减少创建对象对代码优化</div><div>的重要性</div><div><br></div><div>模型说明：</div><div>其中涉及了可变的Date对象，它的值一旦计算出来就不在改变，下面建立一个模型：其中一个人，并有<span >IsPost90s方法，判断此人是否为90后</span>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2015/02/09/e3-80-90-e7-bc-96-e7-a8-8b-e8-af-ad-e8-a8-80-e3-80-91-e9-81-bf-e5-85-8d-e5-88-9b-e5-bb-ba-e4-b8-8d-e5-bf-85-e8-a6-81-e7-9a-84-e5-af-b9-e8-b1-a1/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-02-07T23:41:20.000Z"><a href="/2015/02/07/837335d0d798fb1f51576f90057bd463/">2015-02-07</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/02/07/837335d0d798fb1f51576f90057bd463/">【系统架构】高性能网站的十大原则，系统拆分</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <div>导读：</div><div>技术的进步源于需求的推动，在原始时代，单兵作战的服务器节点很容易满足零星的访问和简单的业务,<span style="font-size: 10.5pt; line-height: 1.5;">随着系统业务复杂度增加，访问流量的不断增加，</span><span style="font-size: 10.5pt; line-height: 1.5;">单兵作战的服务器</span><span style="font-size: 10.5pt; line-height: 1.5;">很难招架住千万人的“同时蹂躏”，</span><span style="font-size: 10.5pt; line-height: 1.5;">在此种情形下有以下方案可供选择，A选择性能更加优良的服务器（几乎不可行），B垂直拆分系统，将不同的模块（业务）分散到不同的机器上。C水平拓展，将系统整体分担到不同的机器上，D.同时运用垂直拆分与水平</span><span style="font-size: 10.5pt; line-height: 1.5;">拓展，用某社交网站的架构图展示如下：</span></div>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2015/02/07/837335d0d798fb1f51576f90057bd463/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-12-28T21:59:15.000Z"><a href="/2014/12/28/99cbe0dfe754af1522fea6f3a61ada14/">2014-12-28</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/12/28/99cbe0dfe754af1522fea6f3a61ada14/">【Oracle】查询锁表的用户并处理</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <div>–锁表查询</div><br><div><br><div><br><br>1.  <code>&lt;span class=&quot;pln&quot;&gt;SQLSELECT object_name&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; machine&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; s&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sid&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; s&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;serial&lt;/span&gt;&lt;span class=&quot;com&quot;&gt;# &lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;pln&quot;&gt;FROM gv$locked_object l&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; dba_objects o&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; gv$session s &lt;/span&gt;</code><br>3.  <code>&lt;span class=&quot;pln&quot;&gt;WHERE l&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;object_id&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;　=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; o&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;object_id &lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;pln&quot;&gt;AND l&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;session_id &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; s&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sid&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;</code><br></div><br></div><br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/12/28/99cbe0dfe754af1522fea6f3a61ada14/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-12-11T17:43:34.000Z"><a href="/2014/12/11/2f00dfaf87bbfa2a5ee961ec223db126/">2014-12-11</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/12/11/2f00dfaf87bbfa2a5ee961ec223db126/">【Mongodb】Mongodb查询优化一合理利用片键</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <div><br></div><div><br><br><table class="MsoTableGrid" border="1" cellspacing="0" cellpadding="0" style="border: none;"><tbody></tbody></table></div><div><br><br><table class="MsoTableGrid" border="1" cellspacing="0" cellpadding="0" style="border: none;"><br> <tbody><tr><br>  <td width="151" valign="top" style="width: 90.45pt; border-color: windowtext; border-width: 1pt; padding: 0cm 5.4pt;"><br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/12/11/2f00dfaf87bbfa2a5ee961ec223db126/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-11-30T21:09:58.000Z"><a href="/2014/11/30/5907e39990a954e2e85959b50b1bca17/">2014-11-30</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/11/30/5907e39990a954e2e85959b50b1bca17/">【Oracle】【Sql】视图的建立与dml</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>1.测试表表结构如下<div></p>
+<div><div><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-99a49482590371de7288d2ef24a054e7_f8156269-79f6-40c2-9579-0fa422acbc7e.png" alt=""><br></div><div>2.表中数据如下</div><div><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-99a49482590371de7288d2ef24a054e7_6bde7566-d0db-4d32-be75-f7de74ea2cb5.png" alt="">
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/11/30/5907e39990a954e2e85959b50b1bca17/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-11-22T00:09:14.000Z"><a href="/2014/11/22/bd77c13f2f0aa9c920b09fa28203a6c9/">2014-11-22</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/11/22/bd77c13f2f0aa9c920b09fa28203a6c9/">【Linux】手动释放linux内存</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <div>1.查看当前系统内存使用情况</div><div><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-f40eac9162e0282c4724b19146858646_bbc3ee27-250c-45dc-b75e-3240c629b32d.png" alt=""><br></div><div>2.<span style="background-color: rgb(248, 248, 248); color: rgb(51, 51, 51); font-family: 宋体; font-size: 14px; line-height: 28px; text-indent: 28px;">手动执行sync命令</span></div>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/11/22/bd77c13f2f0aa9c920b09fa28203a6c9/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-11-21T22:30:54.000Z"><a href="/2014/11/21/fdb751020f885c25b4a7cf224541d33c/">2014-11-21</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/11/21/fdb751020f885c25b4a7cf224541d33c/">【Linux】linux下权限知识整理</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <div>导读：</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;权限查看</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;权限更改命令 chmod</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;权限更改命令 chown</div><div><br></div><div><strong><span data-wiz-span="data-wiz-span" style="font-size: 12pt;">1.</span><span style="font-size: 10.5pt; line-height: 1.5;"><span data-wiz-span="data-wiz-span" style="font-size: 12pt;">权限查看</span></span></strong></div>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/11/21/fdb751020f885c25b4a7cf224541d33c/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+<nav id="pagination">
+  
+    <a href="/page/2/" class="alignleft prev">Vorherige Seite</a>
+  
+  
+    <a href="/page/4/" class="alignright next">Nächste Seite</a>
+  
+  <div class="clearfix"></div>
+</nav></div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Kategorien</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/JAVA设计模式/">JAVA设计模式</a><small>5</small></li>
+  
+    <li><a href="/categories/WEB安全/">WEB安全</a><small>4</small></li>
+  
+    <li><a href="/categories/应用服务器/">应用服务器</a><small>7</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>5</small></li>
+  
+    <li><a href="/categories/数据库知识/">数据库知识</a><small>11</small></li>
+  
+    <li><a href="/categories/系统架构/">系统架构</a><small>4</small></li>
+  
+    <li><a href="/categories/编程语言/">编程语言</a><small>7</small></li>
+  
+    <li><a href="/categories/WEB安全/编程语言/">编程语言</a><small>2</small></li>
+  
+    <li><a href="/categories/JAVA设计模式/编程语言/">编程语言</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Jdk/">Jdk</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>5</small></li>
+  
+    <li><a href="/tags/Memcache/">Memcache</a><small>2</small></li>
+  
+    <li><a href="/tags/Mongodb/">Mongodb</a><small>3</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Oracle/">Oracle</a><small>2</small></li>
+  
+    <li><a href="/tags/Weblogic/">Weblogic</a><small>1</small></li>
+  
+    <li><a href="/tags/Yum/">Yum</a><small>1</small></li>
+  
+    <li><a href="/tags/数据库知识/">数据库知识</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

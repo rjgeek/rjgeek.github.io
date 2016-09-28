@@ -1,0 +1,339 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【编程语言】Java设计原则-迪米特法则 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="定义：一个对象应该对其他对象保持最少的了解。
+问题由来：类与类之间的关系越密切，耦合度越大，当一个类发生改变时，对另一个类的影响也越大。
+解决方案：尽量降低类与类之间的耦合。
+  自从我们接触编程开始，就知道了软件编程的总的原则：低耦合，高内聚。无论是面向过程编程还是面向对象编程，只有使各个模块之间的耦合尽量的低，才能提高代码的复用率。低耦合的优点不言而喻，但是怎么样编程才能做到低耦合呢？那正是迪米特法则要去完成的。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【编程语言】Java设计原则-迪米特法则"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-02-12T16:33:15.000Z"><a href="/2016/02/12/e3-80-90-e7-bc-96-e7-a8-8b-e8-af-ad-e8-a8-80-e3-80-91java-e8-ae-be-e8-ae-a1-e5-8e-9f-e5-88-99-e8-bf-aa-e7-b1-b3-e7-89-b9-e6-b3-95-e5-88-99/">2016-02-12</a></time>
+      
+      
+  
+    <h1 class="title">【编程语言】Java设计原则-迪米特法则</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><span style="font-family: 仿宋; font-size: 14pt;"><span style="color: black; background-color: white;"><strong>定义：</strong>一个对象应该对其他对象保持最少的了解。</span><br></span></p>
+<p><span style="color: black; font-family: 仿宋; font-size: 14pt;"><strong>问题由来：</strong>类与类之间的关系越密切，耦合度越大，当一个类发生改变时，对另一个类的影响也越大。<br></span></p>
+<p><span style="color: black; font-family: 仿宋; font-size: 14pt;"><strong>解决方案：</strong>尽量降低类与类之间的耦合。<br></span></p>
+<p><span style="color: black; font-size: 14pt;"><span style="font-family: 宋体;">  </span><span style="font-family: 仿宋;">自从我们接触编程开始，就知道了软件编程的总的原则：低耦合，高内聚。无论是面向过程编程还是面向对象编程，只有使各个模块之间的耦合尽量的低，才能提高代码的复用率。低耦合的优点不言而喻，但是怎么样编程才能做到低耦合呢？那正是迪米特法则要去完成的。</span></span></p>
+<p><span style="color: black; font-size: 14pt;"><span style="font-family: 宋体;"><a id="more"></a></span><span style="font-family: 仿宋;">迪米特法则又叫最少知道原则，最早是在1987年由美国Northeastern University的Ian Holland提出。通俗的来讲，就是一个类对自己依赖的类知道的越少越好。也就是说，对于被依赖的类来说，无论逻辑多么复杂，都尽量地的将逻辑封装在类的内部，对外除了提供的public方法，不对外泄漏任何信息。迪米特法则还有一个更简单的定义：只与直接的朋友通信。首先来解释一下什么是直接的朋友：每个对象都会与其他对象有耦合关系，只要两个对象之间有耦合关系，我们就说这两个对象之间是朋友关系。耦合的方式很多，依赖、关联、组合、聚合等。其中，我们称出现成员变量、方法参数、方法返回值中的类为直接的朋友，而出现在局部变量中的类则不是直接的朋友。也就是说，陌生的类最好不要作为局部变量的形式出现在类的内部。<br></span></span></p>
+<p><span style="color: black; font-family: 仿宋; font-size: 14pt;">举一个例子：有一个集团公司，下属单位有分公司和直属部门，现在要求打印出所有下属单位的员工ID。先来看一下违反迪米特法则的设计。<br></span></p>
+<ol>
+<li><div style="background: white;"><span style="color: #008200; font-size: 9pt;"><span style="font-family: Consolas;">//</span><span style="font-family: 宋体;">总公司员工</span><span style="color: black; font-family: Consolas;">  <span style="color: #5c5c5c;"><br></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>class</strong><span style="color: black;"> Employee{  <span style="color: #5c5c5c;"><br></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>private</strong><span style="color: black;"> String id;  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> setId(String id){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        <span style="color: #006699;"><strong>this</strong><span style="color: black;">.id = id;  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> String getId(){  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        <span style="color: #006699;"><strong>return</strong><span style="color: black;"> id;  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><br></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: #008200; font-size: 9pt;"><span style="font-family: Consolas;">//</span><span style="font-family: 宋体;">分公司员工</span><span style="color: black; font-family: Consolas;">  <span style="color: #5c5c5c;"><br></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>class</strong><span style="color: black;"> SubEmployee{  <span style="color: #5c5c5c;"><br></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>private</strong><span style="color: black;"> String id;  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> setId(String id){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        <span style="color: #006699;"><strong>this</strong><span style="color: black;">.id = id;  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> String getId(){  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        <span style="color: #006699;"><strong>return</strong><span style="color: black;"> id;  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><br></div></li>
+<li><div style="background: white;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>class</strong><span style="color: black;"> SubCompanyManager{  <span style="color: #5c5c5c;"><br></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> List&lt;SubEmployee&gt; getAllEmployee(){  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        List&lt;SubEmployee&gt; list = <span style="color: #006699;"><strong>new</strong><span style="color: black;"> ArrayList&lt;SubEmployee&gt;();  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        <span style="color: #006699;"><strong>for</strong><span style="color: black;">(<span style="color: #006699;"><strong>int</strong><span style="color: black;"> i=<span style="color: #c00000;">0<span style="color: black;">; i&lt;<span style="color: #c00000;">100<span style="color: black;">; i++){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">            SubEmployee emp = <span style="color: #006699;"><strong>new</strong><span style="color: black;"> SubEmployee();  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">            <span style="color: #008200;">//</span></span><span style="font-family: 宋体;">为分公司人员按顺序分配一个</span><span style="color: #008200; font-family: Consolas;">ID<span style="color: black;">  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">            emp.setId(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">分公司</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">+i);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">            list.add(emp);  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        <span style="color: #006699;"><strong>return</strong><span style="color: black;"> list;  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><br></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>class</strong><span style="color: black;"> CompanyManager{  <span style="color: #5c5c5c;"><br></span></span></span></div></li>
+<li><div style="background: white;"><br></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> List&lt;Employee&gt; getAllEmployee(){  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        List&lt;Employee&gt; list = <span style="color: #006699;"><strong>new</strong><span style="color: black;"> ArrayList&lt;Employee&gt;();  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        <span style="color: #006699;"><strong>for</strong><span style="color: black;">(<span style="color: #006699;"><strong>int</strong><span style="color: black;"> i=<span style="color: #c00000;">0<span style="color: black;">; i&lt;<span style="color: #c00000;">30<span style="color: black;">; i++){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">            Employee emp = <span style="color: #006699;"><strong>new</strong><span style="color: black;"> Employee();  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">            <span style="color: #008200;">//</span></span><span style="font-family: 宋体;">为总公司人员按顺序分配一个</span><span style="color: #008200; font-family: Consolas;">ID<span style="color: black;">  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">            emp.setId(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">总公司</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">+i);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">            list.add(emp);  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        <span style="color: #006699;"><strong>return</strong><span style="color: black;"> list;  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><br></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> printAllEmployee(SubCompanyManager sub){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        List&lt;SubEmployee&gt; list1 = sub.getAllEmployee();  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        <span style="color: #006699;"><strong>for</strong><span style="color: black;">(SubEmployee e:list1){  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">            System.out.println(e.getId());  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><br></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        List&lt;Employee&gt; list2 = <span style="color: #006699;"><strong>this</strong><span style="color: black;">.getAllEmployee();  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        <span style="color: #006699;"><strong>for</strong><span style="color: black;">(Employee e:list2){  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">            System.out.println(e.getId());  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><br></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>class</strong><span style="color: black;"> Client{  <span style="color: #5c5c5c;"><br></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>static</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> main(String[] args){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        CompanyManager e = <span style="color: #006699;"><strong>new</strong><span style="color: black;"> CompanyManager();  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        e.printAllEmployee(<span style="color: #006699;"><strong>new</strong><span style="color: black;"> SubCompanyManager());  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div>
+
+</li>
+</ol>
+<p><span style="color: black;"><span style="font-family: Arial; font-size: 10pt;">        </span><span style="font-family: 仿宋; font-size: 14pt;">现在这个设计的主要问题出在CompanyManager中，根据迪米特法则，只与直接的朋友发生通信，而SubEmployee类并不是CompanyManager类的直接朋友（以局部变量出现的耦合不属于直接朋友），从逻辑上讲总公司只与他的分公司耦合就行了，与分公司的员工并没有任何联系，这样设计显然是增加了不必要的耦合。按照迪米特法则，应该避免类中出现这样非直接朋友关系的耦合。修改后的代码如下:</span><span style="font-family: Arial; font-size: 10pt;"><br></span></span></p>
+<p><span style="color: silver; font-family: Verdana; font-size: 7pt;"><strong>[java]</strong> <a href="http://blog.csdn.net/zhengzhb/article/details/7296930" title="view plain" target="_blank" rel="external"><span style="color: #a0a0a0;">view plain</span></a> <a href="http://blog.csdn.net/zhengzhb/article/details/7296930" title="copy" target="_blank" rel="external"><span style="color: #a0a0a0;">copy</span></a><br></span></p>
+<ol>
+<li><div style="background: white;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>class</strong><span style="color: black;"> SubCompanyManager{  <span style="color: #5c5c5c;"><br></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> List&lt;SubEmployee&gt; getAllEmployee(){  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        List&lt;SubEmployee&gt; list = <span style="color: #006699;"><strong>new</strong><span style="color: black;"> ArrayList&lt;SubEmployee&gt;();  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        <span style="color: #006699;"><strong>for</strong><span style="color: black;">(<span style="color: #006699;"><strong>int</strong><span style="color: black;"> i=<span style="color: #c00000;">0<span style="color: black;">; i&lt;<span style="color: #c00000;">100<span style="color: black;">; i++){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">            SubEmployee emp = <span style="color: #006699;"><strong>new</strong><span style="color: black;"> SubEmployee();  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">            <span style="color: #008200;">//</span></span><span style="font-family: 宋体;">为分公司人员按顺序分配一个</span><span style="color: #008200; font-family: Consolas;">ID<span style="color: black;">  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">            emp.setId(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">分公司</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">+i);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">            list.add(emp);  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        <span style="color: #006699;"><strong>return</strong><span style="color: black;"> list;  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> printEmployee(){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        List&lt;SubEmployee&gt; list = <span style="color: #006699;"><strong>this</strong><span style="color: black;">.getAllEmployee();  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        <span style="color: #006699;"><strong>for</strong><span style="color: black;">(SubEmployee e:list){  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">            System.out.println(e.getId());  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><br></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>class</strong><span style="color: black;"> CompanyManager{  <span style="color: #5c5c5c;"><br></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> List&lt;Employee&gt; getAllEmployee(){  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        List&lt;Employee&gt; list = <span style="color: #006699;"><strong>new</strong><span style="color: black;"> ArrayList&lt;Employee&gt;();  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        <span style="color: #006699;"><strong>for</strong><span style="color: black;">(<span style="color: #006699;"><strong>int</strong><span style="color: black;"> i=<span style="color: #c00000;">0<span style="color: black;">; i&lt;<span style="color: #c00000;">30<span style="color: black;">; i++){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">            Employee emp = <span style="color: #006699;"><strong>new</strong><span style="color: black;"> Employee();  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">            <span style="color: #008200;">//</span></span><span style="font-family: 宋体;">为总公司人员按顺序分配一个</span><span style="color: #008200; font-family: Consolas;">ID<span style="color: black;">  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">            emp.setId(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">总公司</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">+i);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">            list.add(emp);  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        <span style="color: #006699;"><strong>return</strong><span style="color: black;"> list;  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><br></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> printAllEmployee(SubCompanyManager sub){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        sub.printEmployee();  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        List&lt;Employee&gt; list2 = <span style="color: #006699;"><strong>this</strong><span style="color: black;">.getAllEmployee();  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        <span style="color: #006699;"><strong>for</strong><span style="color: black;">(Employee e:list2){  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">            System.out.println(e.getId());  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div>
+
+</li>
+</ol>
+<p><span style="color: black; font-family: 仿宋; font-size: 14pt;">  修改后，为分公司增加了打印人员ID的方法，总公司直接调用来打印，从而避免了与分公司的员工发生耦合。<br></span></p>
+<p><span style="color: black; font-family: 仿宋; font-size: 14pt;">  迪米特法则的初衷是降低类之间的耦合，由于每个类都减少了不必要的依赖，因此的确可以降低耦合关系。但是凡事都有度，虽然可以避免与非直接的类通信，但是要通信，必然会通过一个”中介”来发生联系，例如本例中，总公司就是通过分公司这个”中介”来与分公司的员工发生联系的。过分的使用迪米特原则，会产生大量这样的中介和传递类，导致系统复杂度变大。所以在采用迪米特法则时要反复权衡，既做到结构清晰，又要高内聚低耦合。<br></span></p>
+<p><span style="color: black; font-family: 仿宋; font-size: 14pt;">原文作者：卡奴达摩<br></span></p>
+<p><span style="color: black; font-family: 仿宋; font-size: 14pt;">原文地址：<a href="http://blog.csdn.net/zhengzhb/article/details/7296930" target="_blank" rel="external">http://blog.csdn.net/zhengzhb/article/details/7296930</a></span></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/JAVA设计模式/">JAVA设计模式</a>, <a href="/categories/JAVA设计模式/编程语言/">编程语言</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2016/02/12/e3-80-90-e7-bc-96-e7-a8-8b-e8-af-ad-e8-a8-80-e3-80-91java-e8-ae-be-e8-ae-a1-e5-8e-9f-e5-88-99-e8-bf-aa-e7-b1-b3-e7-89-b9-e6-b3-95-e5-88-99/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Kategorien</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/JAVA设计模式/">JAVA设计模式</a><small>5</small></li>
+  
+    <li><a href="/categories/WEB安全/">WEB安全</a><small>4</small></li>
+  
+    <li><a href="/categories/应用服务器/">应用服务器</a><small>7</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>5</small></li>
+  
+    <li><a href="/categories/数据库知识/">数据库知识</a><small>11</small></li>
+  
+    <li><a href="/categories/系统架构/">系统架构</a><small>4</small></li>
+  
+    <li><a href="/categories/编程语言/">编程语言</a><small>7</small></li>
+  
+    <li><a href="/categories/WEB安全/编程语言/">编程语言</a><small>2</small></li>
+  
+    <li><a href="/categories/JAVA设计模式/编程语言/">编程语言</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Jdk/">Jdk</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>5</small></li>
+  
+    <li><a href="/tags/Memcache/">Memcache</a><small>2</small></li>
+  
+    <li><a href="/tags/Mongodb/">Mongodb</a><small>3</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Oracle/">Oracle</a><small>2</small></li>
+  
+    <li><a href="/tags/Weblogic/">Weblogic</a><small>1</small></li>
+  
+    <li><a href="/tags/Yum/">Yum</a><small>1</small></li>
+  
+    <li><a href="/tags/数据库知识/">数据库知识</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

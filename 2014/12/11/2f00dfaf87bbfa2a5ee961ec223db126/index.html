@@ -1,0 +1,245 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【Mongodb】Mongodb查询优化一合理利用片键 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【Mongodb】Mongodb查询优化一合理利用片键"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-12-11T17:43:34.000Z"><a href="/2014/12/11/2f00dfaf87bbfa2a5ee961ec223db126/">2014-12-11</a></time>
+      
+      
+  
+    <h1 class="title">【Mongodb】Mongodb查询优化一合理利用片键</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <div><br></div><div><br><br><table class="MsoTableGrid" border="1" cellspacing="0" cellpadding="0" style="border: none;"><tbody></tbody></table></div><div><br><br><table class="MsoTableGrid" border="1" cellspacing="0" cellpadding="0" style="border: none;"><br> <tbody><tr><br>  <td width="151" valign="top" style="width: 90.45pt; border-color: windowtext; border-width: 1pt; padding: 0cm 5.4pt;"><br>  <a id="more"></a><br><br><strong><span style="font-size:12.0pt;font-family:
+  宋体;mso-bidi-font-family:宋体;mso-font-kerning:0pt">指标项</span></strong><span lang="EN-US" style="font-family: Arial, sans-serif;"><o:p></o:p></span><br><br>  </td><br>  <td width="559" valign="top" style="width: 335.65pt; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; border-left-style: none; padding: 0cm 5.4pt;"><br><br><strong><span style="font-size:12.0pt;font-family:
+  宋体;mso-bidi-font-family:宋体;mso-font-kerning:0pt">具体说明</span></strong><span lang="EN-US" style="font-family: Arial, sans-serif;"><o:p></o:p></span><br><br>  </td><br> </tr><br> <tr><br>  <td width="151" valign="top" style="width: 90.45pt; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; border-top-style: none; padding: 0cm 5.4pt;"><br><br><span style="font-size:12.0pt;font-family:宋体;
+  mso-bidi-font-family:宋体;mso-font-kerning:0pt">当前数据量<span lang="EN-US"><o:p></o:p></span></span><br><br>  </td><br>  <td width="559" valign="top" style="width: 335.65pt; border-top-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;"><br><br><span style="font-size:12.0pt;font-family:宋体;
+  mso-bidi-font-family:宋体;mso-font-kerning:0pt">单个集合<span lang="EN-US">100G<o:p></o:p></span></span><br><br>  </td><br> </tr><br> <tr><br>  <td width="151" valign="top" style="width: 90.45pt; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; border-top-style: none; padding: 0cm 5.4pt;"><br><br><span style="font-size:12.0pt;font-family:宋体;
+  mso-bidi-font-family:宋体;mso-font-kerning:0pt">优化结果<span lang="EN-US"><o:p></o:p></span></span><br><br>  </td><br>  <td width="559" valign="top" style="width: 335.65pt; border-top-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;"><br><br><span style="font-size:12.0pt;font-family:宋体;
+  mso-bidi-font-family:宋体;mso-font-kerning:0pt">目前查询平均相应时间小于<span lang="EN-US">20s<o:p></o:p></span></span><br><br>  </td><br> </tr><br> <tr><br>  <td width="151" valign="top" style="width: 90.45pt; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; border-top-style: none; padding: 0cm 5.4pt;"><br><br><span style="font-size:12.0pt;font-family:宋体;
+  mso-bidi-font-family:宋体;mso-font-kerning:0pt">最优查询方式<span lang="EN-US"><o:p></o:p></span></span><br><br>  </td><br>  <td width="559" valign="top" style="width: 335.65pt; border-top-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;"><br><br><span style="font-size:12.0pt;font-family:宋体;
+  mso-bidi-font-family:宋体;mso-font-kerning:0pt">切换到需要查询的单位，选择时间间隔，输入其他查询条件<span lang="EN-US"><o:p></o:p></span></span><br><br>  </td><br> </tr><br> <tr><br>  <td width="151" valign="top" style="width: 90.45pt; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; border-top-style: none; padding: 0cm 5.4pt;"><br><br><span style="font-size:12.0pt;font-family:宋体;
+  mso-bidi-font-family:宋体;mso-font-kerning:0pt">必要说明<span lang="EN-US"><o:p></o:p></span></span><br><br>  </td><br>  <td width="559" valign="top" style="width: 335.65pt; border-top-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;"><br><br><span lang="EN-US" style="font-size:12.0pt;font-family:宋体;mso-bidi-font-family:宋体;
+  mso-font-kerning:0pt">1.</span><span style="font-size:12.0pt;font-family:
+  宋体;mso-bidi-font-family:宋体;mso-font-kerning:0pt">查询时间间隔越小，速度越快，<span lang="EN-US"><o:p></o:p></span></span><br><br><span lang="EN-US" style="font-size:12.0pt;font-family:宋体;mso-bidi-font-family:宋体;
+  mso-font-kerning:0pt">2.</span><span style="font-size:12.0pt;font-family:
+  宋体;mso-bidi-font-family:宋体;mso-font-kerning:0pt">查询同一家单位首次查询速度最慢，查询次数越多，速度越快<span lang="EN-US">&nbsp; &nbsp; &nbsp;&nbsp;<o:p></o:p></span></span><br><br><span lang="EN-US" style="font-size:12.0pt;
+  font-family:宋体;mso-bidi-font-family:宋体;mso-font-kerning:0pt">3.</span><span style="font-size:12.0pt;font-family:宋体;mso-bidi-font-family:宋体;mso-font-kerning:
+  0pt">数据库多线程每个<span lang="EN-US">15</span>秒批量插入一次，在数据库插入的同一时间点去查询，速度会较慢<span lang="EN-US"><o:p></o:p></span></span><br><br>  </td><br> </tr><br> <tr><br>  <td width="151" valign="top" style="width: 90.45pt; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; border-top-style: none; padding: 0cm 5.4pt;"><br><br><span style="font-size:12.0pt;font-family:宋体;
+  mso-bidi-font-family:宋体;mso-font-kerning:0pt">优化过程<span lang="EN-US"><o:p></o:p></span></span><br><br>  </td><br>  <td width="559" valign="top" style="width: 335.65pt; border-top-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;"><br><br><span lang="EN-US" style="font-size:12.0pt;font-family:宋体;mso-bidi-font-family:宋体;
+  mso-font-kerning:0pt">1.</span><span style="font-size:12.0pt;font-family:
+  宋体;mso-bidi-font-family:宋体;mso-font-kerning:0pt">去除所有模糊查询【全表扫描】；<span lang="EN-US"><o:p></o:p></span></span><br><br><span lang="EN-US" style="font-size:12.0pt;font-family:宋体;mso-bidi-font-family:宋体;
+  mso-font-kerning:0pt">2.</span><span style="font-size:12.0pt;font-family:
+  宋体;mso-bidi-font-family:宋体;mso-font-kerning:0pt">优化查询<span lang="EN-US">json</span>串，【去除<span lang="EN-US">KEY</span>中双引号，速度有明显提升，原因不明】，<span lang="EN-US"><o:p></o:p></span></span><br><br><span lang="EN-US" style="font-size:12.0pt;font-family:宋体;mso-bidi-font-family:宋体;
+  mso-font-kerning:0pt">3.</span><span style="font-size:12.0pt;font-family:
+  宋体;mso-bidi-font-family:宋体;mso-font-kerning:0pt">利用联合索引中单位<span lang="EN-US">ID</span>字段并与其他字段组合【<span lang="EN-US">B</span>树扫描】，<span lang="EN-US"><o:p></o:p></span></span><br><br><span lang="EN-US" style="font-size:12.0pt;
+  font-family:宋体;mso-bidi-font-family:宋体;mso-font-kerning:0pt">4.</span><span style="font-size:12.0pt;font-family:宋体;mso-bidi-font-family:宋体;mso-font-kerning:
+  0pt">利用索引总按照时间倒序的规律【<span lang="EN-US">B</span>树扫描】<span lang="EN-US"><o:p></o:p></span></span><br><br>  </td><br> </tr><br></tbody></table></div><div><br></div><div><br></div><div>1.查询最优图示：</div><div><br></div><div><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-12b45b80b162bb572027a83698960c26_36d47459-a5e4-435a-a019-afd3aa9ad8e5.png" alt="0N9$D3%1Y~KVJ2R$GDG@)ZU.png"><br></div><div><br></div><div>2.生产环境10点左右查询，时间显示</div><div><br></div><div><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-12b45b80b162bb572027a83698960c26_e76dbc99-8679-439d-9ef7-322eaf6823a7.bmp" alt="3.bmp"><br></div><div><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-12b45b80b162bb572027a83698960c26_95c8a9c0-0da9-4216-9bd8-2c781285f1e1.bmp" alt="111.bmp"><br></div><div><br></div><div>3.查询JSON字符串优化前后对比图</div><div><br></div><div><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-12b45b80b162bb572027a83698960c26_cada9c3b-6cbb-4fa2-bdcc-b0d88c144941.jpg" alt="FH@05Q`HD)9OIT_9CGCFO[9.jpg](http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-12b45b80b162bb572027a83698960c26_67b8e8f2-81d2-40d7-8c06-48b8f6639bc9.jpg)![[C_K4U64E1]H{HO`{(W(W{A.jpg"></div><div><br></div><div><span style="font-size: 10.5pt; line-height: 1.5;">4.生产环境优化前后，平均时间对比</span></div><div><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-12b45b80b162bb572027a83698960c26_ef05be57-c55c-424a-a768-488920703e1d.png" alt="P`~D22H4YKSC$8Y00TLWV{U.png"><br></div><div><br></div><div><br></div>
+
+<div><a href="http://www.wiz.cn/i/60efacb7" title="来自为知笔记(Wiz)" target="_blank" rel="external">来自为知笔记(Wiz)</a></div>
+
+<div><br><br>### 附件列表<br><br><em>   <a href="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-12b45b80b162bb572027a83698960c26_C_K4U64E1HHOWWA.jpg" target="_blank" rel="external">[C_K4U64E1]H{HO`{(W(W{A.jpg</a>
+</em>   <a href="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-12b45b80b162bb572027a83698960c26_C_K4U64E1HHOWWA_2.jpg" target="_blank" rel="external">[C_K4U64E1]H{HO`{(W(W{A_2.jpg</a><br><em>   <a href="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-12b45b80b162bb572027a83698960c26_0N9D3%1YKVJ2RGDG@ZU.png" target="_blank" rel="external">0N9$D3%1Y~KVJ2R$GDG@)ZU.png</a>
+</em>   <a href="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-12b45b80b162bb572027a83698960c26_111.bmp" target="_blank" rel="external">111.bmp</a><br><em>   <a href="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-12b45b80b162bb572027a83698960c26_3.bmp" target="_blank" rel="external">3.bmp</a>
+</em>   [FH@05Q<code>HD)9OIT_9CGCFO[9.jpg](http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-12b45b80b162bb572027a83698960c26_FH@05QHD9OIT_9CGCFO9.jpg)
+*   [FH@05Q</code>HD)9OIT_9CGCFO<a href="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-12b45b80b162bb572027a83698960c26_FH@05QHD9OIT_9CGCFO9_2.jpg" target="_blank" rel="external">9_2.jpg</a><br>*   <a href="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-12b45b80b162bb572027a83698960c26_PD22H4YKSC8Y00TLWVU.png" target="_blank" rel="external">P`~D22H4YKSC$8Y00TLWV{U.png</a></div>
+
+<p>&nbsp;</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/数据库知识/">数据库知识</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2014/12/11/2f00dfaf87bbfa2a5ee961ec223db126/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Kategorien</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/JAVA设计模式/">JAVA设计模式</a><small>5</small></li>
+  
+    <li><a href="/categories/WEB安全/">WEB安全</a><small>4</small></li>
+  
+    <li><a href="/categories/应用服务器/">应用服务器</a><small>7</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>5</small></li>
+  
+    <li><a href="/categories/数据库知识/">数据库知识</a><small>11</small></li>
+  
+    <li><a href="/categories/系统架构/">系统架构</a><small>4</small></li>
+  
+    <li><a href="/categories/编程语言/">编程语言</a><small>7</small></li>
+  
+    <li><a href="/categories/WEB安全/编程语言/">编程语言</a><small>2</small></li>
+  
+    <li><a href="/categories/JAVA设计模式/编程语言/">编程语言</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Jdk/">Jdk</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>5</small></li>
+  
+    <li><a href="/tags/Memcache/">Memcache</a><small>2</small></li>
+  
+    <li><a href="/tags/Mongodb/">Mongodb</a><small>3</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Oracle/">Oracle</a><small>2</small></li>
+  
+    <li><a href="/tags/Weblogic/">Weblogic</a><small>1</small></li>
+  
+    <li><a href="/tags/Yum/">Yum</a><small>1</small></li>
+  
+    <li><a href="/tags/数据库知识/">数据库知识</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

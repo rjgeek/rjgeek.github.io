@@ -1,0 +1,239 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【WEB安全】WEB安全基础知识系列-DATA URI | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="1.DATA URI 释义:">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【WEB安全】WEB安全基础知识系列-DATA URI"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-06-09T19:41:52.000Z"><a href="/2016/06/09/01ee46195698d061ab87e4ff17816a48/">2016-06-09</a></time>
+      
+      
+  
+    <h1 class="title">【WEB安全】WEB安全基础知识系列-DATA URI</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><strong><span style="font-size: 14pt;" data-wiz-span="data-wiz-span"><span style="font-family: 仿宋;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">1.DATA URI 释义:</span></span></span></strong></p>
+<ul>
+<li><a id="more"></a>
+<div style="line-height: 21px;"><span style="font-family: 仿宋;"><span style="text-align: justify; widows: 1;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">举例：</span></span><span style="font-size: 10.5pt; line-height: 1.5; text-align: justify; widows: 1;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">data:text/html;charset=utf-8;base64,PGh0bWw+PGJvZHk+aGkhISEhPC9ib2R5PjwvaHRtbD4=<br></span></span><span style="font-size: 10.5pt; line-height: 1.5; text-align: justify; widows: 1;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">Data URI scheme是在RFC2397中定义的，目的是将一些小的数据，直接嵌入到网页中，从而不用再从外部文件载入。</span></span></span></div><br><div style="line-height: 21px;"><span style="text-align: justify; widows: 1;"><span style="font-family: 仿宋;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">data表示取得数据的协定名称，</span></span></span></div><br><div style="line-height: 21px;"><span style="font-family: 仿宋;"><span style="text-align: justify; widows: 1; font-size: 10.5pt; line-height: 1.5;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">text/html</span></span><span style="text-align: justify; widows: 1; font-size: 10.5pt; line-height: 1.5;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span"> 是数据类型名称，</span></span></span></div><br><div style="line-height: 21px;"><span style="text-align: justify; widows: 1; font-size: 10.5pt; line-height: 1.5;"><span style="font-family: 仿宋;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">charset=utf-8;是编码格式，</span></span></span></div><br><div style="line-height: 21px;"><span style="font-size: 10.5pt; line-height: 1.5; text-align: justify; widows: 1;"><span style="font-family: 仿宋;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">base64 是数据的编码方法，</span></span></span></div><br><div style="line-height: 21px;"><span style="font-size: 10.5pt; line-height: 1.5; text-align: justify; widows: 1;"><span style="font-family: 仿宋;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">逗号后面就是这个image/png文件base64编码后的数据。</span></span></span></div>
+</li>
+<li><p><span style="font-family: 仿宋;"><span style="line-height: 21px; text-align: justify; widows: 1;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">data:,文本数据</span></span><br><span style="line-height: 21px; text-align: justify; widows: 1;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">data:text/plain,文本数据</span></span><br><span style="line-height: 21px; text-align: justify; widows: 1;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">data:text/html,HTML代码</span></span><br><span style="line-height: 21px; text-align: justify; widows: 1;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">data:text/html;base64,base64编码的HTML代码</span></span><br><span style="line-height: 21px; text-align: justify; widows: 1;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">data:text/css,CSS代码</span></span><br><span style="line-height: 21px; text-align: justify; widows: 1;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">data:text/css;base64,base64编码的CSS代码</span></span><br><span style="line-height: 21px; text-align: justify; widows: 1;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">data:text/javascript,Javascript代码</span></span><br><span style="line-height: 21px; text-align: justify; widows: 1;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">data:text/javascript;base64,base64编码的Javascript代码</span></span><br><span style="line-height: 21px; text-align: justify; widows: 1;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">data:image/gif;base64,base64编码的gif图片数据</span></span><br><span style="line-height: 21px; text-align: justify; widows: 1;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">data:image/png;base64,base64编码的png图片数据</span></span><br><span style="line-height: 21px; text-align: justify; widows: 1;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">data:image/jpeg;base64,base64编码的jpeg图片数据</span></span><br><span style="line-height: 21px; text-align: justify; widows: 1;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">data:image/x-icon;base64,base64编码的icon图片数据</span></span></span><br><strong><span style="font-family: 仿宋;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">2.应用举例</span></span></strong></p>
+</li>
+<li><p><span style="font-family: 仿宋;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">1.直接挂载&lt;object data=data:text/html;base64,PHNjcmlwdD5hbGVydCgieHNzIik8L3NjcmlwdD4=&gt;&lt;/object&gt;页面</span></span></p>
+</li>
+<li><span style="font-size: 1em; line-height: 1.5;"><span style="font-family: 仿宋;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">会弹’xss’,如下图所示</span></span></span></li>
+<li><span style="font-family: 仿宋;"><img src="http://helloword.1kapp.com/wp-content/uploads/2016/06/wpid-12344478dcf03dd9283fb35ede62fdd3_70504d67-cd9a-4c4b-9180-a033a19d4fc71.png" alt=""></span></li>
+<li><span style="font-family: 仿宋;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">2.压缩图片，减少网络请求，提高运行效率，<span style="widows: 1;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">图片的 base64 编码就是可以将一副图片数据编码成一串字符串，使</span></span></span></span></li>
+<li><span style="font-family: 仿宋;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span"><span style="widows: 1;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">用该字符串代替图像地址。</span></span></span></span><span style="font-size: 14pt; font-family: 仿宋;">那么图片的 base64 编码长什么样子呢？举个栗子。</span><a href="http://www.google.com/" target="_blank" rel="external"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">www.google.com</span></a><span style="font-size: 14pt; font-family: 仿宋;"> 的首页搜索框右侧</span></li>
+<li><span style="font-size: 14pt; font-family: 仿宋;">的搜索小图标使用的就是base64编码。我们可以看到：</span></li>
+<li><span style="font-family: 仿宋;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span"><img src="http://helloword.1kapp.com/wp-content/uploads/2016/06/wpid-12344478dcf03dd9283fb35ede62fdd3_898d1a7a-081d-41d7-a3c7-7bfa861a0299.jpg" alt="">       <img src="http://helloword.1kapp.com/wp-content/uploads/2016/06/wpid-12344478dcf03dd9283fb35ede62fdd3_456062b5-1132-44e8-8eb9-6a044f3f764e.jpg" alt=""></span></span></li>
+</ul>
+<div class="cnblogs_Highlighter sh-gutter" style="widows: 1;"><br><div id="highlighter_919905" class="syntaxhighlighter  javascript" style="width: 976px; margin: 1em 0px !important; position: relative !important; overflow: auto !important;"><br><table style="border-color: silver; border-spacing: 0px; width: 1279px; word-break: break-word; border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important; border-bottom-left-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; padding: 0px !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; box-sizing: content-box !important; min-height: auto !important; background-image: none !important;" border="0" cellspacing="0" cellpadding="0"><br><tbody style="border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important; border-bottom-left-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; padding: 0px !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important; background-image: none !important;"><br><tr style="border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important; border-bottom-left-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; padding: 0px !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important; background-image: none !important;"><br><td class="gutter" style="border-color: silver; padding: 3px; list-style-type: none; list-style-image: none; margin: 0px !important; border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important; border-bottom-left-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: 35px !important; box-sizing: content-box !important; min-height: auto !important; background-image: none !important;"><br><div class="line number1 index0 alt2" style="border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important; border-bottom-left-radius: 0px !important; border-width: 0px 2px 0px 0px !important; border-right-style: solid !important; border-right-color: #6ce26c !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; padding: 0px 0.5em !important; position: static !important; right: auto !important; text-align: right !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important; background-image: none !important;"><span style="font-family: 仿宋;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">1</span></span></div><br><div class="line number2 index1 alt1" style="border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important; border-bottom-left-radius: 0px !important; border-width: 0px 2px 0px 0px !important; border-right-style: solid !important; border-right-color: #6ce26c !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; padding: 0px 0.5em !important; position: static !important; right: auto !important; text-align: right !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important; background-image: none !important;"><span style="font-family: 仿宋;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">2</span></span></div><br><div class="line number3 index2 alt2" style="border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important; border-bottom-left-radius: 0px !important; border-width: 0px 2px 0px 0px !important; border-right-style: solid !important; border-right-color: #6ce26c !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; padding: 0px 0.5em !important; position: static !important; right: auto !important; text-align: right !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important; background-image: none !important;"><span style="font-family: 仿宋;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">3</span></span></div><br><div class="line number4 index3 alt1" style="border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important; border-bottom-left-radius: 0px !important; border-width: 0px 2px 0px 0px !important; border-right-style: solid !important; border-right-color: #6ce26c !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; padding: 0px 0.5em !important; position: static !important; right: auto !important; text-align: right !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important; background-image: none !important;"><span style="font-family: 仿宋;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">4</span></span></div></td><br><td class="code" style="border-color: silver; padding: 3px; list-style-type: none; list-style-image: none; margin: 0px !important; border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important; border-bottom-left-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important; background-image: none !important;"><br><div class="container" style="border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important; border-bottom-left-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; padding: 0px !important; position: relative !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important; background-image: none !important;"><br><div class="line number1 index0 alt2" style="border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important; border-bottom-left-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; padding: 0px 1em !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important; background-image: none !important;"><span style="color: #008200; font-family: 仿宋;"><span style="line-height: 1.8em !important; min-height: auto !important;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">//在css里的写法</span></span></span></div><br><div class="line number2 index1 alt1" style="border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important; border-bottom-left-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; padding: 0px 1em !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important; background-image: none !important;"><span style="color: #808080; font-family: 仿宋;"><span style="line-height: 1.8em !important; min-height: auto !important;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">#fkbx-spch, #fkbx-hspch {</span></span></span></div><br><div class="line number3 index2 alt2" style="border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important; border-bottom-left-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; padding: 0px 1em !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important; background-image: none !important;"><span style="font-family: 仿宋;"><span style="line-height: 1.8em !important; min-height: auto !important;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">  background: url(data:image/gif;base64,R0lGODlhHAAmAKIHAKqqqsvLy0hISObm5vf394uLiwAAAP</span></span><span style="color: #008200;"><span style="line-height: 1.8em !important; min-height: auto !important;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">///yH5B…EoqQqJKAIBaQOVKHAXr3t7txgBjboSvB8EpLoFZywOAo3LFE5lYs/QW9LT1TRk1V7S2xYJADs=) no-repeat center;</span></span></span></span></div><br><div class="line number4 index3 alt1" style="border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important; border-bottom-left-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; padding: 0px 1em !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important; background-image: none !important;"><span style="line-height: 1.8em !important; min-height: auto !important;"><span style="font-family: 仿宋;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">}</span></span></span></div><br></div></td><br></tr><br></tbody><br></table><br></div><br></div><br><div class="cnblogs_Highlighter sh-gutter" style="color: #333333; font-family: Tahoma, Arial, 微软雅黑, sans-serif; font-size: 16px; line-height: 28.8px; widows: 1; background-color: #ffffff;"><br><div id="highlighter_809019" class="syntaxhighlighter  javascript " style="width: 976px; margin: 1em 0px !important; position: relative !important; overflow: auto !important; font-size: 1em !important;"><br><table style="border-color: silver; border-spacing: 0px; width: 1114px; word-break: break-word; border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important; border-bottom-left-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; padding: 0px !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; box-sizing: content-box !important; font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace !important; font-size: 12px !important; min-height: auto !important; background-image: none !important;" border="0" cellspacing="0" cellpadding="0"><br><tbody style="border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important; border-bottom-left-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; padding: 0px !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important; background-image: none !important;"><br><tr style="border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important; border-bottom-left-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; padding: 0px !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important; background-image: none !important;"><br><td class="gutter" style="border-color: silver; padding: 3px; list-style-type: none; list-style-image: none; margin: 0px !important; border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important; border-bottom-left-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: 35px !important; box-sizing: content-box !important; min-height: auto !important; background-image: none !important;"><br><div class="line number1 index0 alt2" style="border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important; border-bottom-left-radius: 0px !important; border-width: 0px 2px 0px 0px !important; border-right-style: solid !important; border-right-color: #6ce26c !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; padding: 0px 0.5em !important; position: static !important; right: auto !important; text-align: right !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important; background-image: none !important;"><span style="font-family: 仿宋;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">1</span></span></div><br><div class="line number2 index1 alt1" style="border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important; border-bottom-left-radius: 0px !important; border-width: 0px 2px 0px 0px !important; border-right-style: solid !important; border-right-color: #6ce26c !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; padding: 0px 0.5em !important; position: static !important; right: auto !important; text-align: right !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important; background-image: none !important;"><span style="font-family: 仿宋;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">2</span></span></div></td><br><td class="code" style="border-color: silver; padding: 3px; list-style-type: none; list-style-image: none; margin: 0px !important; border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important; border-bottom-left-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important; background-image: none !important;"><br><div class="container" style="border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important; border-bottom-left-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; padding: 0px !important; position: relative !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important; background-image: none !important;"><br><div class="line number1 index0 alt2" style="border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important; border-bottom-left-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; padding: 0px 1em !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important; background-image: none !important;"><span style="color: #008200; font-family: 仿宋;"><span style="line-height: 1.8em !important; min-height: auto !important;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">//在html代码img标签里的写法</span></span></span></div><br><div class="line number2 index1 alt1" style="border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important; border-bottom-left-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; padding: 0px 1em !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important; background-image: none !important;"><span style="font-family: 仿宋;"><span style="min-height: auto !important;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">&lt;i</span></span><code>&lt;span style=&quot;font-size: 14pt;&quot; data-wiz-span=&quot;data-wiz-span&quot;&gt;mg src=&lt;/span&gt;``&lt;span style=&quot;font-size: 14pt;&quot; data-wiz-span=&quot;data-wiz-span&quot;&gt;&quot;data:image/gif;base64,R0lGODlhHAAmAKIHAKqqqsvLy0hISObm5vf394uLiwAAAP///yH5B…EoqQqJKAIBaQOVKHAXr3t7txgBjboSvB8EpLoFZywOAo3LFE5lYs/QW9LT1TRk1V7S2xYJADs=&quot;&lt;/span&gt;``&lt;span style=&quot;font-size: 14pt;&quot; data-wiz-span=&quot;data-wiz-span&quot;&gt;&amp;gt;&lt;/span&gt;</code></span></div><br></div></td><br></tr><br></tbody><br></table><br></div><br></div>
+
+<p><span style="font-family: 仿宋;"><span style="font-size: 14px;"><span style="color: #000000;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">上面分别是图片的 base64 编码在 css 里面的写法和在 html&lt;img&gt; 标签里的写法。base64 编码长得就是这个样子，</span></span></span></span></p>
+<p><span style="font-family: 仿宋;"><span style="font-size: 14px;"><span style="color: #000000;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">当然 base64 编码不仅仅运用在图片编码，</span></span></span><span style="font-size: 10.5pt; line-height: 1.5;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span"> </span></span></span><br><strong><span style="font-family: 仿宋;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">4.<strong>总结与思考</strong>:</span></span></strong></p>
+<ul>
+<li><span style="font-family: 仿宋;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">正确的利用此类协议可以更好的屏蔽XSS漏洞</span></span></li>
+<li><p><span style="font-family: 仿宋;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">同时运用BASE64对图像转换，可以有效的减少网络流量，节省带宽，此类应用在雪碧图中，表现的更为明显</span></span><br><strong><span style="font-family: 仿宋;"><span style="font-size: 14pt;" data-wiz-span="data-wiz-span">5.引用:</span></span></strong></p>
+</li>
+<li><p><span style="font-family: 仿宋;"><a href="http://www.cnblogs.com/coco1s/p/4375774.html" target="_blank" rel="external">http://www.cnblogs.com/coco1s/p/4375774.html</a></span></p>
+</li>
+<li><span style="font-family: 仿宋;"><a href="http://26836659.blogcn.com/articles/data-url.html" target="_blank" rel="external">http://26836659.blogcn.com/articles/data-url.html</a></span></li>
+<li><span style="font-family: 仿宋;"><a href="http://www.pjhome.net/web/html5/encodeDataUrl.htm" target="_blank" rel="external">http://www.pjhome.net/web/html5/encodeDataUrl.htm</a></span><div></div></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/WEB安全/">WEB安全</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2016/06/09/01ee46195698d061ab87e4ff17816a48/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Kategorien</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/JAVA设计模式/">JAVA设计模式</a><small>5</small></li>
+  
+    <li><a href="/categories/WEB安全/">WEB安全</a><small>4</small></li>
+  
+    <li><a href="/categories/应用服务器/">应用服务器</a><small>7</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>5</small></li>
+  
+    <li><a href="/categories/数据库知识/">数据库知识</a><small>11</small></li>
+  
+    <li><a href="/categories/系统架构/">系统架构</a><small>4</small></li>
+  
+    <li><a href="/categories/编程语言/">编程语言</a><small>7</small></li>
+  
+    <li><a href="/categories/WEB安全/编程语言/">编程语言</a><small>2</small></li>
+  
+    <li><a href="/categories/JAVA设计模式/编程语言/">编程语言</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Jdk/">Jdk</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>5</small></li>
+  
+    <li><a href="/tags/Memcache/">Memcache</a><small>2</small></li>
+  
+    <li><a href="/tags/Mongodb/">Mongodb</a><small>3</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Oracle/">Oracle</a><small>2</small></li>
+  
+    <li><a href="/tags/Weblogic/">Weblogic</a><small>1</small></li>
+  
+    <li><a href="/tags/Yum/">Yum</a><small>1</small></li>
+  
+    <li><a href="/tags/数据库知识/">数据库知识</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

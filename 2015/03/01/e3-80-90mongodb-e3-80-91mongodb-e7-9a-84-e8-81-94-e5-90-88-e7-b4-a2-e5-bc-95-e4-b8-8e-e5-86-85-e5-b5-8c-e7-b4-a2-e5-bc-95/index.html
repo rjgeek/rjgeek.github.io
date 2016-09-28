@@ -1,0 +1,234 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【Mongodb】Mongodb的联合索引与内嵌索引 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="【Mongodb】Mongodb的联合索引与内嵌索引
+
+导读：
+索引是对数据库表中一列或多列的值进行排序的一种结构，使用索引可快速访问数据库表中的特定信息。索引有诸多优点如，通过创建唯一性索引，可以保证数据库表中每一行数据的唯一性； 可以大大加快数据的检索速度，当然使用索引时也存在一些不可避免的问题">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【Mongodb】Mongodb的联合索引与内嵌索引"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-01T11:12:09.000Z"><a href="/2015/03/01/e3-80-90mongodb-e3-80-91mongodb-e7-9a-84-e8-81-94-e5-90-88-e7-b4-a2-e5-bc-95-e4-b8-8e-e5-86-85-e5-b5-8c-e7-b4-a2-e5-bc-95/">2015-03-01</a></time>
+      
+      
+  
+    <h1 class="title">【Mongodb】Mongodb的联合索引与内嵌索引</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><strong>【Mongodb】Mongodb的联合索引与内嵌索引</strong></p>
+<blockquote>
+<p>导读：</p>
+<p>索引是对数据库表中一列或多列的值进行排序的一种结构，使用索引可快速访问数据库表中的特定信息。索引有诸多优点如，通过创建唯一性索引，可以保证数据库表中每一行数据的唯一性； 可以大大加快数据的检索速度，当然使用索引时也存在一些不可避免的问题，本文不在此权衡，下面着重介绍以实验的形式两种常用的常见的索引。</p>
+</blockquote>
+<p><strong>实验条件：</strong></p>
+<div style="background: #DFD;"><br>集合中的数据量约500万条<br>集合存储结构 {<br>             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  “_id” : ObjectId(“54f12a2e46595fd917542d92”),<br>             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “code” : “test0”,<br>             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “age”  : 28,<br>             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  “dog” : { “name”:”d0”}<br>             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>Mongodb的版本为32位linux版<br></div><br><strong>必备知识：</strong><br><div style="background: #DFD;"><br>查询索引 db.users.getIndex();<br>增加索引 db.users.ensureIndex({});<br>删除索引 db.users.dropIndex({});<br>使用索引 db.users.find({}).expalin();<br><br> explain会返回查询使用的索引情况，耗时和扫描文档数的统计信息。<br>“cursor”:”BasicCursor”表示没有使用索引。<br>“nscanned”:1 表示查询了多少个文档。<br>“n”:1 表示返回的文档数量。<br>“millis”:0 表示整个查询的耗时。<br></div><br><strong>实验论证：</strong><br><div style="background: #DFD;"><br>1.在联合索引的情况下，查询条件与索引部分相同时索引能否生效<br>2.嵌入文档的索引在查询时能否起到辅助作用<br></div>
+
+<p><strong>实验步骤一：</strong></p>
+<div style="background: #DFD;"><br>1.验证当前集合中的数据量<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/03/1.png" alt=""><br>2.不使用索引直接查询，此时的执行计划<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/03/2.png" alt=""><br>全表扫描，耗时9223毫秒<br>3.建立联合索引<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/03/3.png" alt=""><br>4.查询条件与索引完全相同时进行查询，此时的执行计划<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/03/4.png" alt=""><br>开始使用B树索引，此时查询耗时仅为1毫秒<br>5.查询条件与索引部分相同时进行查询，此时的执行计划<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/03/5.png" alt=""><br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/03/6.png" alt=""><br>只要查询中含有任一与索引相同的条件时，联合索引在查询时都会生效<br></div><br><strong>实验结论一：</strong><br><div style="background: #DFD;"><br>在联合索引的情况下，查询条件与索引部分相同时，索引会生效<br></div>
+
+<p><strong>实验步骤二：</strong></p>
+<div style="background: #DFD;"><br>1.不使用索引直接查询，此时的执行计划<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/03/7.png" alt=""><br>全表扫描，耗时39062毫秒<br>2.建立内嵌索引<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/03/8.png" alt=""><br>3.查询条件与内嵌索引相同时进行查询，此时的执行计划<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/03/9.png" alt=""><br>使用B树索引，查询时间为0毫秒<br></div><br><strong>实验结论二：</strong><br><div style="background: #DFD;"><br>嵌入文档的索引在查询时能起到辅助作用<br></div>
+
+<p>_</p>
+<p>版权声明：自由转载-非商用-衍生-保持署名（创意共享3.0许可证）<br>引用列表：<br><a href="http://www.cnblogs.com/stephen-liu74/archive/2012/08/01/2561557.html" target="_blank" rel="external">http://www.cnblogs.com/stephen-liu74/archive/2012/08/01/2561557.html</a><br><a href="http://docs.mongodb.org/manual/core/query-optimization/" target="_blank" rel="external">http://docs.mongodb.org/manual/core/query-optimization/</a><br>_</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/数据库知识/">数据库知识</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Mongodb/">Mongodb</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2015/03/01/e3-80-90mongodb-e3-80-91mongodb-e7-9a-84-e8-81-94-e5-90-88-e7-b4-a2-e5-bc-95-e4-b8-8e-e5-86-85-e5-b5-8c-e7-b4-a2-e5-bc-95/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Kategorien</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/JAVA设计模式/">JAVA设计模式</a><small>5</small></li>
+  
+    <li><a href="/categories/WEB安全/">WEB安全</a><small>4</small></li>
+  
+    <li><a href="/categories/应用服务器/">应用服务器</a><small>7</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>5</small></li>
+  
+    <li><a href="/categories/数据库知识/">数据库知识</a><small>11</small></li>
+  
+    <li><a href="/categories/系统架构/">系统架构</a><small>4</small></li>
+  
+    <li><a href="/categories/编程语言/">编程语言</a><small>7</small></li>
+  
+    <li><a href="/categories/WEB安全/编程语言/">编程语言</a><small>2</small></li>
+  
+    <li><a href="/categories/JAVA设计模式/编程语言/">编程语言</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Jdk/">Jdk</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>5</small></li>
+  
+    <li><a href="/tags/Memcache/">Memcache</a><small>2</small></li>
+  
+    <li><a href="/tags/Mongodb/">Mongodb</a><small>3</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Oracle/">Oracle</a><small>2</small></li>
+  
+    <li><a href="/tags/Weblogic/">Weblogic</a><small>1</small></li>
+  
+    <li><a href="/tags/Yum/">Yum</a><small>1</small></li>
+  
+    <li><a href="/tags/数据库知识/">数据库知识</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

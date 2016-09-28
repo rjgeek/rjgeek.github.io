@@ -1,0 +1,343 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【Weblogic】32位redhat6系统安装weblogic | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="1.创建weblogic用户
+用root用户登入服务器，进行如下操作：">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【Weblogic】32位redhat6系统安装weblogic"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-11-01T00:04:06.000Z"><a href="/2014/11/01/59711ebb77f1c5fa569d58136b9752f9/">2014-11-01</a></time>
+      
+      
+  
+    <h1 class="title">【Weblogic】32位redhat6系统安装weblogic</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><strong>        1.创建weblogic用户</strong></p>
+<div><br><br><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; &lt;br /&gt;
+mso-hansi-font-family: 'Times New Roman';">用</span><span style="mso-bidi-font-size: 12.0pt; line-height: 150%;" lang="EN-US">root</span><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: &lt;br /&gt;
+'Times New Roman'; mso-hansi-font-family: 'Times New Roman';">用户登入服务器，进行如下操作：</span><br><br><a id="more"></a><br><br><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US">#groupadd<br>-g 600 weblogic      </span><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">（创建<span lang="EN-US">weblogic</span>组并设置组<span lang="EN-US">id</span>为<span lang="EN-US">600</span>）</span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US">#useradd<br>-u 600 -g 600 weblogic    </span><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">（创建用户<span lang="EN-US">id</span>为<span lang="EN-US">600</span>的<span lang="EN-US">weblogic</span>用户<span lang="EN-US">,</span>并将用户添加到<span lang="EN-US">id</span>为<span lang="EN-US">600</span>的组中）</span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US">#passwd  weblogic</span><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体;">（设置<span lang="EN-US">weblogic</span>密码）</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体;"><strong>2.配置weblogic用户下的jdk</strong></span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US">#su<br>- weblogic  </span><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">（切换到<span lang="EN-US">weblogic</span>用户）</span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US">$vi<br>~/.bash_profile   </span><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">（编辑用户环境变量文件）</span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">按<span lang="EN-US">i</span>键，进入编辑模式，在最后面加入<span lang="EN-US"> JDK</span>环境变量</span><br><br><span lang="EN-US"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_25a40bf7-de4c-4a13-8a80-2460705b756b.jpg" alt=""></span><span style="font-size: &lt;br /&gt;
+15.0pt; line-height: 150%; font-family: 仿宋; mso-font-kerning: 0pt;" lang="EN-US"> </span><br><br></p><p class="MsoNormal" style="text-indent: 18.0pt; mso-char-indent-count: 1.5;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">按<span lang="EN-US">ESC</span>键，退出编辑模式，输入命令<span lang="EN-US">:wq</span>保存退出。</span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">检查配置是否生效。</span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US">$source<br>~/.bash_profile</span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US">$java<br>-version</span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US"><span style="text-indent: -4.3333330154418945px;">如果看到</span><span style="text-indent: -4.3333330154418945px;" lang="EN-US">JVM</span><span style="text-indent: -4.3333330154418945px;">版本及相关信息，即环境变量配置生效</span><br></span><br><br><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; &lt;br /&gt;
+mso-no-proof: yes;" lang="EN-US"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_bef498c7-0a4f-43a5-80ed-a90dddfacb55.jpg" alt=""></span><br><br></p><p class="MsoNormal" style="margin-left: 23.75pt; mso-para-margin-left: 1.71gd; &lt;br /&gt;
+text-indent: -3.25pt; mso-char-indent-count: -.27;"><strong>3.安装前的准备工作（上传与权限变更）</strong><br><br><span style="font-family: 宋体; line-height: 150%; text-indent: 24pt; font-size: 10.5pt;">使用</span><span style="font-family: 宋体; line-height: 150%; text-indent: 24pt; font-size: 10.5pt;" lang="EN-US">weblogic</span><span style="font-family: 宋体; line-height: 150%; text-indent: 24pt; font-size: 10.5pt;">用户将</span><span style="font-family: 宋体; line-height: 150%; text-indent: 24pt; font-size: 10.5pt;" lang="EN-US">weblogic11g</span><span style="font-family: 宋体; line-height: 150%; text-indent: 24pt; font-size: 10.5pt;">安装包</span><span style="font-family: 宋体; line-height: 150%; text-indent: 24pt; font-size: 10.5pt;" lang="EN-US">wls11gR11036_generic.jar</span><span style="font-family: 宋体; line-height: 150%; text-indent: 24pt; font-size: 10.5pt;">上传至应用服务器</span><span style="font-family: 宋体; line-height: 150%; text-indent: 24pt; font-size: 10.5pt;" lang="EN-US">/u01/app</span><span style="font-family: 宋体; line-height: 150%; text-indent: 24pt; font-size: 10.5pt;">目录下，如下图所示</span><br><br><span lang="EN-US"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_73c1c219-b812-4a25-9c5a-7918ed6887a7.jpg" alt=""></span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">使用<span lang="EN-US">chmod</span>命令修改<span lang="EN-US">weblogic</span>安装包可执行权限<span lang="EN-US">,</span>如下图：</span><br><br><span style="font-size: 12.0pt; mso-bidi-font-size: 10.0pt; line-height: &lt;br /&gt;
+150%; font-family: 'Times New Roman','serif'; mso-fareast-font-family: 宋体; &lt;br /&gt;
+mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; &lt;br /&gt;
+mso-bidi-language: AR-SA;" lang="EN-US"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_2128d264-9b1e-4690-8bb2-c6ddab461d39.jpg" alt=""></span><br><br><strong>4.执行weblogic安装程序</strong><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">使用可视化工具<span lang="EN-US">(</span>例如：<span lang="EN-US">Xmanager</span>、<span lang="EN-US">VNC)</span>连接到服务器，打开命令操作界面，用<span lang="EN-US">weblogic</span>用户执行如下命令进行<span lang="EN-US">weblogic</span>安装。</span><br><br><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; color: red; background: yellow; mso-font-kerning: &lt;br /&gt;
+0pt;">（注意：如果执行命令无法进入图形界面，请先使用<span lang="EN-US">root</span>用户，执行<span lang="EN-US">xhost<br>+</span>命令，然后重开命令窗口，执行<span lang="EN-US">weblogic</span>安装命令）</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="font-family: 宋体;" lang="EN-US">$java -jar /u01/app/</span><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US">wls11gR11036_generic.jar</span><span style="text-indent: 24pt; font-size: 10.5pt; line-height: 150%; font-family: Wingdings;" lang="EN-US"> </span><span style="text-indent: 24pt; font-size: 10.5pt; line-height: 150%; font-family: 宋体;">安装界面，点击<span lang="EN-US">next</span>，执行下一步</span><br><br><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_d7bf9a5c-7a9f-4fd3-9c61-f9220859c93a.gif" alt=""></span><br><br></p><p class="MsoNormal" style="margin-left: 49.0pt; text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: Wingdings; &lt;br /&gt;
+mso-font-kerning: 0pt;" lang="EN-US">l </span><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt;">选择程序安装目录<span lang="EN-US">(</span><span style="color: red; background: yellow;">可以自定义安装目录，这里我们自定义安装到<span lang="EN-US">/u01/weblogic</span>目录下</span><span lang="EN-US">)</span>，点击<span lang="EN-US">next</span>，执行下一步</span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span lang="EN-US"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_7566f83e-3bca-45c1-aaf6-ab4f1881f053.jpg" alt=""></span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: Wingdings; &lt;br /&gt;
+mso-font-kerning: 0pt;" lang="EN-US">l </span><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt;">不设置邮箱信息，点击<span lang="EN-US">next</span>，弹出确认框后点击<span lang="EN-US">yes</span></span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_461bf9d8-79fd-46aa-90e0-e59d27fa3fed.gif" alt=""></span><br><br></p><p class="MsoNormal" style="margin-left: 49.0pt; text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: Wingdings; &lt;br /&gt;
+mso-font-kerning: 0pt;" lang="EN-US">l </span><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt;">弹出确认框后点击<span lang="EN-US">yes</span></span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_46cee60c-b8f4-4c73-a0f5-57327ea9f88a.gif" alt=""></span><br><br></p><p class="MsoNormal" style="margin-left: 49.0pt; text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: Wingdings; &lt;br /&gt;
+mso-font-kerning: 0pt;" lang="EN-US">l </span><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt;">取消选择框，点击<span lang="EN-US">continue</span>，执行下一步</span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_f3000933-0dc6-481e-aed1-91991d21ab4f.gif" alt=""></span><br><br></p><p class="MsoNormal" style="margin-left: 49.0pt; text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: Wingdings; &lt;br /&gt;
+mso-font-kerning: 0pt;" lang="EN-US">l </span><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt;">默认安装即可，点击<span lang="EN-US">next</span>，执行下一步</span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_4de8d1aa-677d-4b62-81b2-52010fe2453d.gif" alt=""></span><br><br></p><p class="MsoNormal" style="margin-left: 49.0pt; text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: Wingdings; &lt;br /&gt;
+mso-font-kerning: 0pt;" lang="EN-US">l </span><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt;">选择<span lang="EN-US">jdk</span>，默认为环境变量配置的<span lang="EN-US">JDK</span>，点击<span lang="EN-US">next</span>，执行下一步</span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_a7168d4e-7e99-470b-b7c6-d32e13cc00f6.gif" alt=""></span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: Wingdings; &lt;br /&gt;
+mso-font-kerning: 0pt;" lang="EN-US">l </span><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt;">选择程序安装目录，默认即可，点击<span lang="EN-US">next</span>，执行下一步</span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span lang="EN-US"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_05b7d415-e8e5-4718-a4e0-f406f3e06cf2.jpg" alt=""></span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: Wingdings; &lt;br /&gt;
+mso-font-kerning: 0pt;" lang="EN-US">l </span><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt;">安装信息确认界面，点击<span lang="EN-US">next</span>，执行安装</span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_03e77035-991c-4f79-8d39-a19757991055.gif" alt=""></span><br><br></p><p class="MsoNormal" style="margin-left: 49.0pt; text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: Wingdings; &lt;br /&gt;
+mso-font-kerning: 0pt;" lang="EN-US">l </span><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt;">安装进度显示界面，安装完成后点击<span lang="EN-US">done</span>，完成安装</span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_adfdabba-46a2-4513-905b-2b02b44ecb4d.jpg" alt=""></span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_94f413e2-06c8-46a1-85fe-00d63d67863e.gif" alt=""></span><br><br></p><p class="MsoNormal"><strong>5.创建weblogic域</strong><br><br>&nbsp;<br><br><strong><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-bidi-font-family: 宋体;" lang="EN-US">1)<span style="font-weight: normal; font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">  </span></span>**</strong><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; mso-ascii-font-family: 宋体;">启动安装命令</span><strong><br><br><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US">Linux</span><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">系统：用<span lang="EN-US">weblogic</span>用户执行</span><br><br><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; font-family: 宋体;" lang="EN-US">     /u01/weblogic/Oracle/Middleware/wlserver_10.3/common/bin</span><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">下的<span lang="EN-US">config.sh</span></span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0; &lt;br /&gt;
+mso-outline-level: 1;"><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; font-family: 宋体;" lang="EN-US">$cd /u01/weblogic/Oracle/Middleware/wlserver_10.3/common/bin</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0; &lt;br /&gt;
+mso-outline-level: 1;"><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; font-family: 宋体;" lang="EN-US"><span lang="EN-US">$</span><span style="font-size: 10.5pt; text-indent: 24pt;" lang="EN-US">./</span><span style="font-size: 10.5pt; text-indent: 24pt;" lang="EN-US">co</span><span style="font-size: 10.5pt; text-indent: 24pt;" lang="EN-US">n</span><span style="font-size: 10.5pt; text-indent: 24pt;" lang="EN-US">f</span><span style="font-size: 10.5pt; text-indent: 24pt;">ig.sh</span><br></span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_0377f5e3-85b3-430e-93be-8cb00a8db8a4.jpg" alt=""></span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">接受默认设置，点击“<span lang="EN-US">Next</span>”</span><br><br><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_edd7c511-6156-47ab-b727-ad01a892b1e5.jpg" alt=""></span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">接受默认设置，点击“<span lang="EN-US">Next</span>” </span><br><br><span lang="EN-US"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_c9699b60-09df-44f3-8d66-a56b53e69ec2.jpg" alt=""></span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">修改路径和域名点击<span lang="EN-US">NEXT</span></span>
+
+</p></strong><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-bidi-font-family: 宋体;" lang="EN-US">2)<span style="font-weight: normal; font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">  </span></span><strong><strong><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; mso-ascii-font-family: 宋体;">设置</span></strong></strong><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; &lt;br /&gt;
+font-family: 宋体; mso-fareast-font-family: 仿宋_GB2312;" lang="EN-US">console</span><strong>**<span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; mso-ascii-font-family: 宋体;">登入的用户名及密码</span></strong><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">注意：如果此处不能填用户名和密码，把语言切换成英文后，重新创建域，如下图所示：</span><br><br><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_d18bd833-cffb-4544-802e-8bc4c10db964.jpg" alt=""></span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_fb59c425-fea4-49ee-baea-254c5a841ba0.jpg" alt=""></span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="text-indent: 40px; font-size: 15pt; line-height: 29.629629135131836px;" lang="EN-US"><span style="font-family: 宋体; font-size: 14.074073791503906px; line-height: 20.740739822387695px; text-indent: 32px;">  密</span></span><span style="text-indent: 30pt; font-size: 15pt; line-height: 29.629629135131836px;" lang="EN-US"><span style="font-family: 宋体; font-size: 14.074073791503906px; line-height: 20.740739822387695px; text-indent: 32px;">码：</span><span style="font-family: 宋体; font-size: 14.074073791503906px; line-height: 20.740739822387695px; text-indent: 32px;" lang="EN-US">webl</span></span><span style="text-indent: 30pt; font-size: 15pt; line-height: 29.629629135131836px;" lang="EN-US"><span style="font-family: 宋体; font-size: 14.074073791503906px; line-height: 20.740739822387695px; text-indent: 32px;" lang="EN-US">ogic1</span></span><span style="font-size: 10.5pt; font-family: 宋体; line-height: 20.740739822387695px;">，点击“</span><span style="font-size: 10.5pt; font-family: 宋体; line-height: 20.740739822387695px;" lang="EN-US">Next</span><span style="font-size: 10.5pt; font-family: 宋体; line-height: 20.740739822387695px;">”</span><br><br><strong><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-bidi-font-family: 宋体;" lang="EN-US">3)<span style="font-weight: normal; font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">  </span></span>**</strong><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; mso-ascii-font-family: 宋体;">选择安装模式及</span><strong>**<span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-fareast-font-family: 仿宋_GB2312;" lang="EN-US">JDK</span></strong><br><br></p><p class="MsoListParagraph" style="margin-left: 42.0pt; text-indent: -21.0pt; &lt;br /&gt;
+mso-char-indent-count: 0; mso-list: l0 level1 lfo1;"><span style="font-family: 宋体; line-height: 20.740739822387695px; text-indent: 32px;">此处我们选择生产模式及</span><span style="font-family: 宋体; line-height: 20.740739822387695px; text-indent: 32px;" lang="EN-US">JDK1.6.0_45</span><span style="font-family: 宋体; line-height: 20.740739822387695px; text-indent: 32px;">进行部署。</span><strong><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-fareast-font-family: 仿宋_GB2312;" lang="EN-US"><br></span></strong><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_4ffa87d1-7488-47ea-8753-db2f2254e5b8.jpg" alt=""><br><br><strong><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-bidi-font-family: 宋体;" lang="EN-US">4)<span style="font-weight: normal; font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">  </span></span>**</strong><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; mso-ascii-font-family: 宋体;">选择服务配置设置</span><strong><br><br><p class="MsoListParagraph" style="margin-left: 42.0pt; text-indent: -21.0pt; &lt;br /&gt;
+mso-char-indent-count: 0; mso-list: l0 level1 lfo1;"><span style="font-family: 宋体; line-height: 20.740739822387695px; text-indent: 32px;">选择</span><span style="font-family: 宋体; line-height: 20.740739822387695px; text-indent: 32px;" lang="EN-US">“Administration Server”</span><span style="font-family: 宋体; line-height: 20.740739822387695px; text-indent: 32px;">，点击“</span><span style="font-family: 宋体; line-height: 20.740739822387695px; text-indent: 32px;" lang="EN-US">Next</span><span style="font-family: 宋体; line-height: 20.740739822387695px; text-indent: 32px;">”。</span></p></strong><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; mso-ascii-font-family: 宋体;"><br></span><strong><br><br><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_7c9e9453-076f-4f7c-8125-4ee6dd8feb02.jpg" alt="">
+
+</p></strong><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-bidi-font-family: 宋体;" lang="EN-US">5)<span style="font-weight: normal; font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">  </span></span><strong><strong><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; mso-ascii-font-family: 宋体;">设置</span></strong></strong><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; &lt;br /&gt;
+font-family: 宋体; mso-fareast-font-family: 仿宋_GB2312;" lang="EN-US">console</span><strong>**<span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; mso-ascii-font-family: 宋体;">信息</span></strong><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US">Listen<br>address:localhost </span><span style="mso-bidi-font-size: 12.0pt; line-height: &lt;br /&gt;
+150%; font-family: 宋体; color: red;">（填写<span lang="EN-US">locahost</span>或者服务器<span lang="EN-US">IP</span>）</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="line-height: 20.740739822387695px; font-family: 宋体;" lang="EN-US">Listen port:7001     <span style="color: red;">(</span></span><span style="line-height: 20.740739822387695px; font-family: 宋体; color: red;">控制台的监听端口，默认<span lang="EN-US">7001</span>，也可自行设置<span lang="EN-US">)</span></span><span style="mso-bidi-font-size: 12.0pt; line-height: &lt;br /&gt;
+150%; font-family: 宋体; color: red;"><br></span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_4dec44c5-184d-45fb-b321-95413014aed4.jpg" alt=""></span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;">点击“<span lang="EN-US">Next</span>”，继续。</span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_9b495e46-6580-4b72-a013-33f376b0e985.jpg" alt=""></span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt; mso-bidi-font-style: &lt;br /&gt;
+italic;">点击“<span lang="EN-US">Create</span>”，进行域创建。</span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_6d1f52ca-5a4a-47bb-adcd-dc65bd3f1893.jpg" alt=""></span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt; mso-bidi-font-style: &lt;br /&gt;
+italic;">点击“<span lang="EN-US">Done”</span>完成域创建。</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt; mso-bidi-font-style: &lt;br /&gt;
+italic;"><strong>6.配置weblogic的密码服务</strong></span><br><br><span style="font-weight: normal;"><span style="font-family: 宋体;"><a name="_Toc384758394"></a><span lang="X-NONE"><span style="font-size: 7pt; line-height: normal;"><span style="font-size: 10.5pt;" data-wiz-span="data-wiz-span">a.</span></span></span><span lang="X-NONE"><span style="font-size: 10.5pt;" data-wiz-span="data-wiz-span">创建</span></span><span lang="X-NONE"><span style="font-size: 10.5pt;" data-wiz-span="data-wiz-span">boot.properties</span></span><span lang="X-NONE"><span style="font-size: 10.5pt;" data-wiz-span="data-wiz-span">文件</span></span></span></span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt; mso-bidi-font-style: &lt;br /&gt;
+italic;">为使各<span lang="EN-US">weblogic</span>服务启动时不必每次都输入控制台的用户名和密码，故须设置<span lang="EN-US">weblogic</span>的<span lang="EN-US">boot</span>文件，让服务启动时自动填充用户名、密码。具体操作如下：</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt; mso-bidi-font-style: &lt;br /&gt;
+italic;">使用<span lang="EN-US">weblogic</span>账户登录服务器，进入<span lang="EN-US">weblogic</span>域创建<span lang="EN-US">boot.properties</span>文件</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US">$cd </span><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US">/u01/weblogic/Oracle/Middleware/</span><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; &lt;br /&gt;
+mso-font-kerning: 0pt; mso-bidi-font-style: italic;" lang="EN-US">user_projects/domains/base_domain</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US">$vi boot.properties</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt; mso-bidi-font-style: &lt;br /&gt;
+italic;">按<span lang="EN-US">i</span>键进入编辑模式，输入用户名和密码</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt; mso-bidi-font-style: &lt;br /&gt;
+italic;">例如：</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US">username=weblogic</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US">password=weblogic1</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt; mso-bidi-font-style: &lt;br /&gt;
+italic;">按<span lang="EN-US">ESC</span>退出编辑模式，输入<span lang="EN-US">:wq</span>进行保存。</span><br><br><span style="font-family: 宋体;"><a name="_Toc384758395"></a><span lang="X-NONE"><span style="font-weight: normal;">b.</span></span><span lang="X-NONE">修改</span><span lang="X-NONE">weblogic11g </span><span lang="X-NONE">域下的</span><span lang="X-NONE">/bin/setDomainEnv.sh</span><span lang="X-NONE">文件</span></span><br><br>### <a name="_Toc385361079"></a><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt; mso-bidi-font-style: &lt;br /&gt;
+italic;">由于<span lang="EN-US">weblogic 11g</span>默认的<span lang="EN-US">boot</span>文件路径是在各应用服务的文件夹下的<span lang="EN-US">security</span>目录下，为使同一个<span lang="EN-US">weblogic</span>域下各个应用服务共用同一个<span lang="EN-US">boot</span>文件而不必为每个应用服务创建一个<span lang="EN-US">boot</span>文件，故须修改<span lang="EN-US">setDomainEnv.sh</span>文件，设置默认的<span lang="EN-US">boot</span>文件读取路径。</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US">$cd </span><span style="font-size: &lt;br /&gt;
+10.5pt; line-height: 150%; font-family: 宋体;" lang="EN-US">/u01/weblogic/Oracle/Middleware</span><span style="font-size: 10.5pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US">/user_projects/domains/base_domain/bin</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US">$vi setDomainEnv.sh</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt; mso-bidi-font-style: &lt;br /&gt;
+italic;">将下列值</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US">JAVA_OPTIONS=”${JAVA_OPTIONS}”</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US">export JAVA_OPTIONS</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US"># SET THE CLASSPATH</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt; mso-bidi-font-style: &lt;br /&gt;
+italic;">修改为</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US">JAVA_OPTIONS=”${JAVA_OPTIONS}<br>-Dweblogic.system.BootIdentityFile=${DOMAIN_HOME}/boot.properties”</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US">export JAVA_OPTIONS</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US"># SET THE CLASSPATH</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US"><strong>7.安装成功的验证（启动weblogic控制台）</strong></span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><br><br><span style="line-height: 150%;">使用<span lang="EN-US">weblogic</span>用户登录服务器，进入<span lang="EN-US">weblogic</span>安装域下的<span lang="EN-US">bin</span>目录</span><br><br><span style="line-height: 150%;" lang="EN-US">$cd </span><span style="font-size: 10.5pt; line-height: 150%;" lang="EN-US">/u01/weblogic/Oracle/Middleware</span><span style="font-size: 10.5pt; line-height: 150%;" lang="EN-US">/user_projects/domains/base_domain/bin</span><br><br><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; mso-ascii-font-family: 宋体;">用</span><span style="line-height: 150%;" lang="EN-US">nohup</span><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; &lt;br /&gt;
+mso-ascii-font-family: 宋体;">在后台启动，并制定输出日志路径</span><br><br></p><p class="MsoListParagraph" style="text-indent: 24.0pt;"><span style="line-height: 150%;" lang="EN-US">$nohup ./startWebLogic.sh &gt; startWebLogic.log &amp; tail –f<br>/app/logs/startWebLogic.log</span><br><br><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; mso-ascii-font-family: 宋体;">查看输出日志，如果看到</span><span style="line-height: 150%;" lang="EN-US">Running Mode</span><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; mso-ascii-font-family: 宋体;">则证明控制台启动成功。</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span lang="EN-US"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-1d6151c774b13240063f444c3967c3b6_clip_image002d8556b24-54b3-496f-b45c-0ed8e2e61d72.jpg" alt=""></span><br><br><span lang="EN-US"> </span><br><br>&nbsp;<br><br><span lang="EN-US"><br></span><br><br></p><p class="MsoNormal" style="margin-left: 23.75pt; mso-para-margin-left: 1.71gd; &lt;br /&gt;
+text-indent: -3.25pt; mso-char-indent-count: -.27;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; &lt;br /&gt;
+mso-no-proof: yes;" lang="EN-US"><br></span><br><br></p><p class="MsoNormal" style="margin-left: 23.75pt; mso-para-margin-left: 1.71gd; &lt;br /&gt;
+text-indent: -3.25pt; mso-char-indent-count: -.27;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; &lt;br /&gt;
+mso-no-proof: yes;" lang="EN-US"><br></span><br><br></p><p class="MsoNormal" style="margin-left: 23.75pt; mso-para-margin-left: 1.71gd; &lt;br /&gt;
+text-indent: -3.25pt; mso-char-indent-count: -.27;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; &lt;br /&gt;
+mso-no-proof: yes;" lang="EN-US"><br></span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体;"><br></span><br><br></p></div><br><div><a href="http://www.wiz.cn/i/60efacb7" title="来自为知笔记(Wiz)" target="_blank" rel="external">来自为知笔记(Wiz)</a></div>
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/应用服务器/">应用服务器</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Weblogic/">Weblogic</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2014/11/01/59711ebb77f1c5fa569d58136b9752f9/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Kategorien</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/JAVA设计模式/">JAVA设计模式</a><small>5</small></li>
+  
+    <li><a href="/categories/WEB安全/">WEB安全</a><small>4</small></li>
+  
+    <li><a href="/categories/应用服务器/">应用服务器</a><small>7</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>5</small></li>
+  
+    <li><a href="/categories/数据库知识/">数据库知识</a><small>11</small></li>
+  
+    <li><a href="/categories/系统架构/">系统架构</a><small>4</small></li>
+  
+    <li><a href="/categories/编程语言/">编程语言</a><small>7</small></li>
+  
+    <li><a href="/categories/WEB安全/编程语言/">编程语言</a><small>2</small></li>
+  
+    <li><a href="/categories/JAVA设计模式/编程语言/">编程语言</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Jdk/">Jdk</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>5</small></li>
+  
+    <li><a href="/tags/Memcache/">Memcache</a><small>2</small></li>
+  
+    <li><a href="/tags/Mongodb/">Mongodb</a><small>3</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Oracle/">Oracle</a><small>2</small></li>
+  
+    <li><a href="/tags/Weblogic/">Weblogic</a><small>1</small></li>
+  
+    <li><a href="/tags/Yum/">Yum</a><small>1</small></li>
+  
+    <li><a href="/tags/数据库知识/">数据库知识</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

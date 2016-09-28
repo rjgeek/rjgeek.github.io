@@ -1,0 +1,298 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【Memcache】32位Linux下的Memcache安装 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="由于memcached安装时，需要使用libevent类库，所以先安装libevent">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【Memcache】32位Linux下的Memcache安装"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-08-12T23:18:13.000Z"><a href="/2014/08/13/b15a2d7569b341bd4cbf61a9cfe6824c/">2014-08-13</a></time>
+      
+      
+  
+    <h1 class="title">【Memcache】32位Linux下的Memcache安装</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>由于memcached安装时，需要使用libevent类库，所以先安装libevent<br><a id="more"></a></p>
+<p>libevent下载网址:<a href="http://www.monkey.org/~provos/libevent/" target="_blank" rel="external">http://www.monkey.org/~provos/libevent/</a> </p>
+<font color="#333333" face="宋体"><span style="font-size: 14px; line-height: 28px;">官方网站下载地址：</span><span style="line-height: 28px;"><a href="http://libevent.org/" target="_blank" rel="external">http://libevent.org/</a></span></font>
+
+<p>本次安装用的是 libevent-2.0.21-stable.tar.gz 版本安装步骤如下:</p>
+<p>1. 解压缩</p>
+<p>tar xzfv libevent-2.0.21-stable.tar.gz</p>
+<p>2. 进入到 libevent-2.0.21-stable目录</p>
+<p>cd libevent-2.0.21-stable</p>
+<p>3. 编译，安装</p>
+<p>./configure</p>
+<p>make</p>
+<p>make install</p>
+<p>注：默认安装到/usr/local/lib/ 目录</p>
+<p>接下来，安装memcached</p>
+<p>memcached下载网址:<a href="http://www.memcached.org/" target="_blank" rel="external">http://www.memcached.org/</a></p>
+<p>本手册中下载的是 memcached-1.4.20.tar.gz版本</p>
+<p>安装步骤如下:</p>
+<p>1. 解压缩</p>
+<p>tar xzfv memcached-1.4.20.tar.gz</p>
+<p>2. 进入到 memcached-1.4.20目录</p>
+<p>cd memcached-1.2.6</p>
+<p>3. 编译，安装</p>
+<p>./configure –prefix=/local/memcached</p>
+<p>make</p>
+<p>make install</p>
+<p>安装完成后，会在 /local/memcached 出现 bin和share目录</p>
+<p>进行 bin目录，启动 memcache</p>
+<p>方法如下:</p>
+<p>./memcached -d -u nobody -m 512 127.0.0.1 -p 11211</p>
+<p>此时，会报一个异常</p>
+<p>error while loading shared libraries: libevent-2.0.so.5: cannot open shared object file: No such file or directory</p>
+<p>原因是找不到libevent-2.0.so.5类库，解决办法如下：</p>
+<p>使用LD_DEBUG=help ./memcached -v来确定 加载的类库路径,方法如下:</p>
+<p>LD_DEBUG=libs ./memcached -v 2&gt;&amp;1 &gt; /dev/null | less</p>
+<p>则系统会显示:</p>
+<p>linux:/local/memcached/bin # LD_DEBUG = libs ./memcached -v&nbsp; 2 &gt;&amp; 1&nbsp; &gt; /dev/null | less</p>
+<p>20421 :&nbsp;&nbsp;&nbsp;&nbsp; find library = libevent-2.0.so.5 ;&nbsp; searching</p>
+<p>20421 :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; search cache = /etc/ld.so.cache</p>
+<p>20421 :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; search path = /lib/tls/i686/sse2:/lib/tls/i686:/lib/tls/sse2:/lib/tls:/lib/i686/sse2:/lib/i686:/lib/sse2:/lib:/usr/lib/tls/i686</p>
+<p>/sse2:/usr/lib/tls/i686:/usr/lib/tls/sse2:/usr/lib/tls:/usr/lib/i686/sse2:/usr/lib/i686:/usr/lib/sse2:/usr/lib&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (system search path)</p>
+<p>20421 :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; trying file = /lib/tls/i686/sse2/libevent-2.0.so.5</p>
+<p>20421 :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; trying file = /lib/tls/i686/libevent-2.0.so.5</p>
+<p>20421 :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; trying file = /lib/tls/sse2/libevent-2.0.so.5</p>
+<p>20421 :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; trying file = /lib/tls/libevent-2.0.so.5</p>
+<p>20421 :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; trying file = /lib/i686/sse2/libevent-2.0.so.5</p>
+<p>20421 :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; trying file = /lib/i686/libevent-2.0.so.5</p>
+<p>20421 :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; trying file = /lib/sse2/libevent-2.0.so.5</p>
+<p>20421 :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; trying file = /lib/libevent-2.0.so.5</p>
+<p>20421 :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; trying file = /usr/lib/tls/i686/sse2/libevent-2.0.so.5</p>
+<p>20421 :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; trying file = /usr/lib/tls/i686/libevent-2.0.so.5</p>
+<p>20421 :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; trying file = /usr/lib/tls/sse2/libevent-2.0.so.5</p>
+<p>20421 :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; trying file = /usr/lib/tls/libevent-2.0.so.5</p>
+<p>20421 :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; trying file = /usr/lib/i686/sse2/libevent-2.0.so.5</p>
+<p>20421 :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; trying file = /usr/lib/i686/libevent-2.0.so.5</p>
+<p>20421 :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; trying file = /usr/lib/sse2/libevent-2.0.so.5</p>
+<p>20421 :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; trying file = /usr/lib/libevent-2.0.so.5</p>
+<p>20421 :</p>
+<p>./memcached: error while loading shared libraries: libevent-2.0.so.5 : cannot open shared object file: No such file or directory</p>
+<p>我们看到，memcached会到很多地方去找，所以根据其它求，我们只需建一个软链接，指定到我们安装的类库上即可</p>
+<p>方法如下：</p>
+<p>ln -s /usr/local/lib/libevent-2.0.so.5 &nbsp;/lib/libevent-2.0.so.5</p>
+<p>现在可以正常启动memcached了</p>
+<p>./memcached -d -u nobody -m 512 127.0.0.1 -p 11211</p>
+<p>到这里，看到memcached已经启动，说明安装成功。</p>
+<p>测试：通过其他机器telnet 此机器的端口 &nbsp; &nbsp; ps:虚拟机上的端口是否已经打开</p>
+<p>最后做启动文件，下次可以直接使用</p>
+<font color="#333333" face="宋体"><span style="line-height: 28px;">1startmemcache.sh</span></font>
+
+<font color="#333333" face="宋体"><span style="line-height: 28px;">内容为：local/memcached/bin/memcached -d -m 10 -u redhat -l 192.168.199.101 -p 11211 -c 256 -P /tmp/memcached.pid&nbsp;</span></font>
+
+<font color="#333333" face="宋体"><span style="line-height: 28px;">2stopmemecache.sh</span></font>
+
+<p><font color="#333333" face="宋体"><span style="line-height: 28px;">内容为：</span></font><span style="background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: 'Hiragino Sans GB W3', 'Hiragino Sans GB', Arial, Helvetica, simsun, u5b8bu4f53; font-size: 16px; line-height: 28px;">kill <code>cat /tmp/memcached.pid</code></span></p>
+<p>memcache启动参数说明:</p>
+<p>-d选项是启动一个守护进程，</p>
+<p>-m是分配给Memcache使用的内存数量，单位是MB，我这里是10MB，</p>
+<p>-u是运行Memcache的用户，我这里是root，</p>
+<p>-l是监听的服务器IP地址，如果有多个地址的话，我这里指定了服务器的IP地址192.168.0.200，</p>
+<p>-p是设置Memcache监听的端口，我这里设置了12000，最好是1024以上的端口，</p>
+<p>-c选项是最大运行的并发连接数，默认是1024，我这里设置了256，按照你服务器的负载量来设定，</p>
+<p>-P是设置保存Memcache的pid文件，我这里是保存在 /tmp/memcached.pid</p>
+<p><small><small>&nbsp;</small></small></p>
+<div><a href="http://www.wiz.cn/i/60efacb7" title="来自为知笔记(Wiz)" target="_blank" rel="external">来自为知笔记(Wiz)</a></div>
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/应用服务器/">应用服务器</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Memcache/">Memcache</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2014/08/13/b15a2d7569b341bd4cbf61a9cfe6824c/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Kategorien</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/JAVA设计模式/">JAVA设计模式</a><small>5</small></li>
+  
+    <li><a href="/categories/WEB安全/">WEB安全</a><small>4</small></li>
+  
+    <li><a href="/categories/应用服务器/">应用服务器</a><small>7</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>5</small></li>
+  
+    <li><a href="/categories/数据库知识/">数据库知识</a><small>11</small></li>
+  
+    <li><a href="/categories/系统架构/">系统架构</a><small>4</small></li>
+  
+    <li><a href="/categories/编程语言/">编程语言</a><small>7</small></li>
+  
+    <li><a href="/categories/WEB安全/编程语言/">编程语言</a><small>2</small></li>
+  
+    <li><a href="/categories/JAVA设计模式/编程语言/">编程语言</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Jdk/">Jdk</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>5</small></li>
+  
+    <li><a href="/tags/Memcache/">Memcache</a><small>2</small></li>
+  
+    <li><a href="/tags/Mongodb/">Mongodb</a><small>3</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Oracle/">Oracle</a><small>2</small></li>
+  
+    <li><a href="/tags/Weblogic/">Weblogic</a><small>1</small></li>
+  
+    <li><a href="/tags/Yum/">Yum</a><small>1</small></li>
+  
+    <li><a href="/tags/数据库知识/">数据库知识</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【编程语言】Java设计原则-单一职责原则 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="定义：不要存在多于一个导致类变更的原因。通俗的说，即一个类只负责一项职责。
+问题由来：类T负责两个不同的职责：职责P1，职责P2。当由于职责P1需求发生改变而需要修改类T时，有可能会导致原本运行正常的职责P2功能发生故障。
+解决方案：遵循单一职责原则。分别建立两个类T1、T2，使T1完成职责P1功能，T2完成职责P2功能。这样，当修改类T1时，不会使职责P2发生故障风险；同理，当修改T2时，也不会使职责P1发生故障风险。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【编程语言】Java设计原则-单一职责原则"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-02-12T15:25:24.000Z"><a href="/2016/02/12/e3-80-90-e7-bc-96-e7-a8-8b-e8-af-ad-e8-a8-80-e3-80-91java-e8-ae-be-e8-ae-a1-e5-8e-9f-e5-88-99-e5-8d-95-e4-b8-80-e8-81-8c-e8-b4-a3-e5-8e-9f-e5-88-99/">2016-02-12</a></time>
+      
+      
+  
+    <h1 class="title">【编程语言】Java设计原则-单一职责原则</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><span style="color: black; font-family: 宋体;"><span style="font-size: 10pt; background-color: white;"><strong>定义：<span style="color: #000099;">不要存在多于一个导致类变更的原因。</span></strong><span style="color: black;">通俗的说，即一个类只负责一项职责。</span></span><span style="font-size: 12pt;"><br></span></span></p>
+<p><span style="color: black; font-size: 10pt;"><span style="font-family: 宋体;"><strong>问题由来：</strong>类</span><span style="font-family: Arial;">T</span><span style="font-family: 宋体;">负责两个不同的职责：职责</span><span style="font-family: Arial;">P1</span><span style="font-family: 宋体;">，职责</span><span style="font-family: Arial;">P2</span><span style="font-family: 宋体;">。当由于职责</span><span style="font-family: Arial;">P1</span><span style="font-family: 宋体;">需求发生改变而需要修改类</span><span style="font-family: Arial;">T</span><span style="font-family: 宋体;">时，有可能会导致原本运行正常的职责</span><span style="font-family: Arial;">P2</span><span style="font-family: 宋体;">功能发生故障。</span><span style="font-family: Arial;"><br></span></span></p>
+<p><span style="color: black; font-size: 10pt;"><span style="font-family: 宋体;"><strong>解决方案：</strong>遵循单一职责原则。分别建立两个类</span><span style="font-family: Arial;">T1</span><span style="font-family: 宋体;">、</span><span style="font-family: Arial;">T2</span><span style="font-family: 宋体;">，使</span><span style="font-family: Arial;">T1</span><span style="font-family: 宋体;">完成职责</span><span style="font-family: Arial;">P1</span><span style="font-family: 宋体;">功能，</span><span style="font-family: Arial;">T2</span><span style="font-family: 宋体;">完成职责</span><span style="font-family: Arial;">P2</span><span style="font-family: 宋体;">功能。这样，当修改类</span><span style="font-family: Arial;">T1</span><span style="font-family: 宋体;">时，不会使职责</span><span style="font-family: Arial;">P2</span><span style="font-family: 宋体;">发生故障风险；同理，当修改</span><span style="font-family: Arial;">T2</span><span style="font-family: 宋体;">时，也不会使职责</span><span style="font-family: Arial;">P1</span><span style="font-family: 宋体;">发生故障风险。</span></span></p>
+<p><span style="color: black; font-size: 10pt;"><span style="font-family: Arial;"><a id="more"></a></span><span style="font-family: 宋体;">说到单一职责原则，很多人都会不屑一顾。因为它太简单了。稍有经验的程序员即使从来没有读过设计模式、从来没有听说过单一职责原则，在设计软件时也会自觉的遵守这一重要原则，因为这是常识。在软件编程中，谁也不希望因为修改了一个功能导致其他的功能发生故障。而避免出现这一问题的方法便是遵循单一职责原则。虽然单一职责原则如此简单，并且被认为是常识，但是即便是经验丰富的程序员写出的程序，也会有违背这一原则的代码存在。为什么会出现这种现象呢？因为有职责扩散。<strong>所谓职责扩散，就是因为某种原因，职责</strong></span><strong><span style="font-family: Arial;">P</span><span style="font-family: 宋体;">被分化为粒度更细的职责</span><span style="font-family: Arial;">P1</span><span style="font-family: 宋体;">和</span><span style="font-family: Arial;">P2</span><span style="font-family: 宋体;">。</span></strong><span style="font-family: Arial;"><br></span></span></p>
+<p><span style="color: black; font-size: 10pt;"><span style="font-family: Arial;">         </span><span style="font-family: 宋体;">比如：类</span><span style="font-family: Arial;">T</span><span style="font-family: 宋体;">只负责一个职责</span><span style="font-family: Arial;">P</span><span style="font-family: 宋体;">，这样设计是符合单一职责原则的。后来由于某种原因，也许是需求变更了，也许是程序的设计者境界提高了，需要将职责</span><span style="font-family: Arial;">P</span><span style="font-family: 宋体;">细分为粒度更细的职责</span><span style="font-family: Arial;">P1</span><span style="font-family: 宋体;">，</span><span style="font-family: Arial;">P2</span><span style="font-family: 宋体;">，这时如果要使程序遵循单一职责原则，需要将类</span><span style="font-family: Arial;">T</span><span style="font-family: 宋体;">也分解为两个类</span><span style="font-family: Arial;">T1</span><span style="font-family: 宋体;">和</span><span style="font-family: Arial;">T2</span><span style="font-family: 宋体;">，分别负责</span><span style="font-family: Arial;">P1</span><span style="font-family: 宋体;">、</span><span style="font-family: Arial;">P2</span><span style="font-family: 宋体;">两个职责。但是在程序已经写好的情况下，这样做简直太费时间了。所以，简单的修改类</span><span style="font-family: Arial;">T</span><span style="font-family: 宋体;">，用它来负责两个职责是一个比较不错的选择，虽然这样做有悖于单一职责原则。（这样做的风险在于职责扩散的不确定性，因为我们不会想到这个职责</span><span style="font-family: Arial;">P</span><span style="font-family: 宋体;">，在未来可能会扩散为</span><span style="font-family: Arial;">P1</span><span style="font-family: 宋体;">，</span><span style="font-family: Arial;">P2</span><span style="font-family: 宋体;">，</span><span style="font-family: Arial;">P3</span><span style="font-family: 宋体;">，</span><span style="font-family: Arial;">P4……Pn</span><span style="font-family: 宋体;">。所以记住，在职责扩散到我们无法控制的程度之前，立刻对代码进行重构。）</span><span style="font-family: Arial;"><br></span></span></p>
+<p><span style="color: black; font-size: 10pt;"><span style="font-family: 宋体;">举例说明，用一个类描述动物呼吸这个场景：</span><span style="font-family: Arial;"><br></span></span></p>
+<ol>
+<li><div style="background: white;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>class</strong><span style="color: black;"> Animal{  <span style="color: #5c5c5c;"><br></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> breathe(String animal){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        System.out.println(animal+<span style="color: blue;">“</span></span><span style="font-family: 宋体;">呼吸空气</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>class</strong><span style="color: black;"> Client{  <span style="color: #5c5c5c;"><br></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>static</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> main(String[] args){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        Animal animal = <span style="color: #006699;"><strong>new</strong><span style="color: black;"> Animal();  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        animal.breathe(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">牛</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        animal.breathe(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">羊</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        animal.breathe(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">猪</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div>
+
+</li>
+</ol>
+<p><span style="color: black; font-size: 10pt;"><span style="font-family: 宋体;">运行结果：</span><span style="font-family: Arial;"><br></span></span></p>
+<p><span style="color: #000099; font-size: 10pt;"><span style="font-family: 宋体;">牛呼吸空气</span><span style="font-family: Arial;"><br></span><span style="font-family: 宋体;">羊呼吸空气</span><span style="font-family: Arial;"><br></span><span style="font-family: 宋体;">猪呼吸空气</span><span style="color: black; font-family: Arial;"><br></span></span></p>
+<p><span style="color: black; font-size: 10pt;"><span style="font-family: Arial;">        </span><span style="font-family: 宋体;">程序上线后，发现问题了，并不是所有的动物都呼吸空气的，比如鱼就是呼吸水的。修改时如果遵循单一职责原则，需要将</span><span style="font-family: Arial;">Animal</span><span style="font-family: 宋体;">类细分为陆生动物类</span><span style="font-family: Arial;">Terrestrial</span><span style="font-family: 宋体;">，水生动物</span><span style="font-family: Arial;">Aquatic</span><span style="font-family: 宋体;">，代码如下：</span><span style="font-family: Arial;"><br></span></span></p>
+<ol>
+<li><div style="background: white;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>class</strong><span style="color: black;"> Terrestrial{  <span style="color: #5c5c5c;"><br></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> breathe(String animal){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        System.out.println(animal+<span style="color: blue;">“</span></span><span style="font-family: 宋体;">呼吸空气</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>class</strong><span style="color: black;"> Aquatic{  <span style="color: #5c5c5c;"><br></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> breathe(String animal){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        System.out.println(animal+<span style="color: blue;">“</span></span><span style="font-family: 宋体;">呼吸水</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><br></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>class</strong><span style="color: black;"> Client{  <span style="color: #5c5c5c;"><br></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>static</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> main(String[] args){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        Terrestrial terrestrial = <span style="color: #006699;"><strong>new</strong><span style="color: black;"> Terrestrial();  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        terrestrial.breathe(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">牛</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        terrestrial.breathe(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">羊</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        terrestrial.breathe(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">猪</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><br></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        Aquatic aquatic = <span style="color: #006699;"><strong>new</strong><span style="color: black;"> Aquatic();  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        aquatic.breathe(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">鱼</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div>
+
+</li>
+</ol>
+<p><span style="color: black; font-size: 10pt;"><span style="font-family: Arial;"><br></span><span style="font-family: 宋体;">运行结果：</span><span style="font-family: Arial;"><br></span></span></p>
+<p><span style="color: #000099; font-size: 10pt;"><span style="font-family: 宋体;">牛呼吸空气</span><span style="font-family: Arial;"><br></span><span style="font-family: 宋体;">羊呼吸空气</span><span style="font-family: Arial;"><br></span><span style="font-family: 宋体;">猪呼吸空气</span><span style="font-family: Arial;"><br></span><span style="font-family: 宋体;">鱼呼吸水</span><span style="color: black; font-family: Arial;"><br></span></span></p>
+<p><span style="color: black; font-size: 10pt;"><span style="font-family: 宋体;">我们会发现如果这样修改花销是很大的，除了将原来的类分解之外，还需要修改客户端。而直接修改类</span><span style="font-family: Arial;">Animal</span><span style="font-family: 宋体;">来达成目的虽然违背了单一职责原则，但花销却小的多，代码如下：</span><span style="font-family: Arial;"><br></span></span></p>
+<p><span style="color: silver; font-family: Verdana; font-size: 7pt;"><strong>[java]</strong> <a href="http://blog.csdn.net/zhengzhb/article/details/7278174" title="view plain" target="_blank" rel="external"><span style="color: #a0a0a0;">view plain</span></a> <a href="http://blog.csdn.net/zhengzhb/article/details/7278174" title="copy" target="_blank" rel="external"><span style="color: #a0a0a0;">copy</span></a><br></span></p>
+<ol>
+<li><div style="background: white;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>class</strong><span style="color: black;"> Animal{  <span style="color: #5c5c5c;"><br></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> breathe(String animal){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        <span style="color: #006699;"><strong>if</strong><span style="color: black;">(<span style="color: blue;">“</span></span></span></span><span style="font-family: 宋体;">鱼</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">.equals(animal)){  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">            System.out.println(animal+<span style="color: blue;">“</span></span><span style="font-family: 宋体;">呼吸水</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        }<span style="color: #006699;"><strong>else</strong><span style="color: black;">{  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">            System.out.println(animal+<span style="color: blue;">“</span></span><span style="font-family: 宋体;">呼吸空气</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><br></div></li>
+<li><div style="background: white;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>class</strong><span style="color: black;"> Client{  <span style="color: #5c5c5c;"><br></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>static</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> main(String[] args){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        Animal animal = <span style="color: #006699;"><strong>new</strong><span style="color: black;"> Animal();  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        animal.breathe(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">牛</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        animal.breathe(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">羊</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        animal.breathe(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">猪</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        animal.breathe(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">鱼</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div>
+
+</li>
+</ol>
+<p><span style="color: black; font-size: 10pt;"><span style="font-family: Arial;"><br></span><span style="font-family: 宋体;">可以看到，这种修改方式要简单的多。但是却存在着隐患：有一天需要将鱼分为呼吸淡水的鱼和呼吸海水的鱼，则又需要修改</span><span style="font-family: Arial;">Animal</span><span style="font-family: 宋体;">类的</span><span style="font-family: Arial;">breathe</span><span style="font-family: 宋体;">方法，而对原有代码的修改会对调用</span><span style="font-family: Arial;">“</span><span style="font-family: 宋体;">猪</span><span style="font-family: Arial;">“”</span><span style="font-family: 宋体;">牛</span><span style="font-family: Arial;">“”</span><span style="font-family: 宋体;">羊</span><span style="font-family: Arial;">“</span><span style="font-family: 宋体;">等相关功能带来风险，也许某一天你会发现程序运行的结果变为</span><span style="font-family: Arial;">“</span><span style="font-family: 宋体;">牛呼吸水</span><span style="font-family: Arial;">“</span><span style="font-family: 宋体;">了。这种修改方式直接在代码级别上违背了单一职责原则，虽然修改起来最简单，但隐患却是最大的。还有一种修改方式：</span><span style="font-family: Arial;"><br></span></span></p>
+<p><span style="color: silver; font-family: Verdana; font-size: 7pt;"><strong>[java]</strong> <a href="http://blog.csdn.net/zhengzhb/article/details/7278174" title="view plain" target="_blank" rel="external"><span style="color: #a0a0a0;">view plain</span></a> <a href="http://blog.csdn.net/zhengzhb/article/details/7278174" title="copy" target="_blank" rel="external"><span style="color: #a0a0a0;">copy</span></a><br></span></p>
+<ol>
+<li><div style="background: white;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>class</strong><span style="color: black;"> Animal{  <span style="color: #5c5c5c;"><br></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> breathe(String animal){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        System.out.println(animal+<span style="color: blue;">“</span></span><span style="font-family: 宋体;">呼吸空气</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><br></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> breathe2(String animal){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        System.out.println(animal+<span style="color: blue;">“</span></span><span style="font-family: 宋体;">呼吸水</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><br></div></li>
+<li><div style="background: white;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>class</strong><span style="color: black;"> Client{  <span style="color: #5c5c5c;"><br></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>static</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> main(String[] args){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        Animal animal = <span style="color: #006699;"><strong>new</strong><span style="color: black;"> Animal();  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        animal.breathe(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">牛</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        animal.breathe(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">羊</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        animal.breathe(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">猪</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        animal.breathe2(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">鱼</span><span style="color: blue; font-family: Consolas;">“<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div>
+
+</li>
+</ol>
+<p><span style="color: black; font-size: 10pt;"><span style="font-family: Arial;"><br></span><span style="font-family: 宋体;">可以看到，这种修改方式没有改动原来的方法，而是在类中新加了一个方法，这样虽然也违背了单一职责原则，但在方法级别上却是符合单一职责原则的，因为它并没有动原来方法的代码。这三种方式各有优缺点，那么在实际编程中，采用哪一中呢？其实这真的比较难说，需要根据实际情况来确定。我的原则是：只有逻辑足够简单，才可以在代码级别上违反单一职责原则；只有类中方法数量足够少，才可以在方法级别上违反单一职责原则；</span><span style="font-family: Arial;"><br></span></span></p>
+<p><span style="color: black; font-size: 10pt;"><span style="font-family: Arial;">        </span><span style="font-family: 宋体;">例如本文所举的这个例子，它太简单了，它只有一个方法，所以，无论是在代码级别上违反单一职责原则，还是在方法级别上违反，都不会造成太大的影响。实际应用中的类都要复杂的多，一旦发生职责扩散而需要修改类时，除非这个类本身非常简单，否则还是遵循单一职责原则的好。</span><span style="font-family: Arial;"><br></span></span></p>
+<p><span style="color: black; font-size: 10pt;"><span style="font-family: 宋体;">遵循单一职责原的优点有：</span><span style="font-family: Arial;"><br></span></span></p>
+<ul>
+<li><div style="background: white;"><span style="color: black; font-size: 10pt;"><span style="font-family: 宋体;">可以降低类的复杂度，一个类只负责一项职责，其逻辑肯定要比负责多项职责简单的多；</span><span style="font-family: Arial;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 10pt;"><span style="font-family: 宋体;">提高类的可读性，提高系统的可维护性；</span><span style="font-family: Arial;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 10pt;"><span style="font-family: 宋体;">变更引起的风险降低，变更是必然的，如果单一职责原则遵守的好，当修改一个功能时，可以显著降低对其他功能的影响。</span><span style="font-family: Arial;"><br></span></span></div>
+
+</li>
+</ul>
+<p><span style="color: black; font-size: 10pt;"><span style="font-family: Arial;">        </span><span style="font-family: 宋体;">需要说明的一点是单一职责原则不只是面向对象编程思想所特有的，只要是模块化的程序设计，都适用单一职责原则。</span><span style="font-family: Arial;"><br></span></span></p>
+<p>&nbsp;</p>
+<p><span style="color: black; font-size: 10pt;"><span style="font-family: 宋体;">原文作者：卡奴达摩</span><span style="font-family: Arial;"><br></span></span></p>
+<p><span style="color: black; font-size: 10pt;"><span style="font-family: 宋体;">原文地址：</span><span style="font-family: Arial;"><a href="http://blog.csdn.net/zhengzhb/article/details/7278174" target="_blank" rel="external">http://blog.csdn.net/zhengzhb/article/details/7278174</a></span></span></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/JAVA设计模式/">JAVA设计模式</a>, <a href="/categories/JAVA设计模式/编程语言/">编程语言</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2016/02/12/e3-80-90-e7-bc-96-e7-a8-8b-e8-af-ad-e8-a8-80-e3-80-91java-e8-ae-be-e8-ae-a1-e5-8e-9f-e5-88-99-e5-8d-95-e4-b8-80-e8-81-8c-e8-b4-a3-e5-8e-9f-e5-88-99/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Kategorien</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/JAVA设计模式/">JAVA设计模式</a><small>5</small></li>
+  
+    <li><a href="/categories/WEB安全/">WEB安全</a><small>4</small></li>
+  
+    <li><a href="/categories/应用服务器/">应用服务器</a><small>7</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>5</small></li>
+  
+    <li><a href="/categories/数据库知识/">数据库知识</a><small>11</small></li>
+  
+    <li><a href="/categories/系统架构/">系统架构</a><small>4</small></li>
+  
+    <li><a href="/categories/编程语言/">编程语言</a><small>7</small></li>
+  
+    <li><a href="/categories/WEB安全/编程语言/">编程语言</a><small>2</small></li>
+  
+    <li><a href="/categories/JAVA设计模式/编程语言/">编程语言</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Jdk/">Jdk</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>5</small></li>
+  
+    <li><a href="/tags/Memcache/">Memcache</a><small>2</small></li>
+  
+    <li><a href="/tags/Mongodb/">Mongodb</a><small>3</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Oracle/">Oracle</a><small>2</small></li>
+  
+    <li><a href="/tags/Weblogic/">Weblogic</a><small>1</small></li>
+  
+    <li><a href="/tags/Yum/">Yum</a><small>1</small></li>
+  
+    <li><a href="/tags/数据库知识/">数据库知识</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

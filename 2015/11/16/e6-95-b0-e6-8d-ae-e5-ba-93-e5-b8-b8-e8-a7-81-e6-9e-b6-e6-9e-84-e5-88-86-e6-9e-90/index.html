@@ -1,0 +1,232 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【系统架构】数据库常见架构分析 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="##">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【系统架构】数据库常见架构分析"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-11-16T15:41:45.000Z"><a href="/2015/11/16/e6-95-b0-e6-8d-ae-e5-ba-93-e5-b8-b8-e8-a7-81-e6-9e-b6-e6-9e-84-e5-88-86-e6-9e-90/">2015-11-16</a></time>
+      
+      
+  
+    <h1 class="title">【系统架构】数据库常见架构分析</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <div id="page-content"><div id="img-content"><br><br>##<br><a id="more"></a><div id="js_content"><br><br><font face="微软雅黑, Microsoft YaHei, Georgia, Helvetica, Arial, sans-serif, 宋体, PMingLiU, serif"><span style="font-size: 14px; line-height: 21px;">数据库常见架构分析</span></font><br><br><em> </em> <em><br><br>1.基本概念<br><br>1.1 单库<br><br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/11/wpid-292bef3af3dc7d82c8876d3b531478a5_B127C6FBBF69F6F7EFA53E9CBE3EEAEA.png" alt=""><br><br>单张表支撑所有业务，一旦异常，后果严重。
+
+</em> <em> </em><br><br>1.2&nbsp;<span style="font-size: 10.5pt; line-height: 1.5;">分片</span><br><br><span style="font-size: 10.5pt; line-height: 1.5;"><br></span><br><br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/11/wpid-292bef3af3dc7d82c8876d3b531478a5_IMG_5316.png" alt=""><br><br><div><br></div>分片解决的是“数据量太大”的问题，也就是通常说的“水平切分”。<br><br>一旦引入分片，势必有“数据路由”的概念，哪个数据访问哪个库。<br><br>针对个别的数据库，也支持表级的分片，如mongodb<br><div><br><br>路由规则通常有3种方法：<br><br>（1）范围：range<br><br>优点：简单，容易扩展<br><br>缺点：各库压力不均（新号段更活跃）<br><br>（2）哈希：hash<br><br>优点：简单，数据均衡，负载均匀<br><br>缺点：迁移麻烦（2库扩3库数据要迁移）<br><br>（3）路由服务：router-config-server<br><br>优点：灵活性强，业务与路由算法解耦<br><br>缺点：每次访问数据库前多一次查询<br><br><em> </em> <em><br><br>1.3 分组<br><br><span style="font-size: 10.5pt; line-height: 1.5;">分组解决“可用性”问题，分组通常通过主从复制的方式实现。</span><br><br><span style="font-size: 10.5pt; line-height: 1.5;"><br></span><br><br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/11/wpid-292bef3af3dc7d82c8876d3b531478a5_IMG_5317.png" alt=""><br><br>互联网公司数据库实际软件架构是：又分片，又分组（如下图）<br><br></em></div><img src="http://helloword.1kapp.com/wp-content/uploads/2015/11/wpid-292bef3af3dc7d82c8876d3b531478a5_IMG_5318.png" alt=""></div><div id="js_content"><br></div><div id="js_content"><br></div><div id="js_content">
+
+ <em> </em><br><br>2、数据库架构设计需要考虑的方向<br><br><span style="font-size: 10.5pt; line-height: 1.5;">2.1数据的可用性</span><br><br>解决可用性问题的思路是=&gt;冗余<br><br>如何保证站点的可用性？复制站点，冗余站点<br><br>如何保证服务的可用性？复制服务，冗余服务<br><br>如何保证数据的可用性？复制数据，冗余数据<br><br><span style="font-size: 10.5pt; line-height: 1.5;">数据的冗余，会带来一个副作用=&gt;引发一致性问题（先不说一致性问题，先说可用性）</span><br><br><span style="font-size: 10.5pt; line-height: 1.5;">如何保证数据库“读”高可用？</span><br><br>冗余读库<br><br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/11/wpid-292bef3af3dc7d82c8876d3b531478a5_IMG_5319.png" alt=""><br><br>写入单台机器中，另外两台根据日志去同步主数据库，<span style="font-size: 10.5pt; line-height: 1.5;">读写有延时，可能不一致</span><br><br><span style="font-size: 10.5pt; line-height: 1.5;">写仍然是单点，不能保证写高可用，</span><span style="font-size: 10.5pt; line-height: 1.5;">如何保证数据库“写”高可用？</span><br><br><span style="font-size: 10.5pt; line-height: 1.5;">冗余写库</span><br><br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/11/wpid-292bef3af3dc7d82c8876d3b531478a5_IMG_5320.png" alt=""><br><br>采用双主互备的方式，可以冗余写库<br><br>带来的副作用？双写同步，数据可能冲突（例如“自增id”同步冲突）,如何解决同步冲突，有两种常见解决方案：<br><br>（1）两个写库使用<span style="font-size: 10.5pt; line-height: 1.5;">不同的初始值，相同的步长来增加id：1写库的id为0,2,4,6…；2写库的id为1,3,5,7…</span><br><br>（2）不使用数据的id，业务层自己生成唯一的id，保证数据不冲突<br><br><span style="font-size: 10.5pt; line-height: 1.5;">双主当主从用</span><br><br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/11/wpid-292bef3af3dc7d82c8876d3b531478a5_IMG_5321.png" alt=""><br>仍是双主，但只有一个主提供服务（读+写），另一个主是“shadow-master”，只用来保证高可用，平时不提供服务。<br><br>master挂了，shadow-master顶上（vip漂移，对业务层透明，不需要人工介入）<br><br>这种方式的好处：<br><br>1）读写没有延时<br><br>2）读写高可用<br><br>不足：<br><br>1）不能通过加从库的方式扩展读性能<br><br>2）资源利用率为50%，一台冗余主没有提供服务<br><br><span style="font-size: 10.5pt; line-height: 1.5;">那如何提高读性能呢？进入第二个话题，如何提供读性能。</span><br><br><em> </em> <em><br><br>2.2数据库的拓展性<br><br>提高读性能的方式大致有三种<br><br>第一种是建立索引。这种方式不展开，要提到的一点是，不同的库可以建立不同的索引。<br><br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/11/wpid-292bef3af3dc7d82c8876d3b531478a5_IMG_5322.png" alt=""><br><br>写库不建立索引；<br><br>线上读库建立线上访问索引，例如uid；<br><br>线下读库建立线下访问索引，例如time；<br><br>第二种扩充读性能的方式是，增加从库，这种方法大家用的比较多，但是，存在两个缺点：<br><br>（1）从库越多，同步越慢<br><br>（2）同步越慢，数据不一致窗口越大（不一致后面说，还是先说读性能的提高）<br><br><span style="font-size: 10.5pt; line-height: 1.5;">第三种 服务+数据库+缓存一套</span><br><br><span style="font-size: 10.5pt; line-height: 1.5;"><br></span><br><br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/11/wpid-292bef3af3dc7d82c8876d3b531478a5_IMG_5324.png" alt=""><br><br>业务层不直接面向db和cache，服务层屏蔽了底层db、cache的复杂性。为什么要引入服务层，今天不展开，58采用了“服务+数据库+缓存一套”的方式提供数据访问，用cache提高读性能。<br><br><span style="font-size: 10.5pt; line-height: 1.5;">不管采用主从的方式扩展读性能，还是缓存的方式扩展读性能，数据都要复制多份（主+从，db+cache），一定会引发一致性问题。</span>
+
+</em> <em> </em><br><br><div><br><br>2.3数据库的一致性<br><br>主从数据库的一致性，通常有两种解决方案：<br><br>（1）中间件<br><br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/11/wpid-292bef3af3dc7d82c8876d3b531478a5_IMG_5325.png" alt=""><br><br>如果某一个key有写操作，在不一致时间窗口内，中间件会将这个key的读操作也路由到主库上。<br><br>常见的组件有 Atlas<span style="font-size: 10.5pt; line-height: 1.5;">，cobar，TDDL</span><br><br>（2）强制读主<br><br>第二类不一致，是db与缓存间的不一致<br><br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/11/wpid-292bef3af3dc7d82c8876d3b531478a5_IMG_5326.png" alt=""><br>常见的缓存架构如上，此时<font face="宋体">写操作的顺序是</font>：<br><br>（1）淘汰cache<br><br>（2）写数据库<br><br>读操作的顺序是：<br><br>（1）读cache，如果cache hit则返回<br><br>（2）如果cache miss，则读从库<br><br>（3）读从库后，将数据放回cache<br><br><span style="font-size: 10.5pt; line-height: 1.5;">在一些异常时序情况下，有可能从【从库读到旧数据（同步还没有完成），旧数据入cache后】，数据会长期不一致。</span><br><br><span style="font-size: 10.5pt; line-height: 1.5;">解决办法是“缓存双淘汰”，写操作时序升级为：</span><br><br>（1）淘汰cache<br><br>（2）写数据库<br><br>（3）在经验“主从同步延时窗口时间”后，再次发起一个异步淘汰cache的请求<br><br>这样，即使有脏数据如cache，一个小的时间窗口之后，脏数据还是会被淘汰。带来的代价是，多引入一次读miss（成本可以忽略）。<br><br><span style="font-size: 10.5pt; line-height: 1.5;">建议为所有cache中的item设置一个超时时间。</span><br><br><span style="font-size: 10.5pt; line-height: 1.5;"><br></span><br><br><em> </em> <em><br><br>2.4数据库的拓展性<br><br>如何秒级扩容？<br><br>首先，我们不做2库变3库的扩容，我们做2库变4库（库加倍）的扩容（未来4-&gt;8-&gt;16）<br><br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/11/wpid-292bef3af3dc7d82c8876d3b531478a5_IMG_5327.png" alt=""><br><br>服务+数据库是一套（省去了缓存）<br><br>数据库采用“双主”的模式。<br><br>扩容步骤：<br><br>第一步，将一个主库提升<br><br>第二步，修改配置，2库变4库（原来MOD2，现在配置修改后MOD4）<br><br>扩容完成<br><br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/11/wpid-292bef3af3dc7d82c8876d3b531478a5_IMG_5328.png" alt=""><br><br>原MOD2为偶的部分，现在会MOD4余0或者2<br><br>原MOD2为奇的部分，现在会MOD4余1或者3<br><br>数据不<span style="font-size: 10.5pt; line-height: 1.5;">需要迁移，同时，双主互相同步，一遍是余0，一边余2，两边数据同步也不会冲突，秒级完成扩容！</span><br><br>最后，要做一些收尾工作：<br><br>（1）将旧的双主同步解除<br><br>（2）增加新的双主（双主是保证可用性的，shadow-master平时不提供服务）<br><br>（3）删除多余的数据（余0的主，可以将余2的数据删除掉）<br><br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/11/wpid-292bef3af3dc7d82c8876d3b531478a5_7162ae61-1406-4459-9516-5c230ac871fc.png" alt="91A4C8CDA901CF30766E1D2636751444.png"><br></em></div><div><br></div><br>这样，秒级别内，我们就完成了2库变4库的扩展。</div><div id="js_content"><br></div><div id="js_content"><br></div><div id="js_content">
+
+ <em> </em><br><br>最后感谢58同城架构师 沈剑 的分享！<br><div><br></div><br><div><br></div><br><div><br></div>
+
+<p></p></div></div></div><div id="js_pc_qr_code" style="font-family: 微软雅黑, 'Microsoft YaHei', Georgia, Helvetica, Arial, sans-serif, 宋体, PMingLiU, serif; font-size: 14px; line-height: 21px;">&nbsp;</div><p></p>
+<div><a href="http://www.wiz.cn/i/60efacb7" title="来自为知笔记(Wiz)" target="_blank" rel="external">来自为知笔记(Wiz)</a></div>
+
+<div><br><br>### 附件列表<br><br><em>   <a href="http://helloword.1kapp.com/wp-content/uploads/2015/11/wpid-292bef3af3dc7d82c8876d3b531478a5_b4b787a3-4d55-4db4-9d90-aba34f1aaa93.png" target="_blank" rel="external">b4b787a3-4d55-4db4-9d90-aba34f1aaa93.png</a>
+</em>   <a href="http://helloword.1kapp.com/wp-content/uploads/2015/11/wpid-292bef3af3dc7d82c8876d3b531478a5_a13eb93f-e69c-4f1c-9ada-ce5d1c63ae2b.png" target="_blank" rel="external">a13eb93f-e69c-4f1c-9ada-ce5d1c63ae2b.png</a></div>
+
+<p>&nbsp;</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/数据库知识/">数据库知识</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/数据库知识/">数据库知识</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2015/11/16/e6-95-b0-e6-8d-ae-e5-ba-93-e5-b8-b8-e8-a7-81-e6-9e-b6-e6-9e-84-e5-88-86-e6-9e-90/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Kategorien</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/JAVA设计模式/">JAVA设计模式</a><small>5</small></li>
+  
+    <li><a href="/categories/WEB安全/">WEB安全</a><small>4</small></li>
+  
+    <li><a href="/categories/应用服务器/">应用服务器</a><small>7</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>5</small></li>
+  
+    <li><a href="/categories/数据库知识/">数据库知识</a><small>11</small></li>
+  
+    <li><a href="/categories/系统架构/">系统架构</a><small>4</small></li>
+  
+    <li><a href="/categories/编程语言/">编程语言</a><small>7</small></li>
+  
+    <li><a href="/categories/WEB安全/编程语言/">编程语言</a><small>2</small></li>
+  
+    <li><a href="/categories/JAVA设计模式/编程语言/">编程语言</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Jdk/">Jdk</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>5</small></li>
+  
+    <li><a href="/tags/Memcache/">Memcache</a><small>2</small></li>
+  
+    <li><a href="/tags/Mongodb/">Mongodb</a><small>3</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Oracle/">Oracle</a><small>2</small></li>
+  
+    <li><a href="/tags/Weblogic/">Weblogic</a><small>1</small></li>
+  
+    <li><a href="/tags/Yum/">Yum</a><small>1</small></li>
+  
+    <li><a href="/tags/数据库知识/">数据库知识</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

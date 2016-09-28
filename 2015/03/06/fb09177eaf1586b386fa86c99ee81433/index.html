@@ -1,0 +1,219 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【Oracle】利用数据泵迁移数据库，以迁移用户schema为例 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="Oracle数据泵是Oracle提供的更新、更灵活的数据导入、导出工具，数据泵可以用来导出表，表空间，用户Schema等
+但也有限制，只能在服务器端进行。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【Oracle】利用数据泵迁移数据库，以迁移用户schema为例"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-06T00:54:17.000Z"><a href="/2015/03/06/fb09177eaf1586b386fa86c99ee81433/">2015-03-06</a></time>
+      
+      
+  
+    <h1 class="title">【Oracle】利用数据泵迁移数据库，以迁移用户schema为例</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><span style="line-height: 20.997596740722656px; font-size: 10.5pt; font-family: simsun; color: #494949;">Oracle数据泵是Oracle提供的更新、更灵活的数据导入、导出工具，数据泵可以用来导出表，表空间，用户Schema等</span></p>
+<div><span style="color: #494949; font-family: simsun;"><span style="line-height: 20.997596740722656px;">但也有限制，只能在服务器端进行。</span></span><a id="more"></a><br><div>一、准备工作</div><br><div>1.目标数据库已经安装，源数据库能正常运行，Linux安装Oracle的细节详见<a href="http://helloword.1kapp.com/archives/129" target="_blank" rel="external">《【Oracle】linux下安装Oracle11g数据库》</a></div><br><div>2.查看目标数据库的版本与源数据库的版本，当目标数据的版本高于源数据库的版本时，导出需指定版本号</div><br><div>目标数据库的版本信息</div><br><div><br><div><br><br>1.  <code>&lt;span class=&quot;pln&quot;&gt;SQL&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; select &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; from v$version&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;</code><br>2.3.  <code>BANNER</code><br>4.  <code>--------------------------------------------------------------------------------</code><br>5.  <code>&lt;span class=&quot;typ&quot;&gt;Oracle&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Database&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;11g&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Enterprise&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Edition&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Release&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;11.2&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Production&lt;/span&gt;</code><br>6.  <code>&lt;span class=&quot;pln&quot;&gt;PL&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;SQL &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Release&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;11.2&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Production&lt;/span&gt;</code><br>7.  <code>&lt;span class=&quot;pln&quot;&gt;CORE &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;11.2&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Production&lt;/span&gt;</code><br>8.  <code>&lt;span class=&quot;pln&quot;&gt;TNS &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Linux&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Version&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;11.2&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Production&lt;/span&gt;</code><br>9.  <code>&lt;span class=&quot;pln&quot;&gt;NLSRTL &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Version&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;11.2&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Production&lt;/span&gt;</code><br></div><br><div>源数据库的版本信息</div><br></div><br><div><br><div><br><br>1.  <code>&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Oracle&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Database&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;11g&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Enterprise&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Edition&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Release&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;11.2&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;64bit&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Production&lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;lit&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; PL&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;SQL &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Release&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;11.2&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Production&lt;/span&gt;</code><br>3.  <code>&lt;span class=&quot;lit&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;CORE 11.2.0.1.0 Production&quot;&lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;lit&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; TNS &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;64&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;bit &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Windows&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Version&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;11.2&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Production&lt;/span&gt;</code><br>5.  <code>&lt;span class=&quot;lit&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; NLSRTL &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Version&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;11.2&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Production&lt;/span&gt;</code><br></div><br><div>数据库版本一致，可以直接导出，导入</div><br></div><br><div></div><br><div>二、用数据泵导出数据库</div><br><div></div><br><div>1建立保存数据文件的地址</div><br><div> 用root新建文件夹，并给oracle用户赋权，备注一，Linux赋权知识详见<span style="font-size: 10.5pt; line-height: 1.5;"><a href="http://helloword.1kapp.com/archives/149" target="_blank" rel="external">《【Linux】linux下权限知识整理》</a></span><span style="font-size: 10.5pt; line-height: 1.5;"> （一般在Linux安装Oracle时必须提前建立</span><span style="font-size: 10.5pt; line-height: 1.5;">Oracle用户</span><span style="font-size: 10.5pt; line-height: 1.5;">）</span></div><br><div><br><div><br><br>1.  <span style="color: #48484c; line-height: 18px; font-size: 13px;">[root@localhost data]# mkdir /data/oracle/</span><br>2.  <code>&lt;span class=&quot;pun&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;root@localhost &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/]#&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; chown &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;R oracle&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dba &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data&lt;/span&gt;</code><br></div><br><div>2.登录Oracle，采用主机认证方式</div><br></div><br><div><br><div><br><br>1.  <code>&lt;span class=&quot;pun&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;oracle@localhost &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;~]&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;$ sqlplus &lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;/as sysdba&#39;&lt;/span&gt;</code><br>2.3.  <code>&lt;span class=&quot;pln&quot;&gt;SQL&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Plus&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Release&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;11.2&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Production&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; on &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Wed&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Mar&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;22&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;43&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2015&lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;typ&quot;&gt;Copyright&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1982&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2009&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Oracle&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;All&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; rights reserved&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;</code><br>5.  <code>&lt;span class=&quot;typ&quot;&gt;Connected&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; to&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;</code><br>6.  <code>&lt;span class=&quot;typ&quot;&gt;Oracle&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Database&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;11g&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Enterprise&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Edition&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Release&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;11.2&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Production&lt;/span&gt;</code><br>7.  <code>&lt;span class=&quot;typ&quot;&gt;With&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; the &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Partitioning&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; OLAP&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Data&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Mining&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; and &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Real&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Application&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Testing&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; options&lt;/span&gt;</code><br>8.9.  <code>&lt;span class=&quot;pln&quot;&gt;SQL&amp;gt;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;</code><br></div><br><div>3.在数据库服务器上创建DIRECTORY</div><br></div><br><div><br><div><br><br>1.  <code>&lt;span class=&quot;pln&quot;&gt;create directory dir_dp as &lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;/data/oracle&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;</code><br></div><br><div>4.查询已经创建的目录以及权限</div><br><div><br><div><br><br>1.  <code>&lt;span class=&quot;pln&quot;&gt;SELECT PRIVILEGE&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; DIRECTORY_NAME&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; DIRECTORY_PATH &lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;pln&quot;&gt; FROM USER_TAB_PRIVS T&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; ALL_DIRECTORIES D &lt;/span&gt;</code><br>3.  <code>&lt;span class=&quot;pln&quot;&gt; WHERE T&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;TABLE_NAME&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(+)&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; D&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;DIRECTORY_NAME &lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;pln&quot;&gt; ORDER BY &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;</code><br></div><br><div>5.按照<span style="color: #494949; font-family: simsun; line-height: 20.997596740722656px;">Schema</span>开始导出，命令如下</div><br></div><br><div><br><div><br><br>1.  <code>&lt;span class=&quot;pln&quot;&gt;expdp xtbg/xtbg dumpfile =2015-03-05EXP.DMP directory = dir_dp schemas=xtbg LOGFILE=xtbg_expdp.log &lt;/span&gt;</code><br></div><br></div><br><div></div><br><div>二、将*.DMP导入到目标数据库</div><br><div>1.建立<span style="font-size: 10.5pt; line-height: 1.5;">DIRECTORY步奏同上</span></div><br><div>2.创建表空间</div><br></div><br><div><br><div><br><br>1.  <code>--</code><br>2.  <code>&lt;span class=&quot;pun&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; XTBG &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Tablespace&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;</code><br>3.  <code>--</code><br>4.  <code>CREATE TABLESPACE XTBG DATAFILE</code><br>5.  <code>&lt;span class=&quot;str&quot;&gt;&#39;/home/oracle/app/oradata/orcl/XTBG_01.DBF&#39;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; SIZE &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;138048K&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; AUTOEXTEND ON NEXT &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;10M&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; MAXSIZE &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1000M&lt;/span&gt;</code><br>6.  <code>LOGGING</code><br>7.  <code>ONLINE</code><br>8.  <code>EXTENT MANAGEMENT LOCAL AUTOALLOCATE</code><br>9.  <code>&lt;span class=&quot;pln&quot;&gt;BLOCKSIZE &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;8K&lt;/span&gt;</code><br>10.  <code>SEGMENT SPACE MANAGEMENT AUTO</code><br>11.  <code>&lt;span class=&quot;pln&quot;&gt;FLASHBACK ON&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;</code><br></div><br><div>3.创建用户</div><br></div><br><div><br><div><br><br>1.  <code>&lt;span class=&quot;pun&quot;&gt;--&lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;pun&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; XTBG &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;</code><br>3.  <code>&lt;span class=&quot;pun&quot;&gt;--&lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;pln&quot;&gt;CREATE USER XTBG&lt;/span&gt;</code><br>5.  <code>&lt;span class=&quot;pln&quot;&gt; IDENTIFIED BY xtbg&lt;/span&gt;</code><br>6.  <code>&lt;span class=&quot;pln&quot;&gt; DEFAULT TABLESPACE XTBG&lt;/span&gt;</code><br>7.  <code>&lt;span class=&quot;pln&quot;&gt; TEMPORARY TABLESPACE TEMP&lt;/span&gt;</code><br></div><br><div>4.对用户进行赋权</div><br></div><br><div><br><div><br><br>1.  <code>&lt;span class=&quot;pln&quot;&gt;grant dba&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;resource&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;connect to xtbg&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;pln&quot;&gt;grant read&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;write on directory dir_dp to xtbg&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;</code><br></div><br><div>5.开始导入</div><br></div><br><div><br><div><br><br>1.  <code>&lt;span class=&quot;pln&quot;&gt;impdp xtbg&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;xtbg directory&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dir_dp dumpfile&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2015&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;span style=&quot;color: #195f91;&quot;&gt;03&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-05&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;EXP&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;DMP schemas&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;xtbg&lt;/span&gt;</code><br></div><br><div><em>
+</em></div><br><div><em>版权声明：自由转载-非商用-非衍生-保持署名（创意共享3.0许可证）<br>引用列表：Oracle官网文档
+</em></div><br></div><br><div></div><br><div></div><br><div></div><br><div></div><br><div></div><br><div></div><br><div></div><br><div></div><br><div></div><br><div></div><br><div></div><br></div><br><div><a href="http://www.wiz.cn/i/60efacb7" title="来自为知笔记(Wiz)" target="_blank" rel="external">来自为知笔记(Wiz)</a></div>
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/数据库知识/">数据库知识</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Oracle/">Oracle</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2015/03/06/fb09177eaf1586b386fa86c99ee81433/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Kategorien</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/JAVA设计模式/">JAVA设计模式</a><small>5</small></li>
+  
+    <li><a href="/categories/WEB安全/">WEB安全</a><small>4</small></li>
+  
+    <li><a href="/categories/应用服务器/">应用服务器</a><small>7</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>5</small></li>
+  
+    <li><a href="/categories/数据库知识/">数据库知识</a><small>11</small></li>
+  
+    <li><a href="/categories/系统架构/">系统架构</a><small>4</small></li>
+  
+    <li><a href="/categories/编程语言/">编程语言</a><small>7</small></li>
+  
+    <li><a href="/categories/WEB安全/编程语言/">编程语言</a><small>2</small></li>
+  
+    <li><a href="/categories/JAVA设计模式/编程语言/">编程语言</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Jdk/">Jdk</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>5</small></li>
+  
+    <li><a href="/tags/Memcache/">Memcache</a><small>2</small></li>
+  
+    <li><a href="/tags/Mongodb/">Mongodb</a><small>3</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Oracle/">Oracle</a><small>2</small></li>
+  
+    <li><a href="/tags/Weblogic/">Weblogic</a><small>1</small></li>
+  
+    <li><a href="/tags/Yum/">Yum</a><small>1</small></li>
+  
+    <li><a href="/tags/数据库知识/">数据库知识</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

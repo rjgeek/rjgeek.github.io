@@ -1,0 +1,220 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【密码知识】An introduction to Digital Signatures(数字证书的介绍) | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="What is a Digital Signature?Written by David Youd ,Expanded by LI RuJiaFor respecting authentic author, I give all the original text, For reading easily, I expanded it &amp;nbsp;and &amp;nbsp;translated it into Chinese&amp;nbsp;">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【密码知识】An introduction to Digital Signatures(数字证书的介绍)"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-12-07T18:50:10.000Z"><a href="/2015/12/07/e2c6f029977a8f38d983f0f2fdaa1d69/">2015-12-07</a></time>
+      
+      
+  
+    <h1 class="title">【密码知识】An introduction to Digital Signatures(数字证书的介绍)</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <div><center>What is a Digital Signature?</center><center>Written by David Youd ,Expanded by LI RuJia</center>For respecting authentic author, I give all the original text, For reading easily, I expanded it &nbsp;and &nbsp;translated it into Chinese&nbsp;<a id="more"></a><br><br><em> </em> <em><br><center><table border="0"><tbody><tr><td align="CENTER"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_f87a0712-00df-4cbd-977f-7f578f1839d5.gif" alt=""><br>Bob</td><td><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_4be023b2-15b3-4a74-92a6-a4718bd582b9.gif" alt=""></td><td align="center"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_51efd4ec-5e44-4056-9880-a98f1207e9ad.gif" alt=""><br>(Bob’s public key)<br><br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_0c3170b1-038e-4f60-9aed-4e042c778723.gif" alt=""><br>(Bob’s private key)<br></td></tr></tbody></table></center><br><br>Bob has been given two keys. One of Bob’s keys is called a Public Key, the other is called a Private Key.<br><center><table border="0"><tbody><tr><td align="CENTER" colspan="3">Bob’s Co-workers:</td></tr><tr><td align="CENTER"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_8326af8b-84c8-49c6-ae7d-880aae219446.gif" alt=""></td><td align="CENTER"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_be037057-781e-46f6-9630-5794ea9a3042.gif" alt=""></td><td align="CENTER"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_7fe6611c-0a33-4db7-bf26-0aacc6d47b03.gif" alt=""></td><td><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_4be023b2-15b3-4a74-92a6-a4718bd582b9.gif" alt=""></td><td width="150" align="center"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_51efd4ec-5e44-4056-9880-a98f1207e9ad.gif" alt=""><br>Anyone can get Bob’s Public Key, but Bob keeps his Private Key to himself</td></tr><tr><td align="CENTER">Pat</td><td align="CENTER">Doug</td><td align="CENTER">Susan</td></tr></tbody></table></center><br><br>Bob’s Public key is available to anyone who needs it, but he keeps his Private Key to himself. Keys are used to encrypt information. Encrypting information means “scrambling it up”, so that only a person with the appropriate key can make it readable again. Either one of Bob’s two keys can encrypt data, and the other key can decrypt that data.<br><br>Susan (shown below) can encrypt a message using Bob’s Public Key. Bob uses his Private Key to decrypt the message. Any of Bob’s coworkers might have access to the message Susan encrypted, but without Bob’s Private Key, the data is worthless.<br><center><table border="0"><tbody><tr><td align="CENTER"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_7fe6611c-0a33-4db7-bf26-0aacc6d47b03.gif" alt=""></td><td><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_4be023b2-15b3-4a74-92a6-a4718bd582b9.gif" alt=""></td><td width="100">“Hey Bob, how about lunch at Taco Bell. I hear they have free refills!”</td><td><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_1268c8d7-0571-4b58-a482-50b849b3e1ba.gif" alt=""></td><td width="100">HNFmsEm6Un BejhhyCGKOK JUxhiygSBCEiC 0QYIh/Hn3xgiK BcyLK1UcYiY lxx2lCFHDC/A</td></tr></tbody></table><table border="0"><tbody><tr><td align="CENTER"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_f87a0712-00df-4cbd-977f-7f578f1839d5.gif" alt=""></td><td><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_4be023b2-15b3-4a74-92a6-a4718bd582b9.gif" alt=""></td><td width="100">HNFmsEm6Un BejhhyCGKOK JUxhiygSBCEiC 0QYIh/Hn3xgiK BcyLK1UcYiY lxx2lCFHDC/A</td><td><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_d7958e24-f338-493e-80dc-ae0a4c6bf451.gif" alt=""></td><td width="100">“Hey Bob, how about lunch at Taco Bell. I hear they have free refills!”</td></tr></tbody></table></center><br><br>With his private key and the right software, Bob can put digital signatures on documents and other data. A digital signature is a “stamp” Bob places on the data which is unique to Bob, and is very difficult to forge. In addition, the signature assures that any changes made to the data that has been signed can not go undetected.<br><center><table border="0" cellspacing="5" cellpadding="5"><tbody><tr><td><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_b8053cb7-9d6f-45ef-8e08-c0862b463578.gif" alt=""></td><td><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_f612d73e-7851-46cb-9247-5136d949ba18.gif" alt=""></td><td><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_090b799d-13a7-4e71-ad6f-cdfa59cc2d3b.gif" alt=""></td></tr></tbody></table></center><table><tbody><tr><td align="CENTER"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_f87a0712-00df-4cbd-977f-7f578f1839d5.gif" alt=""></td><td>To sign a document, Bob’s software will crunch down the data into just a few lines by a process called “hashing”. These few lines are called a message digest. (It is not possible to change a message digest back into the original data from which it was created.)</td></tr></tbody></table><center><table border="0" cellspacing="5" cellpadding="5"><tbody><tr><td align="center"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_090b799d-13a7-4e71-ad6f-cdfa59cc2d3b.gif" alt=""></td><td align="center"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_d85ff476-a3aa-4e29-8118-3225a5d8bdae.gif" alt=""></td><td align="center"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_48c52fc6-bfe2-4b78-8be0-e5919c55d788.gif" alt=""></td></tr></tbody></table></center><br><br>Bob’s software then encrypts the message digest with his private key. The result is the digital signature.<br><center><table border="0" cellspacing="5" cellpadding="5"><tbody><tr><td align="center"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_48c52fc6-bfe2-4b78-8be0-e5919c55d788.gif" alt=""></td><td align="center"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_db3e4076-92cc-4b2b-a133-0f913b2996ad.gif" alt=""></td><td align="center"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_47f90459-cd6a-4946-bba7-4421096e7f97.gif" alt=""></td></tr></tbody></table></center><br><br>Finally, Bob’s software appends the digital signature to document. All of the data that was hashed has been signed.<br><center><table border="0" cellspacing="5" cellpadding="5"><tbody><tr><td align="center" rowspan="2"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_47f90459-cd6a-4946-bba7-4421096e7f97.gif" alt=""></td><td align="center"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_f612d73e-7851-46cb-9247-5136d949ba18.gif" alt=""></td><td align="center"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_090b799d-13a7-4e71-ad6f-cdfa59cc2d3b.gif" alt=""></td></tr><tr><td align="center"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_458315d8-39f1-443c-839a-1c65517b81e6.gif" alt=""></td><td align="center"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_090b799d-13a7-4e71-ad6f-cdfa59cc2d3b.gif" alt=""></td></tr></tbody></table></center><br><br>Bob now passes the document on to Pat.<br><table border="0"><tbody><tr><td align="CENTER"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_8326af8b-84c8-49c6-ae7d-880aae219446.gif" alt=""></td><td>First, Pat’s software decrypts the signature (using Bob’s public key) changing it back into a message digest. If this worked, then it proves that Bob signed the document, because only Bob has his private key. Pat’s software then hashes the document data into a message digest. If the message digest is the same as the message digest created when the signature was decrypted, then Pat knows that the signed data has not been changed.</td></tr></tbody></table><center>Plot complication…</center><table border="0"><tbody><tr><td align="CENTER"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_be037057-781e-46f6-9630-5794ea9a3042.gif" alt=""></td><td>Doug (our disgruntled employee) wishes to deceive Pat. Doug makes sure that Pat receives a signed message and a public key that appears to belong to Bob. Unbeknownst to Pat, Doug deceitfully sent a key pair he created using Bob’s name. Short of receiving Bob’s public key from him in person, how can Pat be sure that Bob’s public key is authentic?</td></tr></tbody></table><br><br>It just so happens that Susan works at the company’s certificate authority center. Susan can create a digital certificate for Bob simply by signing Bob’s public key as well as some information about Bob.<br><center><table border="0"><tbody><tr><td align="middle"><table border="2" cellspacing="2" cellpadding="2"><tbody><tr><td bgcolor="#FFFFFF">Bob Info:&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;Department&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;Cubical Number<br><br>Certificate Info:&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;Expiration Date&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;Serial Number<br><br>Bob’s Public Key:&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;<img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_51efd4ec-5e44-4056-9880-a98f1207e9ad.gif" alt=""><br></td></tr></tbody></table></td><td align="middle"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_4be023b2-15b3-4a74-92a6-a4718bd582b9.gif" alt=""></td><td align="middle"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_57cee98c-6fca-49bf-be3c-af2e499540f1.gif" alt=""><br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_7fe6611c-0a33-4db7-bf26-0aacc6d47b03.gif" alt=""></td><td align="middle"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_4be023b2-15b3-4a74-92a6-a4718bd582b9.gif" alt=""></td><td align="middle"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_f8f5b883-c5ae-4aca-bfc9-9916b54ad3fa.gif" alt=""></td></tr></tbody></table></center><br><br>Now Bob’s co-workers can check Bob’s trusted certificate to make sure that his public key truly belongs to him. In fact, no one at Bob’s company accepts a signature for which there does not exist a certificate generated by Susan. This gives Susan the power to revoke signatures if private keys are compromised, or no longer needed. There are even more widely accepted certificate authorities that certify Susan.<br><br>Let’s say that Bob sends a signed document to Pat. To verify the signature on the document, Pat’s software first uses Susan’s (the certificate authority’s) public key to check the signature on Bob’s certificate. Successful de-encryption of the certificate proves that Susan created it. After the certificate is de-encrypted, Pat’s software can check if Bob is in good standing with the certificate authority and that all of the certificate information concerning Bob’s identity has not been altered.<br><br>Pat’s software then takes Bob’s public key from the certificate and uses it to check Bob’s signature. If Bob’s public key de-encrypts the signature successfully, then Pat is assured that the signature was created using Bob’s private key, for Susan has certified the matching public key. And of course, if the signature is valid, then we know that Doug didn’t try to change the signed content.<br><center></center>Although these steps may sound complicated, they are all handled behind the scenes by Pat’s user-friendly software. To verify a signature, Pat need only click on it.
+
+</em> <em> </em><br>原文地址：<a href="http://www.youdzone.com/signature.html" target="_blank" rel="external">http://www.youdzone.com/signature.html</a><br>主要内容有：对称密钥系统，非对称密钥系统，数字信封，确保信息完整性hash散列，数字签名，数字证书等<br>1，对称密钥系统加密和解密用同一个密钥，密钥长度较短，传输熟读较快，常常用于在建立连接后的内容加密<br>&nbsp; &nbsp; &nbsp; 如下图所示;典型的算法，DES（核心思想是替换加密和转换加密），三重DES<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_df0bdabb-6724-484b-86d6-d013a1006a80.jpg" alt=""><br>—————————————————————————————<br>2，非对称密钥系统，也称为公钥加密,它使用一对密钥，包括一个公钥（ Public Key ）和一个私钥（ Private Key ）。<br>&nbsp; &nbsp; &nbsp;主要作用是认证，典型有算法RSA，背包算法，如下图所示<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_a71d8092-7f34-42f9-bc90-103b357d6606.gif" alt=""><br>—————————————————————————————<br>两者常常一起使，下面是应用的案例用<br><br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_23e266d4-c2de-4af4-a251-c9d875bd2ad6.bmp" alt=""><br>发送者公开密钥进行加密，接收者用私钥进行解密，问题是这个私钥怎么传输？<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_7d912cad-27b6-4a13-bd40-ed158685c378.bmp" alt=""><br>&nbsp;<br>&nbsp;<br>接收者用私钥进行加密，所有人都知道的公钥，安全问题？<br>&nbsp;<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_a29471fc-1659-4606-a985-e084cc2bcd8a.bmp" alt=""><br>这个图片解决以上两个问题，首先用发送者的私钥进行加密，这时所有人的公钥都可以解开，然后在用接收者的公钥进行加密，<br>确保了只有接收者可以解开&nbsp;公钥算法相对兑成算法速度较慢，无法用于加密和解密大量数据，在实际应用中常常是两者同时使用<br>—————————————————————————————<br>下面来介绍可以几个相关概念：<br>数字信封：（digitalenvelope）,用公钥建立和发送一个对称密钥个给接收人，然后用这个密钥进行信息的加密和解密<br>&nbsp;通俗点将就是：通过非对称加密，获取对称加密的密钥，如下图所示：<br>&nbsp;<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_b4531a3c-a5fc-449e-9ec7-069165d1243f.bmp" alt=""><br>&nbsp;<br>下面来思考一个问题，当我们可以确保信息不会外泄时，我们怎么样保证所发信息的完整性？<br>&nbsp;<br>散列值（也成哈希值），当不用个输入时，可以确保有不同的输出，通过输出值可以保证输入的唯一性<br>散列是一个单向的函数，即使信息有细微的变化，所输出的散列值也不同<br>确保信息完整的有效加密方法就是通过散列值，这点已经广泛应用，比如我们平时用的迅雷，电驴，甚至有时候在下载大型软件时，<br>旁边会附有他的散列值<br>原理如下<br>&nbsp;<br>1.将信息和信息的散列值一同发给收件人<br>2.收件人收到信息，通过相同的散列算法，计算出另一个散列值<br>3将两个散列值进行比较，如果相同，则说明在传输过程中未出现丢失，信息是完整的<br>&nbsp;<br>—————————————————————————————&nbsp;<br>到目前为止，我们已经解决了两个问题，即传输中信息泄露（安全性）和接收后保证信息的完整性，当我们接收到一个数<br>据后又是怎样确定是发送者发送的呢？下面我们来讨论这个问题&nbsp;现在最关心的是发送者的身份？现实生活中我们可以使用<br>笔迹鉴定，按手印等，如甲在写完文章后，既按了一个手印，当乙（甚至是所有人）看到这个手印后，既可以确定是甲按的，<br>这个手印具有唯一性，在网络传输中我们可以将内容和这个手印一起传给接收者，当接收者看到这手印后，即认定他就是甲，<br>这个手印就是就是下面要讲的数据签名<br>—————————————————————————————<br>数据签名：基本原理<br>1.对发送者者内容进行散列<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_707f4385-7ecf-45e7-ba83-c1df3b9ff3a3.png" alt=""><br>&nbsp;获取发送内容的哈希值，确保完整性<br>—————————————————————————————<br>2，对这个散列值进行加密（用发送者的私钥）记住一个原则，私钥加密，公钥解密不安全，但是可以用于身份验证<br>&nbsp;<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_cbdc90c8-c954-499a-833f-340296465f5b.png" alt=""><br>—————————————————————————————<br>3.将数字签名（用发送者私钥加密的发送内容的哈希值），附加在发送的内容中生成一个明文A，一起进行发送<br>&nbsp;<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_c3d990e2-7e06-4810-b79b-65bb080989c4.png" alt=""><br>—————————————————————————————<br>&nbsp;4.对明文A，用接收者的公钥进行加密生成密文B，进行发送<br>&nbsp;5.接受者在收到密文B后，用自己的私钥进行解密，还原成明文Ａ<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_c0c4bc87-30fa-45d1-ac72-b8ee892d0bbd.jpg" alt="" title="点击查看原始大小图片"><br>6.接受者从还原的明文A中，抽取中签名，然后对签名用发送者的公钥进行解密得到一个散列值Ｆ，如果能得到说明，<br>信息就是发送者发来的，因为发送者的私钥只有发送者的公钥能解开，至此验证了身份，对接收的明文A中内容进行<br>哈希散列，获取哈希D ,如果D和F一致，说明发送的是完整，<br>—————————————————————————————<br>下面我们来讨论一个更深层次的问题：在确定了发送方的身份后，我们怎么确定接收方的身份，你必须知道某人的公<br>钥才向他发送信息，公钥来自何处，如何确定公钥持有者的身份？<br>带着这个问题，我们来探究下一个话题：数字证书<br>数字证书有认证中心发行，用来正式公钥和私钥持有人真实身份，个人可以像CA（认证中心）申请数字证书，这个<br>过程称为公钥认证，证书中心用自己 的私钥对申请人公钥和一些基本信息进行加密，寄给申请方，当有人像申请人<br>发送信息时，他们首先要求接收人，寄过来签名证书，然后发送人使用CA公钥给证书解密，发送人对接收人的身份<br>得意确认，这样最后只需要与认证方打交道即可 &nbsp;例子自己看看吧，我就不分析了<br><img src="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_8aa7c803-315f-495f-9ada-8567e2504807.bmp" alt=""><br><pre>本文曾经出现我之前的博客中：&nbsp;&lt;<a href="http://lirujia00.iteye.com/blog/1731309" target="_blank" rel="external">http://lirujia00.iteye.com/blog/1731309</a><font color="#808080" face="Simsun"><span>&gt;</span></font><br><pre>&nbsp;</pre></pre></div><div id="blog_content"><br><br><span></span><br><br><span></span><br><br><span></span><br><br><span></span><br></div>
+
+<div><a href="http://www.wiz.cn/i/60efacb7" title="来自为知笔记(Wiz)" target="_blank" rel="external">来自为知笔记(Wiz)</a></div>
+
+<div><br><br>### 附件列表<br><br><em>   [)TEBIW9)<a href="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_TEBIW9KSQXBN9UZ@D2.png" target="_blank" rel="external">KSQX$BN9U{Z@~D.png</a>
+</em>   <a href="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_PQS0SN48J2L0TMVE8U2W2.png" target="_blank" rel="external">[PQS0SN48J2L0TMVE8U2~]W.png</a><br>*   <a href="http://helloword.1kapp.com/wp-content/uploads/2015/12/wpid-6567211442dd8fb3b9c517188dd9ef70_FQZ65JBDXSZ@EU0AO1Q2.png" target="_blank" rel="external">FQZ6~5JBDXSZ)@EU0AO(}1Q.png</a></div>
+
+<p>&nbsp;</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/编程语言/">编程语言</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2015/12/07/e2c6f029977a8f38d983f0f2fdaa1d69/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Kategorien</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/JAVA设计模式/">JAVA设计模式</a><small>5</small></li>
+  
+    <li><a href="/categories/WEB安全/">WEB安全</a><small>4</small></li>
+  
+    <li><a href="/categories/应用服务器/">应用服务器</a><small>7</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>5</small></li>
+  
+    <li><a href="/categories/数据库知识/">数据库知识</a><small>11</small></li>
+  
+    <li><a href="/categories/系统架构/">系统架构</a><small>4</small></li>
+  
+    <li><a href="/categories/编程语言/">编程语言</a><small>7</small></li>
+  
+    <li><a href="/categories/WEB安全/编程语言/">编程语言</a><small>2</small></li>
+  
+    <li><a href="/categories/JAVA设计模式/编程语言/">编程语言</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Jdk/">Jdk</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>5</small></li>
+  
+    <li><a href="/tags/Memcache/">Memcache</a><small>2</small></li>
+  
+    <li><a href="/tags/Mongodb/">Mongodb</a><small>3</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Oracle/">Oracle</a><small>2</small></li>
+  
+    <li><a href="/tags/Weblogic/">Weblogic</a><small>1</small></li>
+  
+    <li><a href="/tags/Yum/">Yum</a><small>1</small></li>
+  
+    <li><a href="/tags/数据库知识/">数据库知识</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

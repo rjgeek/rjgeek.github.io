@@ -1,0 +1,336 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【Mongodb】低版本Mongodb集群加密-用户认证 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="1  数据库调整本文适用于对Mongo有一定了解到操作人员
+以下操作基于以下条件
+操作系统：Red Hat 6.4
+Mongo版本：2.6.3
+已经完成集群分片，已经存在数据库pmr
+因为Mongo升级的原因，以下方法仅适用于2.6.3 以前的版本
+1.1  创建用户本次一共预留4个用户
+用户名  ">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【Mongodb】低版本Mongodb集群加密-用户认证"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-12T10:49:20.000Z"><a href="/2015/10/12/mongo-e9-9b-86-e7-be-a4-e5-8a-a0-e5-af-86-e4-b8-8e-e7-a8-8b-e5-ba-8f-e5-8f-98-e6-9b-b4/">2015-10-12</a></time>
+      
+      
+  
+    <h1 class="title">【Mongodb】低版本Mongodb集群加密-用户认证</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="1-数据库调整"><a href="#1-数据库调整" class="headerlink" title="1  数据库调整"></a><span style="line-height: 1.2;">1  数据库调整</span></h1><p>本文适用于对Mongo有一定了解到操作人员</p>
+<p>以下操作基于以下条件</p>
+<p>操作系统：Red Hat 6.4</p>
+<p>Mongo版本：2.6.3</p>
+<p>已经完成集群分片，已经存在数据库pmr</p>
+<p>因为Mongo升级的原因，以下方法仅适用于2.6.3 以前的版本</p>
+<h2 id="1-1-创建用户"><a href="#1-1-创建用户" class="headerlink" title="1.1  创建用户"></a>1.1  创建用户</h2><p>本次一共预留4个用户</p>
+<p>用户名                密码                备注</p>
+<p>admin                123root           超级管理员</p>
+<p>admin_read           123root_read      只读超级管理员</p>
+<p>pmr_admin            123root_pmr        pmr库管理员</p>
+<p>pmr_admin_read      123root_pmr_read   pmr库可读管理员</p>
+<p>在无命令的情况下进行登录,（蓝色字体表示需敲入的语句，黑色字体表示执行成功的控制台输出的部分）</p>
+<p>   [root@master ~]# mongo 192.168.0.178:20000/admin</p>
+<p>MongoDB shell version: 2.6.1</p>
+<p>connecting to: 192.168.0.178:20000/admin</p>
+<p>mongos&gt;db.addUser(‘admin’,’123root’)  #添加超级管理员用户</p>
+<p>mongos&gt;db.addUser(‘admin_read’,123root_read’，true) #添加超级管理员可读用</p>
+<p>mongos&gt;use pmr</p>
+<p>mongos&gt; db.addUser(‘pmr_admin’,’123root_pmr’)  #添加pmr库管理员</p>
+<p>mongos&gt; db.addUser(‘pmr_admin_read ‘,’123root_pmr_read ‘)  #添加pmr可读管理员用户</p>
+<p>命令执行成功标志：出现</p>
+<p>Successfully added user: { }</p>
+<p>在执行过程中会出现WARNING，提示方法已经过期，不影响最终结果</p>
+<h2 id="1-2-关闭服务器的mongod-mongos和config服务"><a href="#1-2-关闭服务器的mongod-mongos和config服务" class="headerlink" title="1.2  关闭服务器的mongod,mongos和config服务"></a>1.2  关闭服务器的mongod,mongos和config服务</h2><p>执行ps –ef|grep mongo 查出所有mongo正在运行的进程</p>
+<p>执行 kill -2 进程ID   杀掉所有进程</p>
+<h2 id="1-3-停生成密钥文件keyfile"><a href="#1-3-停生成密钥文件keyfile" class="headerlink" title="1.3  停生成密钥文件keyfile"></a>1.3  停生成密钥文件keyfile</h2><p>切换到root的跟目录下执行以下命令</p>
+<p>openssl rand -base64 753 &gt;keyfile</p>
+<p>chmod 600 keyfile #重点 必须</p>
+<p>cat keyfile   #查看</p>
+<p>4a7w479ouV6fY5CASqxeWzzPhPLzZgYnHKWOFSIxjMABjaWK7up6Keb2+ZKz1C2Rtfl7ukCBelW2xOL0h3gOSAdIhUi0j8IMBYZV/kbUSSf0987xIur3lHZqUINPVVyl</p>
+<p>ib+XPrg3SO4IG25tCQbEf/twvS1CxiDmi/GtQZfqOjUX7MEJK3ynFBsB/9wU1nf1</p>
+<p>6rLhBPIdmSnpNf5s9yGohx2wn6dQcJ8o0wn75oOBysX2mPkLI0tEu4//7x1PgY9Q</p>
+<p>Ws4XdXs1MFqUYXkh8K6RFd/TKB2zs5fonzqiXrgwpaW1KUFZB1lAfQwWePmxsWul</p>
+<p>HqR96/yTGPxQKOVpm1Zdj2LGa616X3Www16Td4c2UVoM7mPi+Js8R2Flc6oV9H+</p>
+<h2 id="1-4-将keyfile分发到各个库中"><a href="#1-4-将keyfile分发到各个库中" class="headerlink" title="1.4  将keyfile分发到各个库中"></a>1.4  将keyfile分发到各个库中</h2><p>#将生成的keyfile 拷贝到mongod/mongos/config 进程对应的文件夹（依据自己的库而定）</p>
+<p>[root@master ~]# cp keyfile /data/mongodb/config/data/</p>
+<p>[root@master ~]# cp keyfile /data/mongodb/mongos/</p>
+<p>[root@master ~]# cp keyfile /data/mongodb/shard1/data/</p>
+<p>[root@master ~]# cp keyfile /data/mongodb/shard2/data/</p>
+<p>[root@master ~]# cp keyfile /data/mongodb/shard3/data/</p>
+<p>依次将keyfile拷贝到另外两台机器上的数据文件</p>
+<p>   全部执行完之后，依次变更权限，下面为其中一个例子</p>
+<p>执行    chmod 600  /data/mongodb/mongos/keyfile</p>
+<h2 id="1-5-变更脚本文件"><a href="#1-5-变更脚本文件" class="headerlink" title="1.5  变更脚本文件"></a>1.5  变更脚本文件</h2><p>原脚本</p>
+<p>${MONGODB}/bin/mongod -fork -shardsvr -replSet shard1 -port 10001 -dbpath ${MONGO_DATA}/shard1 -logpath ${MONGO_LOG}/shard1/shard1.log</p>
+<p>变更后的脚本，在最后添加上权限</p>
+<p>${MONGODB}/bin/mongod -fork -shardsvr -replSet shard1 -port 10001 -dbpath ${MONGO_DATA}/shard1 -logpath ${MONGO_LOG}/shard1/shard1.log</p>
+<p>–keyFile /data/mongodb/shard1/data/keyfile</p>
+<p>请依次变更所有服务的脚本（3台shard,config,mongo）</p>
+<h2 id="1-6-启动脚本"><a href="#1-6-启动脚本" class="headerlink" title="1.6  启动脚本"></a>1.6  启动脚本</h2><p>进入脚本目录下，依次执行所有shard和config脚本后，然后在执行mongo服务，顺序很重要</p>
+<h2 id="1-7-确认权限是否添加成功"><a href="#1-7-确认权限是否添加成功" class="headerlink" title="1.7  确认权限是否添加成功"></a>1.7  确认权限是否添加成功</h2><p>验证超级管理员, 账户认证前状态</p>
+<p>[Mongo@master ~]# mongo 10.142.51.43:30000</p>
+<p>MongoDB shell version: 2.6.1</p>
+<p>connecting to: localhost: 10.142.51.43:30000/test</p>
+<p>Error while trying to show server startup warnings: not authorized on admin to execute command { getLog: “startupWarnings” }</p>
+<p>mongos&gt; show collections;</p>
+<p>2014-08-03T12:02:48.535+0800 error: {</p>
+<p>  “$err” : “not authorized for query on test.system.namespaces”,</p>
+<p>  “code” : 13</p>
+<p>} at src/mongo/shell/query.js:131</p>
+<p>mongos&gt; use pmr</p>
+<p>switched to db pmr</p>
+<p>mongos&gt; show collections;</p>
+<p>2014-08-03T12:03:10.923+0800 error: { “$err” : “not authorized for query on uba.system.namespaces”, “code” : 13 } at src/mongo/shell/query.js:131</p>
+<p>验证超级管理员, 账户认证后状态</p>
+<p>#admin库认证</p>
+<p>[Mongo @master ~]# mongo 10.142.51.43:30000/admin -u admin -p 123root</p>
+<p>MongoDB shell version: 2.6.1</p>
+<p>connecting to: localhost:20000/admin</p>
+<p>mongos&gt; show collections;</p>
+<p>system.indexes</p>
+<p>system.users</p>
+<p>system.version</p>
+<p>#pmr库认证 读写权限用户</p>
+<p>[Mongo@master ~]# mongo 10.142.51.44:30000/pmr -u pmr_admin -p 123root_pmr</p>
+<p>MongoDB shell version: 2.6.1</p>
+<p>connecting to: 10.142.51.44:30000/pmr</p>
+<p>Error while trying to show server startup warnings: not authorized on admin to execute command { getLog: “startupWarnings” }</p>
+<p>mongos&gt; show collections;</p>
+<p>system.indexes</p>
+<p>table1</p>
+<p>mongos&gt; db.table1.count()</p>
+<p>0</p>
+<p>mongos&gt; for (var i = 1; i &lt;= 1000; i++)db.table1.save({id:i,name:”username”+i,age:i});</p>
+<p>WriteResult({ “nInserted” : 1 })</p>
+<p>mongos&gt; db.table1.count()</p>
+<p>1000</p>
+<p>mongos&gt; db.table1.findOne()</p>
+<p>{</p>
+<p>  “_id” : ObjectId(“53ddb52a65bb900f61e458a1”),</p>
+<p>  “id” : 1,</p>
+<p>  “name” : “username1”,</p>
+<p>  “age” : 1</p>
+<p>}</p>
+<p>#pmr库 只读权限用户</p>
+<p>[Mongo@master ~]# mongo localhost:20000/pmr -u pmr_read -p 123root_pmr_read</p>
+<p>MongoDB shell version: 2.6.1</p>
+<p>connecting to: localhost:20000/pmr</p>
+<p>Error while trying to show server startup warnings: not authorized on admin to execute command { getLog: “startupWarnings” }</p>
+<p>mongos&gt; db.auth(‘sa_read’,’123root_pmr_read’)</p>
+<p>1</p>
+<p>mongos&gt; for (var i = 1; i &lt;= 1000; i++)db.table1.save({id:i,name:”username”+i,age:i});</p>
+<p>WriteResult({</p>
+<p>  “writeError” : {</p>
+<p>   “code” : 13,</p>
+<pre><code>&quot;errmsg&quot; : &quot;not authorized on uba to execute command { insert: \&quot;table1\&quot;, documents: [ { id: 1000.0, name: \&quot;username1000\&quot;, age: 1000.0, _id: ObjectId(&apos;53ddb5d62390d9a487087c87&apos;) } ], ordered: true }&quot;
+</code></pre><p>  }</p>
+<p>})</p>
+<p>mongos&gt; db.table1.findOne()</p>
+<p>{</p>
+<p>  “_id” : ObjectId(“53ddb52a65bb900f61e458a1”),</p>
+<p> “id” : 1,</p>
+<p>  “name” : “username1”,</p>
+<p>  “age” : 1</p>
+<p>}</p>
+<p>mongos&gt; db.table1.count()</p>
+<p>1000</p>
+<p>也可用工具MongoVUE执行验证，这里不再描述</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/数据库知识/">数据库知识</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2015/10/12/mongo-e9-9b-86-e7-be-a4-e5-8a-a0-e5-af-86-e4-b8-8e-e7-a8-8b-e5-ba-8f-e5-8f-98-e6-9b-b4/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Kategorien</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/JAVA设计模式/">JAVA设计模式</a><small>5</small></li>
+  
+    <li><a href="/categories/WEB安全/">WEB安全</a><small>4</small></li>
+  
+    <li><a href="/categories/应用服务器/">应用服务器</a><small>7</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>5</small></li>
+  
+    <li><a href="/categories/数据库知识/">数据库知识</a><small>11</small></li>
+  
+    <li><a href="/categories/系统架构/">系统架构</a><small>4</small></li>
+  
+    <li><a href="/categories/编程语言/">编程语言</a><small>7</small></li>
+  
+    <li><a href="/categories/WEB安全/编程语言/">编程语言</a><small>2</small></li>
+  
+    <li><a href="/categories/JAVA设计模式/编程语言/">编程语言</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Jdk/">Jdk</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>5</small></li>
+  
+    <li><a href="/tags/Memcache/">Memcache</a><small>2</small></li>
+  
+    <li><a href="/tags/Mongodb/">Mongodb</a><small>3</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Oracle/">Oracle</a><small>2</small></li>
+  
+    <li><a href="/tags/Weblogic/">Weblogic</a><small>1</small></li>
+  
+    <li><a href="/tags/Yum/">Yum</a><small>1</small></li>
+  
+    <li><a href="/tags/数据库知识/">数据库知识</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【编程语言】Java设计原则-接口隔离原则 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="总结一句话：接口的设计尽量单一化
+定义：客户端不应该依赖它不需要的接口；一个类对另一个类的依赖应该建立在最小的接口上。
+问题由来：类A通过接口I依赖类B，类C通过接口I依赖类D，如果接口I对于类A和类B来说不是最小接口，则类B和类D必须去实现他们不需要的方法。
+解决方案：将臃肿的接口I拆分为独立的几个接口，类A和类C分别与他们需要的接口建立依赖关系。也就是采用接口隔离原则。
+举例来说明接口隔离原则：
+
+（图1  未遵循接口隔离原则的设计）">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【编程语言】Java设计原则-接口隔离原则"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-02-12T16:02:41.000Z"><a href="/2016/02/12/e3-80-90-e7-bc-96-e7-a8-8b-e8-af-ad-e8-a8-80-e3-80-91java-e8-ae-be-e8-ae-a1-e5-8e-9f-e5-88-99-e6-8e-a5-e5-8f-a3-e9-9a-94-e7-a6-bb-e5-8e-9f-e5-88-99/">2016-02-12</a></time>
+      
+      
+  
+    <h1 class="title">【编程语言】Java设计原则-接口隔离原则</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><span style="color: black; font-family: 仿宋; font-size: 14pt; background-color: white;"><strong>总结一句话：<span style="color: red;">接口的设计尽量单一化<span style="color: black;"><br></span></span></strong></span></p>
+<p><span style="font-family: 仿宋; font-size: 14pt;"><span style="color: black; background-color: white;"><strong>定义：</strong>客户端不应该依赖它不需要的接口；一个类对另一个类的依赖应该建立在最小的接口上。</span><br></span></p>
+<p><span style="color: black; font-family: 仿宋; font-size: 14pt;"><strong>问题由来：</strong>类A通过接口I依赖类B，类C通过接口I依赖类D，如果接口I对于类A和类B来说不是最小接口，则类B和类D必须去实现他们不需要的方法。<br></span></p>
+<p><span style="color: black; font-family: 仿宋; font-size: 14pt;"><strong>解决方案：</strong>将臃肿的接口I拆分为独立的几个接口，类A和类C分别与他们需要的接口建立依赖关系。也就是采用接口隔离原则。<br></span></p>
+<p><span style="color: black; font-family: 仿宋; font-size: 14pt;">举例来说明接口隔离原则：<br></span></p>
+<p><img src="http://helloword.1kapp.com/wp-content/uploads/2016/06/061216_0802_Java1.jpg" alt=""><span style="color: black; font-family: Arial; font-size: 10pt;"><br></span></p>
+<p><span style="color: black; font-size: 10pt;"><span style="font-family: 宋体;">（图</span><span style="font-family: Arial;">1  </span><span style="font-family: 宋体;">未遵循接口隔离原则的设计）</span><span style="font-family: Arial;"><br></span></span></p>
+<p><span style="color: black;"><span style="font-family: Arial; font-size: 10pt;">   </span><span style="font-family: 仿宋; font-size: 14pt;"> <a id="more"></a>这个图的意思是：类A依赖接口I中的方法1、方法2、方法3，类B是对类A依赖的实现。类C依赖接口I中的方法1、方法4、方法5，类D是对类C依赖的实现。对于类B和类D来说，虽然他们都存在着用不到的方法（也就是图中红色字体标记的方法），但由于实现了接口I，所以也必须要实现这些用不到的方法。对类图不熟悉的可以参照程序代码来理解，代码如下：<br></span></span></p>
+<p><span style="color: silver; font-family: Verdana; font-size: 7pt;"><strong>[java]</strong> <a href="http://blog.csdn.net/zhengzhb/article/details/7296921" title="view plain" target="_blank" rel="external"><span style="color: #a0a0a0;">view plain</span></a> <a href="http://blog.csdn.net/zhengzhb/article/details/7296921" title="copy" target="_blank" rel="external"><span style="color: #a0a0a0;">copy</span></a><br></span></p>
+<ol>
+<li><div style="background: white;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>interface</strong><span style="color: black;"> I {  <span style="color: #5c5c5c;"><br></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method1();  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method2();  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method3();  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method4();  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method5();  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><br></div></li>
+<li><div style="background: white;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>class</strong><span style="color: black;"> A{  <span style="color: #5c5c5c;"><br></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> depend1(I i){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        i.method1();  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> depend2(I i){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        i.method2();  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> depend3(I i){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        i.method3();  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><br></div></li>
+<li><div style="background: white;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>class</strong><span style="color: black;"> B <span style="color: #006699;"><strong>implements</strong><span style="color: black;"> I{  <span style="color: #5c5c5c;"><br></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method1() {  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        System.out.println(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">类</span><span style="color: blue;"><span style="font-family: Consolas;">B</span><span style="font-family: 宋体;">实现接口</span><span style="font-family: Consolas;">I</span><span style="font-family: 宋体;">的方法</span><span style="font-family: Consolas;">1”<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method2() {  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        System.out.println(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">类</span><span style="color: blue;"><span style="font-family: Consolas;">B</span><span style="font-family: 宋体;">实现接口</span><span style="font-family: Consolas;">I</span><span style="font-family: 宋体;">的方法</span><span style="font-family: Consolas;">2”<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method3() {  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        System.out.println(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">类</span><span style="color: blue;"><span style="font-family: Consolas;">B</span><span style="font-family: 宋体;">实现接口</span><span style="font-family: Consolas;">I</span><span style="font-family: 宋体;">的方法</span><span style="font-family: Consolas;">3”<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">    <span style="color: #008200;">//</span></span><span style="font-family: 宋体;">对于类</span><span style="color: #008200;"><span style="font-family: Consolas;">B</span><span style="font-family: 宋体;">来说，</span><span style="font-family: Consolas;">method4</span><span style="font-family: 宋体;">和</span><span style="font-family: Consolas;">method5</span><span style="font-family: 宋体;">不是必需的，但是由于接口</span><span style="font-family: Consolas;">A</span><span style="font-family: 宋体;">中有这两个方法，</span><span style="color: black; font-family: Consolas;">  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">    <span style="color: #008200;">//</span></span><span style="font-family: 宋体;">所以在实现过程中即使这两个方法的方法体为空，也要将这两个没有作用的方法进行实现。</span><span style="font-family: Consolas;">  <span style="color: #5c5c5c;"><br></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method4() {}  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method5() {}  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><br></div></li>
+<li><div style="background: white;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>class</strong><span style="color: black;"> C{  <span style="color: #5c5c5c;"><br></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> depend1(I i){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        i.method1();  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> depend2(I i){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        i.method4();  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> depend3(I i){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        i.method5();  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><br></div></li>
+<li><div style="background: white;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>class</strong><span style="color: black;"> D <span style="color: #006699;"><strong>implements</strong><span style="color: black;"> I{  <span style="color: #5c5c5c;"><br></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method1() {  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        System.out.println(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">类</span><span style="color: blue;"><span style="font-family: Consolas;">D</span><span style="font-family: 宋体;">实现接口</span><span style="font-family: Consolas;">I</span><span style="font-family: 宋体;">的方法</span><span style="font-family: Consolas;">1”<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">    <span style="color: #008200;">//</span></span><span style="font-family: 宋体;">对于类</span><span style="color: #008200;"><span style="font-family: Consolas;">D</span><span style="font-family: 宋体;">来说，</span><span style="font-family: Consolas;">method2</span><span style="font-family: 宋体;">和</span><span style="font-family: Consolas;">method3</span><span style="font-family: 宋体;">不是必需的，但是由于接口</span><span style="font-family: Consolas;">A</span><span style="font-family: 宋体;">中有这两个方法，</span><span style="color: black; font-family: Consolas;">  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">    <span style="color: #008200;">//</span></span><span style="font-family: 宋体;">所以在实现过程中即使这两个方法的方法体为空，也要将这两个没有作用的方法进行实现。</span><span style="font-family: Consolas;">  <span style="color: #5c5c5c;"><br></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method2() {}  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method3() {}  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><br></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method4() {  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        System.out.println(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">类</span><span style="color: blue;"><span style="font-family: Consolas;">D</span><span style="font-family: 宋体;">实现接口</span><span style="font-family: Consolas;">I</span><span style="font-family: 宋体;">的方法</span><span style="font-family: Consolas;">4”<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method5() {  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        System.out.println(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">类</span><span style="color: blue;"><span style="font-family: Consolas;">D</span><span style="font-family: 宋体;">实现接口</span><span style="font-family: Consolas;">I</span><span style="font-family: 宋体;">的方法</span><span style="font-family: Consolas;">5”<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><br></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>class</strong><span style="color: black;"> Client{  <span style="color: #5c5c5c;"><br></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>static</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> main(String[] args){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        A a = <span style="color: #006699;"><strong>new</strong><span style="color: black;"> A();  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        a.depend1(<span style="color: #006699;"><strong>new</strong><span style="color: black;"> B());  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        a.depend2(<span style="color: #006699;"><strong>new</strong><span style="color: black;"> B());  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        a.depend3(<span style="color: #006699;"><strong>new</strong><span style="color: black;"> B());  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><br></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        C c = <span style="color: #006699;"><strong>new</strong><span style="color: black;"> C();  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        c.depend1(<span style="color: #006699;"><strong>new</strong><span style="color: black;"> D());  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        c.depend2(<span style="color: #006699;"><strong>new</strong><span style="color: black;"> D());  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        c.depend3(<span style="color: #006699;"><strong>new</strong><span style="color: black;"> D());  <span style="color: #5c5c5c;"><br></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div>
+
+</li>
+</ol>
+<p><span style="color: black;"><span style="font-family: Arial; font-size: 10pt;">        </span><span style="font-family: 仿宋; font-size: 14pt;">可以看到，如果接口过于臃肿，只要接口中出现的方法，不管对依赖于它的类有没有用处，实现类中都必须去实现这些方法，这显然不是好的设计。如果将这个设计修改为符合接口隔离原则，就必须对接口I进行拆分。在这里我们将原有的接口I拆分为三个接口，拆分后的设计如图2所示：</span><span style="font-family: Arial; font-size: 10pt;"><br></span></span></p>
+<p><img src="http://helloword.1kapp.com/wp-content/uploads/2016/06/061216_0802_Java2.jpg" alt=""><span style="color: black; font-family: Arial; font-size: 10pt;"><br></span></p>
+<p><span style="color: black; font-size: 10pt;"><span style="font-family: 宋体;">（图</span><span style="font-family: Arial;">2  </span><span style="font-family: 宋体;">遵循接口隔离原则的设计）</span><span style="font-family: Arial;"><br></span></span></p>
+<p><span style="color: black; font-family: 仿宋; font-size: 14pt;">照例贴出程序的代码，供不熟悉类图的朋友参考：<br></span></p>
+<p><span style="color: silver; font-family: Verdana; font-size: 7pt;"><strong>[java]</strong> <a href="http://blog.csdn.net/zhengzhb/article/details/7296921" title="view plain" target="_blank" rel="external"><span style="color: #a0a0a0;">view plain</span></a> <a href="http://blog.csdn.net/zhengzhb/article/details/7296921" title="copy" target="_blank" rel="external"><span style="color: #a0a0a0;">copy</span></a><br></span></p>
+<ol>
+<li><div style="background: white;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>interface</strong><span style="color: black;"> I1 {  <span style="color: #5c5c5c;"><br></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method1();  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><br></div></li>
+<li><div style="background: white;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>interface</strong><span style="color: black;"> I2 {  <span style="color: #5c5c5c;"><br></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method2();  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method3();  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><br></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>interface</strong><span style="color: black;"> I3 {  <span style="color: #5c5c5c;"><br></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method4();  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method5();  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><br></div></li>
+<li><div style="background: white;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>class</strong><span style="color: black;"> A{  <span style="color: #5c5c5c;"><br></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> depend1(I1 i){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        i.method1();  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> depend2(I2 i){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        i.method2();  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> depend3(I2 i){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        i.method3();  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><br></div></li>
+<li><div style="background: white;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>class</strong><span style="color: black;"> B <span style="color: #006699;"><strong>implements</strong><span style="color: black;"> I1, I2{  <span style="color: #5c5c5c;"><br></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method1() {  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        System.out.println(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">类</span><span style="color: blue;"><span style="font-family: Consolas;">B</span><span style="font-family: 宋体;">实现接口</span><span style="font-family: Consolas;">I1</span><span style="font-family: 宋体;">的方法</span><span style="font-family: Consolas;">1”<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method2() {  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        System.out.println(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">类</span><span style="color: blue;"><span style="font-family: Consolas;">B</span><span style="font-family: 宋体;">实现接口</span><span style="font-family: Consolas;">I2</span><span style="font-family: 宋体;">的方法</span><span style="font-family: Consolas;">2”<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method3() {  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        System.out.println(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">类</span><span style="color: blue;"><span style="font-family: Consolas;">B</span><span style="font-family: 宋体;">实现接口</span><span style="font-family: Consolas;">I2</span><span style="font-family: 宋体;">的方法</span><span style="font-family: Consolas;">3”<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><br></div></li>
+<li><div style="background: white;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>class</strong><span style="color: black;"> C{  <span style="color: #5c5c5c;"><br></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> depend1(I1 i){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        i.method1();  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> depend2(I3 i){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        i.method4();  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> depend3(I3 i){  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">        i.method5();  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><br></div></li>
+<li><div style="background: white;"><span style="color: #006699; font-family: Consolas; font-size: 9pt;"><strong>class</strong><span style="color: black;"> D <span style="color: #006699;"><strong>implements</strong><span style="color: black;"> I1, I3{  <span style="color: #5c5c5c;"><br></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method1() {  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        System.out.println(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">类</span><span style="color: blue;"><span style="font-family: Consolas;">D</span><span style="font-family: 宋体;">实现接口</span><span style="font-family: Consolas;">I1</span><span style="font-family: 宋体;">的方法</span><span style="font-family: Consolas;">1”<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method4() {  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        System.out.println(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">类</span><span style="color: blue;"><span style="font-family: Consolas;">D</span><span style="font-family: 宋体;">实现接口</span><span style="font-family: Consolas;">I3</span><span style="font-family: 宋体;">的方法</span><span style="font-family: Consolas;">4”<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    <span style="color: #006699;"><strong>public</strong><span style="color: black;"> <span style="color: #006699;"><strong>void</strong><span style="color: black;"> method5() {  <span style="color: #5c5c5c;"><br></span></span></span></span></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-size: 9pt;"><span style="font-family: Consolas;">        System.out.println(<span style="color: blue;">“</span></span><span style="font-family: 宋体;">类</span><span style="color: blue;"><span style="font-family: Consolas;">D</span><span style="font-family: 宋体;">实现接口</span><span style="font-family: Consolas;">I3</span><span style="font-family: 宋体;">的方法</span><span style="font-family: Consolas;">5”<span style="color: black;">);  <span style="color: #5c5c5c;"><br></span></span></span></span></span></div></li>
+<li><div style="background: #f8f8f8;"><span style="color: black; font-family: Consolas; font-size: 9pt;">    }  <span style="color: #5c5c5c;"><br></span></span></div></li>
+<li><div style="background: white;"><span style="color: black; font-family: Consolas; font-size: 9pt;">}  <span style="color: #5c5c5c;"><br></span></span></div>
+
+</li>
+</ol>
+<p><span style="color: black; font-family: 仿宋; font-size: 14pt;"> 接口隔离原则的含义是：建立单一接口，不要建立庞大臃肿的接口，尽量细化接口，接口中的方法尽量少。也就是说，我们要为各个类建立专用的接口，而不要试图去建立一个很庞大的接口供所有依赖它的类去调用。本文例子中，将一个庞大的接口变更为3个专用的接口所采用的就是接口隔离原则。在程序设计中，依赖几个专用的接口要比依赖一个综合的接口更灵活。接口是设计时对外部设定的”契约”，通过分散定义多个接口，可以预防外来变更的扩散，提高系统的灵活性和可维护性。<br></span></p>
+<p><span style="color: black; font-family: 仿宋; font-size: 14pt;"> 说到这里，很多人会觉的接口隔离原则跟之前的单一职责原则很相似，其实不然。其一，单一职责原则原注重的是职责；而接口隔离原则注重对接口依赖的隔离。其二，单一职责原则主要是约束类，其次才是接口和方法，它针对的是程序中的实现和细节；而接口隔离原则主要约束接口接口，主要针对抽象，针对程序整体框架的构建。<br></span></p>
+<p><span style="color: black; font-family: 仿宋; font-size: 14pt;"> 采用接口隔离原则对接口进行约束时，要注意以下几点：<br></span></p>
+<p><span style="color: black; font-family: 仿宋; font-size: 14pt;">接口尽量小，但是要有限度。对接口进行细化可以提高程序设计灵活性是不挣的事实，但是如果过小，则会造成接口数量过多，使设计复杂化。所以一定要适度。<br></span></p>
+<p><span style="color: black; font-family: 仿宋; font-size: 14pt;">为依赖接口的类定制服务，只暴露给调用的类它需要的方法，它不需要的方法则隐藏起来。只有专注地为一个模块提供定制服务，才能建立最小的依赖关系。<br></span></p>
+<p><span style="color: black; font-family: 仿宋; font-size: 14pt;">提高内聚，减少对外交互。使接口用最少的方法去完成最多的事情。<br></span></p>
+<p><span style="color: black; font-family: 仿宋; font-size: 14pt;">运用接口隔离原则，一定要适度，接口设计的过大或过小都不好。设计接口的时候，只有多花些时间去思考和筹划，才能准确地实践这一原则。<br></span></p>
+<p><span style="color: black; font-family: 仿宋; font-size: 14pt;">原文作者：卡奴达摩<br></span></p>
+<p><span style="color: black; font-family: 仿宋; font-size: 14pt;">原文地址：<a href="http://blog.csdn.net/zhengzhb/article/details/7296921" target="_blank" rel="external">http://blog.csdn.net/zhengzhb/article/details/7296921</a></span></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/JAVA设计模式/">JAVA设计模式</a>, <a href="/categories/JAVA设计模式/编程语言/">编程语言</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2016/02/12/e3-80-90-e7-bc-96-e7-a8-8b-e8-af-ad-e8-a8-80-e3-80-91java-e8-ae-be-e8-ae-a1-e5-8e-9f-e5-88-99-e6-8e-a5-e5-8f-a3-e9-9a-94-e7-a6-bb-e5-8e-9f-e5-88-99/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Kategorien</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/JAVA设计模式/">JAVA设计模式</a><small>5</small></li>
+  
+    <li><a href="/categories/WEB安全/">WEB安全</a><small>4</small></li>
+  
+    <li><a href="/categories/应用服务器/">应用服务器</a><small>7</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>5</small></li>
+  
+    <li><a href="/categories/数据库知识/">数据库知识</a><small>11</small></li>
+  
+    <li><a href="/categories/系统架构/">系统架构</a><small>4</small></li>
+  
+    <li><a href="/categories/编程语言/">编程语言</a><small>7</small></li>
+  
+    <li><a href="/categories/WEB安全/编程语言/">编程语言</a><small>2</small></li>
+  
+    <li><a href="/categories/JAVA设计模式/编程语言/">编程语言</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Jdk/">Jdk</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>5</small></li>
+  
+    <li><a href="/tags/Memcache/">Memcache</a><small>2</small></li>
+  
+    <li><a href="/tags/Mongodb/">Mongodb</a><small>3</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Oracle/">Oracle</a><small>2</small></li>
+  
+    <li><a href="/tags/Weblogic/">Weblogic</a><small>1</small></li>
+  
+    <li><a href="/tags/Yum/">Yum</a><small>1</small></li>
+  
+    <li><a href="/tags/数据库知识/">数据库知识</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

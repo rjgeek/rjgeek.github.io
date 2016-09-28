@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【Oracle】查询锁表的用户并处理 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="–锁表查询1.  &amp;lt;span class=&amp;quot;pln&amp;quot;&amp;gt;SQLSELECT object_name&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pun&amp;quot;&amp;gt;,&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pln&amp;quot;&amp;gt; machine&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pun&amp;quot;&amp;gt;,&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pln&amp;quot;&amp;gt; s&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pun&amp;quot;&amp;gt;.&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pln&amp;quot;&amp;gt;sid&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pun&amp;quot;&amp;gt;,&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pln&amp;quot;&amp;gt; s&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pun&amp;quot;&amp;gt;.&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pln&amp;quot;&amp;gt;serial&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;com&amp;quot;&amp;gt;# &amp;lt;/span&amp;gt;2.  &amp;lt;span class=&amp;quot;pln&amp;quot;&amp;gt;FROM gv$locked_object l&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pun&amp;quot;&amp;gt;,&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pln&amp;quot;&amp;gt; dba_objects o&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pun&amp;quot;&amp;gt;,&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pln&amp;quot;&amp;gt; gv$session s &amp;lt;/span&amp;gt;3.  &amp;lt;span class=&amp;quot;pln&amp;quot;&amp;gt;WHERE l&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pun&amp;quot;&amp;gt;.&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pln&amp;quot;&amp;gt;object_id&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pun&amp;quot;&amp;gt;　=&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pln&amp;quot;&amp;gt; o&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pun&amp;quot;&amp;gt;.&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pln&amp;quot;&amp;gt;object_id &amp;lt;/span&amp;gt;4.  &amp;lt;span class=&amp;quot;pln&amp;quot;&amp;gt;AND l&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pun&amp;quot;&amp;gt;.&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pln&amp;quot;&amp;gt;session_id &amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pun&amp;quot;&amp;gt;=&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pln&amp;quot;&amp;gt; s&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pun&amp;quot;&amp;gt;.&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pln&amp;quot;&amp;gt;sid&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;pun&amp;quot;&amp;gt;;&amp;lt;/span&amp;gt;">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【Oracle】查询锁表的用户并处理"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-12-28T21:59:15.000Z"><a href="/2014/12/28/99cbe0dfe754af1522fea6f3a61ada14/">2014-12-28</a></time>
+      
+      
+  
+    <h1 class="title">【Oracle】查询锁表的用户并处理</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <div>–锁表查询</div><br><div><br><div><br><br>1.  <code>&lt;span class=&quot;pln&quot;&gt;SQLSELECT object_name&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; machine&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; s&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sid&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; s&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;serial&lt;/span&gt;&lt;span class=&quot;com&quot;&gt;# &lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;pln&quot;&gt;FROM gv$locked_object l&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; dba_objects o&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; gv$session s &lt;/span&gt;</code><br>3.  <code>&lt;span class=&quot;pln&quot;&gt;WHERE l&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;object_id&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;　=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; o&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;object_id &lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;pln&quot;&gt;AND l&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;session_id &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; s&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sid&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;</code><br></div><br></div><br><a id="more"></a><br><div></div><br><div>找到被锁定的表，解锁</div><br><div></div><br><div>–释放SESSION SQL:</div><br><div><br><div><br><br>1.  <code>&lt;span class=&quot;pun&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;alter system kill session &lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;sid, serial#&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;pln&quot;&gt;ALTER system kill session &lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;23, 1647&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;</code><br></div><br><div></div><br></div><br><div><a href="http://www.wiz.cn/i/60efacb7" title="来自为知笔记(Wiz)" target="_blank" rel="external">来自为知笔记(Wiz)</a></div>
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/数据库知识/">数据库知识</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Oracle/">Oracle</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2014/12/28/99cbe0dfe754af1522fea6f3a61ada14/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Kategorien</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/JAVA设计模式/">JAVA设计模式</a><small>5</small></li>
+  
+    <li><a href="/categories/WEB安全/">WEB安全</a><small>4</small></li>
+  
+    <li><a href="/categories/应用服务器/">应用服务器</a><small>7</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>5</small></li>
+  
+    <li><a href="/categories/数据库知识/">数据库知识</a><small>11</small></li>
+  
+    <li><a href="/categories/系统架构/">系统架构</a><small>4</small></li>
+  
+    <li><a href="/categories/编程语言/">编程语言</a><small>7</small></li>
+  
+    <li><a href="/categories/WEB安全/编程语言/">编程语言</a><small>2</small></li>
+  
+    <li><a href="/categories/JAVA设计模式/编程语言/">编程语言</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Jdk/">Jdk</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>5</small></li>
+  
+    <li><a href="/tags/Memcache/">Memcache</a><small>2</small></li>
+  
+    <li><a href="/tags/Mongodb/">Mongodb</a><small>3</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Oracle/">Oracle</a><small>2</small></li>
+  
+    <li><a href="/tags/Weblogic/">Weblogic</a><small>1</small></li>
+  
+    <li><a href="/tags/Yum/">Yum</a><small>1</small></li>
+  
+    <li><a href="/tags/数据库知识/">数据库知识</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

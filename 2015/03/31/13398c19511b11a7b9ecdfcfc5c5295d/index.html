@@ -1,0 +1,309 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【Mongodb】集群分片环境mongodb的版本升级 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="背景说明">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【Mongodb】集群分片环境mongodb的版本升级"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-31T06:23:46.000Z"><a href="/2015/03/31/13398c19511b11a7b9ecdfcfc5c5295d/">2015-03-31</a></time>
+      
+      
+  
+    <h1 class="title">【Mongodb】集群分片环境mongodb的版本升级</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h4 id="背景说明"><a href="#背景说明" class="headerlink" title="背景说明"></a><span style="font-family: 宋体;"><label class="wiz-todo-label wiz-todo-label-unchecked"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/03/wpid-dc9805dbb1b814621a2fc31efaab7c96_unchecked.png" alt="">背景说明</label></span></h4><a id="more"></a>
+<div><span style="font-family: 宋体;">生产环境数据量的剧增，鉴于2.6版本优化了存储引擎，提高了写入的速度，特提出了升级Mongo的需求</span></div><br><div><span style="font-family: 宋体;">目前环境中最大的一个集合分为6个片，且每片均有主节点，副节点和仲裁节点，本次升级为不停服务升级，</span></div><br><div><span style="font-family: 宋体;">升级的版本有2.4.10升级至2.6.2版本，特别需要提醒的是升级前请做好备份，升级一旦失败无法回退。</span></div>
+
+<h4 id="lt-span-style-”font-family-宋体-mso-ascii-font-family-Cambria-mso-ascii-theme-font-lt-br-gt"><a href="#lt-span-style-”font-family-宋体-mso-ascii-font-family-Cambria-mso-ascii-theme-font-lt-br-gt" class="headerlink" title="&lt;span style=”font-family: 宋体; mso-ascii-font-family: Cambria; mso-ascii-theme-font: &lt;br /&gt;"></a>&lt;span style=”font-family: 宋体; mso-ascii-font-family: Cambria; mso-ascii-theme-font: &lt;br /&gt;</h4><p>major-latin; mso-fareast-font-family: 宋体; mso-fareast-theme-font: major-fareast; &lt;br /&gt;<br>mso-hansi-font-family: Cambria; mso-hansi-theme-font: major-latin;”&gt;<label class="wiz-todo-label wiz-todo-label-unchecked"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/03/wpid-dc9805dbb1b814621a2fc31efaab7c96_unchecked.png" alt="">升级的注意事项</label></p>
+<p>#### </p>
+<p><span lang="EN-US">1.</span><span style="font-family: 宋体; &lt;br /&gt;
+mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-fareast-font-family: &lt;br /&gt;
+宋体; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Calibri; &lt;br /&gt;
+mso-hansi-theme-font: minor-latin;">升级过程中不允许有以下操作</span></p>
+<ol>
+<li><code>&lt;span class=&quot;pln&quot;&gt;sh&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;enableSharding&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;()&lt;/span&gt;</code></li>
+<li><p><span class="pln" style="line-height: 18px; font-size: 13px;">sh</span><span class="pun" style="line-height: 18px; font-size: 13px;">.</span><span class="pln" style="line-height: 18px; font-size: 13px;">shardCollection</span><span class="pun" style="line-height: 18px; font-size: 13px;">()</span></p>
+</li>
+<li><p><span class="pln" style="line-height: 18px; font-size: 13px;">sh</span><span class="pun" style="line-height: 18px; font-size: 13px;">.</span><span class="pln" style="line-height: 18px; font-size: 13px;">addShard</span><span class="pun" style="line-height: 18px; font-size: 13px;">()</span></p>
+</li>
+<li><p><code>&lt;span class=&quot;pln&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;createCollection&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;()&lt;/span&gt;</code></p>
+</li>
+<li><code>&lt;span class=&quot;pln&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;collection&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;drop&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;()&lt;/span&gt;</code></li>
+<li><code>&lt;span class=&quot;pln&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dropDatabase&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;()&lt;/span&gt;</code></li>
+<li><code>&lt;span class=&quot;pln&quot;&gt;any operation that creates a database&lt;/span&gt;</code></li>
+<li><code>&lt;span class=&quot;pln&quot;&gt;any other operation that modifies the cluster metadata in any way&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;See&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Sharding&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Reference&lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; a complete list of sharding commands&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Note&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; however&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; that not all commands on the &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Sharding&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Reference&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; page modifies the cluster meta&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;</code><br><p class="MsoNormal"><span lang="EN-US">2,有</span><span style="font-family: 宋体; &lt;br /&gt;
+mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-fareast-font-family: &lt;br /&gt;
+宋体; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Calibri; &lt;br /&gt;
+mso-hansi-theme-font: minor-latin;">升级后无法降级</span></p></li>
+</ol>
+<h4 id="lt-span-style-”font-family-宋体-mso-ascii-font-family-Cambria-mso-ascii-theme-font-lt-br-gt-1"><a href="#lt-span-style-”font-family-宋体-mso-ascii-font-family-Cambria-mso-ascii-theme-font-lt-br-gt-1" class="headerlink" title="&lt;span style=”font-family: 宋体; mso-ascii-font-family: Cambria; mso-ascii-theme-font: &lt;br /&gt;"></a>&lt;span style=”font-family: 宋体; mso-ascii-font-family: Cambria; mso-ascii-theme-font: &lt;br /&gt;</h4><p>major-latin; mso-fareast-font-family: 宋体; mso-fareast-theme-font: major-fareast; &lt;br /&gt;<br>mso-hansi-font-family: Cambria; mso-hansi-theme-font: major-latin;”&gt;<label class="wiz-todo-label wiz-todo-label-unchecked"><img src="http://helloword.1kapp.com/wp-content/uploads/2015/03/wpid-dc9805dbb1b814621a2fc31efaab7c96_unchecked.png" alt="">升级的步骤</label></p>
+<p></p><p class="MsoNormal"><span lang="EN-US">1. </span><span style="font-family: 宋体; &lt;br /&gt;
+mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-fareast-font-family: &lt;br /&gt;
+宋体; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Calibri; &lt;br /&gt;
+mso-hansi-theme-font: minor-latin;">安装，解压到</span><span style="background: yellow; mso-highlight: yellow;" lang="EN-US">/home/Mongo</span><span style="font-family: 宋体; mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; &lt;br /&gt;
+mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: &lt;br /&gt;
+Calibri; mso-hansi-theme-font: minor-latin;">下，关于</span>Mongo集群环境的搭建详见《<a href="http://helloword.1kapp.com/archives/142" target="_blank" rel="external">【Mongodb】MongoDB分片备份策略与配置迁移示例</a>》</p>
+<p></p><p class="MsoNormal"><span lang="EN-US">2. </span><span style="font-family: 宋体; &lt;br /&gt;
+mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-fareast-font-family: &lt;br /&gt;
+宋体; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Calibri; &lt;br /&gt;
+mso-hansi-theme-font: minor-latin;">建脚本库存放于文件夹</span><span lang="EN-US">script中</span><span style="font-family: 宋体; mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; &lt;br /&gt;
+mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: &lt;br /&gt;
+Calibri; mso-hansi-theme-font: minor-latin;">，脚本库中权限与内容如下</span></p>
+<div><br><br>1.  <code>&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;rwxrwxrwx &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Mongo&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Mongodb&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;179&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Mar&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;22&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;09&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; startconfig&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sh&lt;/span&gt;</code><br>2.3.  <code>&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;rwxrwxrwx &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Mongo&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Mongodb&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;191&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Mar&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;22&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;09&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; startmongos&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sh&lt;/span&gt;</code><br>4.5.  <code>&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;rwxrwxrwx &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Mongo&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Mongodb&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;169&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Mar&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;22&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;09&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; startshard1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sh&lt;/span&gt;</code><br>6.7.  <code>&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;rwxrwxrwx &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Mongo&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Mongodb&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;169&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Mar&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;22&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;09&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; startshard2&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sh&lt;/span&gt;</code><br>8.9.  <code>&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;rwxrwxrwx &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Mongo&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Mongodb&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;169&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Mar&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;22&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;09&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; startshard3&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sh&lt;/span&gt;</code><br></div><br><p class="MsoNormal"><span lang="EN-US">       </span><span style="font-family: 宋体; &lt;br /&gt;
+mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-fareast-font-family: &lt;br /&gt;
+宋体; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Calibri; &lt;br /&gt;
+mso-hansi-theme-font: minor-latin;">文件中的内容（此处可以选择配置环境变量）</span><br><div><br><br>1.  <code>**&lt;span class=&quot;pln&quot;&gt;startconfig&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sh&lt;/span&gt;**</code><br>2.3.  <code>&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Mongo&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;mongodb&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;x86_64&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;bin&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;mongod &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;configsvr &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;port &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;20000&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;fork &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dbpath &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Mongo&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;mongodb&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;x86_64&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;config &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;logpath &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dblog&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;log &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;upgrade&lt;/span&gt;</code><br>4.5.  <code>**&lt;span class=&quot;pln&quot;&gt;startmongos&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sh&lt;/span&gt;**</code><br>6.7.  <code>&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Mongo&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;mongodb&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;x86_64&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;bin&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;mongos &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;fork &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;port &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;30000&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;configdb &lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;192.168.199.133:20000,192.168.199.134:20000,192.168.199.135:20000&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;logpath &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dblog&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;mongos&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;mongos&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;log&lt;/span&gt;</code><br>8.9.  <code>**&lt;span class=&quot;pln&quot;&gt;startshard1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sh&lt;/span&gt;**</code><br>10.11.  <code>&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Mongo&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;mongodb&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;x86_64&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;bin&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;mongod &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;fork &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;shardsvr &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;replSet shard1 &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;port &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;10001&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dbpath &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;shard1 &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;logpath &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dblog&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;shard1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;shard1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;log&lt;/span&gt;</code><br>12.13.  <code>**&lt;span class=&quot;pln&quot;&gt;startshard2&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sh&lt;/span&gt;**</code><br>14.15.  <code>&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Mongo&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;mongodb&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;x86_64&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;bin&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;mongod &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;fork &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;shardsvr &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;replSet shard2 &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;port &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;10002&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dbpath &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;shard2 &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;logpath &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dblog&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;shard2&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;shard2&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;log&lt;/span&gt;</code><br>16.17.  <code>**&lt;span class=&quot;pln&quot;&gt;startshard3&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sh&lt;/span&gt;**</code><br>18.19.  <code>&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Mongo&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;mongodb&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;x86_64&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;bin&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;mongod &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;fork &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;shardsvr &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;replSet shard3 &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;port &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;10003&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dbpath &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;shard3 &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;logpath &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dblog&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;shard3&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;shard3&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;log&lt;/span&gt;</code><br></div><br></p><p class="MsoNormal"><span style="font-family: Helvetica, sans-serif; color: #313030; background-color: white;" lang="EN-US">3.停止均衡器（</span><span style="background-color: #ffffff; color: #313030; font-family: Helvetica, sans-serif; font-size: 10.5pt; line-height: 1.5;">Disable the Balancer</span><span style="background-color: white; color: #313030; font-family: Helvetica, sans-serif; font-size: 10.5pt; line-height: 1.5;">）.</span><br><br><span style="font-family: 宋体; mso-ascii-font-family: Calibri; mso-ascii-theme-font: &lt;br /&gt;
+minor-latin; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast; &lt;br /&gt;
+mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin;">连接到</span><span lang="EN-US">mongos,</span><span style="font-family: 宋体; mso-ascii-font-family: &lt;br /&gt;
+Calibri; mso-ascii-theme-font: minor-latin; mso-fareast-font-family: 宋体; mso-fareast-theme-font: &lt;br /&gt;
+minor-fareast; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin;">执行脚本</span><br><div><br><br>1.  <code>&lt;span class=&quot;pun&quot;&gt;./&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; mongos &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;port &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;30000&lt;/span&gt;&lt;span class=&quot;com&quot;&gt;//30000为路由器端口&lt;/span&gt;</code><br>2.3.  <code>&lt;span class=&quot;pln&quot;&gt;sh&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;stopBalancer&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;()&lt;/span&gt;</code><br></div><br></p><p class="MsoListParagraph" style="margin-left: 18.0pt; text-indent: 0cm; mso-char-indent-count: &lt;br /&gt;
+0;"><span style="font-family: 宋体; mso-ascii-font-family: Calibri; mso-ascii-theme-font: &lt;br /&gt;
+minor-latin; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast; &lt;br /&gt;
+mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin;">检查是否已经完全停止</span><br><div><br><br>1.  <code>&lt;span class=&quot;pln&quot;&gt;use config&lt;/span&gt;</code><br>2.3.  <code>&lt;span class=&quot;kwd&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; sh&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;isBalancerRunning&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;{&lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;pln&quot;&gt; print&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;waiting...&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;</code><br>5.  <code>&lt;span class=&quot;pln&quot;&gt; sleep&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;</code><br>6.  <code>&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;</code><span style="font-size: 10.5pt; line-height: 1.5; font-family: Arial;"> </span><br></div><br></p><p class="MsoNormal"><span lang="EN-US">4.</span><span style="font-family: 宋体; &lt;br /&gt;
+mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-fareast-font-family: &lt;br /&gt;
+宋体; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Calibri; &lt;br /&gt;
+mso-hansi-theme-font: minor-latin;">升级分片元数据（配置服务器）</span><br><br></p><p class="MsoNormal"><span style="font-family: 宋体; &lt;br /&gt;
+mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-fareast-font-family: &lt;br /&gt;
+宋体; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Calibri; &lt;br /&gt;
+mso-hansi-theme-font: minor-latin;">    进入mongod节点,运行升级脚本</span><br><div><br><br>1.  <code>&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Mongo&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;mongodb&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;x86_64&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;bin&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;mongos &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;configdb &lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;192.168.199.133:20000,192.168.199.134:20000,192.168.199.135:20000&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;logpath &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dblog&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;mongos&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;updatemongos&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;log &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;—&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;upgrade&lt;/span&gt;</code><br></div><br></p><p class="MsoListParagraph" style="margin-left: 18.0pt; text-indent: 0cm; mso-char-indent-count: &lt;br /&gt;
+0;"><span style="font-size: 10.5pt; line-height: 1.5;">查看</span><span style="background-color: #f7f7f9; color: #48484c; font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace; font-size: 13.076923370361328px; line-height: 17.992788314819336px; white-space: pre;">updatemongos中日志信息</span><span style="font-family: 宋体; font-size: 10.5pt; line-height: 1.5; text-indent: 0cm;">，如果输出以下语句，则表示配置服务器升级成功</span><br><br><span style="background: yellow; mso-highlight: yellow;" lang="EN-US">upgrade of config<br>server to v5 successful</span><br><br><span style="background: yellow; mso-highlight: yellow;" lang="EN-US">Config database is at<br>version v5</span><br><br><span style="font-family: 宋体; mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; &lt;br /&gt;
+mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: &lt;br /&gt;
+Calibri; mso-hansi-theme-font: minor-latin;">依次停止旧的配置服务器启动新的配置服务器，备注：升级过程中保至少一台配置服务器正常运转</span><br><br></p><p class="MsoNormal"><span lang="EN-US">5.</span><span style="font-family: 宋体; &lt;br /&gt;
+mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-fareast-font-family: &lt;br /&gt;
+宋体; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Calibri; &lt;br /&gt;
+mso-hansi-theme-font: minor-latin;">升级分片服务（主从节点升级）</span><br><br></p><p class="MsoNormal" style="text-indent: 10.5pt; mso-char-indent-count: 1.0;"><span style="font-family: 宋体; mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; &lt;br /&gt;
+mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: &lt;br /&gt;
+Calibri; mso-hansi-theme-font: minor-latin;">停止</span><span lang="EN-US">10001</span><span style="font-family: 宋体; mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; &lt;br /&gt;
+mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: &lt;br /&gt;
+Calibri; mso-hansi-theme-font: minor-latin;">的备份服务，启动新服务</span><br><br></p><p class="MsoNormal" style="text-indent: 10.5pt; mso-char-indent-count: 1.0;"><span style="font-family: 宋体; mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; &lt;br /&gt;
+mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: &lt;br /&gt;
+Calibri; mso-hansi-theme-font: minor-latin;">停止</span><span lang="EN-US">10001</span><span style="font-family: 宋体; mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; &lt;br /&gt;
+mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: &lt;br /&gt;
+Calibri; mso-hansi-theme-font: minor-latin;">的仲裁服务，启动新服务</span><br><br></p><p class="MsoNormal" style="text-indent: 10.5pt; mso-char-indent-count: 1.0;"><span style="font-family: 宋体; mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; &lt;br /&gt;
+mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: &lt;br /&gt;
+Calibri; mso-hansi-theme-font: minor-latin;">切换</span><span lang="EN-US">10001</span><span style="font-family: 宋体; mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; &lt;br /&gt;
+mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: &lt;br /&gt;
+Calibri; mso-hansi-theme-font: minor-latin;">的主节点到备份服务</span><br><br></p><p class="MsoNormal" style="text-indent: 10.5pt; mso-char-indent-count: 1.0;"><span style="font-family: 宋体; mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; &lt;br /&gt;
+mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: &lt;br /&gt;
+Calibri; mso-hansi-theme-font: minor-latin;">连接至主节点</span> <span style="font-family: &lt;br /&gt;
+宋体; mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-fareast-font-family: &lt;br /&gt;
+宋体; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Calibri; &lt;br /&gt;
+mso-hansi-theme-font: minor-latin;">使用切换命令</span><br><div><br><br>1.  <code>&lt;span class=&quot;pln&quot;&gt;rs&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;stepDown&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;()&lt;/span&gt;</code><br></div><br><div><span style="font-family: 宋体; text-indent: 10.5pt; font-size: 10.5pt; line-height: 1.5;">查看是否切换成功</span></div><br><div><br><br>1.  <code>&lt;span class=&quot;pln&quot;&gt;rs&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;()&lt;/span&gt;</code><br></div><br></p><p class="MsoNormal" style="text-indent: 10.5pt; mso-char-indent-count: 1.0;"><span style="font-family: 宋体; mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; &lt;br /&gt;
+mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: &lt;br /&gt;
+Calibri; mso-hansi-theme-font: minor-latin;">依次处理</span><span lang="EN-US">10002</span><span style="font-family: 宋体; mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; &lt;br /&gt;
+mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: &lt;br /&gt;
+Calibri; mso-hansi-theme-font: minor-latin;">节点与</span><span lang="EN-US">10003</span><span style="font-family: 宋体; mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; &lt;br /&gt;
+mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: &lt;br /&gt;
+Calibri; mso-hansi-theme-font: minor-latin;">节点</span><br><br></p><p class="MsoNormal" style="text-indent: 10.5pt; mso-char-indent-count: 1.0;"><span lang="EN-US">WARNING</span><span style="font-family: 宋体; mso-ascii-font-family: &lt;br /&gt;
+Calibri; mso-ascii-theme-font: minor-latin; mso-fareast-font-family: 宋体; mso-fareast-theme-font: &lt;br /&gt;
+minor-fareast; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin;">：</span><span style="text-indent: 10.5pt; font-size: 10.5pt; line-height: 1.5;">Do not upgrade mongod instances until after you have upgraded all<br>mongos instances.</span><br><br></p><p class="MsoNormal" style="text-indent: 10.5pt; mso-char-indent-count: 1.0;"><span lang="EN-US">6.</span><span style="font-family: 宋体; mso-ascii-font-family: Calibri; &lt;br /&gt;
+mso-ascii-theme-font: minor-latin; mso-fareast-font-family: 宋体; mso-fareast-theme-font: &lt;br /&gt;
+minor-fareast; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin;">重启主服务，启动</span><strong><span style="font-family: 'Helvetica','sans-serif'; color: #313030; &lt;br /&gt;
+background: white;" lang="EN-US">Balancer</span></strong><br><br></p><p class="MsoNormal" style="text-indent: 10.5pt; mso-char-indent-count: 1.0;"><span style="font-family: 宋体; mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; &lt;br /&gt;
+mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: &lt;br /&gt;
+Calibri; mso-hansi-theme-font: minor-latin;">关闭原来的服务，使用新的脚本启动</span><br><br></p><p class="MsoNormal" style="text-indent: 10.5pt; mso-char-indent-count: 1.0;"><span style="font-family: 宋体; mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; &lt;br /&gt;
+mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: &lt;br /&gt;
+Calibri; mso-hansi-theme-font: minor-latin;">下面的脚本启动</span><strong><span style="font-family: 'Helvetica','sans-serif'; color: #313030; background: white;" lang="EN-US">Balancer</span></strong><br><div><br><br>1.  <code>&lt;span class=&quot;pln&quot;&gt;sh&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;setBalancerState&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;</code><br></div><br><div><span style="text-indent: 10.5pt; font-size: 10.5pt; line-height: 1.5;" lang="EN-US">7.</span><span style="text-indent: 10.5pt; font-size: 10.5pt; line-height: 1.5; font-family: 宋体;">检查服务是否正常运转</span></div><br></p><p class="MsoNormal" style="text-indent: 10.5pt; mso-char-indent-count: 1.0;"><span style="font-family: 宋体; mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; &lt;br /&gt;
+mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: &lt;br /&gt;
+Calibri; mso-hansi-theme-font: minor-latin;">查看版本信息</span><br><div><br><br>1.  <code>&lt;span class=&quot;pln&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;runCommand&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;buildInfo&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;})&lt;/span&gt;</code><br></div><br><div></div><br></p><p class="MsoNormal" style="text-indent: 10.5pt; mso-char-indent-count: 1.0;"><span lang="EN-US"> </span><br><br><div><a href="http://www.wiz.cn/i/60efacb7" title="来自为知笔记(Wiz)" target="_blank" rel="external">来自为知笔记(Wiz)</a></div></p>
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/数据库知识/">数据库知识</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Mongodb/">Mongodb</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2015/03/31/13398c19511b11a7b9ecdfcfc5c5295d/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Kategorien</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/JAVA设计模式/">JAVA设计模式</a><small>5</small></li>
+  
+    <li><a href="/categories/WEB安全/">WEB安全</a><small>4</small></li>
+  
+    <li><a href="/categories/应用服务器/">应用服务器</a><small>7</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>5</small></li>
+  
+    <li><a href="/categories/数据库知识/">数据库知识</a><small>11</small></li>
+  
+    <li><a href="/categories/系统架构/">系统架构</a><small>4</small></li>
+  
+    <li><a href="/categories/编程语言/">编程语言</a><small>7</small></li>
+  
+    <li><a href="/categories/WEB安全/编程语言/">编程语言</a><small>2</small></li>
+  
+    <li><a href="/categories/JAVA设计模式/编程语言/">编程语言</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Jdk/">Jdk</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>5</small></li>
+  
+    <li><a href="/tags/Memcache/">Memcache</a><small>2</small></li>
+  
+    <li><a href="/tags/Mongodb/">Mongodb</a><small>3</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Oracle/">Oracle</a><small>2</small></li>
+  
+    <li><a href="/tags/Weblogic/">Weblogic</a><small>1</small></li>
+  
+    <li><a href="/tags/Yum/">Yum</a><small>1</small></li>
+  
+    <li><a href="/tags/数据库知识/">数据库知识</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
