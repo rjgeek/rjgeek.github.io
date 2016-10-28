@@ -1,14 +1,9 @@
 language: node_js
 node_js: stable
 
-# S: Build Lifecycle
 install:
   - npm install
-
-
-#before_script:
- # - npm install -g gulp
-
+  
 script:
   - hexo clean
   - hexo g
