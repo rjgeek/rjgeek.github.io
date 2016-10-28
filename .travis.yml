@@ -19,7 +19,7 @@ after_script:
 
 branches:
   only:
-    - source
+    - code
 env:
  global:
    - GH_REF: github.com/rjgeek/rjgeek.github.io.git
