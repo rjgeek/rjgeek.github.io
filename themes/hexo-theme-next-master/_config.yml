@@ -6,7 +6,7 @@
 favicon: /favicon.ico
 
 # Set default keywords (Use a comma to separate)
-keywords: "Hexo, NexT"
+keywords: "HelloWorld"
 
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
@@ -30,10 +30,10 @@ canonical: true
 menu:
   home: /
   #categories: /categories
-  #about: /about
   archives: /archives
   tags: /tags
   schedule: /schedule
+  about: /about
   #commonweal: /404.html
 
 
@@ -43,7 +43,7 @@ menu:
 #   Key is the name of menu item and value is the name of FontAwsome icon. Key is case-senstive.
 #   When an question mask icon presenting up means that the item has no mapping icon.
 menu_icons:
-  enable: false
+  enable: true
   #KeyMapsToMenuItemKey: NameOfTheIconFromFontAwesome
   home: home
   about: user
@@ -164,7 +164,7 @@ toc:
 
 sidebar:
   # Sidebar Position, available value: left | right
-  position: left
+  position: right
   #position: right
 
   # Sidebar Display, available value:
@@ -172,8 +172,8 @@ sidebar:
   #  - always  expand for all pages automatically
   #  - hide    expand only when click on the sidebar toggle icon.
   #  - remove  Totally remove sidebar including sidebar toggler.
-  display: post
-  #display: always
+  #display: post
+  display: always
   #display: hide
   #display: remove
 
