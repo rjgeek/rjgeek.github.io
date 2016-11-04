@@ -6,13 +6,7 @@ categories:
 date: 2016-11-04 16:20:06
 tags:
 ---
-## Reading Notes Of 《RFC 2616, HTTP/1.1》 Part1
-Copyright Notice  
-1 Introduction  
-&nbsp;  &nbsp; 1.1 Purpose  
-&nbsp;  &nbsp;  1.2 Requirements  
-&nbsp;  &nbsp; 1.3 Terminology  
-&nbsp;  &nbsp; 1.4 Overall Operation  
+
 # 1 Introduction
 ## 1.1 Purpose
 The Hypertext Transfer Protocol (HTTP) is an application-level protocol for distributed, collaborative, hypermediainformation systems. HTTP has been in use by the World-Wide Web global information initiative since 1990. The first version of HTTP, referred to as HTTP/0.9, was a simple protocol for raw data transfer across the Internet. HTTP/1.0, as defined by RFC 1945 [6], improved the protocol by allowing messages to be in the format of MIMElike messages, containing metainformation about the data transferred and modifiers on the request/response semantics. However, HTTP/1.0 does not sufficiently take into consideration the effects of hierarchical proxies,caching, the need for persistent connections, or virtual hosts. In addition, the proliferation of incompletelyimplemented applications calling themselves “HTTP/1.0” has necessitated a protocol version change in order for two communicating applications to determine each other’s true capabilities.  
@@ -26,6 +20,9 @@ HTTP is also used as a generic protocol for communication between user agents an
 
 - 阐述了HTTP的发展历史，从版本0.9 到版本1.1 中间添加的新功能和新需求
 - HTTP1.1重点增加了可靠性传输的功能
+
+ <!--more-->
+
 
 ## 1.2 Requirements
 The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD
