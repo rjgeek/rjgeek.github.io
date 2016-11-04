@@ -1,3 +1,11 @@
+---
+title: Reading Notes Of 《RFC 2616, HTTP/1.1》 Part1
+id: 1291
+categories:
+  - 网络知识
+date: 2016-11-04 16:20:06
+tags:
+---
 ## Reading Notes Of 《RFC 2616, HTTP/1.1》 Part1
 Copyright Notice  
 1 Introduction  
