@@ -14,7 +14,7 @@ keywords: "HelloWorld"
 rss:
 
 # Specify the date when the site was setup
-#since: 2015
+  since: 2016
 
 # Canonical, set a canonical link tag in your hexo, you could use it for your SEO of blog.
 # See: https://support.google.com/webmasters/answer/139066
@@ -418,6 +418,3 @@ images: images
 # Theme version
 version: 5.0.2
 
-reward_comment: 坚持原创技术分享，您的支持将鼓励我继续创作！
-#wechatpay: /path/to/wechat-reward-image
-alipay:  /images/alipay.jpg
