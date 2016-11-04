@@ -14,7 +14,7 @@ keywords: "HelloWorld"
 rss:
 
 # Specify the date when the site was setup
-  since: 2016
+#since: 2015
 
 # Canonical, set a canonical link tag in your hexo, you could use it for your SEO of blog.
 # See: https://support.google.com/webmasters/answer/139066
@@ -417,4 +417,3 @@ images: images
 
 # Theme version
 version: 5.0.2
-
