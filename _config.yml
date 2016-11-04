@@ -3,8 +3,8 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: HelloWorld
-subtitle: Think; therefore, I am -Rene Descartes
+title: Think; therefore, I am -Rene Descartes
+subtitle: HelloWorld
 description:
 author: RuJia
 language:
@@ -89,8 +89,6 @@ deploy:
   type: git
   repo: http://github.com/rjgeek/rjgeek.github.io.git
   branch: master  
-
-disqus_shortname: rjgeek
 
 # ---------------------------------------------------------------
 # Scheme Settings
