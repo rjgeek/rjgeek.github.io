@@ -89,8 +89,8 @@ deploy:
   type: git
   repo: http://github.com/rjgeek/rjgeek.github.io.git
   branch: master  
-disqus_shortname: rjgeek
 
+disqus_shortname: rjgeek
 
 # ---------------------------------------------------------------
 # Scheme Settings
