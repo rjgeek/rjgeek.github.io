@@ -33,7 +33,7 @@ menu:
   archives: /archives
   tags: /tags
   categories: /categories
-  schedule: /schedule
+  #schedule: /schedule
   about: /about
   #commonweal: /404.html
 
@@ -47,11 +47,11 @@ menu_icons:
   enable: true
   #KeyMapsToMenuItemKey: NameOfTheIconFromFontAwesome
   home: home
-  about: user
-  categories: th
-  schedule: calendar
-  tags: tags
   archives: archive
+  tags: tags
+  categories: archives
+  #schedule: calendar
+  about: about
   commonweal: heartbeat
 
 
