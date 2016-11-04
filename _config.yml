@@ -102,15 +102,14 @@ scheme: Mist
 
 # Social links   #社交链接
 social:
-  GitHub: https://github.com/rjgeek
-  Weibo:  	
-  Facebook: https://en-gb.facebook.com/people/Rujia-LI/100013599212732
+  GitHub: 
+  Weibo:
+  Others:
 
 # Social Icons  #社交的图标
 social_icons:
   enable: true
   # Icon Mappings
   GitHub: github
-  #Twitter: twitter
-  Facebook: facebook
+  Twitter: twitter
   Weibo: weibo
