@@ -32,7 +32,7 @@ menu:
   archives: /archives
   tags: /tags
   about: /about
-  #categories: /categories
+  categories: /categories
   #commonweal: /404.html
   
 menu_icons:

@@ -49,9 +49,9 @@ menu_icons:
   home: home
   archives: archive
   tags: tags
-  categories: archives
+  categories: th
   #schedule: calendar
-  about: about
+  about: user
   commonweal: heartbeat
 
 
