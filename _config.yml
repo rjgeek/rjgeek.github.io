@@ -3,8 +3,8 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
+title: HelloWorld
+subtitle: Think; therefore, I am -Rene Descartes
 description:
 author: RuJia
 language:
@@ -72,3 +72,28 @@ deploy:
   repo: http://github.com/rjgeek/rjgeek.github.io.git
   branch: master  
 disqus_shortname: rjgeek
+
+
+# ---------------------------------------------------------------
+# Scheme Settings
+# ---------------------------------------------------------------
+
+# Schemes  #next的三个scheme
+#scheme: Muse
+#scheme: Mist
+#scheme: Pisces
+
+
+# Social links   #社交链接
+social:
+  GitHub: 
+  Weibo:
+  Others:
+
+# Social Icons  #社交的图标
+social_icons:
+  enable: true
+  # Icon Mappings
+  GitHub: github
+  Twitter: twitter
+  Weibo: weibo
