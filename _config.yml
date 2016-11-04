@@ -27,6 +27,24 @@ code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
 
+menu:
+  home: /
+  archives: /archives
+  tags: /tags
+  about: /about
+  #categories: /categories
+  #commonweal: /404.html
+  
+menu_icons:
+  enable: true
+  # Icon Mapping.
+  home: home
+  about: user
+  categories: th
+  tags: tags
+  archives: archive
+  commonweal: heartbeat
+
 # Writing
 new_post_name: :title.md # File name of new posts
 default_layout: post
