@@ -423,3 +423,7 @@ search:
   field: post
   format: html
   limit: 10000
+
+reward_comment: 坚持原创技术分享，您的支持将鼓励我继续创作！
+#wechatpay: /path/to/wechat-reward-image
+alipay: /source/images/alipay.jpg
