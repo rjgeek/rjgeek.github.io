@@ -180,11 +180,13 @@ sidebar:
 
 
 # Blogrolls
-#links_title: Links
+links_title: Links
 #links_layout: block
 #links_layout: inline
-#links:
-  #Title: http://example.com/
+links:
+  Professor Mark Ryan: https://www.cs.bham.ac.uk/~mdr/
+  The Security and Privacy Group: http://sec.cs.bham.ac.uk/people/
+  Dr Rami Bahsoon: http://www.cs.bham.ac.uk/~rzb/
 
 
 # ---------------------------------------------------------------
