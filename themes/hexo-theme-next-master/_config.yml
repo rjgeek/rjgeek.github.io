@@ -427,7 +427,3 @@ search:
 reward_comment: Adhere to the original technology sharing, your support will encourage me to continue to create!
 #wechatpay: /path/to/wechat-reward-image
 alipay: /images/alipay.jpg
-
-auto_excerpt:
-  enable: true
-  length: 150
