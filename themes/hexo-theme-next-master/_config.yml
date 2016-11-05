@@ -417,3 +417,9 @@ images: images
 
 # Theme version
 version: 5.0.2
+
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
