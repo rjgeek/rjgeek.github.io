@@ -279,7 +279,7 @@ alert(Qmail.newMailsList.summary);
 <span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">其中 +/v8  为 utf7-BOM ，后面的为我们注入的 utf-7 编码后的 XSS 代码的：
 ``` 
 
-alert(1);
+//alert(1);
 
 ``` 
 
