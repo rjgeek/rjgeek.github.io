@@ -72,7 +72,7 @@ int main(){
     printf("%#X,%#X,%#X\n" , pa, pb,pc); 
     return 0;
 }
-``` 
+```  
 
 ![Alt text](../images/2016/11/c_point_1.jpg) 
 返回结果，  
@@ -83,11 +83,24 @@ int main(){
 0X240FF1C到0X240FF20 int类型后移动4位  
 0X240FF10到0X240FF18 double类型后移8位  
 
-
+ 
 ![Alt text](../images/2016/11/c_point_1.jpg) 
-
-
-
+```
+#include <stdio.h>
+int main(){
+    char *str = "Hello World!";
+    //str[3] = 'w'; //错误 不能更改 
+    str = "test"; //正确 
+    puts(str) ; 
+    
+    
+    char str1[] = "Hello World!";
+    str1[3] = 'w'; //正确 
+	puts(str1) ; 
+	
+    return 0;
+}
+```
 
 
 
