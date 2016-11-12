@@ -17,7 +17,7 @@ tags:
 <span style="color: #585858;">CSRF攻击原理比较简单，如图1所示。其中Web A为存在CSRF漏洞的网站，Web B为攻击者构建的恶意网站，User C为Web A网站的合法用户。<span style="font-family: 微软雅黑; font-size: 11pt;">
 </span></span>
 
-![](http://helloword.1kapp.com/wp-content/uploads/2016/06/060916_0848_WEB16.jpg)
+![](https://rjgeek.github.io/images/2016/06/060916_0848_WEB16.jpg)
 <span style="color: #585858; font-family: 微软雅黑; font-size: 11pt;">
 </span>
 

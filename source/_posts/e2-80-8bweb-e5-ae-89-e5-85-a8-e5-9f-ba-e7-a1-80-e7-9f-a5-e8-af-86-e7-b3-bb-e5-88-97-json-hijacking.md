@@ -15,7 +15,7 @@ tags:
 ## <span style="font-family: 仿宋; font-size: 14pt;">Json Hijacking攻击的思想见下图：
 </span>
 
-![](http://helloword.1kapp.com/wp-content/uploads/2016/06/061016_1601_WEBWEB15.jpg)
+![](https://rjgeek.github.io/images//2016/06/061016_1601_WEBWEB15.jpg)
 
 ## <span style="font-family: 仿宋; font-size: 14pt;"><!--more-->
 </span>

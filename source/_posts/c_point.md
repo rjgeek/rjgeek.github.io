@@ -83,7 +83,7 @@ int main(){
 0X240FF10到0X240FF18 double类型后移8位  
 
 以 a 和 pa 为例，a 的类型为 int，占用 4 个字节，pa 是指向 a 的指针，如下图所示：   
-![Alt text](../images/2016/11/c_point_1.jpg) 
+![Alt text](https://rjgeek.github.io/images/2016/11/c_point_1.jpg) 
 
 
 

@@ -15,7 +15,7 @@ tags:
 
 <span style="color: #585858;"><span style="font-family: 仿宋;"><span style="font-size: 12pt;">点击劫持（ClickJacking）是一种视觉上的欺骗手段。大概有两种方式，一是攻击者使用一个透明的iframe，覆盖在一个[网页](http://www.07net01.com/tags-%E7%BD%91%E9%A1%B5-0.html)上，然后诱使用户在该页面上进行操作，此时用户将在不知情的情况下点击透明的iframe页面；二是攻击者使用一张[图片](http://www.wredian.com/tags-%E5%9B%BE%E7%89%87-0.html)覆盖在网页，遮挡网页原有位置的含义；</span><span style="color: #069aef; font-size: 9pt;">
 </span></span>
-![](http://helloword.1kapp.com/wp-content/uploads/2016/06/061016_0248_WEBWEB11.png)</span>
+![](https://rjgeek.github.io/images/2016/06/061016_0248_WEBWEB11.png)</span>
 
 <span style="color: #585858;"><!--more-->
 </span><span style="font-family: 宋体; font-size: 12pt;">
@@ -142,7 +142,7 @@ tags:
 <span style="color: #585858; font-family: 仿宋; font-size: 12pt;">2\. 网址传播出去后，用户手贱点击了查看详情后，其实就会点到关注按钮。
 </span>
 
-![](http://helloword.1kapp.com/wp-content/uploads/2016/06/061016_0248_WEBWEB21.png)<span style="color: #444444; font-family: 微软雅黑; font-size: 13pt;">
+![](https://rjgeek.github.io/images/2016/06/061016_0248_WEBWEB21.png)<span style="color: #444444; font-family: 微软雅黑; font-size: 13pt;">
 </span>
 
 <span style="color: #585858; font-family: 仿宋; font-size: 12pt;">PS：可以把iframe透明设为0.3看下实际点到的东西。
@@ -151,7 +151,7 @@ tags:
 <span style="color: #585858; font-family: 仿宋; font-size: 12pt;">3\. 这样贴吧就多了一个粉丝了。
 </span>
 
-![](http://helloword.1kapp.com/wp-content/uploads/2016/06/061016_0248_WEBWEB31.png)<span style="color: #444444; font-family: 微软雅黑; font-size: 13pt;">
+![](https://rjgeek.github.io/images/2016/06/061016_0248_WEBWEB31.png)<span style="color: #444444; font-family: 微软雅黑; font-size: 13pt;">
 </span>
 
 ## 4.漏洞防御:

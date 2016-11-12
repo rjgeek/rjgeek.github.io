@@ -170,7 +170,7 @@ mso-char-indent-count: 0; mso-list: l4 level1 lfo3;"><span lang="EN-US">3)<span 
 
 <span style="font-family: 宋体;">此时分别连接</span><span lang="EN-US">10001</span><span style="font-family: 宋体;">、</span><span lang="EN-US">10002</span><span style="font-family: 宋体;">和</span><span lang="EN-US">10003</span><span style="font-family: 宋体;">端口，用执行</span><span lang="EN-US">rs.status()</span><span style="font-family: 宋体;">命令会看到如下图所示的信息：</span>
 
-<span lang="EN-US">![](http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_clip_image002ba1a8041-7d7d-49ca-95cd-882760f6d82a.jpg)</span>
+<span lang="EN-US">![](https://rjgeek.github.io/images//2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_clip_image002ba1a8041-7d7d-49ca-95cd-882760f6d82a.jpg)</span>
 
 <div><span lang="EN-US">
 </span></div>
@@ -344,8 +344,8 @@ mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE">--查
 mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE">1、shard1的副本集情况</span></div>
 <div><span style="font-family: 黑体; &lt;br /&gt;
 mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE"><span style="font-family: 黑体; &lt;br /&gt;
-mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE">![](http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_559644114970fcdc2db003ee4d5eb3b4.png)</span></span>
-<div>![](http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_a851c3740c7f8ed8a623fe95a9d347ad.png)
+mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE">![](https://rjgeek.github.io/images//2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_559644114970fcdc2db003ee4d5eb3b4.png)</span></span>
+<div>![](https://rjgeek.github.io/images//2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_a851c3740c7f8ed8a623fe95a9d347ad.png)
 <div></div>
 </div>
 </div>
@@ -353,8 +353,8 @@ mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE">![](h
 mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE">2、shard2的副本集情况</span></div>
 <div><span style="font-family: 黑体; &lt;br /&gt;
 mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE"><span style="font-family: 黑体; &lt;br /&gt;
-mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE">![](http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_908a45abc97733e8faefc6ad79532695.png)</span></span>
-<div>![](http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_d1cca730827559fd5eefebd0b72980e5.png)
+mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE">![](https://rjgeek.github.io/images//2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_908a45abc97733e8faefc6ad79532695.png)</span></span>
+<div>![](https://rjgeek.github.io/images//2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_d1cca730827559fd5eefebd0b72980e5.png)
 <div></div>
 </div>
 </div>
@@ -362,8 +362,8 @@ mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE">![](h
 mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE">3、shard3的副本集情况</span></div>
 <div><span style="font-family: 黑体; &lt;br /&gt;
 mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE"><span style="font-family: 黑体; &lt;br /&gt;
-mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE">![](http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_81090258219c4eb30a3907d160865323.png)</span></span>
-<div>![](http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_836dde6525a281b02d51b9af2b0cf3a3.png)
+mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE">![](https://rjgeek.github.io/images//2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_81090258219c4eb30a3907d160865323.png)</span></span>
+<div>![](https://rjgeek.github.io/images//2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_836dde6525a281b02d51b9af2b0cf3a3.png)
 <div></div>
 </div>
 </div>
@@ -374,7 +374,7 @@ mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE">
 </span></div>
 <div><span style="font-family: 黑体; &lt;br /&gt;
 mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE"><span style="font-family: 黑体; &lt;br /&gt;
-mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE">![](http://helloword.1kapp.com/wp-content/uploads/2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_83e74839797dd91bb712c55ee8b900ab.png)</span></span>
+mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE">![](https://rjgeek.github.io/images//2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_83e74839797dd91bb712c55ee8b900ab.png)</span></span>
 <div></div>
 </div>
 <div><span style="font-family: 黑体;">1.3 操作当某57磁盘空间沾满而47空间空闲时，将57中的副本集迁移到47中的操作过程：</span></div>

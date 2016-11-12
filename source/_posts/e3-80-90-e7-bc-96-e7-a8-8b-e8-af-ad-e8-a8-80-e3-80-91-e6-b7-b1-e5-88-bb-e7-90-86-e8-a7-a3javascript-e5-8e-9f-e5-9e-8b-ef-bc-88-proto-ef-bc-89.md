@@ -44,7 +44,7 @@ y: 20
 <span style="color: #333333; font-size: 10pt;"><span style="font-family: 宋体;">上述代码</span><span style="font-family: Georgia;">foo</span><span style="font-family: 宋体;">对象有两个显式的属性</span><span style="font-family: Georgia;">[explicit own properties]</span><span style="font-family: 宋体;">和一个自带隐式的</span><span style="font-family: Georgia;"> __proto__ </span><span style="font-family: 宋体;">属性</span><span style="font-family: Georgia;">[implicit __proto__ property]</span><span style="font-family: 宋体;">，指向</span><span style="font-family: Georgia;">foo</span><span style="font-family: 宋体;">的原型。</span><span style="font-family: Georgia;">
 </span></span>
 
-![](http://helloword.1kapp.com/wp-content/uploads/2016/06/061016_1319_javas1.png)<span style="color: #333333; font-family: Georgia; font-size: 10pt;">
+![](https://rjgeek.github.io/images//2016/06/061016_1319_javas1.png)<span style="color: #333333; font-family: Georgia; font-size: 10pt;">
 </span>
 
 <span style="color: #333333;"><span style="font-size: 9pt;"><span style="font-family: 宋体;">图</span><span style="font-family: Verdana;"> 1\. </span><span style="font-family: 宋体;">一个含有原型的基本对象</span></span><span style="font-family: Georgia; font-size: 10pt;">
@@ -114,7 +114,7 @@ __proto__: a
 <span style="color: #333333; font-size: 10pt;"><span style="font-family: 宋体;">下面的图示就是表示了上述</span><span style="font-family: Georgia;">a,b,c</span><span style="font-family: 宋体;">的继承关系</span><span style="font-family: Georgia;">
 </span></span>
 
-![](http://helloword.1kapp.com/wp-content/uploads/2016/06/061016_1319_javas2.png)<span style="color: #333333; font-family: Georgia; font-size: 10pt;">
+![](https://rjgeek.github.io/images//2016/06/061016_1319_javas2.png)<span style="color: #333333; font-family: Georgia; font-size: 10pt;">
 </span>
 
 <span style="color: #333333; font-size: 10pt;"><span style="font-family: 宋体;">图</span><span style="font-family: Georgia;"> 2\. </span><span style="font-family: 宋体;">原型链</span><span style="font-family: Georgia;">
@@ -198,7 +198,7 @@ b.calculate === b.__proto__.calculate, <span style="color: green;">// true
 <span style="color: #333333; font-size: 10pt;"><span style="font-family: 宋体;">上述代码可表示为如下的关系：</span><span style="font-family: Georgia;">
 </span></span>
 
-![](http://helloword.1kapp.com/wp-content/uploads/2016/06/061016_1319_javas3.png)<span style="color: #333333; font-family: Georgia; font-size: 10pt;">
+![](https://rjgeek.github.io/images//2016/06/061016_1319_javas3.png)<span style="color: #333333; font-family: Georgia; font-size: 10pt;">
 </span>
 
 <span style="color: #333333; font-size: 10pt;"><span style="font-family: 宋体;">图</span><span style="font-family: Georgia;"> 3\. </span><span style="font-family: 宋体;">构造函数与对象之间的关系</span><span style="font-family: Georgia;">
