@@ -1,3 +1,11 @@
+---
+title: C语言指针整理
+id: 813
+categories:
+  - 编程语言
+date: 2016-11-12 18:05:54
+tags:
+---
 # C语言指针整理
 ## 一切都是地址
 C语言用变量来存储数据，用函数来定义一段可以重复使用的代码，它们最终都要放到内存中才能供 CPU 使用。
@@ -65,6 +73,8 @@ int main(){
     return 0;
 }
 ``` 
+
+![Alt text](../images/2016/11/c_point_1.jpg) 
 返回结果，  
 0X240FF27,0X240FF1C,0X240FF10  
 15,55,0  
@@ -73,7 +83,7 @@ int main(){
 0X240FF1C到0X240FF20 int类型后移动4位  
 0X240FF10到0X240FF18 double类型后移8位  
 
-![Alt text](../images/2016/11/c_point_1.jpg) 
+
 
 
 
