@@ -84,7 +84,7 @@ int main(){
 0X240FF10到0X240FF18 double类型后移8位  
 
 
-
+![Alt text](../images/2016/11/c_point_1.jpg) 
 
 
 
