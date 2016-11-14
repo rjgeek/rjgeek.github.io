@@ -26,12 +26,11 @@ Diffie-Hellman密钥交换是RSA之前的算法，其中的原理就是单项函
 <img src="https://rjgeek.github.io/images/2016/11/rsa_5.png" width = "300" height = "200" alt="图片名称" align=center />  
 假设ALICE和BOB进行通信，而EVE是个监听者，首先ALICE根据上左边的选择一个任意的X54经过计算得出结果15发给BOB
 <img src="https://rjgeek.github.io/images/2016/11/rsa_8.png?t=1" width = "300" height = "200" alt="图片名称" align=center />
-<img src="https://rjgeek.github.io/images/2016/11/rsa_9.png?t=1" width = "300" height = "200" alt="图片名称" align=center />  
+<img src="https://rjgeek.github.io/images/2016/11/rsa_9.png" width = "300" height = "200" alt="图片名称" align=center />  
 BOB同样选择任意一个X24按照上图的公式进行计算得出16，此时54,24分别为ALICE和BOB的私有，15和16则为公开的数据，监听者EVE可以获取15和16  
-<img src="https://rjgeek.github.io/images/2016/11/rsa_10.png?t=1" width = "600" height = "200" alt="图片名称" align=center />  
+<img src="https://rjgeek.github.io/images/2016/11/rsa_10.png" width = "600" height = "200" alt="图片名称" align=center />  
 
-$$(3^{24*54}mod 17) = 1$$  
-$$(3^{54*24}mod 17) = 1$$ 
+$$(3^{54*24}mod 17) =(3^{24*54}mod 17) = 1$$
 其中1为将来需要交换的秘钥，两边接收的相同
 证明  
 $$16^{54}mod 17 = (3^{24}mod17)^{54}mod 17 = 3^{24*54}mod 17$$
