@@ -8,7 +8,10 @@ tags:
 ---
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 ## 数学基础(Fundamental_Theorem_of_Arithmeti)
-### 1.任何合数(Composite Number)都是有若干素数（Prime Number）组成的
+### 1.素数
+定义：大于 1 且只能被 1 和自身整除的正整数称为**素数或质数**. 大于 1 且不是素数的正整数称为**合数**.
+例如,  2,3,5,7,11是素数, 4,6,8,9是合数. 
+### 2.任何合数(Composite Number)都是有若干素数（Prime Number）组成的
 6=2\*2\*2  
 15=3\*5  
 素数是构成元素的基本要素,素数本身是不可再分的，素数是构建，每一个数有且只有一种素数的分解方法，没有两个数会分享同一个素数因子分解  
@@ -19,7 +22,7 @@ tags:
 我的答案是我也不知道  
 <img src="https://rjgeek.github.io/images/2016/11/rsa_3.png" width = "300" height = "200" alt="图片名称" align=center />
 <img src="https://rjgeek.github.io/images/2016/11/rsa_4.png" width = "300" height = "200" alt="图片名称" align=center />   
-### 2.Diffie-Hellman密钥交换
+### 3.Diffie-Hellman密钥交换
 Diffie-Hellman密钥交换是RSA之前的算法，其中的原理就是单项函数，如下图所示  
 在已知下图的模式下，任意跟换X可以获得不同的输出，但是从输出你无法获取X，RSA的算法基石   
 <img src="https://rjgeek.github.io/images/2016/11/rsa_6.png?t=1" width = "300" height = "200" alt="图片名称" align=center />
@@ -32,11 +35,11 @@ BOB同样选择任意一个X24按照上图的公式进行计算得出16，此时
 其中1为将来需要交换的秘钥，两边接收的相同
 证明  
 $$16^{54}mod\quad17 = (3^{24}mod17)^{54}mod\quad17 = 3^{24*54}mod\quad17$$
+$$15^{24}mod\quad17 = (3^{54}mod17)^{24}mod\quad17 = 3^{54*24}mod\quad17$$
 
-
-### 3.最大公约数
+### 4.最大公约数
 a,b属于Z，能同时被a和b整除的最大的那个数，成为最大公约数，或者公因子  
-### 4.互质关系  
+### 5.互质关系  
 如果两个正整数，除了1以外，没有其他公因子，我们就称这两个数是互质关系（coprime）。比如，15和32没有公因子，所以它们是互质关系。这说明，不是质数也可以构成互质关系。  
 关于互质关系，不难得到以下结论： 
 >  
@@ -47,7 +50,7 @@ a,b属于Z，能同时被a和b整除的最大的那个数，成为最大公约�
 　　5. p是大于1的整数，则p和p-1构成互质关系，比如57和56。  
 >　　6. p是大于1的奇数，则p和p-2构成互质关系，比如17和15。  
 
-### 5.欧拉函数  
+### 6.欧拉函数  
 请思考以下问题：  
 ***
 任意给定正整数n，请问在小于等于n的正整数之中，有多少个与n构成互质关系？（比如，在1到8之中，有多少个数与8构成互质关系？）
@@ -85,7 +88,7 @@ $$\phi{n}=n(1-\frac{1}{p_1})(1-\frac{1}{p_2})(1-\frac{1}{p_3})(1-\frac{1}{p_r})$
 这就是欧拉函数的通用计算公式。比如，1323的欧拉函数，计算过程如下：
 $$\phi{1323}=\phi({3^3*7^2})=1323(1-\frac{1}{3})(1-\frac{1}{7})=756$$
 
-### 6.欧拉定理
+### 7.欧拉定理
 欧拉函数的用处，在于欧拉定理。"欧拉定理"指的是：
 如果两个正整数a和n互质，则n的欧拉函数 φ(n) 可以让下面的等式成立：
 $$a^{\phi({n})}\equiv 1(mod\quad n)$$
@@ -101,7 +104,7 @@ $$7^{\phi({4k})}\equiv 1(mod\quad 10)$$
 $$7^{\phi({p-1})}\equiv 1(mod\quad p)$$
 这就是著名的费马小定理。它是欧拉定理的特例。
 欧拉定理是RSA算法的核心。理解了这个定理，就可以理解RSA。
-### 7.模反元素
+### 8.模反元素
 还剩下最后一个概念：
 如果两个正整数a和n互质，那么一定可以找到整数b，使得 ab-1 被n整除，或者说ab被n除的余数是1。
 $$ab\equiv 1(mod\quad n)$$
@@ -111,7 +114,7 @@ $$ab\equiv 1(mod\quad n)$$
 $$a^{\phi({n})}=a*a^{\phi({n})-1}\equiv 1(mod\quad n)$$
 可以看到，a的 φ(n)-1 次方，就是a的模反元素。
 
-### 引用
+### 9.引用
 http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html
 
 
