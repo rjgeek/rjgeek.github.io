@@ -34,9 +34,9 @@ BOB同样选择任意一个X24按照上图的公式进行计算得出16，此时
 <img src="https://rjgeek.github.io/images/2016/11/rsa_10.png" width = "600" height = "200" alt="图片名称" align=center />  
 
 其中1为将来需要交换的秘钥，两边接收的相同
-$$3^{54*24}mod\quad17 =3^{24*54}mod\quad17 = 1$$
+$$3^{54\ast24}mod\quad17 =3^{24\ast54}mod\quad17 = 1$$
 证明  
-<img src="https://rjgeek.github.io/images/2016/11/rsa_11.png" width = "600" height = "100" alt="图片名称" align=center />  
+<img src="https://rjgeek.github.io/images/2016/11/rsa_11.png" width = "600" height = "90" alt="图片名称" align=center />  
 
 ### 4.最大公约数
 a,b属于Z，能同时被a和b整除的最大的那个数，成为最大公约数，或者公因子  
@@ -87,7 +87,7 @@ $$\phi{n}=p_1^{k1}p_2^{k2}p_3^{k3}....p_r^{kr}(1-\frac{1}{p_1})(1-\frac{1}{p_2})
 也就等于
 $$\phi{n}=n(1-\frac{1}{p_1})(1-\frac{1}{p_2})(1-\frac{1}{p_3})(1-\frac{1}{p_r})$$
 这就是欧拉函数的通用计算公式。比如，1323的欧拉函数，计算过程如下：
-$$\phi{1323}=\phi({3^3*7^2})=1323(1-\frac{1}{3})(1-\frac{1}{7})=756$$
+$$\phi{1323}=\phi({3^3\ast7^2})=1323(1-\frac{1}{3})(1-\frac{1}{7})=756$$
 
 ### 7.欧拉定理
 欧拉函数的用处，在于欧拉定理。"欧拉定理"指的是：
