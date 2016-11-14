@@ -30,7 +30,10 @@ Diffie-Hellman密钥交换是RSA之前的算法，其中的原理就是单项函
 BOB同样选择任意一个X24按照上图的公式进行计算得出16，此时54,24分别为ALICE和BOB的私有，15和16则为公开的数据，监听者EVE可以获取15和16  
 <img src="https://rjgeek.github.io/images/2016/11/rsa_10.png" width = "600" height = "200" alt="图片名称" align=center />    
 其中1为将来需要交换的秘钥，两边接收的相同
-$$3^{54*24}mod\quad17 =3^{24*54}mod\quad17 = 1$$
+证明  
+$$16^{54}mod\quad17 = (3^{24}mod17)^{54}mod\quad17 = 3^{24*54}mod\quad17$$
+同理  
+$$15^{24}mod\quad17 = (3^{54}mod17)^{24}mod\quad17 = 3^{54*24}mod\quad17$$
 
 ### 3.最大公约数
 a,b属于Z，能同时被a和b整除的最大的那个数，成为最大公约数，或者公因子  
