@@ -1,5 +1,5 @@
 ---
-title: 【密码学】RSA算法解析-理论基础
+title: 【密码学】RSA算法解析-数论基础
 id: 813
 categories:
   - 密码学
@@ -9,38 +9,22 @@ tags:
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 ## 数学基础(Fundamental_Theorem_of_Arithmeti)
 ### 1.素数
-定义：大于 1 且只能被 1 和自身整除的正整数称为**素数或质数**. 大于 1 且不是素数的正整数称为**合数**.
-例如,  2,3,5,7,11是素数, 4,6,8,9是合数. 
+定义：大于 1 且只能被 1 和自身整除的正整数称为**素数或质数**. 大于 1 且不是素数的正整数称为**合数**.  
+例如,  2,3,5,7,11是素数, 4,6,8,9是合数.     
+一个好玩的现象，如果将所有素数进行螺旋排列，所有素数呈现斐波那契螺旋线排列，在计算机下的模拟如下：  
+<img src="https://rjgeek.github.io/images/2016/11/rsa_1.png" width = "70%" height = "auto" alt="图片名称" align=center />  
+<!--more-->
+当有足够多的数据进行模拟时，展现的图形如下：  
+<img src="https://rjgeek.github.io/images/2016/11/rsa_2.png" width = "70%" height = "auto" alt="图片名称" align=center />  
+自然界中也有很多如贝类的螺旋轮廓线、向日葵轮廓、银河、人的耳朵等这种天然的“黄金螺旋”。至于素数为什么也有这样的特征我的答案是我也不知道  
+<img src="https://rjgeek.github.io/images/2016/11/rsa_4.png" width = "70%" height = "auto" alt="图片名称" align=center />   
+
 ### 2.任何合数(Composite Number)都是有若干素数（Prime Number）组成的
 素数是构成元素的基本要素,素数本身是不可再分的，素数是构建，每一个数有且只有一种素数的分解方法，没有两个数会分享同一个素数因子分解,  (算术基本定理)设a>1, 则
 $$a=p_1^{k1}p_2^{k2}p_3^{k3}....p_r^{kr}$$, 
 其中p1,p2,…,pk是不相同的素数, r1,r2,…,rk是正整数, 并且在不计顺序的情况下, 该表示是惟一的. 
      该表达式称作整数 a 的素因子分解. 
 例如   30=2×3×5, 117=32×13, 1024=210 
-
-一个好玩的现象，如果将所有素数进行螺旋排列，所有素数呈现斐波那契螺旋线排列，在计算机下的模拟如下：  
-<img src="https://rjgeek.github.io/images/2016/11/rsa_1.png" width = "70%" height = "auto" alt="图片名称" align=center />  
-当有足够多的数据进行模拟时，展现的图形如下：  
-<img src="https://rjgeek.github.io/images/2016/11/rsa_2.png" width = "70%" height = "auto" alt="图片名称" align=center />  
-自然界中也有很多如贝类的螺旋轮廓线、向日葵轮廓、银河、人的耳朵等这种天然的“黄金螺旋”。至于素数为什么也有这样的特征我的答案是我也不知道  
-<img src="https://rjgeek.github.io/images/2016/11/rsa_4.png" width = "70%" height = "auto" alt="图片名称" align=center />   
-### 3.Diffie-Hellman密钥交换
-Diffie-Hellman密钥交换是RSA之前的算法，其中的原理就是单项函数，如下图所示  
-在已知下图的模式下，任意跟换X可以获得不同的输出，但是从输出你无法获取X，RSA的算法基石   
-<img src="https://rjgeek.github.io/images/2016/11/rsa_6.png?t=1" width = "70%" height = "auto" alt="图片名称" align=center />
-<img src="https://rjgeek.github.io/images/2016/11/rsa_5.png" width = "70%" height = "auto" alt="图片名称" align=center />  
-假设ALICE和BOB进行通信，而EVE是个监听者，首先ALICE根据上左边的选择一个任意的X54经过计算得出结果15发给BOB
-<img src="https://rjgeek.github.io/images/2016/11/rsa_8.png?t=1" width = "70%" height = "auto" alt="图片名称" align=center />
-<img src="https://rjgeek.github.io/images/2016/11/rsa_9.png" width = "70%" height = "auto" alt="图片名称" align=center />  
-BOB同样选择任意一个X24按照上图的公式进行计算得出16，此时54,24分别为ALICE和BOB的私有，15和16则为公开的数据，监听者EVE可以获取15和16  
-<img src="https://rjgeek.github.io/images/2016/11/rsa_10.png" width = "70%" height = "auto" alt="图片名称" align=center />  
-
-其中1为将来需要交换的秘钥，两边接收的相同
-$$3^{54\ast24}mod\quad17 =3^{24\ast54}mod\quad17 = 1$$
-证明  
-$$16^{54}mod\quad17 = (3^{24}mod17)^{54}mod\quad17 = 3^{24\ast54}mod\quad17$$
-同理  
-$$15^{24}mod\quad17 = (3^{54}mod17)^{24}mod\quad17 = 3^{54\ast24}mod\quad17$$
 
 ### 4.最大公约数
 a,b属于Z，能同时被a和b整除的最大的那个数，成为最大公约数，或者公因子  
@@ -54,6 +38,45 @@ a,b属于Z，能同时被a和b整除的最大的那个数，成为最大公约�
 　　4. 1和任意一个自然数是都是互质关系，比如1和99。  
 　　5. p是大于1的整数，则p和p-1构成互质关系，比如57和56。  
 >　　6. p是大于1的奇数，则p和p-2构成互质关系，比如17和15。  
+
+### 数论倒数
+而在数论中，还有数论倒数的概念，如果两个数a和b，它们的乘积关于模m余1，那么我们称它们互为关于模m的数论倒数.比如  ,所以3是2关于5的数论倒数.数论倒数在中国剩余定理中非常重要.而辗转相除法提供了计算数论倒数的方法.
+### 7.欧几里得算法(Euclidean algorithm)
+欧几里德算法又称辗转相除法，用于计算两个整数a,b的最大公约数。
+其计算原理依赖于下面的定理： 
+定理：gcd(a,b) = gcd(b,a mod b)   
+
+> 证明：a可以表示成a = kb + r ，则r = a mod b  
+假设d是a,b的一个公约数，则有   
+d|a, d|b，而r = a - kb，因此d|r   
+因此d是(b,a mod b)的公约数   
+
+> 假设d 是(b,a mod b)的公约数，则   
+d | b , d |r ，但是a = kb +r   
+因此d也是(a,b)的公约数   
+因此(a,b)和(b,a mod b)的公约数是一样的，其最大公约数也必然相等，得证。  
+
+设两数为a、b(a>b)，求a和b最大公约数(a，b)的步骤如下：用a除以b，得a÷b=q......r1(0≤r1)。若r1=0，则(a，b)=b；若r1≠0，则再用b除以r1，得b÷r1=q......r2 (0≤r2）.若r2=0，则(a，b)=r1，若r2≠0，则继续用r1除以r2，……如此下去，直到能整除为止。其最后一个为被除数的余数的除数即为(a, b)。  
+例如：a=25,b=15，a/b=1......10,b/10=1......5,10/5=2.......0,最后一个为被除数余数的除数就是5,5就是所求最大公约数。
+
+### 8.贝祖定理
+
+### 6.模幂运算(Modular exponentiation)
+*  **定义**  
+模运算即求余运算。“模”是“Mod”的音译，模运算多应用于程序编写中。 Mod的含义为求余。模运算在数论和程序设计中都有着广泛的应用，从奇偶数的判别到素数的判别，从模幂运算到最大公约数的求法，从孙子问题到凯撒密码问题，无不充斥着模运算的身影。虽然很多数论教材上对模运算都有一定的介绍，但多数都是以纯理论为主，对于模运算在程序设计中的应用涉及不多。  
+模幂运算则是指先进行幂运算，在进行模运算。  
+In symbols, given base b(底数), exponent e（指数）, and modulus m（模量）, the modular exponentiation 
+c is:
+$$c \equiv b^e (mod\quad m).$$
+Given integers b and e, and a positive integer m, a unique solution c exists with the property 0 ≤ c < m.  
+Modular exponentiation can be performed with a negative(负指数) exponent e by finding the modular multiplicative inverse d of b modulo m using the extended Euclidean algorithm. That is:
+$$c \equiv b^e \equiv d^{-e} (mod\quad m).$$
+where e < 0 and b ⋅ d ≡ 1 mod m.
+Modular exponentiation similar to the one described above are considered easy to compute, even when the numbers involved are enormous. On the other hand, computing the discrete logarithm – that is, the task of finding the exponent e when given b, c, and m – is believed to be difficult. This one-way function behavior makes modular exponentiation a candidate for use in cryptographic algorithms.
+*  **如何计算**  
+> 1.直接计算  
+2.
+
 
 ### 6.欧拉函数  
 请思考以下问题：  
@@ -120,7 +143,12 @@ $$a^{\phi({n})}=a*a^{\phi({n})-1}\equiv 1(mod\quad n)$$
 可以看到，a的 φ(n)-1 次方，就是a的模反元素。
 
 ### 引用
-http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html
+http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html  
+http://www.cnblogs.com/ziwuge/archive/2011/09/18/2180480.html  
+https://en.wikipedia.org/wiki/Modular_exponentiation  
+http://baike.baidu.com/link?url=o9Fn53FTV7r99qWNCYJGa3oR8yhjWV25RDvOMs0N4CCACOTFtsVzpwEAoVp50ecoYG5REZ2ksjQMfWiWw7y9Y18Y3CW1juoE7wC77h929B9tUysp4WjEt26BzMh1CA1539ZOoeUAZsucN0kz_ZVg9V-Fpt-_Z4nsiX0q9jOHm_jcDNw7Y2lL8BdRoFtmtJao 
+
+
 
 
 
