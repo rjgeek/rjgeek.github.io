@@ -24,6 +24,7 @@ tags:
 自然界中也有很多如贝类的螺旋轮廓线、向日葵轮廓、银河、人的耳朵等这种天然的“黄金螺旋”。至于素数为什么也有这样的特征
 我的答案是我也不知道  
 <img src="https://rjgeek.github.io/images/2016/11/rsa_3.png" width = "300" height = "200" alt="图片名称" align=center />
+![](https://rjgeek.github.io/images/2016/11/rsa_3.png =100x100) 
 <img src="https://rjgeek.github.io/images/2016/11/rsa_4.png" width = "300" height = "200" alt="图片名称" align=center />   
 ### 3.Diffie-Hellman密钥交换
 Diffie-Hellman密钥交换是RSA之前的算法，其中的原理就是单项函数，如下图所示  
