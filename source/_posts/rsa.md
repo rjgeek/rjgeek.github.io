@@ -16,15 +16,13 @@ tags:
 15=3\*5  
 素数是构成元素的基本要素,素数本身是不可再分的，素数是构建，每一个数有且只有一种素数的分解方法，没有两个数会分享同一个素数因子分解  
 一个好玩的现象，如果将所有素数进行螺旋排列，所有素数呈现斐波那契螺旋线排列，在计算机下的模拟如下：  
-
-<img src="https://rjgeek.github.io/images/2016/11/rsa_1.png" width = "70%" height = "auto" alt="图片名称" align=center />
+<img src="https://rjgeek.github.io/images/2016/11/rsa_1.png" width = "70%" height = "auto" alt="图片名称" align=center />  
+当有足够多的数据进行模拟时，展现的图形如下：  
 <img src="https://rjgeek.github.io/images/2016/11/rsa_2.png" width = "70%" height = "auto" alt="图片名称" align=center />  
 
  
 自然界中也有很多如贝类的螺旋轮廓线、向日葵轮廓、银河、人的耳朵等这种天然的“黄金螺旋”。至于素数为什么也有这样的特征
 我的答案是我也不知道  
-<img src="https://rjgeek.github.io/images/2016/11/rsa_3.png" width = "70%" height = "auto" alt="图片名称" align=center />
-![](https://rjgeek.github.io/images/2016/11/rsa_3.png =100x100) 
 <img src="https://rjgeek.github.io/images/2016/11/rsa_4.png" width = "70%" height = "auto" alt="图片名称" align=center />   
 ### 3.Diffie-Hellman密钥交换
 Diffie-Hellman密钥交换是RSA之前的算法，其中的原理就是单项函数，如下图所示  
@@ -40,7 +38,6 @@ BOB同样选择任意一个X24按照上图的公式进行计算得出16，此时
 其中1为将来需要交换的秘钥，两边接收的相同
 $$3^{54\ast24}mod\quad17 =3^{24\ast54}mod\quad17 = 1$$
 证明  
-<!--<img src="https://rjgeek.github.io/images/2016/11/rsa_11.png" width = "600" height = "90" alt="图片名称" align=center /> -->  
 $$16^{54}mod\quad17 = (3^{24}mod17)^{54}mod\quad17 = 3^{24\ast54}mod\quad17$$
 同理  
 $$15^{24}mod\quad17 = (3^{54}mod17)^{24}mod\quad17 = 3^{54\ast24}mod\quad17$$
