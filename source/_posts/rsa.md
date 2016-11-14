@@ -16,8 +16,11 @@ tags:
 15=3\*5  
 素数是构成元素的基本要素,素数本身是不可再分的，素数是构建，每一个数有且只有一种素数的分解方法，没有两个数会分享同一个素数因子分解  
 一个好玩的现象，如果将所有素数进行螺旋排列，所有素数呈现斐波那契螺旋线排列，在计算机下的模拟如下：  
+<div align = center>
 <img src="https://rjgeek.github.io/images/2016/11/rsa_1.png" width = "300" height = "200" alt="图片名称" align=center />
-<img src="https://rjgeek.github.io/images/2016/11/rsa_2.png" width = "300" height = "200" alt="图片名称" align=center />   
+<img src="https://rjgeek.github.io/images/2016/11/rsa_2.png" width = "300" height = "200" alt="图片名称" align=center />  
+</div>
+ 
 自然界中也有很多如贝类的螺旋轮廓线、向日葵轮廓、银河、人的耳朵等这种天然的“黄金螺旋”。至于素数为什么也有这样的特征
 我的答案是我也不知道  
 <img src="https://rjgeek.github.io/images/2016/11/rsa_3.png" width = "300" height = "200" alt="图片名称" align=center />
