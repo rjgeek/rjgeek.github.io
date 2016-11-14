@@ -37,15 +37,8 @@ $$(3^{54*24}mod 17) = 1$$
 $$16^{54}mod 17 = (3^{24}mod17)^{54}mod 17 = 3^{24*54}mod 17$$
 同理  
 $$15^{24}mod 17 = (3^{54}mod17)^{24}mod 17 = 3^{54*24}mod 17$$
-
-
 ### 3.最大公约数
-$$a,b\subset Z	$$
-$$ a\neq0 $$
-$$ b\neq0 $$
-Leta;b2Zwitha6=0 andb . The greatest common divisor for a and b, written gcd(a,b), is the largest positive integer that divides both numbers without remainder
-翻译汉语：能同时被a和b整除的最大的那个数，成为最大公约数，或者公因子
-
+a,b属于Z，能同时被a和b整除的最大的那个数，成为最大公约数，或者公因子  
 ### 4.互质关系  
 如果两个正整数，除了1以外，没有其他公因子，我们就称这两个数是互质关系（coprime）。比如，15和32没有公因子，所以它们是互质关系。这说明，不是质数也可以构成互质关系。  
 关于互质关系，不难得到以下结论： 
