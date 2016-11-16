@@ -7,8 +7,8 @@ date: 2016-11-13 21:15:54
 tags:
 ---
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
-## 数学基础(Fundamental_Theorem_of_Arithmeti)
-### 1.质（素）数（Prime Number）
+
+### 1质（素）数（Prime Number）
 定义：大于 1 且只能被 1 和自身整除的正整数称为**素数或质数**. 大于 1 且不是素数的正整数称为**合数**.  
 例如,  2,3,5,7,11是素数, 4,6,8,9是合数.     
 一个好玩的现象，如果将所有素数进行螺旋排列，所有素数呈现斐波那契螺旋线排列，在计算机下的模拟如下：  
@@ -19,15 +19,15 @@ tags:
 自然界中也有很多如贝类的螺旋轮廓线、向日葵轮廓、银河、人的耳朵等这种天然的“黄金螺旋”。至于素数为什么也有这样的特征我的答案是我也不知道  
 <img src="https://rjgeek.github.io/images/2016/11/rsa_4.png" width = "70%" height = "auto" alt="图片名称" align=center />   
 
-### 2.任何合数(Composite Number)都是有若干素数（Prime Number）组成的
+### 2任何合数(Composite Number)都是有若干素数（Prime Number）组成的
 素数是构成元素的基本要素,素数本身是不可再分的，素数是构建，每一个数有且只有一种素数的分解方法，没有两个数会分享同一个素数因子分解,  (算术基本定理)设a>1, 则
 $$a=p_1^{k1}p_2^{k2}p_3^{k3}....p_r^{kr}$$, 
 其中p1,p2,…,pk是不相同的素数, r1,r2,…,rk是正整数, 并且在不计顺序的情况下, 该表示是惟一的. 
      该表达式称作整数 a 的素因子分解. 
 例如   30=2×3×5, 117=32×13, 1024=210 
-### 3.数论倒数(Multiplicative Inverse)
+### 3数论倒数(Multiplicative Inverse)
 在数论中，还有数论倒数的概念，如果两个数a和b，它们的乘积关于模m余1，那么我们称它们互为关于模m的数论倒数.比如 3是2关于5的数论倒数.数论倒数在中国剩余定理中非常重要.而辗转相除法提供了计算数论倒数的方法,数论的倒数实际就是指定整数范围内的互质关系
-### 4.互质(素)关系  
+### 4互质(素)关系  
 如果两个正整数，除了1以外，没有其他公因子，我们就称这两个数是互质关系（coprime）。比如，15和32没有公因子，所以它们是互质关系。这说明，不是质数也可以构成互质关系。  
 关于互质关系，不难得到以下结论： 
 >  
@@ -41,7 +41,7 @@ $$a=p_1^{k1}p_2^{k2}p_3^{k3}....p_r^{kr}$$,
 官方给的定义：  
 <img src="https://rjgeek.github.io/images/2016/11/rsa_11.png" width = "70%" height = "auto" alt="图片名称" align=center />  
 
-### 5.同余
+### 5同余
 定义 设m是正整数, a和b是整数. 如果m|a-b, 则称a模  
 m同余于b, 或a与b模m同余, 记作a≡b(mod m). 如果a与b模  
 m不同余, 则记作a!≡b(mod m).  
@@ -51,10 +51,10 @@ m不同余, 则记作a!≡b(mod m).
 (1) a mod m = b mod m.  
 (2) a=b+km, 其中k是整数.  
 
-### 6.中国剩余定理
-### 4.最大公约数
+### 6中国剩余定理
+### 7最大公约数
 a,b属于Z，能同时被a和b整除的最大的那个数，成为最大公约数，或者公因子  
-### 6.欧几里得算法(Euclidean Algorithm)
+### 8欧几里得算法(Euclidean Algorithm)
 欧几里德算法又称辗转相除法，用于计算两个整数a,b的最大公约数。
 其计算原理依赖于下面的定理： 
 定理：gcd(a,b) = gcd(b,a mod b)   
@@ -72,14 +72,49 @@ d | b , d |r ，但是a = kb +r
 设两数为a、b(a>b)，求a和b最大公约数(a，b)的步骤如下：用a除以b，得a÷b=q......r1(0≤r1)。若r1=0，则(a，b)=b；若r1≠0，则再用b除以r1，得b÷r1=q......r2 (0≤r2）.若r2=0，则(a，b)=r1，若r2≠0，则继续用r1除以r2，……如此下去，直到能整除为止。其最后一个为被除数的余数的除数即为(a, b)。  
 例如：a=25,b=15，a/b=1......10,b/10=1......5,10/5=2.......0,最后一个为被除数余数的除数就是5,5就是所求最大公约数。
 
-### 7.贝祖定理
+### 9扩展欧几里得算法（Extended Euclidean algorithm）
+已知整数a、b，扩展欧几里得算法可以在求得a、b的最大公约数的同时，能找到整数x、y（其中一个很可能是负数），使它们满足贝祖等式
+$$a\ast x+b\ast y = gcd(a,b)$$
+算法例子：
+用类似辗转相除法，求二元一次不定方程
+$$47\ast x+30\ast y = 1$$
+的整数解。  
+> $$47=30+17\ast1$$
+> $$30=17+13\ast1$$
+> $$17=13+4\ast1$$
+> $$13=4\ast3+1\ast1$$  
+用余数的形式进行表达  
+> $$17=47+30\ast（-1）$$
+> $$13=30+17\ast（-1）$$
+> $$4=17+13\ast（-1）$$
+> $$1=13+4\ast（-3）$$
+> 然后把他倒回去
+> $$1=13-4\ast（3）$$
+> $$1=13 +[17+13\ast（-1）]\ast（-3）$$
+> $$1=13\ast4+17\ast(-3)$$
+> $$1=[30+17\ast（-1）]\ast4+17\ast(-3)$$
+> $$1=30\ast4+17\ast(-7)$$
+> $$1=30\ast4+[47+30\ast（-1）]\ast(-7)$$
+> $$1=30\ast11+47\ast(-7)$$
+得解x=-7, y=11。
+
+### 10贝祖定理
+一次不定方程是形式如   
+$$a_1x_1+a_2x_2+a_3x_3+a_nx_n=c$$
+的方程，一次不定方程有整数解的充要条件为：
+$$gcd(a_1,a_2,....,a_n)|c$$
+换言之 a1,a2,a3的最大公约数须是c的因数
+
+倍祖等式是上面的一种特殊情况
+$$a\ast x+b\ast y = c$$
+贝祖等式有解时必然有无穷多个整数解，每组解 x、y都称为裴蜀数
+
 所谓贝祖定理是说：
 两个整数 a、b 是互质的，等价于方程 ax+by=1有整数解。
-当然， 贝祖定理还有一种更一般的形式，说的是两个整数 a、b有最大公因数是c，等价于方程 ax+by=c有整数解。
-这两种表述其实是等价的，因为对第二种形式稍微一变形就得到了：
+方程 ax+by=1有整数解，两个整数 a、b 是互质的
 $$\frac{a}{c}\ast x-\frac{b}{c}\ast y = 1$$
-所以我们只需要考虑第一种形式的贝祖定理就可以了。
-### 8.模幂运算(Modular exponentiation)
+
+### 11模幂运算(Modular exponentiation)
 *  **定义**  
 模运算即求余运算。“模”是“Mod”的音译，模运算多应用于程序编写中。 Mod的含义为求余。模运算在数论和程序设计中都有着广泛的应用，从奇偶数的判别到素数的判别，从模幂运算到最大公约数的求法，从孙子问题到凯撒密码问题，无不充斥着模运算的身影。虽然很多数论教材上对模运算都有一定的介绍，但多数都是以纯理论为主，对于模运算在程序设计中的应用涉及不多。  
 模幂运算则是指先进行幂运算，在进行模运算。  
@@ -101,14 +136,14 @@ Modular exponentiation similar to the one described above are considered easy to
 (a*b) % c = (a%c) * b % c = (b%c) * (a%c) % c = (a%c) * (b%c) % c        【公式二】  
 > 例题：计算
 > $$4^{13} mod\quad 11$$
-> $$=(4^{6}mod\quad11)\ast(4^{6}mod\quad11) mod \quad11$$
+> $$=(4^{6}mod\quad11)\ast(4^{7}mod\quad11) mod \quad11$$
 > $$=[(4^{3}mod\quad11)\ast(4^{3}mod\quad11)mod\quad11]\ast [(4^{3}mod\quad11)\ast(4^{4}mod\quad11)mod\quad11]mod \quad11$$
 > $$=((-2)\ast(-2)mod\quad11)\ast((-2)\ast(3)mod\quad11) mod 11$$
 > $$=(4mod\quad11)\ast(5mod\quad11) mod 11$$
 > $$=20mod\quad11$$
 > $$=9$$
 
-### 9.欧拉函数  
+### 12欧拉函数  
 请思考以下问题：  
 ***
 任意给定正整数n，请问在小于等于n的正整数之中，有多少个与n构成互质关系？（比如，在1到8之中，有多少个数与8构成互质关系？）
@@ -149,7 +184,7 @@ $$\phi{n}=n(1-\frac{1}{p_1})(1-\frac{1}{p_2})(1-\frac{1}{p_3})(1-\frac{1}{p_r})$
 这就是欧拉函数的通用计算公式。比如，1323的欧拉函数，计算过程如下：
 $$\phi{1323}=\phi({3^3\ast7^2})=1323(1-\frac{1}{3})(1-\frac{1}{7})=756$$
 
-### 10.欧拉定理
+### 13欧拉定理
 欧拉函数的用处，在于欧拉定理。"欧拉定理"指的是：
 如果两个正整数a和n互质，则n的欧拉函数 φ(n) 可以让下面的等式成立：
 $$a^{\phi({n})}\equiv 1(mod\quad n)$$
@@ -165,7 +200,7 @@ $$7^{\phi({4k})}\equiv 1(mod\quad 10)$$
 $$7^{\phi({p-1})}\equiv 1(mod\quad p)$$
 这就是著名的费马小定理。它是欧拉定理的特例。
 欧拉定理是RSA算法的核心。理解了这个定理，就可以理解RSA。
-### 11.模反元素
+### 14模反元素
 还剩下最后一个概念：
 如果两个正整数a和n互质，那么一定可以找到整数b，使得 ab-1 被n整除，或者说ab被n除的余数是1。
 $$ab\equiv 1(mod\quad n)$$
@@ -175,12 +210,14 @@ $$ab\equiv 1(mod\quad n)$$
 $$a^{\phi({n})}=a*a^{\phi({n})-1}\equiv 1(mod\quad n)$$
 可以看到，a的 φ(n)-1 次方，就是a的模反元素。
 
-### 引用
+### 15引用
 http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html  
 http://www.cnblogs.com/ziwuge/archive/2011/09/18/2180480.html  
 https://en.wikipedia.org/wiki/Modular_exponentiation  
 http://baike.baidu.com/link?url=o9Fn53FTV7r99qWNCYJGa3oR8yhjWV25RDvOMs0N4CCACOTFtsVzpwEAoVp50ecoYG5REZ2ksjQMfWiWw7y9Y18Y3CW1juoE7wC77h929B9tUysp4WjEt26BzMh1CA1539ZOoeUAZsucN0kz_ZVg9V-Fpt-_Z4nsiX0q9jOHm_jcDNw7Y2lL8BdRoFtmtJao  
 http://blog.csdn.net/delphiwcdj/article/details/5973026
+https://zh.wikipedia.org/wiki/%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95  
+http://w3.math.sinica.edu.tw/math_media/d294/29408.pdf
 
 
 
