@@ -1,10 +1,10 @@
 ---
 title: 【密码学】RSA算法解析-数论基础
-id: 813
+id: 813  
 categories:
   - 密码学
 date: 2016-11-13 21:15:54
-tags:
+tags:密码学
 ---
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 
