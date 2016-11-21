@@ -7,8 +7,6 @@ date: 2016-11-21 17:15:54
 tags:
 ---
 
-11个令人抓乱的错误交互设计（11 Interaction Design Mistakes That Drive Us Nuts）
-=============
 好的交互设计可以区分开有质量的网站和其他普通网站。然而，如果有明显的设计错误，它只会给予你本来想打动的用户以刺激和挫败感。下面是Speckyboy上总结的让人最不喜欢的交互设计错误列表，来看看你中枪了没！  
 Interaction design can separate the quality sites from the rest of the crowd – if done well. If, however, there are glaring errors in the designs, it will only serve to irritate and frustrate the very people you’re trying to impress.  
 Here’s a list of my least favorite IxD mistakes that have left users disappointed, confused, and can even at times leave them a little angry.  
