@@ -1,9 +1,9 @@
 ---
-title: 【Interaction design】11个令人抓乱的错误交互设计（11 Interaction Design Mistakes That Drive Us Nuts）
+title: 【Interaction design】11个令人抓乱的错误交互设计（11 Interactions Design Mistakes That Drive Us Nuts）
 id: 813  
 categories:
   - 人机交互
-date: 2016-11-13 21:15:54
+date: 2016-11-21 17:15:54
 tags:
 ---
 

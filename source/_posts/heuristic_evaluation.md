@@ -3,7 +3,7 @@ title: 【Interaction design】10 Usability Heuristics for User Interface Design
 id: 813  
 categories:
   - 人机交互
-date: 2016-11-13 21:15:54
+date: 2016-11-21 14:15:54
 tags:
 ---
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
