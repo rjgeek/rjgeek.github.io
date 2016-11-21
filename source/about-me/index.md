@@ -20,7 +20,7 @@ Dual Bachelor’s Degree in Business Administration
 ## Employment History  
 State Grid Corporation of China &nbsp;&nbsp;&nbsp;&nbsp;7/2013-08/2016	
 ## Research Field
-Distributed database，Technical debt,Security certificate，Human-computer interaction
+**Distributed Database**,Pervasive computing,**Technical Debt**,**Security Certificate**，Human-Computer Interaction
 ## Recently published
 Single Sign-on  System and Its Methods(Patent No.: 201511017547.3)  
 Study of Asynchronous Non-Blocking Server Based on Nodejs  
