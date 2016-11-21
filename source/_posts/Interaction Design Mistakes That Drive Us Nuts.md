@@ -128,9 +128,9 @@ Interaction Design Tactics For Visual Designers.
 If you think I’ve missed anything, or you’ve got a pet peeve related to interaction design that you want to share, just leave a comment below!
 No related posts.
 
-### 声明
+## 声明
 本文95%为组合翻译，详见引用,5%为原创
-### 引用
+## 引用
 https://www.nngroup.com/articles/ten-usability-heuristics/
 
 
