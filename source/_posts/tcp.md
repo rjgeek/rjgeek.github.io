@@ -38,106 +38,48 @@ valid segment in a later connection between these same two hosts (which also hap
 Telnet, defined in RFC 854, is a popular application-layer protocol used for remote login. It runs over TCP and is designed to work between any pair of hosts. Unlike the bulk data transfer applications discussed in Chapter 2, Telnet is an interactive application. We discuss a Telnet example here, as it nicely illustrates TCP sequence and acknowledgment numbers. We note that many users now prefer to use the SSH protocol rather than Telnet, since data sent in a Telnet connection (including passwords!) is not encrypted, making Telnet vulnerable to eavesdropping attacks 
 Suppose Host A initiates a Telnet session with Host B. Because Host A initiates the session, it is labeled the client, and Host B is labeled the server. Each character typed by the user (at the client) will be sent to the remote host; the remote host will send back a copy of each character, which will be displayed on the Telnet user’s screen. This “echo back” is used to ensure that characters seen by the Telnet user have already been received and processed at the remote site. Each character thus traverses the network twice between the time the user hits the key and the time the character is displayed on the user’s monitor    
 Now suppose the user types a single letter, ‘C,’and then grabs a coffee. Let’s examine the TCP segments that are sent between the client and server. As shown in Figure 3.31, we suppose the starting sequence numbers are 42 and 79 for the client and server, respectively.Recall that the sequence number of a segment is the sequence number of the first byte in the data field. Thus, the first segment sent from the client will have sequence number 42; the first segment sent from the server will have sequence number Recall that the acknowledgment number is the sequence number of the next byte of data that the host is waiting for. After the TCP connection is established but before any data is sent, the client is waiting for byte 79 and the server is waiting for byte 42  
+<img src="https://rjgeek.github.io/images/2016/11/tcp_4.png?t=2>" width = "70%" height = "300" alt="图片名称" align=center />  
 As shown in Figure 3.31, three segments are sent. The first segment is sent from the client to the server, containing the 1-byte ASCII representation of the letter ‘C’ in its data field. This first segment also has 42 in its sequence number field, as we just described. Also, because the client has not yet received any data from the server, this first segment will have 79 in its acknowledgment number field  
 The second segment is sent from the server to the client. It serves a dual purpose.First it provides an acknowledgment of the data the server has received. By putting 43 in the acknowledgment field, the server is telling the client that it has successfully received everything up through byte 42 and is now waiting for bytes 43 onward. The second purpose of this segment is to echo back the letter ‘C.’ Thus, the second segment has the ASCII representation of ‘C’ in its data field. This second segment has the sequence number 79, the initial sequence number of the server-toclient data flow of this TCP connection, as this is the very first byte of data that the server is sending. Note that the acknowledgment for client-to-server data is carried in a segment carrying server-to-client data; this acknowledgment is said to be piggybacked on the server-to-client data segment  
 ## Round-Trip Time Estimation and Timeout
 TCP, like our rdt protocol in Section 3.4, uses a timeout/retransmit mechanism to recover from lost segments. Although this is conceptually simple, many subtle issues arise when we implement a timeout/retransmit mechanism in an actual protocol such as TCP. Perhaps the most obvious question is the length of the timeout
 intervals. Clearly, the timeout should be larger than the connection’s round-trip time (RTT), that is, the time from when a segment is sent until it is acknowledged. Otherwise, unnecessary retransmissions would be sent. But how much larger? How should the RTT be estimated in the first place? Should a timer be associated with each and every unacknowledged segment? So many questions! Our discussion in this section is based on the TCP work in [Jacobson 1988] and the current IETF recommendations for managing TCP timers [RFC 6298].
 ### Estimating the Round-Trip Time
-Let’s begin our study of TCP timer management by considering how TCP estimates the round-trip time between sender and receiver. This is accomplished as follows. The sample RTT, denoted SampleRTT, for a segment is the amount of time between when the segment is sent (that is, passed to IP) and when an acknowledgment for the segment is received. Instead of measuring a SampleRTT for every
-transmitted segment, most TCP implementations take only one SampleRTT measurement
-at a time. That is, at any point in time, the SampleRTT is being estimated
-for only one of the transmitted but currently unacknowledged segments, leading to a
-new value of SampleRTT approximately once every RTT. Also, TCP never computes
-a SampleRTT for a segment that has been retransmitted; it only measures
-SampleRTT for segments that have been transmitted once [Karn 1987]. (A problem
-at the end of the chapter asks you to consider why.)
-
-Obviously, the SampleRTT values will fluctuate from segment to segment due
-to congestion in the routers and to the varying load on the end systems. Because of
-this fluctuation, any given SampleRTT value may be atypical. In order to estimate
-a typical RTT, it is therefore natural to take some sort of average of the SampleRTT
-values. TCP maintains an average, called EstimatedRTT, of the SampleRTT
-values. Upon obtaining a new SampleRTT, TCP updates
-EstimatedRTT according to the following formula:
+Let’s begin our study of TCP timer management by considering how TCP estimates the round-trip time between sender and receiver. This is accomplished as follows. The sample RTT, denoted SampleRTT, for a segment is the amount of time between when the segment is sent (that is, passed to IP) and when an acknowledgment for the segment is received. Instead of measuring a SampleRTT for every transmitted segment, most TCP implementations take only one SampleRTT measurement at a time. That is, at any point in time, the SampleRTT is being estimated
+for only one of the transmitted but currently unacknowledged segments, leading to a new value of SampleRTT approximately once every RTT. Also, TCP never computes a SampleRTT for a segment that has been retransmitted; it only measures SampleRTT for segments that have been transmitted once [Karn 1987]. (A problem at the end of the chapter asks you to consider why.)  
+Obviously, the SampleRTT values will fluctuate from segment to segment due to congestion in the routers and to the varying load on the end systems. Because of this fluctuation, any given SampleRTT value may be atypical. In order to estimate a typical RTT, it is therefore natural to take some sort of average of the SampleRTT
+values. TCP maintains an average, called EstimatedRTT, of the SampleRTT values. Upon obtaining a new SampleRTT, TCP updates EstimatedRTT according to the following formula:
 $$EstimatedRTT = (1 – a) • EstimatedRTT +  a• SampleRTT$$
-The formula above is written in the form of a programming-language statement—
-the new value of EstimatedRTT is a weighted combination of the previous value
-of EstimatedRTT and the new value for SampleRTT. The recommended value
-of  is  = 0.125 (that is, 1/8) [RFC 6298], in which case the formula above
-becomes:
+The formula above is written in the form of a programming-language statement—the new value of EstimatedRTT is a weighted combination of the previous value of EstimatedRTT and the new value for SampleRTT. The recommended value of  is  = 0.125 (that is, 1/8) [RFC 6298], in which case the formula above becomes:
 $$EstimatedRTT = 0.875 • EstimatedRTT + 0.125 • SampleRTT$$
 ### Setting and Managing the Retransmission Timeout Interval
-Given values of EstimatedRTT and DevRTT, what value should be used for
-TCP’s timeout interval? Clearly, the interval should be greater than or equal to
-EstimatedRTT, or unnecessary retransmissions would be sent. But the timeout
-interval should not be too much larger than EstimatedRTT; otherwise, when a segment
-is lost, TCP would not quickly retransmit the segment, leading to large data transfer
-delays. It is therefore desirable to set the timeout equal to the EstimatedRTT plus
-some margin. The margin should be large when there is a lot of fluctuation in the
-SampleRTT values; it should be small when there is little fluctuation. The value of
-DevRTT should thus come into play here. All of these considerations are taken into
-account in TCP’s method for determining the retransmission timeout interval:
+Given values of EstimatedRTT and DevRTT, what value should be used for TCP’s timeout interval? Clearly, the interval should be greater than or equal to EstimatedRTT, or unnecessary retransmissions would be sent. But the timeout interval should not be too much larger than EstimatedRTT; otherwise, when a segment is lost, TCP would not quickly retransmit the segment, leading to large data transfer delays. It is therefore desirable to set the timeout equal to the EstimatedRTT plus some margin. The margin should be large when there is a lot of fluctuation in the SampleRTT values; it should be small when there is little fluctuation. The value of
+DevRTT should thus come into play here. All of these considerations are taken into account in TCP’s method for determining the retransmission timeout interval:
 $$TimeoutInterval = EstimatedRTT + 4 • DevRTT$$
-An initial TimeoutInterval value of 1 second is recommended [RFC 6298].
-Also, when a timeout occurs, the value of TimeoutInterval is doubled to avoid
-a premature timeout occurring for a subsequent segment that will soon be acknowledged.
-However, as soon as a segment is received and EstimatedRTT is updated,
+An initial TimeoutInterval value of 1 second is recommended [RFC 6298].Also, when a timeout occurs, the value of TimeoutInterval is doubled to avoid a premature timeout occurring for a subsequent segment that will soon be acknowledged.However, as soon as a segment is received and EstimatedRTT is updated,
 the TimeoutInterval is again computed using the formula above.
-
 ## Reliable Data Transfer
-Recall that the Internet’s network-layer service (IP service) is unreliable. IP does
-not guarantee datagram delivery, does not guarantee in-order delivery of datagrams,
-and does not guarantee the integrity of the data in the datagrams. With IP
-service, datagrams can overflow router buffers and never reach their destination,
-datagrams can arrive out of order, and bits in the datagram can get corrupted
-(flipped from 0 to 1 and vice versa). Because transport-layer segments are carried
-across the network by IP datagrams, transport-layer segments can suffer from these
-problems as well
+Recall that the Internet’s network-layer service (IP service) is unreliable. IP does not guarantee datagram delivery, does not guarantee in-order delivery of datagrams, and does not guarantee the integrity of the data in the datagrams. With IP service, datagrams can overflow router buffers and never reach their destination,
+datagrams can arrive out of order, and bits in the datagram can get corrupted(flipped from 0 to 1 and vice versa). Because transport-layer segments are carried across the network by IP datagrams, transport-layer segments can suffer from these problems as well TCP creates a reliable data transfer service on top of IP’s unreliable besteffort service. TCP’s reliable data transfer service ensures that the data stream that a process reads out of its TCP receive buffer is uncorrupted, without gaps, without duplication, and in sequence; that is, the byte stream is exactly the same byte stream that was sent by the end system on the other side of the connection. How TCP provides a reliable data transfer involves many of the principles that we studied in Section 3.4  In our earlier development of reliable data transfer techniques, it was conceptually easiest to assume that an individual timer is associated with each transmitted but not yet acknowledged segment. While this is great in theory, timer management can require considerable overhead. Thus, the recommended TCP timer management procedures [RFC 6298] use only a single retransmission timer, even if there are multiple transmitted but not yet acknowledged segments. The TCP protocol described in this section follows this single-timer recommendation  
+We will discuss how TCP provides reliable data transfer in two incremental steps. We first present a highly simplified description of a TCP sender that uses only timeouts to recover from lost segments; we then present a more complete description that uses duplicate acknowledgments in addition to timeouts. In the ensuing discussion, we suppose that data is being sent in only one direction, from Host A to Host B, and that Host A is sending a large file   
+Figure 3.33 presents a highly simplified description of a TCP sender. We see that there are three major events related to data transmission and retransmission in the TCP sender: data received from application above; timer timeout; and ACK receipt. Upon the occurrence of the first major event, TCP receives data from the application, encapsulates the data in a segment, and passes the segment to IP. Note that each segment includes a sequence number that is the byte-stream number of the first data byte in the segment, as described in Section 3.5.2. Also note that if the timer is already not running for some other segment, TCP starts the timer when the segment is passed to IP. (It is helpful to think of the timer as being associated with the oldest unacknowledged segment.) The expiration interval for this timer is the TimeoutInterval, which is calculated from EstimatedRTT and DevRTT, as described in Section 3.5.3.  
+The second major event is the timeout. TCP responds to the timeout event by retransmitting the segment that caused the timeout. TCP then restarts the timer  
+The third major event that must be handled by the TCP sender is the arrival of an acknowledgment segment (ACK) from the receiver (more specifically, a segment containing a valid ACK field value). On the occurrence of this event, TCP compares the ACK value y with its variable SendBase. The TCP state variable SendBase is the sequence number of the oldest unacknowledged byte. (Thus SendBase–1 is the sequence number of the last byte that is known to have been received correctly and in order at the receiver.) As indicated earlier, TCP uses cumulative acknowledgments, so that y acknowledges the receipt of all bytes before byte number y. If y > SendBase, then the ACK is acknowledging one or more previously unacknowledged segments.Thus the sender updates its SendBase variable; it also restarts the timer if there currently are any not-yet-acknowledged segments.
+### A Few Interesting Scenarios
+We have just described a highly simplified version of how TCP provides reliable data transfer. But even this highly simplified version has many subtleties. To get a good feeling for how this protocol works, let’s now walk through a few simple scenarios.  
+Figure 3.34 depicts the first scenario, in which Host A sends one segment to Host B. Suppose that this segment has sequence number 92 and contains 8 bytes of data. After sending this segment, Host A waits for a segment from B with acknowledgment number 100. Although the segment from A is received at B, the acknowledgment from B to A gets lost. In this case, the timeout event occurs, and Host A retransmits the same segment. Of course, when Host B receives the retransmission, it observes from the sequence number that the segment contains
+data that has already been received. Thus, TCP in Host B will discard the bytes in the retransmitted segment  
+<img src="https://rjgeek.github.io/images/2016/11/tcp_6.png?t=2>" width = "70%" height = "300" alt="图片名称" align=center />  
+In a second scenario, shown in Figure 3.35, Host A sends two segments back to back. The first segment has sequence number 92 and 8 bytes of data, and the second segment has sequence number 100 and 20 bytes of data. Suppose that both segments arrive intact at B, and B sends two separate acknowledgments for each of these segments. The first of these acknowledgments has acknowledgment number 100; the second has acknowledgment number 120. Suppose now that neither of the acknowledgments arrives at Host A before the timeout. When the timeout event occurs, Host A resends the first segment with sequence number 92 and restarts the timer. As long
+as the ACK for the second segment arrives before the new timeout, the second segment will not be retransmitted    
+<img src="https://rjgeek.github.io/images/2016/11/tcp_7.png?t=2>" width = "70%" height = "300" alt="图片名称" align=center /> 
 
-TCP creates a reliable data transfer service on top of IP’s unreliable besteffort
-service. TCP’s reliable data transfer service ensures that the data stream that a
-process reads out of its TCP receive buffer is uncorrupted, without gaps, without
-duplication, and in sequence; that is, the byte stream is exactly the same byte stream
-that was sent by the end system on the other side of the connection. How TCP provides
-a reliable data transfer involves many of the principles that we studied in
-Section 3.4
+In a third and final scenario, suppose Host A sends the two segments, exactly as in the second example. The acknowledgment of the first segment is lost in the network, but just before the timeout event, Host A receives an acknowledgment with acknowledgment number 120. Host A therefore knows that Host B has received everything up through byte 119; so Host A does not resend either of the two segments. This scenario is illustrated in Figure 3.36
 
-In our earlier development of reliable data transfer techniques, it was conceptually
-easiest to assume that an individual timer is associated with each transmitted
-but not yet acknowledged segment. While this is great in theory, timer management
-can require considerable overhead. Thus, the recommended TCP timer management
-procedures [RFC 6298] use only a single retransmission timer, even if there are multiple
-transmitted but not yet acknowledged segments. The TCP protocol described
-in this section follows this single-timer recommendation
 
-We will discuss how TCP provides reliable data transfer in two incremental
-steps. We first present a highly simplified description of a TCP sender that uses only
-timeouts to recover from lost segments; we then present a more complete description
-that uses duplicate acknowledgments in addition to timeouts. In the ensuing discussion,
-we suppose that data is being sent in only one direction, from Host A to
-Host B, and that Host A is sending a large file
-
-Figure 3.33 presents a highly simplified description of a TCP sender. We see
-that there are three major events related to data transmission and retransmission in
-the TCP sender: data received from application above; timer timeout; and ACK
-receipt. Upon the occurrence of the first major event, TCP receives data from the
-application, encapsulates the data in a segment, and passes the segment to IP. Note
-that each segment includes a sequence number that is the byte-stream number of
-the first data byte in the segment, as described in Section 3.5.2. Also note that if the
-timer is already not running for some other segment, TCP starts the timer when the
-segment is passed to IP. (It is helpful to think of the timer as being associated with
-the oldest unacknowledged segment.) The expiration interval for this timer is the
-TimeoutInterval, which is calculated from EstimatedRTT and DevRTT,
-as described in Section 3.5.3.
-
-The second major event is the timeout. TCP responds to the timeout event by
-retransmitting the segment that caused the timeout. TCP then restarts the timer
-
+<img src="https://rjgeek.github.io/images/2016/11/tcp_8.png?t=2>" width = "70%" height = "300" alt="图片名称" align=center /> 
 
 ## 引用
-http://macao.communications.museum/eng/exhibition/secondfloor/moreinfo/2_8_6_Multiplexing.html  
-http://blog.chinaunix.net/uid-26758209-id-3146230.html  
 《计算机网络-自顶向下方法(原书第4版)》  
 
 
