@@ -1,3 +1,4 @@
+{% include 'declare.swig' %}
 {% if page.comments %}
   <div class="comments" id="comments">
     {% if (theme.duoshuo and theme.duoshuo.shortname) or theme.duoshuo_shortname %}
