@@ -113,3 +113,9 @@ social_icons:
   GitHub: github
   Twitter: twitter
   Weibo: weibo
+
+# hexo sitemapÍøÕ¾µØÍ¼
+sitemap:
+path: sitemap.xml
+baidusitemap:
+path: baidusitemap.xml
