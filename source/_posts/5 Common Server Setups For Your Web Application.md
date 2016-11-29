@@ -1,5 +1,5 @@
 ---
-title: 【系统架构】五种通用WEB应用服务器（5 Common Server Setups For Your Web Application）
+title: 【系统架构】五种通用WEB应用服务架构（5 Common Server Setups For Your Web Application）
 id: 813
 categories:
   - 系统架构
