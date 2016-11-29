@@ -427,7 +427,7 @@ search:
   field: post
   format: html
   limit: 10000
-
-reward_comment: Adhere to the original technology sharing, your support will encourage me to continue to create!
+# Adhere to the original technology sharing,
+reward_comment:  your support will encourage me to continue to create!
 #wechatpay: /path/to/wechat-reward-image
 alipay: /images/alipay.jpg
