@@ -14,7 +14,8 @@
       ds.id = 'duoshuo-script';
       ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
       ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
+      //(document.getElementsByTagName('head')[0]
+	  (document.getElementById('footer')
       || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
   </script>
