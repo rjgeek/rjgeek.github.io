@@ -1,5 +1,5 @@
 ---
-title: 【Interaction design】区域链技术（Blockchain Technology）
+title: 【分布式数据库】区域链技术（Blockchain Technology）
 id: 813  
 categories:
   - 区域链
