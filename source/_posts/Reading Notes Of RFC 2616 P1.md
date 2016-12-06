@@ -6,7 +6,7 @@ categories:
 date: 2016-11-04 16:20:06
 tags:
 ---
-
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 # 1 Introduction
 ## 1.1 Purpose
 The Hypertext Transfer Protocol (HTTP) is an application-level protocol for distributed, collaborative, hypermediainformation systems. HTTP has been in use by the World-Wide Web global information initiative since 1990. The first version of HTTP, referred to as HTTP/0.9, was a simple protocol for raw data transfer across the Internet. HTTP/1.0, as defined by RFC 1945 [6], improved the protocol by allowing messages to be in the format of MIMElike messages, containing metainformation about the data transferred and modifiers on the request/response semantics. However, HTTP/1.0 does not sufficiently take into consideration the effects of hierarchical proxies,caching, the need for persistent connections, or virtual hosts. In addition, the proliferation of incompletelyimplemented applications calling themselves “HTTP/1.0” has necessitated a protocol version change in order for two communicating applications to determine each other’s true capabilities.  
