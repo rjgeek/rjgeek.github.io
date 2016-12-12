@@ -1,14 +1,14 @@
 ---
 title: 一种点对点的电子现金系统（Bitcoin: A Peer-to-Peer Electronic Cash System）  
-id: 813
+id: 813  
 categories:
   - 系统架构
-date: 2016-11-29 18:05:54
+date: 2016-12-12 12:05:54  
 tags:
   - Bitcoin
 
 ## Author（作者信息）
-Satoshi Nakamoto  
+Satoshi Nakamoto（中本聪）  
 satoshin@gmx.com
 
 ## Abstract（摘要）
@@ -32,7 +32,7 @@ We define an electronic coin as a chain of digital signatures.  Each owner trans
 
 我们定义，一枚电子货币（an electronic coin）是这样的一串数字签名：每一位所有者通过对前一次交易和下一位拥有者的公钥(Public key) 签署一个随机散列的数字签名，并将这个签名附加在这枚电子货币的末尾，电子货币就发送给了下一位所有者。而收款人通过对签名进行检验，就能够验证该链条的所有者。
 
-<img src="https://rjgeek.github.io/images/2016/11/5_load_balancer.png?t=2>" width = "90%" height = "90%" alt="图片名称" align=center />  
+<img src="https://rjgeek.github.io/images/2016/12/bitcoin_1.png?t=2>" width = "90%" height = "90%" alt="图片名称" align=center />  
 
 The problem of course is the payee can't verify that one of the owners did not double-spendthe coin.  A common solution is to introduce a trusted central authority, or mint, that checks everytransaction for double spending.  After each transaction, the coin must be returned to the mint to issue a new coin, and only coins issued directly from the mint are trusted not to be double-spent.The   problem   with   this   solution   is   that   the   fate   of   the   entire   money   system   depends   on   thecompany running the mint, with every transaction having to go through them, just like a bank.
 
@@ -47,7 +47,7 @@ The solution we propose begins with a timestamp server.  A timestamp server work
 
 本解决方案首先提出一个“时间戳服务器”。时间戳服务器通过对以区块(block)形式存在的一组数据实施随机散列而加上时间戳，并将该随机散列进行广播，就像在新闻或世界性新闻组网络（Usenet）的发帖一样[2-5]。显然，该时间戳能够证实特定数据必然于某特定时刻是的确存在的，因为只有在该时刻存在了才能获取相应的随机散列值。每个时间戳应当将前一个时间戳纳入其随机散列值中，每一个随后的时间戳都对之前的一个时间戳进行增强(reinforcing)，这样就形成了一个链条（Chain）。
 
-<img src="https://rjgeek.github.io/images/2016/11/5_load_balancer.png?t=2>" width = "90%" height = "90%" alt="图片名称" align=center />  
+<img src="https://rjgeek.github.io/images/2016/12/bitcoin_2.png?t=2>" width = "90%" height = "90%" alt="图片名称" align=center />  
 
 ## Proof-of-Work（工作量证明）
 To implement a distributed timestamp server on a peer-to-peer basis, we will need to use a proof-of-work system  similar to Adam  Back's  Hashcash  [6],  rather than  newspaper  or  Usenet  posts. The proof-of-work involves scanning for a value that when hashed, such as with SHA-256, the hash begins with a number of zero bits.  The average work required is exponential in the number of zero bits required and can be verified by executing a single hash.
@@ -58,7 +58,7 @@ For our timestamp network, we implement the proof-of-work by incrementing a nonc
 
 我们在区块中补增一个随机数(Nonce)，这个随机数要使得该给定区块的随机散列值出现了所需的那么多个0。我们通过反复尝试来找到这个随机数，找到为止。这样我们就构建了一个工作量证明机制。只要该CPU 耗费的工作量能够满足该工作量证明机制，那么除非重新完成相当的工作量，该区块的信息就不可更改。由于之后的区块是链接在该区块之后的，所以想要更改该区块中的信息，就还需要重新完成之后所有区块的全部工作量
 
-<img src="https://rjgeek.github.io/images/2016/11/5_combined.png?t=2>" width = "90%" height = "90%" alt="图片名称" align=center />  
+<img src="https://rjgeek.github.io/images/2016/12/bitcoin_3.png?t=2>" width = "90%" height = "90%" alt="图片名称" align=center />  
 
 The proof-of-work also solves the problem of determining representation in majority decisionmaking.  If the majority were based on one-IP-address-one-vote, it could be subverted by anyoneable   to   allocate   many   IPs.     Proof-of-work   is   essentially   one-CPU-one-vote.     The   majoritydecision is represented by the longest chain, which has the greatest proof-of-work effort invested in it.  If a majority of CPU power is controlled by honest nodes, the honest chain will grow the fastest and outpace any competing chains.   To modify a past block, an attacker would have to redo the proof-of-work of the block and all blocks after it and then catch up with and surpass thework of the honest nodes.  We will show later that the probability of a slower attacker catching updiminishes exponentially as subsequent blocks are added.
 
@@ -111,6 +111,8 @@ Once the latest transaction in a coin is buried under enough blocks, the spent t
 
 如果最近的交易已经被纳入了足够多的区块之中，那么就可以丢弃该交易之前的数据，以回收硬盘空间。为了同时确保不损害区块的随机散列值，交易信息被随机散列时，被构建成一种Merkle树（Merkle tree）[7]的形态，使得只有根(root)被纳入了区块的随机散列值。通过将该树（tree）的分支拔除（stubbing）的方法，老区块就能被压缩。而内部的随机散列值是不必保存的。
 
+<img src="https://rjgeek.github.io/images/2016/12/bitcoin_4.png?t=2>" width = "90%" height = "90%" alt="图片名称" align=center />  
+
 A  block   header   with   no   transactions   would   be   about   80   bytes.     If   we   suppose   blocks   aregenerated every 10 minutes, 80 bytes * 6 * 24 * 365 = 4.2MB per year.  With computer systems typically selling with 2GB of RAM as of 2008, and Moore's Law predicting current growth of1.2GB   per   year,   storage   should   not   be   a   problem   even   if   the   block   headers   must   be   kept   inmemory.
 
 不含交易信息的区块头（Block header）大小仅有80字节。如果我们设定区块生成的速率为每10分钟一个，那么每一年产生的数据位4.2MB。（80 bytes * 6 * 24 * 365 = 4.2MB）。2008年，PC系统通常的内存容量为2GB，按照摩尔定律的预言，即使将全部的区块头存储于内存之中都不是问题。
@@ -120,6 +122,8 @@ It is possible to verify payments without running a full network node.  A user o
 
 在不运行完整网络节点的情况下，也能够对支付进行检验。一个用户需要保留最长的工作量证明链条的区块头的拷贝，它可以不断向网络发起询问，直到它确信自己拥有最长的链条，并能够通过merkle的分支通向它被加上时间戳并纳入区块的那次交易。节点想要自行检验该交易的有效性原本是不可能的，但通过追溯到链条的某个位置，它就能看到某个节点曾经接受过它，并且于其后追加的区块也进一步证明全网曾经接受了它。
 
+<img src="https://rjgeek.github.io/images/2016/12/bitcoin_5.png?t=2>" width = "90%" height = "90%" alt="图片名称" align=center />  
+
 As such, the verification is reliable as long as honest nodes control the network, but is more vulnerable   if  the   network   is   over powered   by   an   attacker.     While   network   nodes   can   verify transactions  for   themselves,   the   simplified   method   can   be   fooled   by   an   attacker's   fabricated transactions for as long as the attacker can continue to over power the network.   One strategy to protect against this would be to accept alerts from network nodes when they detect an invalid block,   prompting   the  user's   software   to   download   the   full   block   and   alerted   transactions   to confirm the inconsistency.  Businesses that receive frequent payments will probably still want to run their own nodes for more independent security and quicker verification.
 
 当此情形，只要诚实的节点控制了网络，检验机制就是可靠的。但是，当全网被一个计算力占优的攻击者攻击时，将变得较为脆弱。因为网络节点能够自行确认交易的有效性，只要攻击者能够持续地保持计算力优势，简化的机制会被攻击者焊接的（fabricated）交易欺骗。那么一个可行的策略就是，只要他们发现了一个无效的区块，就立刻发出警报，收到警报的用户将立刻开始下载被警告有问题的区块或交易的完整信息，以便对信息的不一致进行判定。对于日常会发生大量收付的商业机构，可能仍会希望运行他们自己的完整节点，以保持较大的独立完全性和检验的快速性。
@@ -127,12 +131,16 @@ As such, the verification is reliable as long as honest nodes control the networ
 ## Combining and Splitting Value(价值的组合与分割)
 Although   it   would   be   possible   to   handle   coins   individually,   it   would   be   unwieldy   to   make   aseparate   transaction   for   every   cent   in   a   transfer.     To   allow   value   to   be   split   and   combined,transactions  contain  multiple  inputs  and  outputs.    Normally  there will  be either  a  single  inputfrom a larger previous transaction or multiple inputs combining smaller amounts, and at most two outputs: one for the payment, and one returning the change, if any, back to the sender.It should be noted that fan-out, where a transaction depends on several transactions, and those transactions depend on many more, is not a problem here.   There is never the need to extract acomplete standalone copy of a transaction's history. 
 
+<img src="https://rjgeek.github.io/images/2016/12/bitcoin_6.png?t=2>" width = "90%" height = "90%" alt="图片名称" align=center />
+
 虽然可以单个单个地对电子货币进行处理，但是对于每一枚电子货币单独发起一次交易将是一种笨拙的办法。为了使得价值易于组合与分割，交易被设计为可以纳入多个输入和输出。一般而言是某次价值较大的前次交易构成的单一输入，或者由某几个价值较小的前次交易共同构成的并行输入，但是输出最多只有两个：一个用于支付，另一个用于找零（如有）。 需要指出的是，虽然一笔交易依赖于之前的多笔交易、这些交易又各自依赖于多笔交易，但是这并不存在任何问题。因为这个工作机制并不需要展开检验之前发生的所有交易历史。
 
 ## Privacy(隐私)
 The traditional banking model achieves a level of privacy by limiting access to information to the parties involved and the trusted third party.   The necessity to announce all transactions publicly precludes this method, but privacy can still be maintained by breaking the flow of information in another place: by keeping public keys anonymous.   The public can see that someone is sending an amount to someone else, but without information linking the transaction to anyone.   This issimilar   to   the   level   of   information   released   by   stock   exchanges,   where   the   time   and   size   ofindividual trades, the "tape", is made public, but without telling who the parties were.
 
 传统的造币厂模型为交易的参与者提供了一定程度的隐私保护，因为试图向可信任的第三方索取交易信息是严格受限的。但是如果将交易信息向全网进行广播，就意味着这样的方法失效了。但是隐私依然可以得到保护：将公钥保持为匿名。公众得知的信息仅仅是有某个人将一定数量的货币发所给了另外一个人，但是难以将该交易同某个特定的人联系在一起，也就是说，公众难以确信，这些人究竟是谁。这同股票交易所发布的信息是类似的，每一手股票买卖发生的时间、交易量是记录在案且可供查询的，但是交易双方的身份信息却不予透露。
+
+<img src="https://rjgeek.github.io/images/2016/12/bitcoin_7.png?t=2>" width = "90%" height = "90%" alt="图片名称" align=center />  
 
 As an additional firewall, a new key pair should be used for each transaction to keep them from   being   linked   to   a   common   owner.     Some   linking   is   still   unavoidable   with   multi-inputtransactions, which necessarily reveal that their inputs were owned by the same owner.  The riskis that if the owner of a key is revealed, linking could reveal other transactions that belonged tothe same owner
 
@@ -157,6 +165,8 @@ p=诚实节点制造出下一个节点的概率
 q=攻击者制造出下一个节点的概率  
 qz=攻击者最终消弭了z个区块的落后差距  *
 
+<img src="https://rjgeek.github.io/images/2016/12/bitcoin_8.png?t=2>" width = "40%" height = "90%" alt="图片名称" align=center />  
+
 Given our assumption that p > q, the probability drops exponentially as the number of blocks theattacker has to catch up with increases.   With the odds against him, if he doesn't make a lucky lunge forward early on, his chances become vanishingly small as he falls further behind.We   now   consider   how   long   the   recipient  of  a   new   transaction   needs   to   wait   before   being sufficiently certain the sender can't change the transaction.  We assume the sender is an attacker who wants to make the recipient believe he paid him for a while, then switch it to pay back to himself  after   some   time   has   passed.    The   receiver   will   be  alerted   when   that   happens,   but   the sender hopes it will be too late.
 
 假定p>q，那么攻击成功的概率就因为区块数的增长而呈现指数化下降。由于概率是攻击者的敌人，如果他不能幸运且快速地获得成功，那么他获得成功的机会随着时间的流逝就变得愈发渺茫。那么我们考虑一个收款人需要等待多长时间，才能足够确信付款人已经难以更改交易了。我们假设付款人是一个支付攻击者，希望让收款人在一段时间内相信他已经付过款了，然后立即将支付的款项重新支付给自己。虽然收款人届时会发现这一点，但为时已晚。
@@ -168,11 +178,17 @@ The receiver generates a new key pair and gives the public key to the sender sho
 The recipient waits until the transaction has been added to a block and  z  blocks have beenlinked   after   it.     He   doesn't   know   the   exact   amount   of   progress   the   attacker   has  made,   butassuming   the   honest   blocks   took   the   average   expected   time   per   block,   the   attacker's   potentialprogress will be a Poisson distribution with expected value:
 然后收款人将等待交易出现在首个区块中，然后在等到z个区块链接其后。此时，他仍然不能确切知道攻击者已经进展了多少个区块，但是假设诚实区块将耗费平均预期时间以产生一个区块，那么攻击者的潜在进展就是一个泊松分布，分布的期望值为：
 
+<img src="https://rjgeek.github.io/images/2016/12/bitcoin_9.png?t=2>" width = "40%" height = "90%" alt="图片名称" align=center />  
+
 To get the probability the attacker could still catch up now, we multiply the Poisson density foreach amount of progress he could have made by the probability he could catch up from that point:
 当此情形，为了计算攻击者追赶上的概率，我们将攻击者取得进展区块数量的泊松分布的概率密度，乘以在该数量下攻击者依然能够追赶上的概率。
 
+<img src="https://rjgeek.github.io/images/2016/12/bitcoin_10.png?t=2>" width = "50%" height = "90%" alt="图片名称" align=center />  
+
 Rearranging to avoid summing the infinite tail of the distribution...  
-化为如下形式，避免对无限数列求和：  
+化为如下形式，避免对无限数列求和：
+
+<img src="https://rjgeek.github.io/images/2016/12/bitcoin_11.png?t=2>" width = "50%" height = "90%" alt="图片名称" align=center />  
 
 Converting to C code...  
 写为如下C语言代码：
