@@ -1,5 +1,5 @@
 ---
-title:   一种点对点的电子现金系统（Bitcoin: A Peer-to-Peer Electronic Cash System）  
+title:   一种点对点的电子现金系统（Bitcoin: A Peer-to-Peer Electronic Cash System） -中本聪  
 id: 813  
 categories:
   - 系统架构
@@ -7,10 +7,6 @@ date: 2016-12-12 12:05:54
 tags:
   - Bitcoin
 ---
-
-## Author（作者信息）
-Satoshi Nakamoto（中本聪）  
-satoshin@gmx.com
 
 ## Abstract（摘要）
 A  purely   peer-to-peer   version   of   electronic   cash   would   allow   onlinepayments   to   be   sent   directly   from   one   party   to   another   without   going   through   afinancial institution.   Digital signatures provide part of the solution, but the mainbenefits are lost if a trusted third party is still required to prevent double-spending.We propose a solution to the double-spending problem using a peer-to-peer network.The  network   timestamps   transactions   by   hashing   them   into   an   ongoing   chain   of hash-based proof-of-work, forming a record that cannot be changed without redoingthe proof-of-work.   The longest chain not only serves as proof of the sequence ofevents witnessed, but proof that it came from the largest pool of CPU power.   Aslong as a majority of CPU power is controlled by nodes that are not cooperating to attack the network,  they'll  generate the  longest  chain  and  outpace attackers.  The network itself requires minimal structure.   Messages are broadcast on a best effortbasis,   and   nodes   can   leave   and   rejoin   the   network   at   will,   accepting   the   longestproof-of-work chain as proof of what happened while they were gone.
