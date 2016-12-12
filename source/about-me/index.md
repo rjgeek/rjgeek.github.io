@@ -27,7 +27,7 @@ Study of Asynchronous Non-Blocking Server Based on Nodejs
 [Design of Distributed and High Concurrency Log System Based on MongoDb](http://www.docin.com/p-982124543.html) 
 
 最近访客
-<div class="ds-recent-visitors" data-num-items="28" data-avatar-size="42" id="ds-recent-visitors" style=""></div>
+<div class="ds-recent-visitors" data-num-items="28" data-avatar-size="42" id="ds-recent-visitors" style="float:left"></div>
 
 
   
