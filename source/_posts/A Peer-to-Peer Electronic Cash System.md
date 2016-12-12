@@ -267,8 +267,6 @@ We have proposed a system for electronic transactions without relying on trust. 
 本文100%为组合翻译，详见引用,0%为原创
 https:www.bitcoin.org/bitcoin.pdf
 
-Latest Visitors:
-<div class="ds-recent-visitors" data-num-items="28" data-avatar-size="42" id="ds-recent-visitors"></div>
 
 
 
