@@ -1,11 +1,12 @@
 ---
-title: 一种点对点的电子现金系统（Bitcoin: A Peer-to-Peer Electronic Cash System）  
+title:   一种点对点的电子现金系统（Bitcoin: A Peer-to-Peer Electronic Cash System）  
 id: 813  
 categories:
   - 系统架构
 date: 2016-12-12 12:05:54  
 tags:
   - Bitcoin
+---
 
 ## Author（作者信息）
 Satoshi Nakamoto（中本聪）  
