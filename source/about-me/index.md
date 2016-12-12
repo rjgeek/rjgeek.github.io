@@ -20,14 +20,15 @@ Dual Bachelor’s Degree in Business Administration
 ## Employment History  
 State Grid Corporation of China &nbsp;&nbsp;&nbsp;&nbsp;7/2013-08/2016	
 ## Research Field
-**Distributed Database**,Pervasive computing,**Technical Debt**,**Security Certificate**，Human-Computer Interaction
+**BlockChain**,**Distributed Database**,Pervasive computing,**Technical Debt**,**Security Certificate**，Human-Computer Interaction
 ## Recently published
+Exploring technical debt of database architecture evolution  
 Single Sign-on  System and Its Methods(Patent No.: 201511017547.3)  
 Study of Asynchronous Non-Blocking Server Based on Nodejs  
 [Design of Distributed and High Concurrency Log System Based on MongoDb](http://www.docin.com/p-982124543.html) 
 
-最近访客
-<div class="ds-recent-visitors" data-num-items="28" data-avatar-size="42" id="ds-recent-visitors" style="float:left"></div>
+Latest Visitors:
+<div class="ds-recent-visitors" data-num-items="28" data-avatar-size="42" id="ds-recent-visitors"></div>
 
 
   
