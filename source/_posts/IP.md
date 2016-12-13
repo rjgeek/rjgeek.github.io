@@ -89,7 +89,8 @@ D类IP地址第一个字节以“1110”开始 。它并不指向特定的网络
 ## 引用
 https://www.zhihu.com/question/29723388/answer/66737890  
 http://www.xitong8.com/xtjc/20120217/2576.html、  
-http://blog.sina.com.cn/s/blog_6de000c20101jj8b.html
+http://blog.sina.com.cn/s/blog_6de000c20101jj8b.html  
+https://zh.wikipedia.org/wiki/IP%E5%9C%B0%E5%9D%80
 
 
 
