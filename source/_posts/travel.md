@@ -145,7 +145,7 @@ tags:
 
 <img src="https://rjgeek.github.io/images/2016/12/travel/cz_1.png?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />
 
-典型的英国中餐，试试上他们不怎么吃中餐（炸鱼薯条）
+典型的英国中餐，事实上他们并不怎么吃中餐（炸鱼薯条）
 
 <img src="https://rjgeek.github.io/images/2016/12/travel/ch_2.jpg?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />
 
