@@ -10,14 +10,19 @@ tags:
 应好友zesing和ivan的邀约，决定写一篇最近在伦敦的游记，本想用英文装一下，纠结了很久之后，决定还是用中文写，下面用文字和图片记录下在伦敦美妙的3天。（此刻的心情：写游记真是一件十分痛苦的事情，因为不知道写成什么文体，不由自主想写成论文的格式，摘要，引言，叙述。。。。）
 
 第一天下车后，对于一个资深的大学历史研究员而言，最开心的事情莫过于在地铁出口看到了大伯大的广告
+
 <img src="https://rjgeek.github.io/images/2016/12/travel/g_1.jpg?t=1>" width = "85%" height = "65%" alt="图片名称" align=center />  
 
 <!--more-->
 
 当然也有一些能代表“英伦气息”的广告，如这个，足够的基友吧  
+
 <img src="https://rjgeek.github.io/images/2016/12/travel/g_2.jpg?t=2>" width = "85%" height = "35%" alt="图片名称" align=center />  
+
 到了酒店，发现酒店远超出我们的预期（因为自带厨房，而且各种设备十分齐全，唯一遗憾的是WI-FI坏了）
+
 <img src="https://rjgeek.github.io/images/2016/12/travel/cz_0.jpg?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />  
+
 在酒店小歇之后，本决定去晚上去海德公园看看夜景，途中发现了宝藏（自然科学历史博物馆），本以为是在讲英国的历史，事实上更加偏重人类历史和宇宙进化的研究，不同于其他的博物馆的地方是更注重体验，很多照片都是可以触摸的，可以试听的，不像我天朝所有展品都写这“禁止触碰！”
 
 ## 自然科学历史博物馆
@@ -92,12 +97,15 @@ tags:
 <img src="https://rjgeek.github.io/images/2016/12/travel/b_1.jpg?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />
 
 让我想起了小学时候，墙上的各种宣传画,然后旁边在写上“德智体全面发展”
+
 <img src="https://rjgeek.github.io/images/2016/12/travel/b_2.png?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />
 
 虽然我看不懂，但是这对于一个书虫真心具有莫大的吸引力
+
 <img src="https://rjgeek.github.io/images/2016/12/travel/b_3.png?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />
 
 为什么不是全裸的？这肯定是伪艺术！
+
 <img src="https://rjgeek.github.io/images/2016/12/travel/b_4.png?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />
 
 ---
