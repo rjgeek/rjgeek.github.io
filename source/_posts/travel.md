@@ -42,7 +42,7 @@ tags:
 
 <img src="https://rjgeek.github.io/images/2016/12/travel/z_4.jpg?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />  
 
-另一部分树生物科学，注入最小的生物，各种生物的进化史等。
+另一部分树生物科学，诸如最小的生物，各种生物的进化史等。
 
 <img src="https://rjgeek.github.io/images/2016/12/travel/z_5.jpg?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />
 
