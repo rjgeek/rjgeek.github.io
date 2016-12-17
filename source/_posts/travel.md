@@ -14,7 +14,7 @@ tags:
 
 <!--more-->
 
-当然也有一些能代表英伦气息的广告，如这个  
+当然也有一些能代表“英伦气息”的广告，如这个，足够的基友吧  
 <img src="https://rjgeek.github.io/images/2016/12/travel/g_2.jpg?t=2>" width = "85%" height = "35%" alt="图片名称" align=center />  
 到了酒店，发现酒店远超出我们的预期（因为自带厨房，而且各种设备十分齐全，唯一遗憾的是WI-FI坏了）
 <img src="https://rjgeek.github.io/images/2016/12/travel/cz_0.jpg?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />  
@@ -186,6 +186,10 @@ tags:
 > 
 >** 5.人的生命有限，你的一生只能做成一件事情，所以一定要聚焦**
 
+
+最后，作者照片镇楼
+
+<img src="https://rjgeek.github.io/images/2016/12/travel/zi.png?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />
 
 ## 声明
 本文1%为组合,99%为原创
