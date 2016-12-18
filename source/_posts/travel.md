@@ -9,7 +9,7 @@ tags:
 
 应好友zesing和ivan的邀约，决定写一篇最近在伦敦的游记，本想用英文装一下，纠结了很久之后，决定还是用中文写，下面用文字和图片记录下在伦敦美妙的3天。（此刻的心情：写游记真是一件十分痛苦的事情，因为不知道写成什么文体，不由自主想写成论文的格式，摘要，引言，叙述。。。。）
 
-第一天下车后，对于一个资深的大学历史研究员而言，最开心的事情莫过于在地铁出口看到了大伯大的广告
+第一天下车后，对于一个资深的大学历史研究员而言，最开心的事情莫过于在地铁出口看到了伯大的广告
 
 <img src="https://rjgeek.github.io/images/2016/12/travel/g_1.jpg?t=1>" width = "85%" height = "65%" alt="图片名称" align=center />  
 
@@ -119,7 +119,7 @@ tags:
 
 <img src="https://rjgeek.github.io/images/2016/12/travel/bjh_2.jpg?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />
 
-战斗演戏
+战斗演习
 
 <img src="https://rjgeek.github.io/images/2016/12/travel/bjh_3.jpg?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />
 
@@ -149,7 +149,7 @@ tags:
 
 <img src="https://rjgeek.github.io/images/2016/12/travel/ch_2.jpg?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />
 
-龙虾薯条，当然这是非典型的英国饭菜
+龙虾薯条，当然这是非典型的英国饭菜，人均消费25磅左右，作为一种体验，还是强烈推荐的
 
 <img src="https://rjgeek.github.io/images/2016/12/travel/ch_3.jpg?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />
 ## 伦敦地铁文化
