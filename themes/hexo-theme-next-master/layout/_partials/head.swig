@@ -8,12 +8,7 @@
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
-{% if theme.google_site_verification %}
-  <meta name="google-site-verification" content="{{ theme.google_site_verification }}" />
-{% endif %}
-
-
-
+<meta name="google-site-verification" content="LzR3qfX_YDfkNEusKegSylZBjqRw3vczTwICGpJ1GRI" />
 <meta name="baidu-site-verification" content="AMkxEiBApp" />
 
 
