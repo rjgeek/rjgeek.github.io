@@ -14,7 +14,7 @@
 
 
 
-<meta name="baidu-site-verification" content="6VWurVhWUo" />
+<meta name="baidu-site-verification" content="AMkxEiBApp" />
 
 
 {% if theme.qihu_site_verification %}
