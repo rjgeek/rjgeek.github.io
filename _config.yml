@@ -116,7 +116,8 @@ social_icons:
   Weibo: weibo
 
 # hexo sitemapÍøÕ¾µØÍ¼
+# sitemap
 sitemap:
-path: sitemap.xml
+  path: sitemap.xml
 baidusitemap:
-path: baidusitemap.xml
+  path: baidusitemap.xml
