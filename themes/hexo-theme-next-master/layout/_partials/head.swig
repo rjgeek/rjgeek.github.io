@@ -9,7 +9,7 @@
 
 
 <meta name="google-site-verification" content="LzR3qfX_YDfkNEusKegSylZBjqRw3vczTwICGpJ1GRI" />
-<meta name="baidu-site-verification" content="AMkxEiBApp" />
+<meta name="baidu-site-verification" content="IhNq56RJS1" />
 
 
 {% if theme.qihu_site_verification %}
