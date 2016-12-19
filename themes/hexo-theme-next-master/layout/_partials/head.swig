@@ -13,9 +13,8 @@
 {% endif %}
 
 
-{% if theme.baidu_site_verification %}
-  <meta name="baidu-site-verification" content="{{ theme.baidu_site_verification }}" />
-{% endif %}
+
+<meta name="baidu-site-verification" content="6VWurVhWUo" />
 
 
 {% if theme.qihu_site_verification %}
