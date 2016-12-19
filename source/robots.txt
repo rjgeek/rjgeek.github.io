@@ -2,6 +2,9 @@
 User-agent: *
 Allow: /
 Allow: /archives/
+Allow: /categories/
+Allow: /tags/
+Allow: /about-me/
 
 Disallow: /vendors/
 Disallow: /js/
@@ -10,5 +13,5 @@ Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
 
-Sitemap: https://rjgeek.github.io/sitemap.xml
-Sitemap: https://rjgeek.github.io/baidusitemap.xml
+Sitemap: http://www.ehcoo.com/sitemap.xml
+Sitemap: http://www.ehcoo.com/baidusitemap.xml
