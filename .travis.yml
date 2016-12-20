@@ -7,6 +7,9 @@ install:
 script:
   - hexo clean
   - hexo g
+  - cd ./public/en
+  - hexo clean
+  - hexo g
 
 after_script:
   - cd ./public
