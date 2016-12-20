@@ -33,7 +33,7 @@ Increasing the (reserve requirement) ratios reduces the volume of deposits that 
 Decreasing the ratios leaves depositories initially with excess reserves, which can induce an expansion of bank credit and deposit levels and a decline in interest rates.
 The volume of net transaction deposits held by all depository institutions is large, 566.5 billion, as of June 2001 (see table and H.6 Release). Thus, even a small change in the reserve requirement ratio may have a relatively large effect on reserve requirements and the money stock.
 
-为了解释的更清楚一点，开始彪汉语了。
+为了解释的更清楚一点，开始彪汉语了，以下内容摘自知乎彭牧的回答，详见引用。
 
 > 1，法定准备金率存在的意义，是为了防范风险。对于银行而言，贷款放出去的越多，他们赚的利息就越多，所以银行为了多赚钱，会尽量多的放出贷款，这个很好理解。而由于银行的特殊性质，当经济危机出现，银行破产时，整个社会都要为银行带来的损失买单，所以监管机构需要严格监控银行的贷款行为，存款准备金是最基本的保障，它可以保证银行在绝大多数情况下不会提不出钱，不过经济危机时，储户恐慌性提款，还是能把银行提空。
 
