@@ -124,9 +124,3 @@ sitemap:
   path: sitemap.xml
 baidusitemap:
   path: baidusitemap.xml
-
-# add post views
-leancloud_visitors:
-  enable: true
-  app_id: iPMcEWz7kLPS3OT2tG7MrJXp-gzGzoHsz
-  app_key: yAM5B2QCPnq3cgCBe6i7AizO
