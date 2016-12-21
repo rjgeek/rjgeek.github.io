@@ -32,11 +32,11 @@ keywords: 哈希函数,Hash Function,密码学
 SHA (Secure Hash Algorithm，译作安全散列算法) 是美国国家安全局 (NSA) 设计，美国国家标准与技术研究院 (NIST) 发布的一系列密码散列函数。正式名称为 SHA 的家族第一个成员发布于 1993年。然而现在的人们给它取了一个非正式的名称 SHA-0 以避免与它的后继者混淆。两年之后， SHA-1，第一个 SHA 的后继者发布了。 另外还有四种变体，曾经发布以提升输出的范围和变更一些细微设计: SHA-224, SHA-256, SHA-384 和 SHA-512。
 
 SHA-2的第t个加密循环。图中的深蓝色方块是事先定义好的非线性函数。ABCDEFGH一开始分别是八个初始值，Kt是第t个密钥，Wt是本区块产生第t个word。原消息被切成固定长度的区块，对每一个区块，产生n个word（n视算法而定），通过重复运作循环n次对ABCDEFGH这八个工作区块循环加密。最后一次循环所产生的八段字符串合起来即是此区块对应到的散列字符串。若原消息包含数个区块，则最后还要将这些区块产生的散列字符串加以混合才能产生最后的散列字符串。
-<img src="https://rjgeek.github.io/images/2016/12/hash_2.png?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />  
+<img src="https://rjgeek.github.io/images/2016/12/hash_3.png?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />  
 网络教程上有各种语言的关于SHA-256的实现库，这里就不重复了
 
 ## 各种哈希函数的对比
-<img src="https://rjgeek.github.io/images/2016/12/hash_3.png?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />  
+<img src="https://rjgeek.github.io/images/2016/12/hash_2.png?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />  
 ## 总结
 本文是为区块链研究做背景的内容，主要浅谈了密码学上的哈希函数，以及此哈希函数与编程上的哈希函数的区别，最后探讨了SHA-256
 ## 声明
