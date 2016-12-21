@@ -314,8 +314,8 @@ facebook_comments_plugin:
 # You can visit https://leancloud.cn get AppID and AppKey.
 leancloud_visitors:
   enable: true
-  app_id: iPMcEWz7kLPS3OT2tG7MrJXp-gzGzoHsz
-  app_key: yAM5B2QCPnq3cgCBe6i7AizO
+  app_id: fyasl2GEE9Vy9EVtAGqeD70V-gzGzoHsz
+  app_key: yIShSer78tiIqiOFhDDirbhH
   
 # Show PV/UV of the website/page with busuanzi.
 # Get more information on http://ibruce.info/2015/04/04/busuanzi/
