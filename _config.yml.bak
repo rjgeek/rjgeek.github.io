@@ -1,0 +1,132 @@
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: Ehcoo
+subtitle: Ehcoo
+description: science,education,culture,politics,ecnomics,relationships,entertaiment,human
+author: RuJia
+language: default
+timezone:
+#language: zh-Hans
+keywords: BlockChain,Distributed Database,Pervasive computing,Technical Debt,Security Certificate,Cryptographic protocols,Human-Computer Interaction
+
+
+# URL
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+url: http://www.ehcoo.com
+root: /
+#permalink: :year/:month/:day/:title/
+permalink: :title.html
+permalink_defaults:
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+menu:
+  home: /
+  archives: /archives
+  tags: /tags
+  about: /about
+  categories: /categories
+  #commonweal: /404.html
+  
+menu_icons:
+  enable: true
+  # Icon Mapping.
+  home: home
+  about: user
+  categories: th
+  tags: tags
+  archives: archive
+  commonweal: heartbeat
+
+# Writing
+new_post_name: :title.md # File name of new posts
+default_layout: post
+titlecase: false # Transform title into titlecase
+external_link: true # Open external links in new tab
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+highlight:
+  enable: true
+  line_number: true
+  auto_detect: false
+  tab_replace:
+
+# Category & Tag
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Date / Time format
+## Hexo uses Moment.js to parse and display date
+## You can customize the date format as defined in
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+
+# Pagination
+## Set per_page to 0 to disable pagination
+per_page: 6
+pagination_dir: page
+
+# Extensions
+## Plugins: https://hexo.io/plugins/
+## Themes: https://hexo.io/themes/
+theme: hexo-theme-next-master
+
+# Deployment
+## Docs: https://hexo.io/docs/deployment.html
+deploy:
+  type: git
+  repo: http://github.com/rjgeek/rjgeek.github.io.git
+  branch: master  
+
+# ---------------------------------------------------------------
+# Scheme Settings
+# ---------------------------------------------------------------
+
+# Schemes  #next的三个scheme
+#scheme: Muse
+scheme: Mist
+#scheme: Pisces
+
+
+# Social links   #社交链接
+social:
+  GitHub: https://github.com/rjgeek/
+  Weibo:
+  Others:
+
+# Social Icons  #社交的图标
+social_icons:
+  enable: true
+  # Icon Mappings
+  GitHub: github
+  Twitter: twitter
+  Weibo: weibo
+
+# hexo sitemap网站地图
+# sitemap
+sitemap:
+  path: sitemap.xml
+baidusitemap:
+  path: baidusitemap.xml
+
+# add post views
+leancloud_visitors:
+  enable: true
+  app_id: iPMcEWz7kLPS3OT2tG7MrJXp-gzGzoHsz
+  app_key: yAM5B2QCPnq3cgCBe6i7AizO
