@@ -4,13 +4,13 @@
 
 # Site
 title: Ehcoo
-subtitle: Ehcoo
-description: BlockChain,Distributed Computing,Security Certificate
+#subtitle: Ehcoo
+description: BlockChain,Distributed Computing
 author: RuJia
 language: default
 timezone:
 #language: zh-Hans
-keywords: BlockChain,Distributed Computing,Security Certificate
+keywords: BlockChain,Distributed Computing
 
 
 # URL
