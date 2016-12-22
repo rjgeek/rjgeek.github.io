@@ -1,5 +1,5 @@
 ---
-title: 【区块链】区块链中的 Merkle tree 的java实现.
+title: 【区块链】区块链中的 Merkle Tree 的java实现.
 tags:
   - 区块链
 id: 375
@@ -10,13 +10,13 @@ keywords: Blockchain,Merkle tree，区块链
 ---
 
 ## 引言
-这篇文章介绍了Merkle tree，Merkle tree被广泛的应用在比特币技术中，本文旨在通过代码实现一个简单的Merkle tree，并计算出Merkle tree的 TreeRoot
+这篇文章介绍了MerkleTree，MerkleTree被广泛的应用在比特币技术中，本文旨在通过代码实现一个简单的MerkleTree，并计算出Merkle tree的 TreeRoot
 <img src="https://rjgeek.github.io/images/2016/12/MerkleTree_0.png?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />  
 <!--more-->
 
-## Merkle tree简介
+## Merkle Tree简介
 
-Merkle tree 是一种数据结构，用于验证在计算机之间和之间存储，处理和传输的任何类型的数据。  
+Merkle Tree 是一种数据结构，用于验证在计算机之间和之间存储，处理和传输的任何类型的数据。  
 
 目前，Merkle树的主要用途是确保从对等网络中接收的数据块未受损和未改变，和检查其他对等网络没有撒谎发送假数据块。
 
