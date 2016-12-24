@@ -2,7 +2,7 @@
 title: 一种点对点的电子现金系统（A Peer-to-Peer Electronic Cash System）-中本聪  
 id: 813  
 categories:
-  - 区域链
+  - 区块链
 date: 2016-12-12 17:15:54
 tags:
 ---
