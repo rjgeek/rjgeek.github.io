@@ -1,5 +1,5 @@
 ---
-title: 【编程语言】Runtime.getRuntime().addShutdownHook（Thread hook）
+title: 【编程语言】Runtime.getRuntime().addShutdownHook（Thread hook）学习
 tags:
   - 编程语言
 id: 375
@@ -11,7 +11,7 @@ keywords: java,addShutdownHook，编程语言
 
 ## 引言
 最近在研究比特流的源码，看到Runtime.getRuntime().addShutdownHook（Thread hook）时，发现全然不知所云，速查之，特总结如下。
-<img src="https://rjgeek.github.io/images/2016/12/MerkleTree_0.png?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />  
+<img src="https://rjgeek.github.io/images/2016/12/runtime_1.jpg?t=1>" width = "85%" height = "65%" alt="图片名称" align=center />  
 <!--more-->
 
 
@@ -101,8 +101,3 @@ Running Shutdown Hook
 本文70%为翻译组合,30%为原创
 ## 引用
 http://stackoverflow.com/questions/8722826/when-do-i-need-to-call-this-method-runtime-getruntime-addshutdownhook
-
-
-
-
-
