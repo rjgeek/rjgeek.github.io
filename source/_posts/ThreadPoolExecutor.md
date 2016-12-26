@@ -11,7 +11,7 @@ date: 2016-12-26 16:38:11
 keywords: Java，ThreadPoolExecutor
 ---
 
-## Reference
+## Introduction
 最近在读源码，俨然已经陷入了java的漩涡，我本意真心是在学习比特流的协议，奈何java基础实在太差劲，也只能摸着石头过河了，好了今天我们来聊聊线程池。
 
 java的线程池是用来管理线程的，他包含了一个等待执行的队列，我们可以用ThreadPoolExecutor去创建线程池
@@ -19,6 +19,10 @@ java的线程池是用来管理线程的，他包含了一个等待执行的队�
 <img src="https://rjgeek.github.io/images/2016/12/ThreadPoolExecutor_1.jpg?t=1>" width = "85%" height = "65%" alt="图片名称" align=center />  
 <!--more-->
 
+**********************************
+
+<img src="https://rjgeek.github.io/images/2016/12/ThreadPoolExecutor_2.png?t=2>" width = "25%" height = "25%" alt="图片名称" align=center />  神马！你也没有告诉我你要用英语讲~~~
+**********************************
 ## Java thread pool
 **Java thread pool** manages the collection of Runnable threads and worker threads execute Runnable from the queue. **java.util.concurrent.Executors** provide implementation of java.util.concurrent.Executor interface to create the thread pool in java. 
 ## ExecutorService Example
