@@ -15,7 +15,7 @@ keywords: 文学艺术，船
 <img src="https://rjgeek.github.io/images/2016/12/boat.jpg?t=1>" width = "85%" height = "65%" alt="图片名称" align=center />  
 <!--more-->
 ## 正文
-<center>
+
 我有过多次这样的奇遇，  
 从天堂到地狱只在瞬息之间；  
 每一朵可爱、温柔的浪花，  
@@ -138,7 +138,7 @@ The late comer can recognize me on the remains,
 And the future poet will sigh a deep sigh:  
 “There is a happy soul here,  
 Which has ever been a ship on the sailing;    
-</center>
+
 ## 总结
 船体现了一个伟大诗人的胸怀！
 ## 声明
