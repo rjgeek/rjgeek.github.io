@@ -220,6 +220,6 @@ pool-1-thread-4 End.
 Notice the change in active, completed and total completed task count of the executor. We can invoke shutdown() method to finish execution of all the submitted tasks and terminate the thread pool.
 
 ## Declaration
-This article 5% is original, you can see it from the reference
+The author has to say this article is not original,  the reference is bellow.
 ## Reference
 http://www.journaldev.com/1069/threadpoolexecutor-java-thread-pool-example-executorservice
