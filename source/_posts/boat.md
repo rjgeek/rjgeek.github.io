@@ -14,7 +14,7 @@ keywords: 文学艺术，船
 最近听了[王德顺的演讲](https://www.youtube.com/watch?v=kBGJ5sDOOxE)，感觉最后的主体诗歌非常棒，这首诗是33年前伟大诗人白桦所做，名字叫《船》，他把自己的一生比作船，历经坎坷，我们从这首诗中去感受我们应该如何对待自己的人生，如何对待自己的命运。
 <img src="https://rjgeek.github.io/images/2016/12/boat.jpg?t=1>" width = "85%" height = "65%" alt="图片名称" align=center />  
 <!--more-->
-
+## 正文
 我有过多次这样的奇遇，  
 从天堂到地狱只在瞬息之间；  
 每一朵可爱、温柔的浪花，  
