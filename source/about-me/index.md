@@ -20,7 +20,7 @@ Dual Bachelor’s Degree in Business Administration
 ## Employment History  
 State Grid Corporation of China &nbsp;&nbsp;&nbsp;&nbsp;7/2013-08/2016	
 ## Research Field
-**BlockChain**,**Distributed Database**,Pervasive computing,**Technical Debt**,**Security Certificate**，Human-Computer Interaction
+**BlockChain**，  **Distributed Database**，  **Security Certificate**，  Trusted Computing，  Pervasive computing，  Technical Debt, 
 ## Recently published
 Exploring technical debt of database architecture evolution  
 Single Sign-on  System and Its Methods(Patent No.: 201511017547.3)  
