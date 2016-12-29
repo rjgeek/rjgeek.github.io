@@ -1,13 +1,13 @@
 ---
-title: 【算法整理】puzzle8_1.png
+title: 【算法整理】A $*$ search 算法实现八数码问题  
 tags:
-  - 曼哈顿距离
+  - 八数码问题
   - 算法整理
 id: 375
 categories:
   - 算法整理
 date: 2016-12-28 2153:09
-keywords: 算法整理，曼哈顿距离
+keywords: 算法整理，八数码问题
 ---
 
 ## 引言
