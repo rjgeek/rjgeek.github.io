@@ -1,5 +1,5 @@
 ---
-title: 【区块链】【密码学】区块链探讨系列 - 一万字带您走进密码学的世界  
+title: 【密码学】一万字带您走进密码学的世界（上）  
 id: 718
 tags:
   - blockchain
@@ -123,16 +123,19 @@ MD5 Hash算法的"数字指纹"特性，使它成为目前应用最广泛的一�
 #### 数字签名
 由于非对称算法的运算速度较慢，所以在数字签名协议中，单向散列函数扮演了一个重要的角色。对 Hash 值，又称"数字摘要"进行数字签名，在统计上可以认为与对文件本身进行数字签名是等效的。而且这样的协议还有其他的优点。
 ### 常见的哈希函数算法
+#### MD4
+MD4(RFC 1320）是 MIT 的Ronald L. Rivest在 1990 年设计的，MD 是 Message Digest 的缩写。它适用在32位字长的处理器上用高速软件实现--它是基于 32位操作数的位操作来实现的。
+#### MD5
+MD5(RFC 1321）是 Rivest 于1991年对MD4的改进版本。它对输入仍以512位分组，其输出是4个32位字的级联，与 MD4 相同。MD5比MD4来得复杂，并且速度较之要慢一点，但更安全，在抗分析和抗差分方面表现更好
+#### SHA1
+SHA1是由NIST NSA设计为同DSA一起使用的，它对长度小于2^64位的输入，产生长度为160bit的散列值，因此抗穷举（brute-force）性更好。SHA-1 设计时基于和MD4相同原理，并且模仿了该算法。
 
-
-## 非对称密码
-### Public Key Cryptography
-### Diffie-Hellman 秘钥交换
-### RSA
-## 数字证书
-
+## 总结
+<font color=#00ffff>
+本文主要阐述了密码学中的对称密码和哈希密码，在[《一万字带您走进密码学的世界（下）》](cryptology1.html)的文章中我们将继续介绍 非对称密码，秘钥交换，数字证书等概念。
+</font>
 ## 声明
-本文90%为翻译组合,**10%为原创**
+本文40%为翻译组合,**60%为原创**
 ## 引用
 http://baike.baidu.com/linkurl=8O2XInaeTewn0xMPgNceWPDDCbwEeI8DjJMwpp_T8Gcu6sGCpeJDSpolFXLsYXPfa5OcaIqq7t_r11cprg2j8q  
 https://zh.wikipedia.org/wiki/%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F#.E7.94.B5.E5.AD.90.E5.AF.86.E7.A0.81.E6.9C.AC.EF.BC.88ECB.EF.BC.89  
