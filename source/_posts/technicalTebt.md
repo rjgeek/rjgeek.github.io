@@ -26,8 +26,7 @@ keywords: 系统架构，Technical debt，技术债务
 <img src="../images/2017/01/technicalTebt_2.jpg?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />
 
 ## 什么是技术债务
-当你做一件事情的时候，你有两种选择去实现它，一种是草草了事，但是后期问题特别多，非常难维护，另一个总经过精心的策划与安排，
-技术债务是一个非常好的比喻去解释这种现象。
+当你做一件事情的时候，你有两种选择去实现它，一种是草草了事，但是后期问题特别多，非常难维护，另一个总经过精心的策划与安排，技术债务是一个非常好的比喻去解释这种现象。
 
 <img src="../images/2017/01/technicalTebt_3.jpg?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />
 
