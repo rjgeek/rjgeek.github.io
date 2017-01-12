@@ -11,7 +11,7 @@ RuJia Li or JiaXuan Li , you can call me Garay , come from Anhui,China
 SCHOOL OF COMPUTER SCIENCE, [UNIVERSITY OF BIRMINGHAM](http://baike.baidu.com/link?url=yzoLkfI5jiVY_CGbQTeUO19Cu3ZeSIPLjlmK4H6tIk9zN7rOpRp_etjYgfmRCwT0iau3vH_eatW5cF8DbEBioDTrv_xkshlFArZfjNRgmTBeFD3H2_FPciOrZqkuyGam-SFX7WtcN6dxaJaIHZ3To_)&nbsp;&nbsp;&nbsp;&nbsp;
 In process		
 Master of Advanced Computer Science  
-SCHOOL OF ###SCIENCE, [WUHAN UNIVERSITY](http://baike.baidu.com/item/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6)&nbsp;&nbsp;&nbsp;&nbsp;
+SCHOOL OF CS, [WUHAN UNIVERSITY](http://baike.baidu.com/item/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6)&nbsp;&nbsp;&nbsp;&nbsp;
 09/2009-07/2013	
 Bachelor’s Degree in Computer Science and Technology  
 SCHOOL OF ECONOMICS & MANAGEMENT, [WUHAN UNIVERSITY](http://baike.baidu.com/item/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6)&nbsp;&nbsp;&nbsp;&nbsp;
