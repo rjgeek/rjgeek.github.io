@@ -157,12 +157,12 @@ Schnorr签名是基于ElGamal算法的，它的安全性取决于离散对数的
 **签名过程：**    
 1.在范围${1,.....q-1}$的选择一个随机数r      
 2.计算出来$s=(g^r mod \quad p ) mod \quad q $      
-3.计算出$t=((SHA-1(M)+x*s)r^{-1}) mod \quad q$      
+3.计算出$t=((SHA-1(M)+xs)r^{-1}) mod \quad q$      
 4.将签名结果$(s,t)$附属在消息上。      
 **验签过程：**  
-1.计算出$u_1 = (SHA-1(M)*t^{-1}) mod \quad q $      
+1.计算出$u_1 = (SHA-1(M)t^{-1}) mod \quad q $      
 2.计算出$u_2 =(s*t^{-1}) mod \quad q$      
-3.计算签名$s^1 = ((g^{u_1}*y^{u_2})mod \quad p) mod \quad q$      
+3.计算签名$s^1 = ((g^{u_1}y^{u_2})mod \quad p) mod \quad q$      
 4.比较$s^1$是否与s相同   
 
 ### RSA签名
