@@ -26,7 +26,7 @@ Big O notation是一种描述述函数渐进行为的理论，又被称作Landau
 <font color = "red">那么为什么要用O来表示呢？</font>    
 大O符号是由德国数论学家保罗·巴赫曼（Paul Bachmann）在其1892年的著作《解析数论》（Analytische Zahlentheorie）首先引入的。而这个记号则是在另一位德国数论学家艾德蒙·朗道（Edmund Landau）的著作中才推广的，因此它有时又称为朗道符号（Landau symbol）。代表“order of ...”（……阶）的大O，最初是一个大写的希腊字母'Θ'（Omicron），现今用的是英文大写字母'O'，但从来不是阿拉伯数字'0'。
 
-## 学术定义
+### 学术定义
 （定义这个东西我觉得还是原汁原味的好，犹豫了很久还是决定保留原版）
 > If we write f(n) = O(g(n)), then there exists a function f(n) such that ∀ n ≥ n0, f(n) ≤ cg (n) with any constant c and a positive integer n0. Or f(n) = O(g(n)) means we can say g(n) is an asymptotic upper bound for f(n).
 
