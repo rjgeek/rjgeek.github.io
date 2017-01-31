@@ -60,7 +60,7 @@ docker logs demo-app
 Open http://127.0.0.1:8080 in browser and you should see the message
 <img src="https://rjgeek.github.io/images/2017/01/spring-boot-docker-5.png?t=1>" width = "85%" height = "65%" alt="图片名称" align=center />  
 Open http://127.0.0.1:8080/hotels/1 in browser and you should see the message
-<img src="https://rjgeek.github.io/images/2017/01/spring-boot-docker-5.png?t=1>" width = "85%" height = "65%" alt="图片名称" align=center />  
+<img src="https://rjgeek.github.io/images/2017/01/spring-boot-docker-6.png?t=1>" width = "85%" height = "65%" alt="图片名称" align=center />  
 
 ***
 This is the end!
