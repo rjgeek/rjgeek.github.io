@@ -15,7 +15,7 @@ In the learning of this project, I have met with many difficulties. To help othe
 <img src="https://rjgeek.github.io/images/2017/01/spring-boot-docker.png?t=1>" width = "85%" height = "65%" alt="图片名称" align=center />  
 <!--more-->
 
-## Step
+## These steps are as follows
 ### 1.Clone the project:
 ```
 git clone https://github.com/rjgeek/spring-boot-mysql-docker.git
