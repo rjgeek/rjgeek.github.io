@@ -10,7 +10,7 @@ keywords: Spring,Docker，MySQL
 ---
 
 ## Introduction
-Since this is the first time for me to use spring-boot project running in the docker with MySQL database, I use a lot of Yuan Ji's work for reference. you can also read his [web page](https://www.jiwhiz.com/blogs/Spring_Boot_Docker_MySQL_Demo) directly.  
+Since this is the first time for me to use spring-boot project running in the docker with MySQL database, I use a lot of Yuan Ji's work for reference， you can also read his [web page](https://www.jiwhiz.com/blogs/Spring_Boot_Docker_MySQL_Demo) directly.  
 In the learning of this project, I have met with many difficulties. To help others have a better understanding of spring-mysql running on the docker. I decide to write it down and you can find the demo project at [GitHub](https://github.com/rjgeek/spring-boot-mysql-docker).
 <img src="https://rjgeek.github.io/images/2017/01/spring-boot-docker.png?t=1>" width = "85%" height = "65%" alt="图片名称" align=center />  
 <!--more-->
