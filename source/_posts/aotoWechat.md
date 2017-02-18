@@ -14,6 +14,8 @@ keywords: wechart,python，编程语言
 本文使用了28行代码实现了一个会自动聊天的机器人.其中主要的类库是基于ichart,API接口基于api.qingyunke
 ![](../images/2017/02/aotoWechat_0.jpg?)
 
+<!--more-->
+
 ## 环境配置
 ### 安装python与pip环境
 因为读者的系统环境不同，在这里关于如何安装python环境与配置python pip环境请读者自行google，如果你当前的系统是windows,可以参考这里，[点我](http://wenku.baidu.com/link?url=5Zk0fAcm44gPMCHpYr2df0Mhhec5atd91ToDqveGc2VOPOlxsh0VqESpAGDbzaiyHsf7kImecYnGhXQM_yB3Ak1ENPb1L_O6DQA_EmXSn17) 
