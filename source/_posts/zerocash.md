@@ -1,5 +1,5 @@
 ---
-title: 【Paper review】Zerocash: Decentralized Anonymous Payments from Bitcoin
+title: 【Paper review】Zerocash —— Decentralized Anonymous Payments from Bitcoin
 
 tags:
   - Bitcoin
