@@ -16,10 +16,11 @@ keywords: technical debt,database architecture evolution
     <param name="_ExtentY" value="10866">  
     <param name="_StockProps" value="0">  
     <param name="SRC" value="pdf/test.pdf">  
-    <object data="Exploring technical debt of database architecture evolution.pdf" type="application/pdf" width="1000" height="1200">   
+    <object data="../images/2017/03/technicalDebt.pdf" type="application/pdf" width="1000" height="1200">   
     </object>  
 </object>
 
+<iframe frameborder=0 width=100% height=100% marginheight=0 marginwidth=0 scrolling=no src=../images/2017/03/technicalDebt.pdf></iframe>
 
 
 
