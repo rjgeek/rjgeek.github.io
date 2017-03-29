@@ -10,6 +10,13 @@ date: 2017-03-18 12:37:09
 keywords: technical debt,database architecture evolution
 ---
 
+## Introduction
+
+>This is one of my reports in last term. It mainly focus on the technical debt in database evolution.
+In this paper, I draw on a case study to analyse the link between technical debts in distributed database architectures and representative architecture evolution decisions. I use alibaba’s for this purpose.
+
+## Content
+
 <object classid="clsid:CA8A9780-280D-11CF-A24D-444553540000" width="1000" height="1200" border="0">  
     <param name="_Version" value="65539">  
     <param name="_ExtentX" value="20108">  
@@ -20,9 +27,8 @@ keywords: technical debt,database architecture evolution
     </object>  
 </object>
 
-<iframe frameborder=0 width=100% height=100% marginheight=0 marginwidth=0 scrolling=no src=../images/2017/03/technicalDebt.pdf></iframe>
-
-
+## Download
+you can download from [here](../images/2017/03/technicalDebt.pdf)
 
 
 
