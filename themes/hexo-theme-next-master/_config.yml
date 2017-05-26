@@ -252,7 +252,7 @@ baidu_analytics: 83e3b6b55c0e48f5d0848d6a14b76c02
 #duoshuo_shortname: rjgeek
 
 # Disqus
-disqus_shortname:EHCOO
+disqus_shortname: EHCOO
 
 # Baidu Share
 # Available value:
@@ -284,10 +284,10 @@ jiathis: true
 # Make duoshuo show UA
 # user_id must NOT be null when admin_enable is true!
 # you can visit http://dev.duoshuo.com get duoshuo user id.
-duoshuo_info:
-  ua_enable: true
-  admin_enable: false
-  user_id: 0
+#duoshuo_info:
+#  ua_enable: true
+#  admin_enable: false
+#  user_id: 0
   #admin_nickname: Author
 
 
