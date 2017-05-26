@@ -249,10 +249,10 @@ mathjax:
 baidu_analytics: 83e3b6b55c0e48f5d0848d6a14b76c02
 
 # Duoshuo ShortName
-duoshuo_shortname: rjgeek
+#duoshuo_shortname: rjgeek
 
 # Disqus
-#disqus_shortname:
+disqus_shortname:EHCOO
 
 # Baidu Share
 # Available value:
