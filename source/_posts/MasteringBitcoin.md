@@ -1,5 +1,5 @@
 ---
-title: 【Mastering Bitcoin】-第1章 介绍
+title: 【精通比特币，解码电子货币】第1章 介绍（译）
 
 tags:
   - 区块链
