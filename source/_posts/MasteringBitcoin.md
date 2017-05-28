@@ -11,7 +11,8 @@ keywords: Bitcoin, blochain
 ---
 ## 引言
 目前市面上讲授区块链技术大多比较肤浅，很难一下子触及核心技术，前两天有朋友在群里问，索性我决定把 Andreas M. Antonopoulos的经典之作翻译一下，英文名：《Mastering Bitcoin-Unlocking Digital Cryptocurrencies》，中文名《精通比特币》，此部分主要涉及第一章简介。
-![](http://www.ehcoo.com/images/2017/07/MasteringBitcoin_0.jpg)
+
+![](http://www.ehcoo.com/images/2017/05/MasteringBitcoin_0.jpg)
 <!--more-->
 
 ## 什么是比特币？
@@ -130,11 +131,11 @@ Alice通过官网bitcoin.org上提供的链接，在她的电脑里下载安装�
 
 Alice下载并安装了Multibit客户端后，打开程序就会出现一个欢迎界面，如图1-1所示：
 
-![](http://www.ehcoo.com/images/2017/07/MasteringBitcoin_1.jpg)
+![](http://www.ehcoo.com/images/2017/05/MasteringBitcoin_1.jpg)
 
 Multibit客户端会自动为Alice生成一个钱包和一个全新的比特币地址，点击图1-2所示的请求标签即可看到。
 
-![](http://www.ehcoo.com/images/2017/07/MasteringBitcoin_2.jpg)
+![](http://www.ehcoo.com/images/2017/05/MasteringBitcoin_2.jpg)
 
 界面中最重要的是Alice的比特币地址。类似于电子邮件的地址，Alice可以分享这个地址，这样任何人都可以通过这个地址直接将比特币发送到的新钱包里。界面上看起来一长串的字母和数字就是地址：1Cdid9KFAaatwczBwBttQcwXYCpvK8h7FK
 
@@ -190,7 +191,7 @@ ZeroBlock是一个免费的安卓和iOS应用程序，可以显示不同交易�
 Bitcoin Wisdom 
 另一个市场数据索引服务站。
 
-![](http://www.ehcoo.com/images/2017/07/MasteringBitcoin_3.jpg)
+![](http://www.ehcoo.com/images/2017/05/MasteringBitcoin_3.jpg)
 
 Joe使用上述的程序或网站中的其中一个，查到比特币的价格约为每个比特币价值100美元左右。按照这个汇率，Alice给了他10美元，作为交换，他应当给Alice 0.1个比特币，即10,000,000聪。
 
@@ -205,7 +206,7 @@ Joe查到一个市场价后，打开自己的手机钱包应用，选择“发�
 
 接着Joe输入了交易的比特币金额，0.1比特币。他仔细检查，确保已经输入了正确的金额，因为他马上要发送这些钱了，任何一点点的小失误都会导致发送到错误的地址。最后，他按下了发送键来完成这笔交易。Joe的手机钱包会创建一笔交易，将Joe的钱包里的0.10比特币发送到Alice提供的地址，利用Joe的私钥来签名这笔交易。这就公告了比特币全网，Joe已经授权允许从他的一个地址转账比特币到Alice的新地址。由于交易是通过P2P网络协议传输，它会迅速在整个比特币网络传播。不到一秒钟，网络中大多数连接良好的节点都会收到该交易信息，并首次公布Alice的地址。
 
-![](http://www.ehcoo.com/images/2017/07/MasteringBitcoin_4.jpg)
+![](http://www.ehcoo.com/images/2017/05/MasteringBitcoin_4.jpg)
 
 如果Alice手边有智能手机或笔记本电脑，她也能看到这笔交易。比特币账簿—一个不断膨胀的文件记录，记载了每一笔曾发生过的比特币交易—是公开的，意味着她可以查看所有曾经使用该地址的记录，可以查看是否有人朝这个账户发送了比特币。她只要在blockchain.info网站的搜索框中，输入她自己的地址，就可以轻而易举的知晓了。网页会显示出该地址所有的交易记录。Joe点击发送后，0.10比特币会很快转到她的钱包里，如果Alice正看这个页面，她就会发现网页更新了这笔新交易信息。
 
@@ -220,6 +221,7 @@ Joe查到一个市场价后，打开自己的手机钱包应用，选择“发�
 
 ## 声明
 本文95%为翻译组合,**5%为原创**，请各位支持原创，尽量看英文版。
+5LmL5YmN5YaZ55qE5paH56ug77yM5aW95aSa5L2c6ICF6YO955u05o6l5ou/6L+H5Y675Y+Y5oiQ5LuW5Lus55qE5Y6f5Yib5LqG77yM5Y+v5oG255qE55m+5bqm54u854uI5Li65aW477yM5L2/5Yqy6ZmN5L2O5oiR55qE5Z+f5ZCN55qE5p2D6YeN77yM5aSn5a626YO96L+Z5LmI6L6b6Ium77yM5oqE5bCx5oqE5ZGX77yM5aW95q255YaZ5Liq5rOo6YeK77yMd3d3LmVoY29vLmNvbSwg5L2c6ICFZWhjb28=（BASE64编码）
 ## 引用
 http://chimera.labs.oreilly.com/books/1234000001802/ch01.html
 
