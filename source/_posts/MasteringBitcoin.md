@@ -2,7 +2,7 @@
 title: 【Mastering Bitcoin】-第1章 介绍
 
 tags:
-  - Bitcoin, blochain, 区块链
+  - 区块链
 id: 375
 categories:
   - 区块链
@@ -12,7 +12,7 @@ keywords: Bitcoin, blochain, 区块链
 ## 引言
 目前市面上讲授区块链技术大多比较肤浅，很难一下子触及核心技术，前两天有朋友在群里问，索性我决定把 Andreas M. Antonopoulos的经典之作翻译一下，英文名：《Mastering Bitcoin-Unlocking Digital Cryptocurrencies》，中文名《精通比特币》，此部分主要涉及第一章简介。
 
-![](http://www.ehcoo.com/images/2017/05/MasteringBitcoin_0.jpg)
+<img src="http://www.ehcoo.com/images/2017/05/MasteringBitcoin_0.jpg" width = "90%" height = "90%" alt="图片名称" align=center />  
 <!--more-->
 
 ## 什么是比特币？
@@ -216,6 +216,7 @@ Joe查到一个市场价后，打开自己的手机钱包应用，选择“发�
 现在Alice可以自由支配她所有的0.10个比特币了，感觉很是自豪。
 
 在下一章中，我们将看看她第一次使用比特币支付，并会更细致地了解交易和广播的相关技术。
+
 
 ## 总结
 
