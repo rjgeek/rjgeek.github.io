@@ -2,12 +2,12 @@
 title: 【Mastering Bitcoin】-第1章 介绍
 
 tags:
-  - Bitcoin, blochain
+  - Bitcoin, blochain, 区块链
 id: 375
 categories:
-  - Bitcoin，blockchain
+  - 区块链
 date: 2017-05-28 15:37:09
-keywords: Bitcoin, blochain
+keywords: Bitcoin, blochain, 区块链
 ---
 ## 引言
 目前市面上讲授区块链技术大多比较肤浅，很难一下子触及核心技术，前两天有朋友在群里问，索性我决定把 Andreas M. Antonopoulos的经典之作翻译一下，英文名：《Mastering Bitcoin-Unlocking Digital Cryptocurrencies》，中文名《精通比特币》，此部分主要涉及第一章简介。
