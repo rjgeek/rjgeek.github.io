@@ -13,7 +13,7 @@ keywords: 算法整理，八数码问题
 ## 引言
 最近帮一个朋友看八数码的问题，后来查了一下发现实际这是人工智能领域中的启发式搜索部分，网上给的答案看的都是一头雾水的，本文着重从降维映射的角度去实现一个简单的启发式搜索搜索算法。
 
-<img src="../images/2016/12/puzzle8_1.png?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />  
+<img src="http://www.ehcoo.com/images/2016/12/puzzle8_1.png?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />  
 
 <!--more-->
 

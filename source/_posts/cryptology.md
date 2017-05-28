@@ -14,7 +14,7 @@ keywords: 密码学，对称秘钥，哈希密码
 
 为了使读者对密码学有一个整体的认识，本文简述了常见的密码学的概念，其中本文包括对称密码，哈希函数。 
 [《一万字带您走进密码学的世界（下）》](cryptology1.html)包括非对称密码，数字签名，数字认证等，需要指出的是文中并没有深入探讨加密算法原理，关于此部分内容，后续的文章会详细阐述。本文的主要内容如下图所示：
-<img src="http://www.ehcoo.com/images/2017/01/cryptology_16.png?t=2>" width = "85%" height = "65%" alt="图片名称" align=center /> 
+<img src="http://www.ehcoo.com/images/2017/01/cryptology_16.png?t=1>" width = "85%" height = "65%" alt="图片名称" align=center /> 
 <!--more-->
 ## 对称密码
 在对称密码体系中，相同的密码用来加密和解密报文，因此无论对发送者还是接收者他们都知道秘钥，解密和解密的过程：  
