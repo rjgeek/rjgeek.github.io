@@ -15,7 +15,7 @@ keywords: 密码学，非对称秘钥，签名算法
 在[《一万字带您走进密码学的世界（上）》](cryptology.html)的文章中我们探讨了对称密码体系，哈希函数等技术，本文继续探讨密码学剩余的部分，本文的主要内容包括，非对称密码体系，签名算法等，因为本部分是区块链技术的基石，所以我会讲的更加详细一点，虽然我已经尽最大努力使思想简化，但是其中的数学理论对于很多人还是很晦涩，建议读者开始之前先读下[数论](https://zh.wikipedia.org/wiki/%E6%95%B0%E8%AE%BA)的有关知识。本部分的主要结构如下：
 
 
-<img src="../images/2017/01/cryptology1_6.jpg?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />
+<img src="http://www.ehcoo.com/images/2017/01/cryptology1_6.jpg?t=2>" width = "85%" height = "65%" alt="图片名称" align=center />
 
 <!--more-->
 ## 非对称密码

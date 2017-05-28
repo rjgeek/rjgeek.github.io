@@ -14,7 +14,7 @@ Ethereum（以太坊）是一个使开发人员能够建立和发布下一代分
 
 本文从0开始搭建了以太坊的开发环境，犹如当年初学其他语言一样，这是我们的第一个hellowork程序，在完成搭建后又进行了账户创建、挖矿、转账等测试。
 
-<img src="../images/2017/02/ether1_1.jpg?>" width = "85%" height = "65%" alt="图片名称" align=center />  
+<img src="http://www.ehcoo.com/images/2017/02/ether1_1.jpg?>" width = "85%" height = "65%" alt="图片名称" align=center />  
 
 <!--more-->
 

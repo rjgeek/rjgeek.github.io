@@ -15,7 +15,7 @@ keywords: HTTPS,TSL，SSL
 在本博客中，我们将介绍我们加密通信背后的知识，主要内容包括：为什么我们需要升级HTTP到HTTPS，HTTP的问题在哪里？TSL和SSL探讨，HTTPS是什么？HTTPS是如何工作的？从黑客的角度如何攻击HTTPS等。
 
 在阅读本文之前，作者默认了你已经对称加密，非对称加密，摘要算法已经有所了解，如果实在没有基础也没关系，可以先读读这两篇预热下[《【密码学】一万字带您走进密码学的世界（上）》](http://www.ehcoo.com/cryptology.html),[《【密码学】一万字带您走进密码学的世界（下）》](http://www.ehcoo.com/cryptology1.html)
-![](../images/2017/02/httpswork_1.jpg)
+![](http://www.ehcoo.com/images/2017/02/httpswork_1.jpg)
 <!--more-->
 
 ## HTTP的问题在哪里？

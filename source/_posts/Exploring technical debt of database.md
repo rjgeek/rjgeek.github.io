@@ -14,7 +14,7 @@ keywords: technical debt,database architecture evolution
 
 This is one of reports which I did in last term. It mainly focus on the technical debt in database evolution.
 In this paper, I draw on a case study to analyse the link between technical debts in distributed database architectures and representative architecture evolution decisions. I use alibaba’s for this purpose.
-![](../images/2017/03/technicalDebt_1.jpg?)
+![](http://www.ehcoo.com/images/2017/03/technicalDebt_1.jpg?)
 <!--more-->
 <object classid="clsid:CA8A9780-280D-11CF-A24D-444553540000" width="900" height="1000" border="0">  
     <param name="_Version" value="65539">  

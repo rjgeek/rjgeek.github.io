@@ -14,7 +14,7 @@ keywords: 算法整理，时间复杂度，空间复杂度
 
 算法的衡量从两个方向出发：时间复杂度和空间复杂度。本文主要是不讲具体算法，只将算法的衡量，重点讲解如何衡量算法的复杂度，解决平时见到的XX算法时间复杂是$O(\log^n)$,其中这个结果是怎么推导出来的？$\log^n$是个什么玩意儿？，大写的$O$是什么意思？为什么用这个符号表示等类似问题。
 
-<img src="../images/2017/01/complexity_0.png?t=1>" width = "85%" height = "65%" alt="图片名称" align=center />
+<img src="http://www.ehcoo.com/images/2017/01/complexity_0.png?t=1>" width = "85%" height = "65%" alt="图片名称" align=center />
 
 <!--more-->
 

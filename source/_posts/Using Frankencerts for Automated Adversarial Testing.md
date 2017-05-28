@@ -12,7 +12,7 @@ keywords: Paper review,SSL/TLS,Certificate Validation,Automated Adversarial Test
 ## Introduction
 This is a review for the paper of "*Using Frankencerts for Automated Adversarial Testing of Certificate Validation in SSL/TLS Implementations*". The source is [here](https://www.cs.utexas.edu/~shmat/shmat_oak14.pdf) 
 
-![](../images/2017/03/frankencerts.png)
+![](http://www.ehcoo.com/images/2017/03/frankencerts.png)
 <!--more-->
 
 ## Summary
