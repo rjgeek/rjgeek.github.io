@@ -12,7 +12,7 @@ keywords: Bitcoin, blochain, 区块链
 ## 引言
 目前市面上讲授区块链技术大多比较肤浅，多数夹杂着很多商业的元素，很难一下子触及技术核心技术，前两天有朋友在群里问，索性我决定把 Andreas M. Antonopoulos的经典之作翻译一下，英文名：《Mastering Bitcoin-Unlocking Digital Cryptocurrencies》，中文名《精通比特币》，翻译完[第一节](http://www.ehcoo.com/MasteringBitcoin.html)的时候才发现网上已经有了翻译版本。
 
-在下面的时间里我将和大家一起探索比特币技术，我将尝试推出一系列的文章去探究技术本质，今天的主要内容包括：比特币地址，比特币密钥使用，比特币钱包，以及这三者存在怎样的关系。
+下面的时间里将和大家一起探索比特币技术，以后将尝试推出一系列的文章去探究比特币和区块链的技术本质，今天的主要内容包括：比特币地址，比特币密钥使用，比特币钱包，以及这三者存在怎样的关系。
 
 <img src="http://www.ehcoo.com/images/2017/05/bitcoin_0.jpg" width = "90%" height = "90%" alt="图片名称" align=center />  
 
