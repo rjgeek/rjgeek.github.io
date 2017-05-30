@@ -109,7 +109,7 @@ BIP32 Extended Public Key	 | 0x0488B21E  | xpub
 ## 总结
 本文介绍了比特币地址，比特币密钥原理，比特币钱包，以及这三者存在怎样的关系。
 ## 声明
-本文55%为翻译组合,**45%为原创**, 文中大量引用了经典之作《Mastering Bitcoin-Unlocking Digital Cryptocurrencies》
+本文70%为翻译组合,**30%为原创**, 文中大量引用了经典之作《Mastering Bitcoin-Unlocking Digital Cryptocurrencies》
 d3d3LmVoY29vLmNvbSwg5L2c6ICFOmVoY29v（BASE64编码）
 ## 引用
 http://chimera.labs.oreilly.com/books/1234000001802/ch01.html
