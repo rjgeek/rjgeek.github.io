@@ -1,0 +1,27 @@
+{
+  "@context": {
+    "id": "@id",
+    "type": "@type",
+	"bm": "http://ehcoo.com#",
+    "obi": "https://w3id.org/openbadges#",
+    
+    "fileHash": "bm:fileHash",
+    "identityClaim": "bm:identityClaim",
+    "revocationClaim": "bm:revocationList",
+    
+  },
+  "obi:validation": [
+    {
+      "obi:validatesType": "fileClaim",
+      "obi:validationSchema": "http://www.ehcoo.com/fileClaim.json"
+    },
+    {
+      "obi:validatesType": "identityClaim",
+      "obi:validationSchema": "https://www.ehcoo.com/identityClaim.json"
+    },
+    {
+      "obi:validatesType": "revocationClaim",
+      "obi:validationSchema": "https://www.ehcoo.com/revocationClaim.json"
+    }
+  ]
+}

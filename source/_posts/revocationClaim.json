@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "MerkleProof2017 schema",
+  "description": "An extension that allows an issuer to issue an Open Badge on the blockchain and provide proof of inclusion in a blockchain transaction. This uses the Chainpoint v2.0 specification: https://chainpoint.org/",
+  "type": "object",
+  "definitions": {
+    "JsonLdType": {
+      "description": "A type or an array of types defined in a JSON-LD context file.",
+      "oneOf": [
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },	
+  "properties": {
+    "type": {
+      "$ref": "#/definitions/JsonLdType"
+    },
+    "filehash": {
+      "type": "string"
+    },
+    "filestore": {
+      "type": "string"
+    },
+	"filetype": {
+      "type": "string"
+    },
+  "required": ["type", "filehash", "filestore", "filetype"]
+}
