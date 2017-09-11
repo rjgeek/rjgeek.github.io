@@ -1,4 +1,4 @@
-{
+figureFun({
 	"btc_address_list":{
 	"address_0": "3DWwmE19gHdv3xM3zPrVwqoRmbJQ6cCPHd|1500942301|127.0.0.1",
 	"address_1": "3LQ7QbYi6tL8fT5HQ6qKc96xkVyzxzNngE|1500942301|127.0.0.1"
@@ -13,4 +13,4 @@
 	"identity_claim_2": {
 		"claim_hash": "http://www.ehcoo.com"
 	}
-}
+})
