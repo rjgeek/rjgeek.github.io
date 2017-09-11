@@ -16,4 +16,4 @@ var data  =
 	}
 }
 
-figureFun(data);
+configuration(data);
