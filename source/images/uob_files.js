@@ -6,13 +6,13 @@ var data  =
 	},
 	"btc_address_Hash": "f24ed3c811777c00b94d53b81c4d0413f94649f9227f4d864b3fb1e793a1d3e3",
 	"identity_claim_0": {
-		"claim_hash": "http://www.ehcoo.com"
+		"claim_hash": "http://www.ehcoo.com/news_0.html"
 	},
 	"identity_claim_1": {
-		"claim_hash": "http://www.ehcoo.com"
+		"claim_hash": "http://www.ehcoo.com/news_1.html"
 	},
 	"identity_claim_2": {
-		"claim_hash": "http://www.ehcoo.com"
+		"claim_hash": "http://www.ehcoo.com/news_2.html"
 	}
 }
 
