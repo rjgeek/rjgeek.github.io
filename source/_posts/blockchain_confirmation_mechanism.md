@@ -1,5 +1,5 @@
 ---
-title: 【比特币确认机制总结】 比特币确认机制总结
+title: 【区块链技术系列】 区块链共识机制总结(上)
 
 tags:
   - 区块链
@@ -27,7 +27,10 @@ keywords: Bitcoin, blochain, 区块链
 Virtual Currency | Mechanism 
 ----|------
 Bitcoin | POW 
-Ppcoin.ShadowCash.BlackCoin.NuShares/NuBits.Qora and Nav Coin.  | POS 
+Ppcoin  | POS 
+ShadowCash | POS 
+BlackCoin  | POS 
+NuShares/NuBits.  | POS 
 Ethereum. NXT | POW+POS  
 AntShares | dBFT 
 
