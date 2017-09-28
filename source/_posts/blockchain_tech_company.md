@@ -13,120 +13,47 @@ keywords: Bitcoin, blockchain, 区块链
 
 本文按照公司的服务类别类别总结了40家国外目前区块链的创业公司，旨在帮助技术人员和创业人员加深对区块链技术和行业的认知。服务类别总体分类2类：金融服务和非金融服务，其中金融服务包括电子商务，保险服务，转账支付，供应链管理，资产管理，证券服务，区块链P2P，区块链众筹，区块链支付，区块链借记卡等；非金融服务包括基础设施，数据存储，数据分析，新闻资讯，身份认证，知识产权，防伪公正，社交通信，物联网，浏览器，DNS，电子投票，学历认证，电子病例等。
 
-<table>
-<tr>
-    <td rowspan="11"> 金融服务<br/>        
-    </td>
-    <td>电子商务</td>
-    <td> OpenBazaar</td>
-</tr>
-<tr>
-    <td>保险服务</td>
-    <td>Safe share insurance</td>
-</tr>
-<tr>
-    <td>转账支付</td>
-    <td>Dragonfly Fintech</td>
-</tr>
-<tr>
-    <td>供应链管理</td>
-    <td>Skuchain</td>
-</tr>
-<tr>
-	<td>资产管理</td>
-	<td>Everledger</td>
-</tr>
+**金融公司**
 
-<tr>
-    <td>证券服务</td>
-    <td>Symbiont</td>
-</tr>
-<tr>
-    <td>区块链P2P</td>
-    <td>BTCJam</td>
-</tr>
-<tr>
-    <td>区块链众筹</td>
-    <td>Bolero</td>
-</tr>
-<tr>
-    <td>区块链支付</td>
-    <td>Changetip</td>
-</tr>
-<tr>
-    <td>区块链借记卡</td>
-    <td>Bladepayments</td>
-</tr>
-<tr>
-    <td>虚拟货币交易平台</td>
-    <td>Trezor，Bitgo, Bitpay</td>
-</tr>
-</table>
+服务类别 | 公司名字 
+----|------
+电子商务 | OpenBazaar 
+保险服务  | Safe share insurance 
+转账支付 | Dragonfly Fintech 
+供应链管理  | Skuchain 
+资产管理  | Everledger 
+证券服务 | Symbiont  
+区块链P2P | BTCJam 
+区块链众筹 | Bolero 
+区块链支付 | Changetip 
+区块链借记卡 | Bladepayments 
+虚拟货币交易平台 | Trezor，Bitgo, Bitpay 
 
 <!--more-->
 
-<table>
-<tr>
-    <td rowspan="15"> 非金融服务<br/>  
-    </td>  
-     <td>基础设施</td>
-    <td>Bitcoin, Ethereum，Hyperledger Fabric,Mijin，Lisk</td>
-</tr>
-<tr>
-    <td>数据存储</td>
-    <td> Sia，Filecoin，Maidsafe，Storj</td>
-</tr>
-<tr>
-	<td>数据分析</td>
-	<td>Scorechain, Chainalysis</td>
-</tr>
-<tr>
-    <td>新闻资讯</td>
-    <td>CoinDesk</td>
-</tr>
-<tr>
-    <td>身份认证</td>
-    <td>World-Citizenship，Shocard，DIF</td>
-</tr>
-<tr>
-    <td>知识产权</td>
-    <td>Stem，Custostech</td>
-</tr>
+**非金融公司**
 
-<tr>
-    <td>社交通信</td>
-    <td>Bitmessage，Steemit</td>
-</tr>
-<tr>
-    <td>物联网</td>
-    <td>Iota</td>
-</tr>
-<tr>
-    <td>浏览器</td>
-    <td>Blockstack-browser</td>
-</tr>
-<tr>
-    <td>DNS</td>
-    <td>Blockstack-DNS</td>
-</tr>
-<tr>
-    <td>电子投票</td>
-    <td>Blockvotes</td>
-</tr>
-<tr>
-    <td>学历认证</td>
-    <td>Blockcerts, BTCert</td>
-</tr>
-<tr>
-    <td>电子病例</td>
-    <td>Medicalchain</td>
-</tr>
+服务类别 | 公司名字 
+----|------
+基础设施 | Bitcoin, Ethereum，Hyperledger Fabric,Mijin，Lisk 
+数据存储  | Sia，Filecoin，Maidsafe，Storj
+数据分析 | Scorechain, Chainalysis 
+新闻资讯  | CoinDesk 
+身份认证  | World-Citizenship，Shocard，DIF 
+知识产权 | Stem，Custostech  
+社交通信 | Bitmessage，Steemit 
+物联网 | Iota 
+浏览器 | Blockstack-browser 
+DNS | Blockstack-DNS 
+电子投票 | Blockvotes
+学历认证 | Blockcerts, BTCert
+电子病例 | Medicalchain
 
-</table>
 
 ## 金融领域
 
-#### 电子商务 OpenBazaar
+### 电子商务 
+#### OpenBazaar
 OpenBazaar is an open source project developing a protocol for e-commerce transactions in a fully decentralized marketplace.[1] It uses the cryptocurrency bitcoin and was inspired by a hackathon project called DarkMarket.
 
 OpenBazaar 是一个结合了ebay和bitTorrent的去中心化的在线交易市场，因为不需要第三方，因此没有任何限制和不需要交易费用。OpenBazaar 启发与臭名昭著的互联网“黑市”（一个枪支和毒品泛滥的市场）。
@@ -135,7 +62,8 @@ OpenBazaar 是一个结合了ebay和bitTorrent的去中心化的在线交易市�
 
 项目地址：https://www.openbazaar.org/
 
-#### 保险服务 Safe share insurance
+### 保险服务 
+#### Safe share insurance
 > SafeShare, an insurance services company has launched a new blockchain based insurance product targetted towards the sharing economy businesses  
 
 >SafeShare is a new-age insurance solutions provider based out of London, England. It is part of Cornerstone Insurance Brokers Limited. SafeShare specializes in insurance solutions for the new-age startups which are based on sharing economy. We all know about the popularity of applications like Airbnb and Uber. They are all based on the sharing economy where individuals offer services in a personal capacity, facilitated by an application or a platform.
@@ -146,14 +74,16 @@ SafeShare 是一家建立在分享经济和区块链基础上的保险公司，�
 
 项目地址：http://www.safeshareinsurance.com/
 
-#### 转账支付解决方案 Dragonfly Fintech
+### 转账支付解决方案 
+#### Dragonfly Fintech
 金融区块链解决方案公司，公司注册在新加坡，目前为软银项目的承担方，第一个被日本银行界认可的区块链解决方案。他们宣称该解决方案将驱动整个汇款链，从批发外汇到接收方的收款。
 
 <img src="../images/2017/09/blockchain_tech_company_12.png" width = "90%" height = "90%" alt="图片名称" align=center /> 
 
 项目网址：http://www.dragonflyfintech.com/
 
-#### 供应链管理 Skuchain
+### 供应链管理 
+#### Skuchain
 
 从事产品制造和分销的企业的盈利能力取决于以供应链管理的基础的库存。 ERP系统，库存管理系统，供应链金融计划，贸易融资工具，信用证，开立账户交易，采购订单，发票和库存资产是当今交易中使用的工具。然而，在使用这些工具时存在显着的摩擦，延迟，泄漏和成本。Skuchain 旨在通过透明化的区块链交易解决供应链和贸易融资中所存在的种种问题。
 
@@ -161,7 +91,8 @@ SafeShare 是一家建立在分享经济和区块链基础上的保险公司，�
 
 项目网址：http://www.skuchain.com/
 
-#### 资产管理 Everledger
+### 资产管理 
+#### Everledger
 
 > We’ve built a global, digital ledger that tracks and protects valuable assets throughout their lifetime journey. We collect an asset’s defining characteristics, history, and ownership to create a permanent record on the blockchain. This digital incarnation, or thumbprint, is used by various stakeholders across a supply chain pipeline to form provenance and verify authenticity.
 
@@ -171,7 +102,8 @@ Everledger是一家创建于英国伦敦的公司，Everledger创建了一个全
 
 项目网址：https://www.everledger.io/
 
-#### 证券服务 Symbiont
+### 证券服务 
+#### Symbiont
 
 Symbiont是一家位于纽约市的区块链技术公，他们提供用于资本市场的智能合约和分类账本产品，他们的产品提供了一个简单的界面，用于指定发行智能证券时的条款和条件，与市场数据反馈。
 
@@ -179,7 +111,8 @@ Symbiont是一家位于纽约市的区块链技术公，他们提供用于资本
 
 项目网址：https://symbiont.io/
 
-#### 区块链P2P BTCJam
+### 区块链P2P 
+#### BTCJam
 
 BTCjam是总部设在旧金山，加州，它提供了一个基于比特币的社交借贷服务公司，将需要贷款的人和有多余比特币放贷的人匹配在一起，该公司与2014年完成种子融资。
 
@@ -187,27 +120,28 @@ BTCjam是总部设在旧金山，加州，它提供了一个基于比特币的�
 
 项目网址：https://btcjam.com/
 
-#### 区块链众筹 Bolero
-
+### 区块链众筹 
+#### Bolero
 Bolero众筹平台推出了号称欧洲第一款区块链应用，验证了区块链可以为非上市公司的证券提供更多的流动性，从而打开以区块链为基础的股权众筹二级市场发展道路。
 
 <img src="../images/2017/09/blockchain_tech_company_16.png" width = "90%" height = "90%" alt="图片名称" align=center />
 
 项目网址：https://bolero-crowdfunding.be/nl
 
-#### 区块链支付 Changetip
-
+### 区块链支付 
+#### Changetip
 ChangeTip是由位于加利福尼亚州旧金山的微型支付平台，专门从事使用数字货币比特币的在线小额支付。 ChangeTip成立于2013年，使数字货币的用户可以在各种社交媒体网站（如Twitter，YouTube，Reddit和Facebook）以及电子邮件和短信发送小额支付。
 
 <img src="../images/2017/09/blockchain_tech_company_17.png" width = "90%" height = "90%" alt="图片名称" align=center />
 
 项目网址：https://www.changetip.com/
 
-#### 区块链借记卡 bladepayments
+### 区块链借记卡 
+#### Bladepayments
 bladepayments 为用户提供了一个可以用比特币充值的借记卡，该借记卡可以在承认比特币的地方进行刷卡。
 项目网址： https://www.bladepayments.com/
 
-#### 比特币交易工具（平台）
+### 比特币交易工具（平台）
 #### Trezor
 
 Trezor 是一个硬件钱包，他使用了离线自主开发的KEY来确保钱包的安全。
@@ -248,7 +182,7 @@ BitPay是世界上最大的比特币支付公司。
 
 项目地址：https://www.ethereum.org/
 
-###  Hyperledger Fabric
+####  Hyperledger Fabric
 Hyperledger Fabric是分布式分类帐解决方案的平台，以模块化架构为基础，提供高度的保密性，弹性，灵活性和可扩展性。它旨在支持不同组件的可插拔实现，并适应经济生态系统中存在的复杂性和复杂性。
 
 <img src="../images/2017/09/blockchain_tech_company_3.png" width = "90%" height = "90%" alt="图片名称" align=center />  
@@ -444,14 +378,15 @@ blockvotes 是一个将换签名与区块链相结合的在线投票系统，该
 
 项目地址：http://blockvotes.com
 
-#### 学历认证 blockcerts
+### 学历认证 
+#### Blockcerts
 blockcerts 是有麻省理工学院发布比特币区块链认证系统，项目的核心思想是将学历的认证信息发布到比特币的区块链上。同时blockcerts采用了openBadges.
 
 <img src="../images/2017/09/blockchain_tech_company_30.png" width = "90%" height = "90%" alt="图片名称" align=center />
 
 项目地址：http://www.blockcerts.org/
 
-#### 学历认证 BTcert
+#### BTcert
 BTcert 在blockcerts标准上研发的项目，BTcert运用了多重签名，基于地址的证书回收协议，联合身份认证等解决了blockcerts的相应缺陷，该项目有伯明翰大学区块链实验室成员推出。
 
 <img src="../images/2017/09/blockchain_tech_company_31.png" width = "90%" height = "90%" alt="图片名称" align=center />
@@ -468,12 +403,11 @@ Medicalchain 采用区块链技术安全存储健康数据。
 
 项目地址： https://medicalchain.com/en/
 
-
 ## 总结
 本文从金融行业和非金融行业的角度列举了50家国外比较火热的区块链创业项目，旨在帮助技术人员和创业人员加深对区块链技术和行业的认知。
 ## 声明
 d3d3LmVoY29vLmNvbSwg5L2c6ICFOmVoY29v（BASE64编码）
-访问地址：
+访问地址：http://www.ehcoo.com/blockchain_tech_company.html
 
 
 
