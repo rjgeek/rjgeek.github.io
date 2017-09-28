@@ -20,7 +20,7 @@ keywords: Bitcoin, blochain, 区块链
 
 区块链系统的核心是有系统中节点竞争记账，这个竞争的过程称为共识机制，区块链的底层有四部分构成，一个分布式的数据库用来存储以往和将来的交易数据，密码学的公私密钥体系用来确认交易双方的身份，P2P网络用来广播和蔓延各类消息（如节点加入消息，节点失效消息，得到挖矿数据的消息）和 用来决定节点记账权利的共识机制。
 
-<img src="../images/2017/09/blockchain_confirmation_mechanism_2.png" width = "90%" height = "90%" alt="图片名称" align=center />
+<img src="http://www.ehcoo.com/images/2017/09/blockchain_confirmation_mechanism_2.png" width = "90%" height = "90%" alt="图片名称" align=center />
 
 共识机制在区块链中扮演着核心的地位，**共识机制决定了谁有记账的权利**，以及记账权利的选择过程和理由。不用的虚拟货币采用共识机制不同，常见的共识机制如POW，POS，DPOS 拜占庭容错等。现梳理如下：
 
