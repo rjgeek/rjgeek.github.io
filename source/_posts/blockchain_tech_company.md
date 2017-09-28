@@ -404,7 +404,7 @@ Medicalchain 采用区块链技术安全存储健康数据。
 项目地址： https://medicalchain.com/en/
 
 ## 总结
-本文从金融行业和非金融行业的角度列举了50家国外比较火热的区块链创业项目，旨在帮助技术人员和创业人员加深对区块链技术和行业的认知。
+本文从金融行业和非金融行业的角度列举了40家国外比较火热的区块链创业项目，旨在帮助技术人员和创业人员加深对区块链技术和行业的认知。
 ## 声明
 d3d3LmVoY29vLmNvbSwg5L2c6ICFOmVoY29v（BASE64编码）
 访问地址：http://www.ehcoo.com/blockchain_tech_company.html
