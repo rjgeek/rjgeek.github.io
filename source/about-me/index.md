@@ -5,19 +5,27 @@ date: 2017-03-10 18:52:44
 ---
 
 ## Basic Information  
-RuJia Li or JiaXuan Li , you can call me Garay , come from Anhui,China  
+RuJia or JiaXuan Li , you can call me Garay, come from Anhui province,China  
 ## Education Background
-SCHOOL OF COMPUTER SCIENCE, [UNIVERSITY OF BIRMINGHAM](http://baike.baidu.com/link?url=yzoLkfI5jiVY_CGbQTeUO19Cu3ZeSIPLjlmK4H6tIk9zN7rOpRp_etjYgfmRCwT0iau3vH_eatW5cF8DbEBioDTrv_xkshlFArZfjNRgmTBeFD3H2_FPciOrZqkuyGam-SFX7WtcN6dxaJaIHZ3To_)&nbsp;&nbsp;&nbsp;&nbsp;
-In process		
-Master of Advanced Computer Science  
-SCHOOL OF CS, [WUHAN UNIVERSITY](http://baike.baidu.com/item/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6)&nbsp;&nbsp;&nbsp;&nbsp;
+[SOUTHERN UNIVERSITY OF SCIENCE AND TECHNOLOGY](http://www.sustc.edu.cn/en/)  
+Probationary Ph.D. candidate   &nbsp;&nbsp;&nbsp;&nbsp; 01/2018 - 01/2021	  
+SCHOOL OF COMPUTER SCIENCE, [UNIVERSITY OF BIRMINGHAM](http://baike.baidu.com/link?url=yzoLkfI5jiVY_CGbQTeUO19Cu3ZeSIPLjlmK4H6tIk9zN7rOpRp_etjYgfmRCwT0iau3vH_eatW5cF8DbEBioDTrv_xkshlFArZfjNRgmTBeFD3H2_FPciOrZqkuyGam-SFX7WtcN6dxaJaIHZ3To_)    
+Master of Advanced Computer Science  &nbsp;&nbsp;&nbsp;&nbsp;
+09/2016 - 01/2018	  	
+SCHOOL OF CS, [WUHAN UNIVERSITY](http://baike.baidu.com/item/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6)  
+Bachelor’s Degree in Computer Science and Technology  &nbsp;&nbsp;&nbsp;&nbsp;
+09/2009-07/2013	  
+SCHOOL OF ECONOMICS & MANAGEMENT, [WUHAN UNIVERSITY](http://baike.baidu.com/item/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6)  
+Dual Bachelor’s Degree in Business Administration   &nbsp;&nbsp;&nbsp;&nbsp;
 09/2009-07/2013	
-Bachelor’s Degree in Computer Science and Technology  
-SCHOOL OF ECONOMICS & MANAGEMENT, [WUHAN UNIVERSITY](http://baike.baidu.com/item/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6)&nbsp;&nbsp;&nbsp;&nbsp;
-09/2009-07/2013	
-Dual Bachelor’s Degree in Business Administration  
 ## Employment History  
-[State Grid Corporation of China](https://en.wikipedia.org/wiki/State_Grid_Corporation_of_China)     7/2013-08/2016	
+
+[STATE GRID INFORMATION&TELECOMMUNICATION CO,.LTD ](https://en.wikipedia.org/wiki/State_Grid_Corporation_of_China) &nbsp;&nbsp;&nbsp;&nbsp; 12/2014-08/2016  
+Position: Secure Architect Assistant  
+[STATE GRID ELECTRIC POWER RESEARCH INSTITUTE](www.sgcc.com.cn/ywlm/index.shtml) &nbsp;&nbsp;&nbsp;&nbsp; 04/2013-11/2014   
+Position: R & D Engineer
+
+
 ## Research Field
 **BlockChain**，**Public-ledger-based applications**, Applied cryptography,   
 **Distributed Network**，  **Security Certificate**
