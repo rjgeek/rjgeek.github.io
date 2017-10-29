@@ -77,9 +77,9 @@ menu_icons:
 # Schemes
 
 # Attention: by now alpha 1/3, we suggest you only chose Muse
-scheme: Muse
+#scheme: Muse
 
-#scheme: Mist
+scheme: Mist
 #scheme: Pisces
 
 
