@@ -1,0 +1,1018 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+<meta name="google-site-verification" content="LzR3qfX_YDfkNEusKegSylZBjqRw3vczTwICGpJ1GRI" />
+<meta name="baidu-site-verification" content="IhNq56RJS1" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Linux】给虚拟机上的LINUX拓展存储">
+<meta property="og:url" content="http://www.ehcoo.com/c309d07117e8340a6343271615731936.html">
+<meta property="og:site_name" content="Ehcoo">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-648dc0a5ec2e1fe5f59d651d61b103c3_clip_image0025b08fd95-4b44-483a-bcbb-ca28f1548be3.gif">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-648dc0a5ec2e1fe5f59d651d61b103c3_clip_image004a069372b-6b66-4b12-b480-75c9c902636c.gif">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-648dc0a5ec2e1fe5f59d651d61b103c3_clip_image00660ebe638-9a15-499d-b64b-34db567c0e1f.gif">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-648dc0a5ec2e1fe5f59d651d61b103c3_clip_image00854e6611e-7454-4c74-9e47-28875de25d27.gif">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-648dc0a5ec2e1fe5f59d651d61b103c3_clip_image010026cbe6f-fe9e-44dc-ad07-df83771e8b43.gif">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-648dc0a5ec2e1fe5f59d651d61b103c3_clip_image012bc87bdb7-741a-43b2-8a30-9fdf10e4bb1a.jpg">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-648dc0a5ec2e1fe5f59d651d61b103c3_clip_image0140dc5f732-d2b2-42ea-a6fa-69d0b1972e58.jpg">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-648dc0a5ec2e1fe5f59d651d61b103c3_clip_image0166adaf73a-bbbe-4c2b-94e0-42151c9f6930.jpg">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-648dc0a5ec2e1fe5f59d651d61b103c3_clip_image0186cac9333-f9fe-480d-bdb5-ed20277e11b3.jpg">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-648dc0a5ec2e1fe5f59d651d61b103c3_clip_image020fc83c240-d01f-4690-8b00-fb4143e3eac1.jpg">
+<meta property="og:updated_time" content="2017-10-29T15:38:31.050Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【Linux】给虚拟机上的LINUX拓展存储">
+<meta name="twitter:image" content="https://rjgeek.github.io/images//2015/01/wpid-648dc0a5ec2e1fe5f59d651d61b103c3_clip_image0025b08fd95-4b44-483a-bcbb-ca28f1548be3.gif">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.ehcoo.com/c309d07117e8340a6343271615731936.html"/>
+
+
+  <title> 【Linux】给虚拟机上的LINUX拓展存储 | Ehcoo </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="default">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?83e3b6b55c0e48f5d0848d6a14b76c02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+  
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ehcoo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about-me" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                【Linux】给虚拟机上的LINUX拓展存储
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2014-11-21T02:51:26+00:00" content="2014-11-21">
+              2014-11-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/c309d07117e8340a6343271615731936.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="c309d07117e8340a6343271615731936.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+		  
+          
+          
+
+          
+		 
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><o:smarttagtype namespaceuri="urn:schemas-microsoft-com:office:smarttags" name="City"></o:smarttagtype></p>
+<o:smarttagtype namespaceuri="urn:schemas-microsoft-com:office:smarttags" name="place">
+
+<h2 id=""><a href="#" class="headerlink" title=""></a><span lang="EN-US"><h2><a id="more"></a></h2><p></p></span></h2><p></p>
+<h2 id="导读：A-给虚拟机添加硬盘-nbsp-B-拓展虚拟机的存储容量"><a href="#导读：A-给虚拟机添加硬盘-nbsp-B-拓展虚拟机的存储容量" class="headerlink" title="导读：A.给虚拟机添加硬盘 &nbsp;B.拓展虚拟机的存储容量"></a><span lang="EN-US">导读：A.给虚拟机添加硬盘 &nbsp;B.拓展虚拟机的存储容量</span></h2><h2 id="1-lt-span-style-”font-family-宋体-mso-ascii-font-family-Calibri-mso-hansi-font-family-Calibri"><a href="#1-lt-span-style-”font-family-宋体-mso-ascii-font-family-Calibri-mso-hansi-font-family-Calibri" class="headerlink" title="1 &lt;span style=”font-family:宋体;mso-ascii-font-family:Calibri;mso-hansi-font-family:Calibri;"></a><span lang="EN-US">1 </span>&lt;span style=”font-family:宋体;mso-ascii-font-family:Calibri;mso-hansi-font-family:Calibri;</h2><p>mso-font-kerning:0pt”&gt;关闭虚拟机，添加磁盘。</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title=""></a><a name="_GoBack"></a></h2><p><strong><span lang="EN-US">1</span>**</strong><span style="font-family: 宋体;">、选择</span><strong><strong><span lang="EN-US">“VM”—-“setting”</span></strong></strong><span style="font-family: 宋体;">并打开，将光标定位在</span><strong><strong><span lang="EN-US">hard Disk</span></strong></strong><span style="font-family: 宋体;">这一选项，然后点击下方的</span><strong><strong><span lang="EN-US">Add</span></strong></strong><span style="font-family: 宋体;">按钮</span>**<span lang="EN-US"><o:p></o:p></span></p>
+<p><span lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-648dc0a5ec2e1fe5f59d651d61b103c3_clip_image0025b08fd95-4b44-483a-bcbb-ca28f1548be3.gif" alt="http://my.csdn.net/uploads/201204/21/1334942057_6581.PNG"></span><span lang="EN-US"><o:p></o:p></span></p>
+<p><strong><span lang="EN-US">2</span>**</strong><span style="font-family: 宋体;">、点击</span><strong><strong><span lang="EN-US">next</span></strong></strong><span style="font-family: 宋体;">，执行下一个步骤</span>**<span lang="EN-US"><o:p></o:p></span></p>
+<p><span lang="EN-US">&nbsp;<o:p></o:p></span></p>
+<p><span lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-648dc0a5ec2e1fe5f59d651d61b103c3_clip_image004a069372b-6b66-4b12-b480-75c9c902636c.gif" alt="http://my.csdn.net/uploads/201204/21/1334942092_4228.PNG"></span><span lang="EN-US"><o:p></o:p></span></p>
+<p><strong><span lang="EN-US">3</span>**</strong><span style="font-family: 宋体;">、根据提示，创建一个虚拟的磁盘，并点击下一步</span>**<span lang="EN-US"><o:p></o:p></span></p>
+<p><strong><span lang="EN-US">&nbsp;</span>**</strong><span lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-648dc0a5ec2e1fe5f59d651d61b103c3_clip_image00660ebe638-9a15-499d-b64b-34db567c0e1f.gif" alt="http://my.csdn.net/uploads/201204/21/1334942139_1872.PNG"></span>**<span lang="EN-US"><o:p></o:p></span></p>
+<p><span lang="EN-US">&nbsp;<o:p></o:p></span></p>
+<p><strong><span lang="EN-US" style="font-size: 12pt;">&nbsp;4</span>**</strong><span style="font-size: 12pt; font-family: 宋体;">、按照默认的，选择</span><strong><strong><span lang="EN-US" style="font-size: 12pt;">SCSI</span></strong></strong><span style="font-size: 12pt; font-family: 宋体;">格式的磁盘即可，点击</span><strong><strong><span lang="EN-US" style="font-size: 12pt;">next</span></strong></strong><span style="font-size: 12pt; font-family: 宋体;">执行下一步</span>**<span lang="EN-US"><o:p></o:p></span></p>
+<p><span lang="EN-US">&nbsp;<o:p></o:p></span></p>
+<p><span lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-648dc0a5ec2e1fe5f59d651d61b103c3_clip_image00854e6611e-7454-4c74-9e47-28875de25d27.gif" alt="http://my.csdn.net/uploads/201204/21/1334942157_1491.PNG"></span><span lang="EN-US"><o:p></o:p></span></p>
+<p><span lang="EN-US">&nbsp;</span><span style="font-family: 宋体;">名称默认。</span><span lang="EN-US"><o:p></o:p></span></p>
+<p><strong><span lang="EN-US" style="font-size: 12pt;">5</span>**</strong><span style="font-size: 12pt; font-family: 宋体;">、按照默认的点击下一步即可完成虚拟磁盘的添加</span>**<span lang="EN-US"><o:p></o:p></span></p>
+<p><span lang="EN-US">&nbsp;<o:p></o:p></span></p>
+<p><span lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-648dc0a5ec2e1fe5f59d651d61b103c3_clip_image010026cbe6f-fe9e-44dc-ad07-df83771e8b43.gif" alt="http://my.csdn.net/uploads/201204/21/1334942191_4106.PNG"></span><span lang="EN-US"><o:p></o:p></span></p>
+<p><span lang="EN-US">&nbsp;</span><span style="font-family: 宋体;">我添加了三块盘。</span><span lang="EN-US"><o:p></o:p></span></p>
+<h2 id="2-lt-span-style-”font-family-宋体-mso-ascii-font-family-Calibri-mso-hansi-font-family-Calibri"><a href="#2-lt-span-style-”font-family-宋体-mso-ascii-font-family-Calibri-mso-hansi-font-family-Calibri" class="headerlink" title="2 &lt;span style=”font-family:宋体;mso-ascii-font-family:Calibri;mso-hansi-font-family:Calibri;"></a><span lang="EN-US">2 </span>&lt;span style=”font-family:宋体;mso-ascii-font-family:Calibri;mso-hansi-font-family:Calibri;</h2><p>mso-font-kerning:0pt”&gt;格式化磁盘。<span lang="EN-US"><o:p></o:p></span></p>
+<div style="line-height: 19.5pt;"><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;pun&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;root@gc1 &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;~]#&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; **fdisk **&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;**-**&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;**l**   //查看&lt;/span&gt;</code><br>2.3.  <code>&lt;span class=&quot;typ&quot;&gt;Disk&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sda&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;19.3&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; GB&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;19327352832&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; bytes&lt;/span&gt;</code><br>4.5.  <code>&lt;span class=&quot;lit&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; heads&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;63&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; sectors&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;track&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2349&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; cylinders&lt;/span&gt;</code><br>6.7.  <code>&lt;span class=&quot;typ&quot;&gt;Units&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; cylinders of &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;16065&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;512&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;8225280&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; bytes&lt;/span&gt;</code><br>8.9.  <code>&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Device&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Boot&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Start&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;         &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;End&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Blocks&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Id&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;System&lt;/span&gt;</code><br>10.11.  <code>&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sda1   &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;           &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;          &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;13&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;104391&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;83&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Linux&lt;/span&gt;</code><br>12.13.  <code>&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sda2              &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;14&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2349&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;18763920&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;8e&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Linux&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; LVM&lt;/span&gt;</code><br>14.15.  <code>&lt;span class=&quot;typ&quot;&gt;Disk&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sdb&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;21.4&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; GB&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;21474836480&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; bytes&lt;/span&gt;</code><br>16.17.  <code>&lt;span class=&quot;lit&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; heads&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;63&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; sectors&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;track&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2610&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; cylinders&lt;/span&gt;</code><br>18.19.  <code>&lt;span class=&quot;typ&quot;&gt;Units&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; cylinders of &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;16065&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;512&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;8225280&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; bytes&lt;/span&gt;</code><br>20.21.  <code>&lt;span class=&quot;typ&quot;&gt;Disk&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sdb doesn&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;t contain a valid partition table&lt;/span&gt;</code><br>22.23.  <code>&lt;span class=&quot;str&quot;&gt;Disk /dev/sdc: 21.4 GB, 21474836480 bytes&lt;/span&gt;</code><br>24.25.  <code>&lt;span class=&quot;str&quot;&gt;255 heads, 63 sectors/track, 2610 cylinders&lt;/span&gt;</code><br>26.27.  <code>&lt;span class=&quot;str&quot;&gt;Units = cylinders of 16065 * 512 = 8225280 bytes&lt;/span&gt;</code><br>28.29.  <code>&lt;span class=&quot;str&quot;&gt;Disk /dev/sdc doesn&#39;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;t contain a valid partition table&lt;/span&gt;</code><br>30.31.  <code>&lt;span class=&quot;typ&quot;&gt;Disk&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sdd&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;21.4&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; GB&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;21474836480&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; bytes&lt;/span&gt;</code><br>32.33.  <code>&lt;span class=&quot;lit&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; heads&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;63&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; sectors&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;track&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2610&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; cylinders&lt;/span&gt;</code><br>34.35.  <code>&lt;span class=&quot;typ&quot;&gt;Units&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; cylinders of &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;16065&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;512&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;8225280&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; bytes&lt;/span&gt;</code><br>36.37.  <code>&lt;span class=&quot;typ&quot;&gt;Disk&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sdd doesn&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;t contain a valid partition table&lt;/span&gt;</code></pre></div><div style="line-height: 19.5pt;">开始格式化</div><div><pre class="prettyprint linenums prettyprinted"><div><br><br>1.  <code>&lt;span class=&quot;pun&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;root@gc1 &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;~]#&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; fdisk  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sdb&lt;/span&gt;</code><br>2.3.  <code>&lt;span class=&quot;typ&quot;&gt;Device&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; contains neither a valid DOS partition table&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; nor &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Sun&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; SGI or OSF disklabel&lt;/span&gt;</code><br>4.5.  <code>&lt;span class=&quot;typ&quot;&gt;Building&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; a new DOS disklabel&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Changes&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; will remain &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; memory only&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;</code><br>6.7.  <code>&lt;span class=&quot;kwd&quot;&gt;until&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; you decide to write them&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;After&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; that&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; of course&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; the previous&lt;/span&gt;</code><br>8.9.  <code>&lt;span class=&quot;pln&quot;&gt;content won&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;t be recoverable.&lt;/span&gt;</code><br>10.11.  <code>&lt;span class=&quot;str&quot;&gt;The number of cylinders for this disk is set to 2610.&lt;/span&gt;</code><br>12.13.  <code>&lt;span class=&quot;str&quot;&gt;There is nothing wrong with that, but this is larger than 1024,&lt;/span&gt;</code><br>14.15.  <code>&lt;span class=&quot;str&quot;&gt;and could in certain setups cause problems with:&lt;/span&gt;</code><br>16.17.  <code>&lt;span class=&quot;str&quot;&gt;1) software that runs at boot time (e.g., old versions of LILO)&lt;/span&gt;</code><br>18.19.  <code>&lt;span class=&quot;str&quot;&gt;2) booting and partitioning software from other OSs&lt;/span&gt;</code><br>20.21.  <code>&lt;span class=&quot;str&quot;&gt;   (e.g., DOS FDISK, OS/2 FDISK)&lt;/span&gt;</code><br>22.23.  <code>&lt;span class=&quot;str&quot;&gt;Warning: invalid flag 0x0000 of partition table 4 will be corrected by w(rite)&lt;/span&gt;</code><br>24.25.26.  <code>&lt;span class=&quot;str&quot;&gt;Command (m for help):&lt;/span&gt;</code><br>27.28.  <code>&lt;span class=&quot;str&quot;&gt;Command (m for help): m&lt;/span&gt;</code><br>29.30.  <code>&lt;span class=&quot;str&quot;&gt;Command action&lt;/span&gt;</code><br>31.32.  <code>&lt;span class=&quot;str&quot;&gt;   a   toggle a bootable flag&lt;/span&gt;</code><br>33.34.  <code>&lt;span class=&quot;str&quot;&gt;   b   edit bsd disklabel&lt;/span&gt;</code><br>35.36.  <code>&lt;span class=&quot;str&quot;&gt;   c   toggle the dos compatibility flag&lt;/span&gt;</code><br>37.38.  <code>&lt;span class=&quot;str&quot;&gt;   d   delete a partition&lt;/span&gt;</code><br>39.40.  <code>&lt;span class=&quot;str&quot;&gt;   l   list known partition types&lt;/span&gt;</code><br>41.42.  <code>&lt;span class=&quot;str&quot;&gt;   m   print this menu&lt;/span&gt;</code><br>43.44.  <code>&lt;span class=&quot;str&quot;&gt;   n   add a new partition&lt;/span&gt;</code><br>45.46.  <code>&lt;span class=&quot;str&quot;&gt;   o   create a new empty DOS partition table&lt;/span&gt;</code><br>47.48.  <code>&lt;span class=&quot;str&quot;&gt;   p   print the partition table&lt;/span&gt;</code><br>49.50.  <code>&lt;span class=&quot;str&quot;&gt;   q   quit without saving changes&lt;/span&gt;</code><br>51.52.  <code>&lt;span class=&quot;str&quot;&gt;   s   create a new empty Sun disklabel&lt;/span&gt;</code><br>53.54.  <code>&lt;span class=&quot;str&quot;&gt;   t   change a partition&#39;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;s system id&lt;/span&gt;</code><br>55.56.  <code>&lt;span class=&quot;pln&quot;&gt;   u   change display&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;entry units&lt;/span&gt;</code><br>57.58.  <code>&lt;span class=&quot;pln&quot;&gt;   v   verify the partition table&lt;/span&gt;</code><br>59.60.  <code>&lt;span class=&quot;pln&quot;&gt;   w   write table to disk and exit&lt;/span&gt;</code><br>61.62.  <code>&lt;span class=&quot;pln&quot;&gt;   x   extra functionality &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;experts only&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;</code><br>63.64.  <code>&lt;span class=&quot;typ&quot;&gt;Command&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;m &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; help&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;):&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; **n**&lt;/span&gt;</code><br>65.66.  <code>&lt;span class=&quot;typ&quot;&gt;Command&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; action&lt;/span&gt;</code><br>67.68.  <code>&lt;span class=&quot;pln&quot;&gt;   e   extended&lt;/span&gt;</code><br>69.70.  <code>&lt;span class=&quot;pln&quot;&gt;   p   primary partition &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)**  **&lt;/span&gt;</code><span style="background-color: white; color: rgb(72, 72, 76); font-size: 13px; line-height: 18px;"><strong>p</strong></span><br>71.72.73.  <code>&lt;span class=&quot;typ&quot;&gt;Partition&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; number &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;):&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;**1**&lt;/span&gt;</code><br>74.75.  <code>&lt;span class=&quot;typ&quot;&gt;First&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; cylinder &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2610&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; default &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;):&lt;/span&gt;</code><br>76.77.  <code>&lt;span class=&quot;typ&quot;&gt;Using&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; default value &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;</code><br>78.79.  <code>&lt;span class=&quot;typ&quot;&gt;Last&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; cylinder or &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;size or &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sizeM or &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sizeK &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2610&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; default &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2610&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;):&lt;/span&gt;</code><br>80.81.  <code>&lt;span class=&quot;typ&quot;&gt;Using&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; default value &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2610&lt;/span&gt;</code><br>82.83.  <code>&lt;span class=&quot;typ&quot;&gt;Command&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;m &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; help&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;):&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;** w**&lt;/span&gt;</code><br>84.85.  <code>&lt;span class=&quot;typ&quot;&gt;The&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; partition table has been altered&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;!&lt;/span&gt;</code><br>86.87.  <code>&lt;span class=&quot;typ&quot;&gt;Calling&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; ioctl&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; to re&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;read partition table&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;</code><br>88.89.  <code>&lt;span class=&quot;typ&quot;&gt;Syncing&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; disks&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;</code></div><div><font color="#bebec5"><span style="line-height: 17.997684478759766px;"><br></span></font></div></pre></div>
+
+<h2 id="-2"><a href="#-2" class="headerlink" title=""></a><span lang="EN-US"><div><pre class="prettyprint linenums prettyprinted"></pre></div></span></h2><ol>
+<li><code>&lt;span class=&quot;pun&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;root@gc1 &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;~]#&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; fdisk &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;l  //再次查看&lt;/span&gt;</code></li>
+<li><code>&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code></li>
+<li><code>&lt;span class=&quot;typ&quot;&gt;Disk&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sda&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;19.3&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; GB&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;19327352832&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; bytes&lt;/span&gt;</code></li>
+<li><code>&lt;span class=&quot;lit&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; heads&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;63&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; sectors&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;track&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2349&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; cylinders&lt;/span&gt;</code></li>
+<li><code>&lt;span class=&quot;typ&quot;&gt;Units&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; cylinders of &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;16065&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;512&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;8225280&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; bytes&lt;/span&gt;</code></li>
+<li><code>&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Device&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Boot&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Start&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;         &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;End&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Blocks&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Id&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;System&lt;/span&gt;</code></li>
+<li><code>&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sda1   &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;           &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;          &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;13&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;104391&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;83&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Linux&lt;/span&gt;</code></li>
+<li><code>&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sda2              &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;14&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2349&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;18763920&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;8e&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Linux&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; LVM&lt;/span&gt;</code></li>
+<li><code>&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code></li>
+<li><code>&lt;span class=&quot;typ&quot;&gt;Disk&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sdb&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;21.4&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; GB&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;21474836480&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; bytes&lt;/span&gt;</code></li>
+<li><code>&lt;span class=&quot;lit&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; heads&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;63&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; sectors&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;track&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2610&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; cylinders&lt;/span&gt;</code></li>
+<li><code>&lt;span class=&quot;typ&quot;&gt;Units&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; cylinders of &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;16065&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;512&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;8225280&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; bytes&lt;/span&gt;</code></li>
+<li><code>&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Device&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Boot&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Start&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;         &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;End&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Blocks&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Id&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;System&lt;/span&gt;</code></li>
+<li><code>&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sdb1               &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2610&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;20964793&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;83&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Linux&lt;/span&gt;</code></li>
+<li><code>&lt;span class=&quot;typ&quot;&gt;Disk&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sdc&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;21.4&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; GB&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;21474836480&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; bytes&lt;/span&gt;</code></li>
+<li><code>&lt;span class=&quot;lit&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; heads&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;63&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; sectors&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;track&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2610&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; cylinders&lt;/span&gt;</code></li>
+<li><code>&lt;span class=&quot;typ&quot;&gt;Units&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; cylinders of &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;16065&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;512&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;8225280&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; bytes&lt;/span&gt;</code></li>
+<li><code>&lt;span class=&quot;typ&quot;&gt;Disk&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sdc doesn&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;t contain a valid partition table&lt;/span&gt;</code></li>
+<li><code>&lt;span class=&quot;str&quot;&gt;Disk /dev/sdd: 21.4 GB, 21474836480 bytes&lt;/span&gt;</code></li>
+<li><code>&lt;span class=&quot;str&quot;&gt;255 heads, 63 sectors/track, 2610 cylinders&lt;/span&gt;</code></li>
+<li><code>&lt;span class=&quot;str&quot;&gt;Units = cylinders of 16065 * 512 = 8225280 bytes&lt;/span&gt;</code></li>
+<li><code>&lt;span class=&quot;str&quot;&gt;Disk /dev/sdd doesn&#39;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;t contain a valid partition table&lt;/span&gt;</code></li>
+</ol>
+<h2 id="3-lt-span-style-”font-family-宋体-mso-ascii-font-family-Calibri-mso-hansi-font-family-Calibri"><a href="#3-lt-span-style-”font-family-宋体-mso-ascii-font-family-Calibri-mso-hansi-font-family-Calibri" class="headerlink" title="3 &lt;span style=”font-family:宋体;mso-ascii-font-family:Calibri;mso-hansi-font-family:Calibri;"></a><span lang="EN-US">3 </span>&lt;span style=”font-family:宋体;mso-ascii-font-family:Calibri;mso-hansi-font-family:Calibri;</h2><p>mso-font-kerning:0pt”&gt;挂载磁盘。<span lang="EN-US"><o:p></o:p></span></p>
+<div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;pun&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;root@gc1 &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;~]#&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; mkfs &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;t ext3 &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sdb1&lt;/span&gt;</code><br>2.3.  <code>&lt;span class=&quot;pln&quot;&gt;mke2fs &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1.39&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;29&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;May&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2006&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;</code><br>4.5.  <code>&lt;span class=&quot;typ&quot;&gt;Filesystem&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; label&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;</code><br>6.7.  <code>&lt;span class=&quot;pln&quot;&gt;OS type&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Linux&lt;/span&gt;</code><br>8.9.  <code>&lt;span class=&quot;typ&quot;&gt;Block&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; size&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;4096&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;</code><br>10.11.  <code>&lt;span class=&quot;typ&quot;&gt;Fragment&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; size&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;4096&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;</code><br>12.13.  <code>&lt;span class=&quot;lit&quot;&gt;2621440&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; inodes&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;5241198&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; blocks&lt;/span&gt;</code><br>14.15.  <code>&lt;span class=&quot;lit&quot;&gt;262059&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; blocks &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;5.00&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;%)&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; reserved &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; the super user&lt;/span&gt;</code><br>16.17.  <code>&lt;span class=&quot;typ&quot;&gt;First&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; data block&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;</code><br>18.19.  <code>&lt;span class=&quot;typ&quot;&gt;Maximum&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; filesystem blocks&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;</code><br>20.21.  <code>&lt;span class=&quot;lit&quot;&gt;160&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; block groups&lt;/span&gt;</code><br>22.23.  <code>&lt;span class=&quot;lit&quot;&gt;32768&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; blocks per group&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;32768&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; fragments per group&lt;/span&gt;</code><br>24.25.  <code>&lt;span class=&quot;lit&quot;&gt;16384&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; inodes per group&lt;/span&gt;</code><br>26.27.  <code>&lt;span class=&quot;typ&quot;&gt;Superblock&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; backups stored on blocks&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;</code><br>28.29.  <code>&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;32768&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;98304&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;163840&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;229376&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;294912&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;819200&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;884736&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1605632&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2654208&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;</code><br>30.31.  <code>&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;4096000&lt;/span&gt;</code><br>32.33.  <code>&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>34.35.  <code>&lt;span class=&quot;typ&quot;&gt;Writing&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; inode tables&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;done&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;                           &lt;/span&gt;</code><br>36.37.  <code>&lt;span class=&quot;typ&quot;&gt;Creating&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; journal &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;32768&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; blocks&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;):&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;done&lt;/span&gt;</code><br>38.39.  <code>&lt;span class=&quot;typ&quot;&gt;Writing&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; superblocks and filesystem accounting information&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;done&lt;/span&gt;</code><br>40.41.  <code>&lt;span class=&quot;typ&quot;&gt;This&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; filesystem will be automatically checked every &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;35&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; mounts or&lt;/span&gt;</code><br>42.43.  <code>&lt;span class=&quot;lit&quot;&gt;180&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; days&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; whichever comes first&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Use&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; tune2fs &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;c or &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;i to override&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;</code></pre></div><div>修改配置文件，启动自动挂载</div><div><div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;pun&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;root@gc1 &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/]#&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; vi &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;etc&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;fsta&lt;/span&gt;</code><br>2.3.  <code>&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;VolGroup00&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;LogVol00&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;                       ext3    defaults        &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;</code><br>4.5.  <code>&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sdb1                &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;disk2                  ext3    defaults        &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;</code><br>6.7.  <code>&lt;span class=&quot;pln&quot;&gt;LABEL&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;boot             &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;boot                   ext3    defaults        &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2&lt;/span&gt;</code><br>8.9.  <code>&lt;span class=&quot;pln&quot;&gt;tmpfs                   &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;shm                tmpfs   defaults        &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;</code><br>10.11.  <code>&lt;span class=&quot;pln&quot;&gt;devpts                  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;pts                devpts  gid&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;mode&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;620&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;</code><br>12.13.  <code>&lt;span class=&quot;pln&quot;&gt;sysfs                   &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sys                    sysfs   defaults        &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;</code><br>14.15.  <code>&lt;span class=&quot;pln&quot;&gt;proc                    &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;proc                   proc    defaults        &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;</code><br>16.17.  <code>&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;VolGroup00&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;LogVol01&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; swap                    swap    defaults        &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;</code><br>18.19.  <code>&lt;span class=&quot;pun&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;root@gc1 &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/]#&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; cd &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;</code><br>20.21.  <code>&lt;span class=&quot;pun&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;root@gc1 &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/]#&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; mkdir &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;disk2&lt;/span&gt;</code><br>22.23.  <code>&lt;span class=&quot;pun&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;root@gc1 &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/]#&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; mount    /dev/sdb1 &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;disk2         //将 &lt;/span&gt;</code><span style="color: rgb(72, 72, 76);">/dev/sdb1挂载在</span><span style="color: rgb(72, 72, 76);">disk2下        </span><br>24.25.  <code>&lt;span class=&quot;pun&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;root@gc1 &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/]#&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; df &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;h   //查看磁盘占用情况&lt;/span&gt;</code><br>26.27.  <code>&lt;span class=&quot;typ&quot;&gt;Filesystem&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;            &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Size&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Used&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Avail&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Use&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Mounted&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; on&lt;/span&gt;</code><br>28.29.  <code>&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;mapper&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;VolGroup00&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;LogVol00&lt;/span&gt;</code><br>30.31.  <code>&lt;span class=&quot;pln&quot;&gt;                       &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;17G&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;11G&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;5.5G&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;66&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;</code><br>32.33.  <code>&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sda1              &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;99M&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;12M&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;82M&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;13&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;boot&lt;/span&gt;</code><br>34.35.  <code>&lt;span class=&quot;pln&quot;&gt;tmpfs                 &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;506M&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;     &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;506M&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;shm&lt;/span&gt;</code><br>36.37.  <code>&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sdb1              &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;20G&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;173M&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;19G&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;disk2&lt;/span&gt;</code></pre></div></div>
+
+<h2 id="lt-span-style-”font-family-宋体-mso-ascii-font-family-Calibri-mso-hansi-font-family"><a href="#lt-span-style-”font-family-宋体-mso-ascii-font-family-Calibri-mso-hansi-font-family" class="headerlink" title="&lt;span style=”font-family:宋体;mso-ascii-font-family:Calibri;mso-hansi-font-family:"></a>&lt;span style=”font-family:宋体;mso-ascii-font-family:Calibri;mso-hansi-font-family:</h2><p>Calibri”&gt;如何扩虚拟机大小：</p>
+<p><strong><span style="font-family:宋体;mso-ascii-font-family:Calibri;mso-hansi-font-family:Calibri">先</span><span lang="EN-US">power off<o:p></o:p></span></strong></p>
+<p><strong><span lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-648dc0a5ec2e1fe5f59d651d61b103c3_clip_image012bc87bdb7-741a-43b2-8a30-9fdf10e4bb1a.jpg" alt=""></span><span lang="EN-US"><o:p></o:p></span></strong></p>
+<p><strong><span lang="EN-US"><o:p>&nbsp;</o:p></span></strong></p>
+<p><strong><span lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-648dc0a5ec2e1fe5f59d651d61b103c3_clip_image0140dc5f732-d2b2-42ea-a6fa-69d0b1972e58.jpg" alt=""></span><span lang="EN-US"><o:p></o:p></span></strong></p>
+<p><span lang="EN-US"><o:p>&nbsp;</o:p></span></p>
+<p><span lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-648dc0a5ec2e1fe5f59d651d61b103c3_clip_image0166adaf73a-bbbe-4c2b-94e0-42151c9f6930.jpg" alt=""><o:p></o:p></span></p>
+<p><span lang="EN-US"><o:p>&nbsp;</o:p></span></p>
+<p><span lang="EN-US"><o:p>&nbsp;</o:p></span></p>
+<p><span lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-648dc0a5ec2e1fe5f59d651d61b103c3_clip_image0186cac9333-f9fe-480d-bdb5-ed20277e11b3.jpg" alt=""><o:p></o:p></span></p>
+<p><span lang="EN-US"><o:p>&nbsp;</o:p></span></p>
+<p><span lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-648dc0a5ec2e1fe5f59d651d61b103c3_clip_image020fc83c240-d01f-4690-8b00-fb4143e3eac1.jpg" alt=""><o:p></o:p></span></p>
+<p><span lang="EN-US"><o:p>&nbsp;</o:p></span></p>
+<div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;pun&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;root@gc1 &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;~]#&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; fdisk &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;l&lt;/span&gt;</code><br>2.3.4.  <code>&lt;span class=&quot;typ&quot;&gt;Disk&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sda&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;32.2&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; GB&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;32212254720&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; bytes&lt;/span&gt;</code><br>5.6.  <code>&lt;span class=&quot;lit&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; heads&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;63&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; sectors&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;track&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;3916&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; cylinders&lt;/span&gt;</code><br>7.8.  <code>&lt;span class=&quot;typ&quot;&gt;Units&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; cylinders of &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;16065&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;512&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;8225280&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; bytes&lt;/span&gt;</code><br>9.10.11.  <code>&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Device&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Boot&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Start&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;         &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;End&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Blocks&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Id&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;System&lt;/span&gt;</code><br>12.13.  <code>&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sda1   &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;           &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;          &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;13&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;104391&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;83&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Linux&lt;/span&gt;</code><br>14.15.  <code>&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sda2              &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;14&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2349&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;18763920&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;8e&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Linux&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; LVM&lt;/span&gt;</code><br>16.17.  <code>&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>18.19.  <code>&lt;span class=&quot;typ&quot;&gt;Disk&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sdb&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;21.4&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; GB&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;21474836480&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; bytes&lt;/span&gt;</code><br>20.21.  <code>&lt;span class=&quot;lit&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; heads&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;63&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; sectors&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;track&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2610&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; cylinders&lt;/span&gt;</code><br>22.23.  <code>&lt;span class=&quot;typ&quot;&gt;Units&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; cylinders of &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;16065&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;512&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;8225280&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; bytes&lt;/span&gt;</code><br>24.25.  <code>&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>26.27.  <code>&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Device&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Boot&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Start&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;         &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;End&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Blocks&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Id&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;System&lt;/span&gt;</code><br>28.29.  <code>&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sdb1               &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2610&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;20964793&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;83&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Linux&lt;/span&gt;</code><br>30.31.  <code>&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>32.33.  <code>&lt;span class=&quot;typ&quot;&gt;Disk&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sdc&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;21.4&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; GB&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;21474836480&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; bytes&lt;/span&gt;</code><br>34.35.  <code>&lt;span class=&quot;lit&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; heads&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;63&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; sectors&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;track&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2610&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; cylinders&lt;/span&gt;</code><br>36.37.  <code>&lt;span class=&quot;typ&quot;&gt;Units&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; cylinders of &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;16065&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;512&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;8225280&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; bytes&lt;/span&gt;</code><br>38.39.  <code>&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>40.41.  <code>&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Device&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Boot&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Start&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;         &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;End&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Blocks&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Id&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;System&lt;/span&gt;</code><br>42.43.  <code>&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sdc1               &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2610&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;20964793&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;83&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Linux&lt;/span&gt;</code><br>44.45.  <code>&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>46.47.  <code>&lt;span class=&quot;typ&quot;&gt;Disk&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sdd&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;21.4&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; GB&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;21474836480&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; bytes&lt;/span&gt;</code><br>48.49.  <code>&lt;span class=&quot;lit&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; heads&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;63&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; sectors&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;track&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2610&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; cylinders&lt;/span&gt;</code><br>50.51.  <code>&lt;span class=&quot;typ&quot;&gt;Units&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; cylinders of &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;16065&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;512&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;8225280&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; bytes&lt;/span&gt;</code><br>52.53.  <code>&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>54.55.  <code>&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Device&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Boot&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Start&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;         &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;End&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Blocks&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Id&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;System&lt;/span&gt;</code><br>56.57.  <code>&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sdd1               &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;2610&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;20964793&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;83&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Linux&lt;/span&gt;</code></pre></div><div><br></div>
+
+<p><strong><span lang="EN-US"><o:p>&nbsp;</o:p></span></strong></p>
+<p><strong><span lang="EN-US"><o:p>&nbsp;</o:p></span></strong></p>
+<p><strong><span lang="EN-US"><o:p>&nbsp;</o:p></span></strong></p>
+<p><strong><span lang="EN-US"><o:p>&nbsp;</o:p></span></strong></p>
+<p><strong><span lang="EN-US"><o:p>&nbsp;</o:p></span></strong><br></p></o:smarttagtype><p></p>
+<div><a href="http://www.wiz.cn/i/60efacb7" title="来自为知笔记(Wiz)" target="_blank" rel="external">来自为知笔记(Wiz)</a></div>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>your support will encourage me to continue to create!</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="RuJia Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/59711ebb77f1c5fa569d58136b9752f9.html" rel="next" title="【Weblogic】32位redhat6系统安装weblogic">
+                <i class="fa fa-chevron-left"></i> 【Weblogic】32位redhat6系统安装weblogic
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2e1c3eb3f9248952b33b5780b356d5c3.html" rel="prev" title="【Linux】linux常用缩写含义">
+                【Linux】linux常用缩写含义 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          <pre><code><b>版权声明</b>:自由转载-非商用-非衍生-保持署名<a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" rel="external nofollow" >(创意共享3.0许可证)</a></code></pre>
+
+
+
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="RuJia" />
+          <p class="site-author-name" itemprop="name">RuJia</p>
+          <p class="site-description motion-element" itemprop="description">BlockChain,Distributed Computing</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rjgeek/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Others">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Others
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cs.bham.ac.uk/~mdr/" title="Professor Mark Ryan" target="_blank" rel="external nofollow" >Professor Mark Ryan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cs.bham.ac.uk/~rzb/" title="Dr Rami Bahsoon" target="_blank" rel="external nofollow" >Dr Rami Bahsoon</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sec.cs.bham.ac.uk/people/" title="The Security and Privacy Group" target="_blank" rel="external nofollow" >The Security and Privacy Group</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.yfgeek.com/" title="YFGeek" target="_blank" rel="external nofollow" >YFGeek</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://rjgeek.github.io/CV1.pdf" title="My CV" target="_blank" rel="external nofollow" >My CV</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导读：A-给虚拟机添加硬盘-nbsp-B-拓展虚拟机的存储容量"><span class="nav-number">3.</span> <span class="nav-text">导读：A.给虚拟机添加硬盘  B.拓展虚拟机的存储容量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-lt-span-style-”font-family-宋体-mso-ascii-font-family-Calibri-mso-hansi-font-family-Calibri"><span class="nav-number">4.</span> <span class="nav-text">1 <span style=”font-family:宋体;mso-ascii-font-family:Calibri;mso-hansi-font-family:Calibri;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-1"><span class="nav-number">5.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-lt-span-style-”font-family-宋体-mso-ascii-font-family-Calibri-mso-hansi-font-family-Calibri"><span class="nav-number">6.</span> <span class="nav-text">2 <span style=”font-family:宋体;mso-ascii-font-family:Calibri;mso-hansi-font-family:Calibri;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-2"><span class="nav-number">7.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-lt-span-style-”font-family-宋体-mso-ascii-font-family-Calibri-mso-hansi-font-family-Calibri"><span class="nav-number">8.</span> <span class="nav-text">3 <span style=”font-family:宋体;mso-ascii-font-family:Calibri;mso-hansi-font-family:Calibri;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lt-span-style-”font-family-宋体-mso-ascii-font-family-Calibri-mso-hansi-font-family"><span class="nav-number">9.</span> <span class="nav-text"><span style=”font-family:宋体;mso-ascii-font-family:Calibri;mso-hansi-font-family:</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RuJia</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+  <span id="busuanzi_container_site_pv">
+    Total visited 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  
+  <span id="busuanzi_container_site_uv">
+  Total visitors 本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'ehcoo';
+      var disqus_identifier = 'c309d07117e8340a6343271615731936.html';
+      var disqus_title = "【Linux】给虚拟机上的LINUX拓展存储";
+      var disqus_url = 'http://www.ehcoo.com/c309d07117e8340a6343271615731936.html';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

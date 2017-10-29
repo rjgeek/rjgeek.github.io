@@ -1,0 +1,1291 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+<meta name="google-site-verification" content="LzR3qfX_YDfkNEusKegSylZBjqRw3vczTwICGpJ1GRI" />
+<meta name="baidu-site-verification" content="IhNq56RJS1" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Ehcoo" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="安装环境">
+<meta name="keywords" content="BlockChain,Distributed Computing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Linux】Linux下安装Oracle11g服务器">
+<meta property="og:url" content="http://www.ehcoo.com/188e1d0b466344e2ecad5c1e1e53a293.html">
+<meta property="og:site_name" content="Ehcoo">
+<meta property="og:description" content="安装环境">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_bbe85e02-a94c-4cc0-8b7b-265653c37a92.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_6ebe7f13-6e77-4824-9eea-17427e04b6ec.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_45cf3081-ad62-44bc-848f-eaff06d8efdd.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_75b26514-ccd3-40ae-b70c-198cfa616f40.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_d9f1f752-6613-4c92-8d97-20bf584a684f.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_3a252f43-4fbd-4e44-adb3-547a6a254d53.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_a16eeebf-f50f-4b51-b15e-5c6e26ef0d68.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_e5326512-f892-436b-9962-cd0ffca45816.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_187449e3-4fe4-4cb2-90c5-a582bf94eb27.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_5a256823-fb35-407f-b18e-7cfaeb21c7d1.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_a9c76934-b202-4616-967c-d9bc9206f69d.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_529cb48f-98ae-4126-b3e5-e36337752d0d.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_7ec2473f-f4ae-4130-9194-834d8f07ca0c.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_91379ebd-22bf-4270-a5f2-e1638126b800.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_e72f5623-d84b-4350-9351-4e10cfada43b.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_13c6be50-273e-4708-9fa5-24279d2e891b.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_ba622dc8-5c0d-4f5c-878d-abcebc6b38d3.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_972be2e1-2305-45a5-b79e-af9ae184c459.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_d66d16c4-d260-4f0c-973f-e32dced9301e.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_1c296757-912a-4ccd-b1c9-222e1534fb3a.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_0a571f56-44b6-4aac-a076-fd1ac2fa7a27.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_058e0551-5d0a-4a8d-99e6-692cae9949c6.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_f7503380-62e9-4916-8773-2f099a116a0a.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_0556415b-1d66-4d63-9e56-c28b140701e2.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_dbbcb459-a848-4877-82d9-c4825b86de8e.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_365e4e02-d948-4284-882f-3ce367878923.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_0172344e-cc3e-415b-a780-63782c7963f8.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_3ad65dcc-0198-4d5f-b333-a2a4bb9875a1.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_1a6d1b3f-001b-4de2-a2d9-41bf81bb3039.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_e89d5081-420e-45e6-83fd-9d1e1d2d0826.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_89a70a50-2bc6-4403-88a4-d35f2835185c.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_f846b00f-8f43-47a1-9426-3fe14c3fac4d.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_469d6df1-4004-4ec0-89b9-a70188b635c1.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_31cbb443-bdad-4742-a976-f8500061cc75.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_57329640-735b-4bce-83f9-fb4175329698.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_147f86dc-47de-46e2-9705-d497b1a3a7ff.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_7c213699-8bfc-4c28-90b5-6704ef2bf622.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_58135a03-4800-4f05-8e8d-ca01b8d1023d.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_63fa56f8-b42a-42c0-96d6-2a272f64803d.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_ddaf80d0-6dc5-48dd-9b7f-dabc79ca71fa.png">
+<meta property="og:updated_time" content="2017-10-29T15:38:31.042Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【Linux】Linux下安装Oracle11g服务器">
+<meta name="twitter:description" content="安装环境">
+<meta name="twitter:image" content="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_bbe85e02-a94c-4cc0-8b7b-265653c37a92.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.ehcoo.com/188e1d0b466344e2ecad5c1e1e53a293.html"/>
+
+
+  <title> 【Linux】Linux下安装Oracle11g服务器 | Ehcoo </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="default">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?83e3b6b55c0e48f5d0848d6a14b76c02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+  
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ehcoo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about-me" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                【Linux】Linux下安装Oracle11g服务器
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2014-08-15T22:20:06+00:00" content="2014-08-15">
+              2014-08-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据库知识/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库知识</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/188e1d0b466344e2ecad5c1e1e53a293.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="188e1d0b466344e2ecad5c1e1e53a293.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+		  
+          
+          
+
+          
+		 
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h2><a id="more"></a>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Linux服务器：SuSe10 sp2 64位</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Oracle服务器：Oracle11gR2 64位</p>
+<h2 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a>系统要求</h2><ol>
+<li>Linux安装Oracle系统要求</li>
+</ol>
+<p>&nbsp;</p>
+<table border="1" cellspacing="0" cellpadding="0" style="margin: 0px; padding: 0px; border: 1px solid silver; border-collapse: collapse; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 13px; line-height: 19.5px; background-color: rgb(255, 255, 255);"><tbody style="margin: 0px; padding: 0px;"><tr style="margin: 0px; padding: 0px;"><td valign="top" width="121" style="margin: 0px; padding: 3px; border: 1px solid silver; border-collapse: collapse;"><br><br>系统要求<br></td><td valign="top" width="584" style="margin: 0px; padding: 3px; border: 1px solid silver; border-collapse: collapse;"><br><br>说明<br></td></tr><tr style="margin: 0px; padding: 0px;"><td valign="top" width="121" style="margin: 0px; padding: 3px; border: 1px solid silver; border-collapse: collapse;"><br><br>内存<br></td><td valign="top" width="584" style="margin: 0px; padding: 3px; border: 1px solid silver; border-collapse: collapse;"><br><br>必须高于1G的物理内存<br></td></tr><tr style="margin: 0px; padding: 0px;"><td valign="top" width="121" style="margin: 0px; padding: 3px; border: 1px solid silver; border-collapse: collapse;"><br><br>交换空间<br></td><td valign="top" width="584" style="margin: 0px; padding: 3px; border: 1px solid silver; border-collapse: collapse;"><br><br>一般为内存的2倍，例如：1G的内存可以设置swap 分区为3G大小<br></td></tr><tr style="margin: 0px; padding: 0px;"><td valign="top" width="121" style="margin: 0px; padding: 3px; border: 1px solid silver; border-collapse: collapse;"><br><br>硬盘<br></td><td valign="top" width="584" style="margin: 0px; padding: 3px; border: 1px solid silver; border-collapse: collapse;"><br><br>5G以上<br></td></tr></tbody></table>
+
+<p>&nbsp;</p>
+<p>&nbsp;2.修改操作系统核心参数</p>
+<p>在Root用户下执行以下步骤：</p>
+<p><strong>1**</strong>）修改用户的SHELL的限制，修改/etc/security/limits.conf文件 &nbsp;设置Oracle用户的资源占用情况**</p>
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif" size="2"><span style="line-height: 19.5px;">输入命令：vi&nbsp;</span></font><strong>/etc/security/limits.conf**</strong><font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif" size="2"><span style="line-height: 19.5px;">，按</span></font><span style="font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 13px; line-height: 1.5; margin: 0px; padding: 0px; color: rgb(255, 0, 0);">i</span><font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif" size="2"><span style="line-height: 19.5px;">键进入编辑模式，将下列内容加入该文件。</span></font><strong><br><div align="center" style="margin: 0px; padding: 0px; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 13px; line-height: 19.5px; background-color: rgb(255, 255, 255);"><table border="1" cellspacing="0" cellpadding="0" style="margin: 0px; padding: 0px; border: 1px solid silver; border-collapse: collapse;"><tbody style="margin: 0px; padding: 0px;"><tr style="margin: 0px; padding: 0px;"><td valign="top" width="594" style="margin: 0px; padding: 3px; border: 1px solid silver; border-collapse: collapse;"><br><br>oracle &nbsp;&nbsp;soft &nbsp;&nbsp;&nbsp;nproc &nbsp;&nbsp;&nbsp;2047<br>oracle &nbsp;&nbsp;hard &nbsp;&nbsp;&nbsp;nproc &nbsp;&nbsp;&nbsp;16384<br>oracle &nbsp;&nbsp;soft &nbsp;&nbsp;&nbsp;nofile &nbsp;&nbsp;&nbsp;&nbsp;1024<br>oracle &nbsp;&nbsp;hard &nbsp;&nbsp;&nbsp;nofile &nbsp;&nbsp;&nbsp;65536<br></td></tr></tbody></table></div><div align="center" style="margin: 0px; padding: 0px; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 13px; line-height: 19.5px; background-color: rgb(255, 255, 255);"><div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;pln&quot;&gt;Oracle soft nproc 2047&lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;pln&quot;&gt;oracle hard nproc 16384&lt;/span&gt;</code><br>3.  <code>&lt;span class=&quot;pln&quot;&gt;oracle最多允许开启2047个进程，软限制和硬限制都是起限制作用。不过策略稍有不同&lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;pln&quot;&gt;oracle soft nofile 1024 &lt;/span&gt;</code><br>5.  <code>&lt;span class=&quot;pln&quot;&gt;oracle hard nofile 65536&lt;/span&gt;</code><br>6.  <code>&lt;span class=&quot;pln&quot;&gt;这两句就是限制epg用户最多允许打开10000个文件。&lt;/span&gt;</code><br>7.8.  <code>&lt;span class=&quot;pln&quot;&gt;硬限制就是“绝对不能超过”&lt;/span&gt;</code><br>9.  <code>&lt;span class=&quot;pln&quot;&gt;软限制是可以超过的，但必须小于等于硬限制值。&lt;/span&gt;</code></pre></div><div><br></div></div>
+
+</strong>编辑完成后按<strong><strong>Esc</strong></strong>键，输入<strong><strong>“</strong></strong>:wq<strong><strong>”</strong></strong>存盘退出<strong><br><br>&nbsp;<br><br>2）修改/etc/pam.d/login 文件，输入命令：<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">vi &nbsp;/etc/pam.d/login</span>，</strong>按<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">i</span>键进入编辑模式，将下列内容加入该文件。<strong><br><div align="center" style="margin: 0px; padding: 0px; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 13px; line-height: 19.5px; background-color: rgb(255, 255, 255);"><table border="1" cellspacing="0" cellpadding="0" style="margin: 0px; padding: 0px; border: 1px solid silver; border-collapse: collapse;"><tbody style="margin: 0px; padding: 0px;"><tr style="margin: 0px; padding: 0px;"><td valign="top" width="600" style="margin: 0px; padding: 3px; border: 1px solid silver; border-collapse: collapse;"><br><br>session &nbsp;&nbsp;required &nbsp;&nbsp;&nbsp;/lib/security/pam_limits.so&nbsp;<br>session &nbsp;&nbsp;required &nbsp;&nbsp;&nbsp;pam_limits.so<br></td></tr></tbody></table></div>
+
+</strong>编辑完成后按<strong><strong>Esc</strong></strong>键，输入<strong><strong>“</strong></strong>:wq<strong><strong>”</strong></strong>存盘退出<strong>
+
+</strong>&nbsp;<strong>
+
+</strong>3<strong><strong>）修改</strong></strong>linux<strong>**内核，修改</strong>/etc/sysctl.conf文件，输入命令:&nbsp;<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">vi &nbsp;/etc/sysctl.conf</span>&nbsp;，<strong>按<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">i</span>键进入编辑模式，将下列内容加入该文件</strong><br><div align="center" style="margin: 0px; padding: 0px; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 13px; line-height: 19.5px; background-color: rgb(255, 255, 255);"><table border="1" cellspacing="0" cellpadding="0" style="margin: 0px; padding: 0px; border: 1px solid silver; border-collapse: collapse;"><tbody style="margin: 0px; padding: 0px;"><tr style="margin: 0px; padding: 0px;"><td valign="top" width="596" style="margin: 0px; padding: 3px; border: 1px solid silver; border-collapse: collapse;"><br><br># 整个系统同时可以开启的文件数<br><br>fs.file-max = 6815744 &nbsp; &nbsp;&nbsp;<br><br># <span style="color: rgb(51, 51, 51); font-family: arial; font-size: 13px; line-height: 20.0200004577637px;">同时可以拥有的的异步IO请求数目</span><br>fs.aio-max-nr = 1048576&nbsp;<br><br>#一个共享内存段所能容纳的内存数量<br>kernel.shmall = 2097152&nbsp;<br><br>#一个共享内存段所能容纳的内存数量<br>kernel.shmmax = 2147483648<br><br><span style="font-size: 13px; line-height: 19.5px;">#整个系统最多可有几个共享内存段</span>&nbsp;<br>kernel.shmmni = 4096&nbsp;<br><br><span style="font-size: 13px; line-height: 19.5px;">#对信号量的设置</span><br>kernel.sem = 250 32000 100 128&nbsp;<br><br>#程序可自由使用端口范围<br>net.ipv4.ip_local_port_range = 9000 65500&nbsp;<br><br>#接收TCP封包的预设缓存空间<br>net.core.rmem_default = 4194304&nbsp;<br><br>#接收TCP封包的最大缓存空间<br>net.core.rmem_max = 4194304&nbsp;<br><br>#发送TCP封包的预设缓存空间<br>net.core.wmem_default = 262144&nbsp;<br><br>#发送TCP封包的最大缓存空间<br>net.core.wmem_max = 1048576<br></td></tr></tbody></table></div><br><br><strong>编辑完成后按**</strong>Esc<strong><strong>键，输入</strong></strong>“<strong><strong>:wq</strong></strong>”<strong>**存盘退出</strong><br><br><strong>&nbsp;</strong><br><br><strong>4**</strong>）<strong>要使 /etc/sysctl.conf 更改立即生效，执行以下命令。 输入：<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">sysctl &nbsp;-p</span>&nbsp;显示如下：<br><table border="1" cellspacing="0" cellpadding="0" style="margin: 0px; padding: 0px; border: 1px solid silver; border-collapse: collapse; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 13px; line-height: 19.5px; background-color: rgb(255, 255, 255);"><tbody style="margin: 0px; padding: 0px;"><tr style="margin: 0px; padding: 0px;"><td valign="top" width="591" style="margin: 0px; padding: 3px; border: 1px solid silver; border-collapse: collapse;">
+
+</td></tr></tbody></table></strong>linux:~ # sysctl -p<strong>
+
+</strong>net.ipv4.icmp_echo_ignore_broadcasts = 1<strong>
+
+</strong>net.ipv4.conf.all.rp_filter = 1<strong>
+
+</strong>fs.file-max = 6815744<strong>
+
+</strong>fs.aio-max-nr = 1048576<strong>
+
+</strong>kernel.shmall = 2097152<strong>
+
+</strong>kernel.shmmax = 2147483648<strong>
+
+</strong>kernel.shmmni = 4096<strong>
+
+</strong>kernel.sem = 250 32000 100 128<strong>
+
+</strong>net.ipv4.ip_local_port_range = 9000 65500<strong>
+
+</strong>net.core.rmem_default = 4194304<strong>
+
+</strong>net.core.rmem_max = 4194304<strong>
+
+</strong>net.core.wmem_default = 262144<strong>
+
+</strong>net.core.wmem_max = 1048576<strong><br><br><br>&nbsp;<br><br>5）编辑 /etc/profile ，输入命令：<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">vi&nbsp; /etc/profile</span>，</strong>按<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">i</span>键进入编辑模式，将下列内容加入该文件。<strong><br><table border="1" cellspacing="0" cellpadding="0" style="margin: 0px; padding: 0px; border: 1px solid silver; border-collapse: collapse; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 13px; line-height: 19.5px; background-color: rgb(255, 255, 255);"><tbody style="margin: 0px; padding: 0px;"><tr style="margin: 0px; padding: 0px;"><td valign="top" width="591" style="margin: 0px; padding: 3px; border: 1px solid silver; border-collapse: collapse;"><br><br>if [ $USER = “oracle” ]; then&nbsp;<br>if [ $SHELL = “/bin/ksh” ]; then&nbsp;<br>&nbsp; ulimit -p 16384&nbsp;<br>&nbsp; ulimit -n 65536&nbsp;<br>else&nbsp;<br>&nbsp; ulimit -u 16384 -n 65536&nbsp;<br>fi<br><br>fi<br></td></tr></tbody></table>
+
+</strong>编辑完成后按<strong><strong>Esc</strong></strong>键，输入<strong><strong>“</strong></strong>:wq<strong><strong>”</strong></strong>存盘退出<strong>
+
+</strong>&nbsp;<strong>
+
+</strong>6<strong>**）创建相关用户和组，</strong>作为软件安装和支持组的拥有者。<br><table border="1" cellspacing="0" cellpadding="0" style="margin: 0px; padding: 0px; border: 1px solid silver; border-collapse: collapse; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 13px; line-height: 19.5px; background-color: rgb(255, 255, 255);"><tbody style="margin: 0px; padding: 0px;"><tr style="margin: 0px; padding: 0px;"><td valign="top" width="591" style="margin: 0px; padding: 3px; border: 1px solid silver; border-collapse: collapse;"><br><br><strong>创建用户，输入命令：</strong><br><br><strong>groupadd &nbsp;oinstall&nbsp;<br>groupadd &nbsp;dba</strong><br><br>创建Oracle用户和密码,输入命令：<br><br><strong>useradd -g oinstall -g dba -m oracle</strong><br><br><strong>passwd &nbsp;oracle</strong><br><br><strong>然后会让你输入密码，密码任意输入2次，但必须保持一致，回车确认</strong><br></td></tr></tbody></table><br><br><strong>&nbsp;</strong><br><br><strong>7**</strong>）创建数据库软件目录和数据文件存放目录，目录的位置，根据自己的情况来定，注意磁盘空间即可，这里我把其放到oracle用户下,例如：<strong><br><table border="1" cellspacing="0" cellpadding="0" style="margin: 0px; padding: 0px; border: 1px solid silver; border-collapse: collapse; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 13px; line-height: 19.5px; background-color: rgb(255, 255, 255);"><tbody style="margin: 0px; padding: 0px;"><tr style="margin: 0px; padding: 0px;"><td valign="top" width="591" style="margin: 0px; padding: 3px; border: 1px solid silver; border-collapse: collapse;">
+
+</td></tr></tbody></table></strong>输入命令：<strong>
+
+</strong>mkdir /home/oracle/app<strong>
+
+</strong>mkdir /home/oracle/app/oracle<strong>
+
+</strong>mkdir /home/oracle/app/oradata<strong>
+
+</strong>mkdir /home/oracle/app/oracle/<strong>**product</strong><br><br><br>&nbsp;<br><br><strong>8)**</strong>更改目录属主为Oracle用户所有，输入命令：<strong><br><br>&nbsp;<br><table border="1" cellspacing="0" cellpadding="0" style="margin: 0px; padding: 0px; border: 1px solid silver; border-collapse: collapse; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 13px; line-height: 19.5px; background-color: rgb(255, 255, 255);"><tbody style="margin: 0px; padding: 0px;"><tr style="margin: 0px; padding: 0px;"><td valign="top" width="591" style="margin: 0px; padding: 3px; border: 1px solid silver; border-collapse: collapse;">
+
+</td></tr></tbody></table></strong>chown -R oracle:oinstall /home/oracle/app<strong><br>
+
+</strong>&nbsp;<strong>
+
+</strong>9)<strong>**配置oracle用户的环境变量，首先，切换到新创建的oracle用户下,</strong><br><br><strong>输入：<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">su – oracle&nbsp;</span>&nbsp;，然后直接在输入 ：<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">&nbsp;vi .bash_profile</span></strong><br><br><strong>按<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">i</span>编辑 .bash_profile,进入编辑模式，增加以下内容：</strong><br><table border="1" cellspacing="0" cellpadding="0" style="margin: 0px; padding: 0px; border: 1px solid silver; border-collapse: collapse; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 13px; line-height: 19.5px; background-color: rgb(255, 255, 255);"><tbody style="margin: 0px; padding: 0px;"><tr style="margin: 0px; padding: 0px;"><td valign="top" width="591" style="margin: 0px; padding: 3px; border: 1px solid silver; border-collapse: collapse;"><br><br><strong>umask 022</strong><br><br><strong>export ORACLE_BASE=/home/oracle/app</strong><br><br><strong>export ORACLE_HOME=$ORACLE_BASE/oracle/product/11.2.0/dbhome_1</strong><br><br><strong>export ORACLE_SID=orcl</strong><br><br><strong>export PATH=$PATH:$HOME/bin:$ORACLE_HOME/bin</strong><br><br><strong>export LD_LIBRARY_PATH=$ORACLE_HOME/lib:/usr/lib</strong><br></td></tr></tbody></table><br><br><strong>编辑完成后按**</strong>Esc<strong><strong>键，输入</strong></strong>“<strong><strong>:wq</strong></strong>”<strong>**存盘退出</strong><br><br>## <strong>安装过程</strong><br><br>1） 当上述系统要求操作全部完成后，<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">注销系统，在图形界面以Oracle用户登陆</span>。首先将下载的Oracle安装包复制到linux中，推荐用Xmanager 或其他ftp工具拷贝。<br><br>&nbsp;&nbsp; 打开一个终端，运行unzip命令解压oracle安装文件，如：<br><table border="1" cellspacing="0" cellpadding="0" style="margin: 0px; padding: 0px; border: 1px solid silver; border-collapse: collapse; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 13px; line-height: 19.5px; background-color: rgb(255, 255, 255);"><tbody style="margin: 0px; padding: 0px;"><tr style="margin: 0px; padding: 0px;"><td valign="top" width="591" style="margin: 0px; padding: 3px; border: 1px solid silver; border-collapse: collapse;"><br><br>输入命令：<br><br>unzip &nbsp;linux.x64_11gR2_database_1of2.zip&nbsp;<br><br>unzip&nbsp; linux.x64_11gR2_database_2of2.zip<br></td></tr></tbody></table><br><br>&nbsp;解压完成后 cd 进入其解压后的目录database<br><table border="1" cellspacing="0" cellpadding="0" style="margin: 0px; padding: 0px; border: 1px solid silver; border-collapse: collapse; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 13px; line-height: 19.5px; background-color: rgb(255, 255, 255);"><tbody style="margin: 0px; padding: 0px;"><tr style="margin: 0px; padding: 0px;"><td valign="top" width="591" style="margin: 0px; padding: 3px; border: 1px solid silver; border-collapse: collapse;"><br><br>输入命令：<br><br>cd &nbsp;database<br></td></tr></tbody></table><br><br>使用<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">ls</span>命令可以查看解压后database所包含的文件，如下图：<br><br><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_bbe85e02-a94c-4cc0-8b7b-265653c37a92.png" alt=""><br><br><strong>2）&nbsp;</strong>执行安装，输入命令：<strong>./runInstaller</strong><br><br><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_6ebe7f13-6e77-4824-9eea-17427e04b6ec.png" alt=""><br><br><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_45cf3081-ad62-44bc-848f-eaff06d8efdd.png" alt=""><br><br><strong>&nbsp;</strong><br><br><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_75b26514-ccd3-40ae-b70c-198cfa616f40.png" alt=""><br><br><strong>&nbsp;</strong><br><br><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_d9f1f752-6613-4c92-8d97-20bf584a684f.png" alt=""><br><br><strong>&nbsp;</strong><br><br><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_3a252f43-4fbd-4e44-adb3-547a6a254d53.png" alt=""><br><br><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_a16eeebf-f50f-4b51-b15e-5c6e26ef0d68.png" alt=""><br><br>&nbsp;<br><br><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_e5326512-f892-436b-9962-cd0ffca45816.png" alt=""><br><br><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_187449e3-4fe4-4cb2-90c5-a582bf94eb27.png" alt=""><br><br><strong>装到这一步，可以看到，可以查看到有很多的rpm**</strong>包没有，我们可以从安装linux<strong><strong>的光盘或ISO</strong></strong>中查找所缺的包，使用ftp<strong><strong>上传到linux</strong></strong>中，然后使用rpm&nbsp; –ivh&nbsp; xxx.rpm&nbsp; –nodeps –force&nbsp;<strong><strong>来进行安装（其中加上–nodeps – force&nbsp;</strong></strong>代表强制安装，是在直接使用rpm –ivh&nbsp; xxx.rpm<strong>**安装不成功的情况下用的）安装过程略。</strong><br><br><strong>方法一：将安装盘挂在到虚拟机上，去</strong><font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"><strong>/media/RHEL_6.2 x86_64 Disc 1/Packages 中</strong></span></font>
+
+<p><strong>执行 &nbsp;rpm&nbsp; –ivh&nbsp; xxx.rpm&nbsp; –nodeps –force&nbsp;</strong><font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"><strong>进行安装，</strong></span></font></p>
+<p>方法二：</p>
+<p>可以直接去网上下载 相关的<strong>xxx.rpm，然后进入目录，然后进行安装</strong></p>
+<p><strong>
+</strong></p>
+<p><strong>&nbsp;&nbsp;&nbsp;**</strong>等到把包全部都安装好的情况下，再次在oracle<strong><strong>图形界面中，执行安装过程2</strong></strong>，下来在环境检查过程中，就通过了。**</p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_5a256823-fb35-407f-b18e-7cfaeb21c7d1.png" alt=""></p>
+<p>安装完成后，系统会提示你需要用root权限执行2个shell脚本。按照其提示的路径，找到其所在的位置，如：我的就在/home/oracle/app/oracle/product/11.2.0/dbhome_1/root.sh</p>
+<p>和 /home/oracle/app/oraInventory/orainstRoot.sh&nbsp; 新开启一个终端，输入命令：</p>
+<table border="1" cellspacing="0" cellpadding="0" style="margin: 0px; padding: 0px; border: 1px solid silver; border-collapse: collapse; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 13px; line-height: 19.5px; background-color: rgb(255, 255, 255);"><tbody style="margin: 0px; padding: 0px;"><tr style="margin: 0px; padding: 0px;"><td valign="top" width="602" style="margin: 0px; padding: 3px; border: 1px solid silver; border-collapse: collapse;"><br><br>su – root<br><br>cd&nbsp; /home/oracle/app/oracle/product/11.2.0/dbhome_1<br><br>sh&nbsp; root.sh<br><br>cd /home/oracle/app/oraInventory<br><br>sh&nbsp; orainstRoot.sh<br></td></tr></tbody></table>
+
+<h2 id="数据库建库"><a href="#数据库建库" class="headerlink" title="数据库建库"></a>数据库建库</h2><p>1） 还是在oracle用户的图形界面oracle用户中，新开启一个终端，直接输入命令dbca会弹出如下界面。我们这里采用定制数据库。</p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_a9c76934-b202-4616-967c-d9bc9206f69d.png" alt=""></p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_529cb48f-98ae-4126-b3e5-e36337752d0d.png" alt=""></p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_7ec2473f-f4ae-4130-9194-834d8f07ca0c.png" alt=""></p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_91379ebd-22bf-4270-a5f2-e1638126b800.png" alt=""></p>
+<p>输入统一密码（也可以分别设置其密码）</p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_e72f5623-d84b-4350-9351-4e10cfada43b.png" alt=""></p>
+<p>数据库存放位置，我这里采用默认</p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_13c6be50-273e-4708-9fa5-24279d2e891b.png" alt=""></p>
+<p>不指定快速恢复和归档</p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_ba622dc8-5c0d-4f5c-878d-abcebc6b38d3.png" alt=""></p>
+<p>去掉不常用的模块</p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_972be2e1-2305-45a5-b79e-af9ae184c459.png" alt=""></p>
+<p>内存分配及指定字符集</p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_d66d16c4-d260-4f0c-973f-e32dced9301e.png" alt=""></p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_1c296757-912a-4ccd-b1c9-222e1534fb3a.png" alt=""></p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_0a571f56-44b6-4aac-a076-fd1ac2fa7a27.png" alt=""></p>
+<p>经过漫长的等待，当看到此界面，说明oracle建库完成</p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_058e0551-5d0a-4a8d-99e6-692cae9949c6.png" alt=""></p>
+<p>可以用sqlplus来检验下，新开启一个命令窗口，输入sqlplus，然后输入用户名和密码，可以测试下，这里就不做过多的介绍了。</p>
+<h2 id="配置监听及本地网络服务"><a href="#配置监听及本地网络服务" class="headerlink" title="配置监听及本地网络服务"></a>配置监听及本地网络服务</h2><p>1） 在oracle用户的图形界面oracle用户中，新开启一个终端，输入命令netca 会弹出如下界面。</p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_f7503380-62e9-4916-8773-2f099a116a0a.png" alt=""></p>
+<p>2）创建监听服务（充当oracle服务器，让别的oracle客户端连接本oracle服务器）</p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_0556415b-1d66-4d63-9e56-c28b140701e2.png" alt=""></p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_dbbcb459-a848-4877-82d9-c4825b86de8e.png" alt=""></p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_365e4e02-d948-4284-882f-3ce367878923.png" alt=""></p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_0172344e-cc3e-415b-a780-63782c7963f8.png" alt=""></p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_3ad65dcc-0198-4d5f-b333-a2a4bb9875a1.png" alt=""></p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_1a6d1b3f-001b-4de2-a2d9-41bf81bb3039.png" alt=""></p>
+<p>3）配置本地网络服务名（充当oracle客户端，连接别的oracle服务器）</p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_e89d5081-420e-45e6-83fd-9d1e1d2d0826.png" alt=""></p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_89a70a50-2bc6-4403-88a4-d35f2835185c.png" alt=""></p>
+<p>输入连接的oracle服务器的数据库的实例名</p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_f846b00f-8f43-47a1-9426-3fe14c3fac4d.png" alt=""></p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_469d6df1-4004-4ec0-89b9-a70188b635c1.png" alt=""></p>
+<p>输入oracle服务器的ip地址</p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_31cbb443-bdad-4742-a976-f8500061cc75.png" alt=""></p>
+<p>选中测试</p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_57329640-735b-4bce-83f9-fb4175329698.png" alt="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>点击change Login 输入所连接oracle服务器的其中某一个用户名和密码，点击OK</p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_147f86dc-47de-46e2-9705-d497b1a3a7ff.png" alt=""></p>
+<p>看到此界面说明测试成功（如果不成功，请查看网络是否畅通，所连接的oracle服务器是否启动，监听是否启动等原因)</p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_7c213699-8bfc-4c28-90b5-6704ef2bf622.png" alt="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>为你所设置的本地网络服务名起个名字</p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_58135a03-4800-4f05-8e8d-ca01b8d1023d.png" alt=""></p>
+<p>&nbsp;然后下一步，下一步即可</p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_63fa56f8-b42a-42c0-96d6-2a272f64803d.png" alt=""></p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_ddaf80d0-6dc5-48dd-9b7f-dabc79ca71fa.png" alt=""></p>
+<p>这样oracle服务器安装配置基本就完成了。</p>
+<p><strong>常见问题分析：</strong></p>
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"><strong>问题一：</strong></span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">vi .bash_profile 修改保存后报错：</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">“.bash_profile”&nbsp;</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">“.bash_profile” E212: Can’t open file for writing</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">Press ENTER or type command to continue</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">解决办法：</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">此问题是权限不够</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">chmod 755 .bash_profile，就可以了</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"><br></span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"><strong>问题二：</strong></span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">在执行检查的时候，会遇到check failed的情况，这是由于依赖包没有安装，可以根据check的情况，到网上下载相应的rpm包，使用：rpm -ivh ……rpm 安装</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">但是在oracle用户下无法执行rpm依赖包，因为权限不够</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">解决办法：</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">su到root用户下执行</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">备注：如何在linux下查看rpm包是否安装完毕，可以执行命令：rpm -q gcc cpp compat-libstdc++ glibc-devel kernel-headers binutils</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"><br></span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"><strong>问题三：</strong></span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">在linux下安装rpm包时经常会遇到下面这个问题： 例如：&nbsp;</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">[root@test Server]# rpm -ivh elfutils-libelf-devel-0.137-3.el5.i386.rpm&nbsp;</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">warning: elfutils-libelf-devel-0.137-3.el5.i386.rpm: Header V3 DSA signature: NOKEY, key ID 37017186</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">error: Failed dependencies:</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">elfutils-libelf-devel-static-i386 = 0.137-3.el5 is needed by elfutils-libelf-devel-0.137-3.el5.i386&nbsp;</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">解决办法：</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">遇到此问题时可以在安装rpm包命令的后面加两个参数：–nodeps –force</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">如 rpm -ivh elfutils-libelf-devel-0.137-3.el5.i386.rpm –nodeps –force</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">–nodeps意思是解决依赖问题</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">–force意思是强制安装</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"><br></span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"><strong>问题四：</strong></span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">安装过程中，会出现下面这句话：</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">Enter the full pathname of the local bin directory: [/usr/local/bin]:&nbsp;</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">解决办法：直接回车</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"><br></span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"><strong>问题五：</strong></span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">执行sqlplus时出错，错误信息如下：</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">cannot restore segment prot after reloc: Permission denied</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">解决办法：</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">原因是selinux的问题，selinux的设置太过严格导致的。解决的办法是在root用户下</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">编辑/etc/selinux/config，找到这段：</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"># This file controls the state of SELinux on the system.</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"># SELINUX= can take one of these three values:</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"># enforcing - SELinux security policy is enforced.</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"># permissive - SELinux prints warnings instead of enforcing.</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"># disabled - SELinux is fully disabled.</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">SELINUX=enforcing&nbsp;</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"><br></span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">把 SELINUX=enforcing 注释掉：#SELINUX=enforcing ，然后新加一行为：</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">SELINUX=disabled</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">保存，关闭。</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">……</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"><br></span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">编辑/etc/sysconfig/selinux，找到:</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"># This file controls the state of SELinux on the system.</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"># SELINUX= can take one of these three values:</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"># enforcing - SELinux security policy is enforced.</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"># permissive - SELinux prints warnings instead of enforcing.</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"># disabled - SELinux is fully disabled.</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">SELINUX=enforcing&nbsp;</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"><br></span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">如果SELINUX已经是 SELINUX=disabled，那么就不用改了，否则就把SELINUX=enforcing 注释掉，新加一行：</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">SELINUX=disabled</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">保存，退出。</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">重启电脑</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"><strong>问题六：</strong></span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">使用用户登录Oracle时报错：</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">ERROR:</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">ORA-01034: ORACLE not available</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">ORA-27101: shared memory realm does not exist</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">Linux Error: 2: No such file or directory</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">解决办法：</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">首先查看ORACLE_HOME 和ORACLE_SID是否正确，并且，ORACLE_HOME不能在尾部有斜杠“/”</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">[oracle@localhost ~]$ echo $ORACLE_HOME</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">/home/oracle/app/oracle/product/11.2.0/dbhome_1</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">[oracle@localhost ~]$ echo $ORACLE_SID</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">orcl</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">上面内容为正确结果</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"><br></span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">接着执行下面的语句便可解决此问题。</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">[oracle@localhost ~]$ sqlplus /nolog</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">SQL&gt; connect /as sysdba</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">Connected to an idle instance.</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">SQL&gt; startup</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">ORACLE instance started</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">执行完后，exit退出Oracle，然后用sqlplus重新登录测试。</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;">做到最后配置完监听后了</span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.800000190734863px; line-height: 19.5px;"><strong>问题七</strong></span></font>
+
+<font face="verdana, ms song, 宋体, Arial, 微软雅黑, Helvetica, sans-serif"><span style="font-size: 12.592592239379883px; line-height: 19.490739822387695px;">开始安装时候报如下错误</span></font>
+
+<p><table cellspacing="0" cellpadding="0" style="word-wrap: break-word; empty-cells: show; font-size: 12px; font-family: verdana, arial, helvetica; table-layout: fixed; width: 1633px; line-height: 18px; background-color: rgb(223, 223, 223);"><tbody style="word-wrap: break-word;"><tr style="word-wrap: break-word;"><td class="t_f" id="postmessage_19247432" style="word-wrap: break-word; font-size: 12px;">[<a href="http://www.itpub.net/tree/index_1/" target="_blank" rel="external">oracle</a>@localhost database]$ ./runInstaller<br>Starting Oracle Universal Installer…<br>Checking Temp space: must be greater than 80 MB.&nbsp; &nbsp;Actual 244 MB&nbsp; &nbsp; Passed<br>Checking swap space: must be greater than 150 MB.&nbsp; &nbsp;Actual 2015 MB&nbsp; &nbsp; Passed<br>Checking monitor: must be configured to display at least 256 colors<br>&nbsp; &nbsp; &gt;&gt;&gt; Could not execute auto check for display colors using command /usr/bin/xdpyinfo. Check if the DISPLAY variable is set.&nbsp; &nbsp; Failed &lt;&lt;&lt;&lt;<br>Some requirement checks failed. You must fulfill these requirements before<br>continuing with the installation,at which time they will be rechecked.<br>Continue? (y/n) [n] y</td></tr></tbody></table></p>
+<p>Rechecking installer requirements….<br>Preparing to launch Oracle Universal Installer from /tmp/OraInstall2012-03-23_02-36-20AM. Please wait …[oracle@localhost database]$ No protocol specified<br>Exception in thread “main” java.lang.InternalError: Can’t connect to X11 window server using ‘:0.0’ as the value of the DISPLAY variable.<br>at sun.awt.X11GraphicsEnvironment.initDisplay(Native Method)<br>at sun.awt.X11GraphicsEnvironment.access$000(X11GraphicsEnvironment.java:53)<br>at sun.awt.X11GraphicsEnvironment$1.run(X11GraphicsEnvironment.java:142)<br>at java.security.AccessController.doPrivileged(Native Method)<br>at sun.awt.X11GraphicsEnvironment.&lt;clinit&gt;(X11GraphicsEnvironment.java:131)<br>at java.lang.Class.forName0(Native Method)<br>at java.lang.Class.forName(Class.java:164)<br>at java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment(GraphicsEnvironment.java:68)<br>at java.awt.Window.init(Window.java:270)<br>at java.awt.Window.&lt;init&gt;(Window.java:318)<br>at java.awt.Frame.&lt;init&gt;(Frame.java:419)<br>at oracle.ewt.popup.PopupFrame.&lt;init&gt;(Unknown Source)<br>at oracle.ewt.lwAWT.BufferedFrame.&lt;init&gt;(Unknown Source)<br>at oracle.sysman.oio.oioc.OiocOneClickInstaller.&lt;init&gt;(OiocOneClickInstaller.java:328)<br>at oracle.sysman.oio.oioc.OiocOneClickInstaller.&lt;clinit&gt;(OiocOneClickInstaller.java:168)</p>
+<div style="color:gray"><br></div><br><span data-wiz-span="data-wiz-span" style="font-size: 9pt;">解决方案，重新启动redhat</span><div><span data-wiz-span="data-wiz-span" style="font-size: 9pt;"><strong>问题八</strong></span><br><div>系统无法正常<span data-wiz-span="data-wiz-span" style="font-size: 9pt;">安装</span><span data-wiz-span="data-wiz-span" style="color: rgb(0, 0, 0); text-decoration: none; font-family: 'Microsoft YaHei'; font-size: 9pt; line-height: 30px; background-color: rgb(255, 255, 255);"><a href="http://blog.csdn.net/claro/article/details/9044741" target="_blank" rel="external"><span data-wiz-span="data-wiz-span" style="font-size: 9pt;">pdksh-5.2.14</span></a></span></div><div>网上32位地址&nbsp;<span style="font-size: 14px; color: rgb(51, 51, 51); line-height: 26px; background-color: rgb(255, 255, 255);">[root@localhost oracle]#&nbsp;</span><span style="font-size: 14px; line-height: 26px; color: rgb(255, 0, 0); background-color: rgb(255, 255, 255);"><strong>wget <a href="http://mirror.centos.org/centos/5/os/i386/CentOS/pdksh-5.2.14-37.el5_8.1.i386.rpm" target="_blank" rel="external">http://mirror.centos.org/centos/5/os/i386/CentOS/pdksh-5.2.14-37.el5_8.1.i386.rpm</a> </strong></span></div><div>网上64位地址&nbsp;<span style="font-size: 14px; color: rgb(51, 51, 51); line-height: 26px; background-color: rgb(255, 255, 255);">[root@localhost oracle]#&nbsp;</span><span style="font-size: 14px; line-height: 26px; color: rgb(255, 0, 0); background-color: rgb(255, 255, 255);"><strong>wget&nbsp;</strong></span><strong><a href="http://mirror.centos.org/centos/5/os/x86_64/CentOS/pdksh-5.2.14-37.el5_8.1.x86_64.rpm**" target="_blank" rel="external">http://mirror.centos.org/centos/5/os/x86_64/CentOS/pdksh-5.2.14-37.el5_8.1.x86_64.rpm**</a></strong>&nbsp;<strong></strong></div><div><span style="line-height: 25.995370864868164px; background-color: rgb(255, 255, 255);">下载后正常安装~**</span></div><div><br></div><div><br><div style="color:gray"><small>来源：&nbsp;&lt;<a href="http://www.cnblogs.com/zhangyongli2011/archive/2012/04/04/2431953.html" target="_blank" rel="external">http://www.cnblogs.com/zhangyongli2011/archive/2012/04/04/2431953.html</a><small>&gt;</small></small></div><small><small>&nbsp;</small></small><br><br></div></div>
+
+<div><a href="http://www.wiz.cn/i/60efacb7" title="来自为知笔记(Wiz)" target="_blank" rel="external">来自为知笔记(Wiz)</a></div>
+
+<div><br><br>### 附件列表<br><br>*   <a href="https://rjgeek.github.io/images//2015/12/wpid-d05dfb1ccf777087cdffa7412207e1e0_pdksh-5.2.14.rar" target="_blank" rel="external">pdksh-5.2.14.rar</a></div>
+
+<p>&nbsp;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>your support will encourage me to continue to create!</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="RuJia Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/b15a2d7569b341bd4cbf61a9cfe6824c.html" rel="next" title="【Memcache】32位Linux下的Memcache安装">
+                <i class="fa fa-chevron-left"></i> 【Memcache】32位Linux下的Memcache安装
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/e3-80-90-e7-b3-bb-e7-bb-9f-e6-9e-b6-e6-9e-84-e3-80-91-e7-94-a8js-e8-ae-b0-e5-bd-95-e6-95-b4-e7-bd-91-e9-a1-b5-e7-9a-84-e5-8a-a0-e8-bd-bd-e6-97-b6-e9-95-bf.html" rel="prev" title="【系统架构】用JS记录整网页的加载时长">
+                【系统架构】用JS记录整网页的加载时长 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          <pre><code><b>版权声明</b>:自由转载-非商用-非衍生-保持署名<a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" rel="external nofollow" >(创意共享3.0许可证)</a></code></pre>
+
+
+
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="RuJia" />
+          <p class="site-author-name" itemprop="name">RuJia</p>
+          <p class="site-description motion-element" itemprop="description">BlockChain,Distributed Computing</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rjgeek/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Others">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Others
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cs.bham.ac.uk/~mdr/" title="Professor Mark Ryan" target="_blank" rel="external nofollow" >Professor Mark Ryan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cs.bham.ac.uk/~rzb/" title="Dr Rami Bahsoon" target="_blank" rel="external nofollow" >Dr Rami Bahsoon</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sec.cs.bham.ac.uk/people/" title="The Security and Privacy Group" target="_blank" rel="external nofollow" >The Security and Privacy Group</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.yfgeek.com/" title="YFGeek" target="_blank" rel="external nofollow" >YFGeek</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://rjgeek.github.io/CV1.pdf" title="My CV" target="_blank" rel="external nofollow" >My CV</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装环境"><span class="nav-number">1.</span> <span class="nav-text">安装环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统要求"><span class="nav-number">2.</span> <span class="nav-text">系统要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库建库"><span class="nav-number">3.</span> <span class="nav-text">数据库建库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置监听及本地网络服务"><span class="nav-number">4.</span> <span class="nav-text">配置监听及本地网络服务</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RuJia</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+  <span id="busuanzi_container_site_pv">
+    Total visited 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  
+  <span id="busuanzi_container_site_uv">
+  Total visitors 本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'ehcoo';
+      var disqus_identifier = '188e1d0b466344e2ecad5c1e1e53a293.html';
+      var disqus_title = "【Linux】Linux下安装Oracle11g服务器";
+      var disqus_url = 'http://www.ehcoo.com/188e1d0b466344e2ecad5c1e1e53a293.html';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

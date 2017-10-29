@@ -1,0 +1,946 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+<meta name="google-site-verification" content="LzR3qfX_YDfkNEusKegSylZBjqRw3vczTwICGpJ1GRI" />
+<meta name="baidu-site-verification" content="IhNq56RJS1" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Ehcoo" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="导读：技术的进步源于需求的推动，在原始时代，单兵作战的服务器节点很容易满足零星的访问和简单的业务,随着系统业务复杂度增加，访问流量的不断增加，单兵作战的服务器很难招架住千万人的“同时蹂躏”，在此种情形下有以下方案可供选择，A选择性能更加优良的服务器（几乎不可行），B垂直拆分系统，将不同的模块（业务）分散到不同的机器上。C水平拓展，将系统整体分担到不同的机器上，D.同时运用垂直拆分与水平拓展，用某社">
+<meta name="keywords" content="BlockChain,Distributed Computing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【系统架构】高性能网站的十大原则，系统拆分">
+<meta property="og:url" content="http://www.ehcoo.com/837335d0d798fb1f51576f90057bd463.html">
+<meta property="og:site_name" content="Ehcoo">
+<meta property="og:description" content="导读：技术的进步源于需求的推动，在原始时代，单兵作战的服务器节点很容易满足零星的访问和简单的业务,随着系统业务复杂度增加，访问流量的不断增加，单兵作战的服务器很难招架住千万人的“同时蹂躏”，在此种情形下有以下方案可供选择，A选择性能更加优良的服务器（几乎不可行），B垂直拆分系统，将不同的模块（业务）分散到不同的机器上。C水平拓展，将系统整体分担到不同的机器上，D.同时运用垂直拆分与水平拓展，用某社">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-27ce07d9fca4b0cf6baddc653d9193fb_4a5f8d63-2bfe-406f-84fd-af8a01f12e4d.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-27ce07d9fca4b0cf6baddc653d9193fb_9e3efe43-86ac-478b-a7c7-0ee29365061b.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-27ce07d9fca4b0cf6baddc653d9193fb_bb2b57bf-5ea0-439d-8be2-161587aa6ebc.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-27ce07d9fca4b0cf6baddc653d9193fb_0f7e2e13-61f3-4373-af82-7904ffde9c0f.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-27ce07d9fca4b0cf6baddc653d9193fb_f8140999-30ec-4590-9ef6-e601daef6188.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-27ce07d9fca4b0cf6baddc653d9193fb_ef88cabb-7820-4047-871d-765a0af377b1.png">
+<meta property="og:updated_time" content="2017-10-29T15:38:31.046Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【系统架构】高性能网站的十大原则，系统拆分">
+<meta name="twitter:description" content="导读：技术的进步源于需求的推动，在原始时代，单兵作战的服务器节点很容易满足零星的访问和简单的业务,随着系统业务复杂度增加，访问流量的不断增加，单兵作战的服务器很难招架住千万人的“同时蹂躏”，在此种情形下有以下方案可供选择，A选择性能更加优良的服务器（几乎不可行），B垂直拆分系统，将不同的模块（业务）分散到不同的机器上。C水平拓展，将系统整体分担到不同的机器上，D.同时运用垂直拆分与水平拓展，用某社">
+<meta name="twitter:image" content="https://rjgeek.github.io/images//2015/12/wpid-27ce07d9fca4b0cf6baddc653d9193fb_4a5f8d63-2bfe-406f-84fd-af8a01f12e4d.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.ehcoo.com/837335d0d798fb1f51576f90057bd463.html"/>
+
+
+  <title> 【系统架构】高性能网站的十大原则，系统拆分 | Ehcoo </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="default">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?83e3b6b55c0e48f5d0848d6a14b76c02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+  
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ehcoo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about-me" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                【系统架构】高性能网站的十大原则，系统拆分
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-02-07T23:41:20+00:00" content="2015-02-07">
+              2015-02-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/系统架构/" itemprop="url" rel="index">
+                    <span itemprop="name">系统架构</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/837335d0d798fb1f51576f90057bd463.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="837335d0d798fb1f51576f90057bd463.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+		  
+          
+          
+
+          
+		 
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <div>导读：</div><div>技术的进步源于需求的推动，在原始时代，单兵作战的服务器节点很容易满足零星的访问和简单的业务,<span style="font-size: 10.5pt; line-height: 1.5;">随着系统业务复杂度增加，访问流量的不断增加，</span><span style="font-size: 10.5pt; line-height: 1.5;">单兵作战的服务器</span><span style="font-size: 10.5pt; line-height: 1.5;">很难招架住千万人的“同时蹂躏”，</span><span style="font-size: 10.5pt; line-height: 1.5;">在此种情形下有以下方案可供选择，A选择性能更加优良的服务器（几乎不可行），B垂直拆分系统，将不同的模块（业务）分散到不同的机器上。C水平拓展，将系统整体分担到不同的机器上，D.同时运用垂直拆分与水平</span><span style="font-size: 10.5pt; line-height: 1.5;">拓展，用某社交网站的架构图展示如下：</span></div><a id="more"></a><div><img src="https://rjgeek.github.io/images//2015/12/wpid-27ce07d9fca4b0cf6baddc653d9193fb_4a5f8d63-2bfe-406f-84fd-af8a01f12e4d.png" alt=""><img src="https://rjgeek.github.io/images//2015/12/wpid-27ce07d9fca4b0cf6baddc653d9193fb_9e3efe43-86ac-478b-a7c7-0ee29365061b.png" alt=""><img src="https://rjgeek.github.io/images//2015/12/wpid-27ce07d9fca4b0cf6baddc653d9193fb_bb2b57bf-5ea0-439d-8be2-161587aa6ebc.png" alt="">&nbsp;&nbsp;</div><div><span style="font-size: 10.5pt; line-height: 1.5;">本文旨在到讨论</span><span style="font-size: 10.5pt; line-height: 1.5;">垂直拆分系统，所涉及的问题的如下</span></div><div><span style="font-size: 10.5pt; line-height: 1.5;">1.为什么需要系统拆分？</span></div><div>2.系统拆分的一般原则</div><div>3.系统拆分所面临的额外的问题</div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp;&nbsp;</span><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp;&nbsp;</span><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp;</span><span style="font-size: 10.5pt; line-height: 1.5;">3.1系统拆分后的数据同步问题</span></div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp;&nbsp;</span><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp;&nbsp;</span><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp;</span><span style="font-size: 10.5pt; line-height: 1.5;">3.2</span><span style="font-size: 10.5pt; line-height: 1.5;">查分后系统之间的通信问题，接口标准化</span><span style="font-size: 10.5pt; line-height: 1.5;"><br></span></div><div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp;&nbsp;</span><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp;&nbsp;</span><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp;3.3</span><span style="font-size: 10.5pt; line-height: 1.5;">系统拆分后单点的问题</span></div></div><div>4.浅谈数据库拆分的策略</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4.1关系型数据库的拆分</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4.2非关系型数据库的拆分</div><div><br></div><div>1.为什么需要系统拆分？<span style="font-size: 10.5pt; line-height: 1.5;"><br></span></div><div>&nbsp; 性能考虑 ：<span style="font-size: 10.5pt; line-height: 1.5;">一个大的系统，往往其中的某个部分，承担了很大的并发压力，或者逻辑运算特别复杂，因此成为系统的性能瓶颈</span><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp;，</span><span style="font-size: 10.5pt; line-height: 1.5;">这时就可以考虑将这部分独立出来，从而实现单独部署，再通过负载均衡等手段，来解决性能的问题</span><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp;</span></div>&nbsp; 逻辑清晰&nbsp;：<span style="font-size: 10.5pt; line-height: 1.5;">根据业务上、流程上的不同环节，将整个系统拆分为不同的子系统，在逻辑上会更加清晰，从而更容易在架构上说清楚，或者进一步做优化</span><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp;</span><div>&nbsp; 分而治之 ：减少系统之间的耦合，一个模块出问题，不影响其他模块的运行，同时在开发时可以减少代码冲突</div><div>&nbsp; 流量限定：将大流量的业务单独剥离出来，提升系统的可控制性</div><div>&nbsp; 便于管理：随着业务的发展，模块之间的耦合性越来越强 ；<span style="font-size: 10.5pt; line-height: 1.5;">开发人员越来越多，相互之间代码版本也难以管理</span></div><div><br><div>2.系统拆分的一般原则<span style="font-size: 10.5pt; line-height: 1.5;"><br></span></div><div>&nbsp; &nbsp;按照业务应用拆分：一般的企业内部都是按照业务增长方式比较多，所以随着业务的增加，将系统进行拆分的是比较多的，也就是将一个较大的系统拆分为多个小的系统</div><div>&nbsp; &nbsp;按照系统瓶颈拆分：当系统做庞大后，不不同的功能点会遇到不同的瓶颈，如安全瓶颈，性能瓶颈等，通过拆分可以解决此类问题</div><div>&nbsp; &nbsp;单节点机器的限制：单个节点机器的CPU处理能力，硬盘存储有限，例如：当单节点上的硬盘容量不足时必须进行转移处理，如采用部分转移，拆分则是一个良策</div><div><br></div><div>3.系统拆分面临的额外的问题<br></div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-size: 10.5pt; line-height: 1.5;">3.1系统拆分后的数据同步问题</span><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp; &nbsp;</span></div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;业务拆分后最好能同时进行数据拆分，减少数据之间的耦合，降低数据层面出问题的可能，一旦数据被拆分，则会面临数据之间的同步的问题，如在京东上下单后，一部分数据流入支付入口，另一部分数据流入</span></div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp;物流入口，处理数据同步问题从根本上讲有两种解决方案，一种是时钟同步，另一种是条件触发,条件触发可以从数据库层面考虑（触发器，数据库链路），也可以从应用的角度上去做，如下图所示</span></div><div><span style="font-size: 10.5pt; line-height: 1.5;"><br></span></div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp;</span><img src="https://rjgeek.github.io/images//2015/12/wpid-27ce07d9fca4b0cf6baddc653d9193fb_0f7e2e13-61f3-4373-af82-7904ffde9c0f.png" alt=""></div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3.2</span><span style="font-size: 10.5pt; line-height: 1.5;">查分后系统之间的通信问题，接口标准化</span></div><div>&nbsp;&nbsp;&nbsp;当系统被拆分后，面临的另一个问题就是以前是属于一个工程内部的系统，相互之间的调用就可以直接调用到，现在很麻烦，要两边来做接口，接口还得联调，尤其是两个厂商之间来联调尤其繁琐，无规矩不成方圆，</div><div>&nbsp; &nbsp;接口之间尽量标准化，这样在后期的维护可以减少不必要的麻烦，服务器之前常用的通信方式，有以下几种webservice，java RMI ,或者直接使用<span style="font-size: 10.5pt; line-height: 1.5;">socket,下面将一一分解</span></div><div>&nbsp; &nbsp;有关通信就说到早期的socket，这个socket虽然是最古老的技术，不过它也算是目前所有网络技术衍生的基石，网络的交互的不断优化过程就是socket特征不断变化的过程。<span style="font-size: 10.5pt; line-height: 1.5;">说到socket就是编写程序比较麻烦，</span></div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp; 双方调用和接受都需要编写 &nbsp; 单独程序去通信，要求传输的内容都可以被序列化，写的一方有点类似于写文件，读的一方有点类似读文件，不过它也是使用IO本身的一种方法去通信；很多程序员初手在调用完了也会搞忘把socket关掉。</span></div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp; 面对java想要把底层封装的，而且尽量减少程序员的错误，所以RMI诞生了，远程方法调用诞生了，RMI是jvm自己封装的一种远程方法调用的协议，中间通过对象序列化来完成，调用方需要有远程的接口，由于RMI本身调用过程中配置 比较麻烦，但是又有了这种技术，于是EJB诞生了，EJB在RMI的基础上衍生出标准化的分布式编程模型，不过它都是基于RMI来编写的，主要目的是将业务和VIEW分解开，不过它是物理上将其分开了，在部署和调试程序上相对比较困难，最头痛的就是RMI里头在调用完后会自己做一个System.gc()方法，将会导致Full GC，于此同时衍生出不同厂商不同</span><span style="font-size: 10.5pt; line-height: 1.5;">系统</span><span style="font-size: 10.5pt; line-height: 1.5;">的通信方法也是沿用EJB，是的各个工程里头都有和自己不想管的</span><span style="font-size: 10.5pt; line-height: 1.5;">系统</span><span style="font-size: 10.5pt; line-height: 1.5;">的代码和jar包，Perm区域增加的开销暂时忽略掉，不过</span><span style="font-size: 10.5pt; line-height: 1.5;">系统</span><span style="font-size: 10.5pt; line-height: 1.5;">的移植性和产品化就出现了很多困难（如果在另一个地方要发布同样的</span><span style="font-size: 10.5pt; line-height: 1.5;">系统</span><span style="font-size: 10.5pt; line-height: 1.5;">，但是这个</span><span style="font-size: 10.5pt; line-height: 1.5;">系统</span><span style="font-size: 10.5pt; line-height: 1.5;">中有很多外部调用需要，要么最后工程鱼龙混杂，要么要把这些东西分解出来是很困难的事情，甚至于会报一些诡异的错误）</span></div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp; 后来基于RPC的webservice出来了，它跨语言，因为它传递过程中你可以认为它不是传递对象（后来EJB也把它融进去了），不过我们很多时候还是喜欢用spring来集成它，高版本的webservice可以通过注解完成大部分的工作，不过tomcat发布这个玩意一直不是很好用；另外Spring里头也提供了对于RMI本身的封装的支持，以及spring hessian也是非常不错的交互框架，而且spring是轻量级的，越来越多的人开始选择spring了，因为EJB很多功能它都有，没有的大部分东西也不想要，用了EJB还有各种各样的</span><span style="font-size: 10.5pt; line-height: 1.5;">问题</span><span style="font-size: 10.5pt; line-height: 1.5;">。</span></div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp; 最最简单的交互方法，HttpClient，这种是apache组织提供的一种非常轻量级的交互方法，其实也是基于socket写的，因为浏览器本身和服务器交互也是一种socket，只是建立了协议包头和一些短连接机制；所以HttpClient就是使用socket模拟的一个浏览器客户端发起的一次提交操作，可以发起Get和POST的请求，也可以控制参数的传递的字符集等等，传递和结果信息由双方决定；服务方只需要通过正常的response输出数据即可，只是这个时候不是输出一个页面，而是输出一些客户端可以被解释的数据，如json结构或xml结构的字符串信息。</span></div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp; 总之，</span><span style="font-size: 10.5pt; line-height: 1.5;">系统</span><span style="font-size: 10.5pt; line-height: 1.5;">一旦拆分，通信是避免不了，从这里也可以看出，并不是</span><span style="font-size: 10.5pt; line-height: 1.5;">系统</span><span style="font-size: 10.5pt; line-height: 1.5;">想怎么拆分就怎么拆分的，要尽量减少相互之间的通信，就需要了解</span><span style="font-size: 10.5pt; line-height: 1.5;">系统</span><span style="font-size: 10.5pt; line-height: 1.5;">，做到</span><span style="font-size: 10.5pt; line-height: 1.5;">系统</span><span style="font-size: 10.5pt; line-height: 1.5;">的低耦合、高内聚，减少外部依赖，不然</span><span style="font-size: 10.5pt; line-height: 1.5;">系统</span><span style="font-size: 10.5pt; line-height: 1.5;">大部分时间就在通信了，没有做其他的事情，不过也不排除有这种情况，那就是有些</span><span style="font-size: 10.5pt; line-height: 1.5;">系统</span><span style="font-size: 10.5pt; line-height: 1.5;">是专门用来做通信的，这种</span><span style="font-size: 10.5pt; line-height: 1.5;">系统</span><span style="font-size: 10.5pt; line-height: 1.5;">可以例外，它处理的核心就是通信处理，做中间转换。其余的业务</span><span style="font-size: 10.5pt; line-height: 1.5;">系统</span><span style="font-size: 10.5pt; line-height: 1.5;">尽量做到减少通信的模块数量。</span></div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3.3</span><span style="font-size: 10.5pt; line-height: 1.5;">系统拆分后单点的问题</span></div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp; &nbsp;关于系统拆分后的单点问题，下面的文章会详细讲解</span></div><div>4.<span style="font-size: 10.5pt; line-height: 1.5;">浅谈数据库拆分的策略</span></div><div>&nbsp; &nbsp; &nbsp; 首先，前端有压力，数据库自然也有，而且数据库压力肯定比前端压力会更多（当然前端可以采用很多缓存技术来环节数据库的压力），数据库的复杂性比前端要更多，因为它是数据的核心，需要对数据库的安全、一致性等做保障，<br></div><div>鉴于以上原因，需要对需要对数据库进行<span style="font-size: 10.5pt; line-height: 1.5;">拆分，下面对数据库拆分进行简单的介绍</span></div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp; &nbsp;</span><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp;4.1</span><span style="font-size: 10.5pt; line-height: 1.5;">关系型数据库的拆分</span></div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4.1.1数据跟随业务拆分，</span><span style="font-size: 10.5pt; line-height: 1.5;">每个服务单独使用一个数据库Schema(垂直拆分）</span></div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4.1.2简单的表分区，提高数据库查询的性能</span><span style="font-size: 10.5pt; line-height: 1.5;"><br></span></div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="font-size: 10.5pt; line-height: 1.5;">4.1.2</span><span style="font-size: 10.5pt; line-height: 1.5;">如果数据量很大，数据库扛不住，还可能需要做缓存&amp;数据库的水平拆分（相同的数据库分解到多个物理库中）&nbsp;</span></div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span>&nbsp; &nbsp; &nbsp; &nbsp;传统应用中的range分区，如果用在分布式上，就是放在多个主机上的多个库上的多个表，这种用于自动增长列或时间上比较多，需要提前预知数据增长量，假设数据平稳增长</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; A中存储3个月的数据就达到上限，第四个月时开始添加B，以后几个月的几个月的数据全部落到B中，这种方式比较容易理解，</div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><img src="https://rjgeek.github.io/images//2015/12/wpid-27ce07d9fca4b0cf6baddc653d9193fb_f8140999-30ec-4590-9ef6-e601daef6188.png" alt=""></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;但是存在一个比较严重的问题，<span style="font-size: 10.5pt; line-height: 1.5;">&nbsp;</span><span style="font-size: 10.5pt; line-height: 1.5;">这种拆分Insert操作始终落在最后一台机器的最后一个表的最后一个block上，如果</span><span style="font-size: 10.5pt; line-height: 1.5;">每秒有几千个insert和</span><span style="font-size: 10.5pt; line-height: 1.5;">update、delete</span><span style="font-size: 10.5pt; line-height: 1.5;">这样做肯定是不行的，热块将严重影响数据库的性能</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;为了解决热块的问题，开始对数据库进行负载均衡，负载均衡最常用的策略就是hash算法，<span style="font-size: 10.5pt; line-height: 1.5;">hash算法最简单的就是求模，如将一个表拆分为100个表，那么按照绝大部分情况按照某个编号去求模得到的是0-99之间的数据，这一百个表编号为0-99，分别对应存储即可，无论是自动增长还是非自动增长也不太可能落在同一个表上面去；而对于某些热点用户，如果按照用户拆分，这些热点用户的访问就会被反复访问到同一个表，比如类似微博这种东西，也许某个热门人物的他的好友个数就会非常多，可能会导致某个表非常大，所以为了缓解这种问题，我们会再做二次hash；而对于一些非数字类的数据，我们一般会采取对其前几个字符的ascii或者hash值等取出来做操作，具体看实际情况而定；</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<img src="https://rjgeek.github.io/images//2015/12/wpid-27ce07d9fca4b0cf6baddc653d9193fb_ef88cabb-7820-4047-871d-765a0af377b1.png" alt=""><span style="font-size: 10.5pt; line-height: 1.5;"><br></span></div><div>&nbsp; &nbsp; &nbsp;&nbsp;</div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp;</span><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp;4.2非</span><span style="font-size: 10.5pt; line-height: 1.5;">关系型数据库的拆分</span><span style="font-size: 10.5pt; line-height: 1.5;"><br></span></div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp; &nbsp; &nbsp;非关系型的数据库的拆分以mongodb为代表，详细请参考</span></div><div><br></div><div><br></div>
+
+<p>&nbsp; &nbsp;&nbsp;</p>
+<p><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp; &nbsp;</span></p>
+<div><br></div><div><br></div>版权声明：文章中的观点或直接饮用，均会在下面列出<br><div style="color:gray"><small><a href="http://www.verydemo.com/demo_c161_i59302.html" target="_blank" rel="external">http://www.verydemo.com/demo_c161_i59302.html</a></small></div><div><font color="#808080"><a href="http://www.iteye.com/topic/1128856" target="_blank" rel="external">http://www.iteye.com/topic/1128856</a></font><br></div><div><a href="http://www.iteye.com/problems/99893" target="_blank" rel="external">http://www.iteye.com/problems/99893</a></div><div> <a href="http://blog.csdn.net/tujiyue/article/details/7222309" target="_blank" rel="external">http://blog.csdn.net/tujiyue/article/details/7222309</a><br></div><small><small>&nbsp;</small></small><div>&nbsp; &nbsp;</div><div><span style="background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-size: 16px; line-height: 26px;">&nbsp;&nbsp;</span></div><div><br></div><div><br></div><br><div><br><div><br></div></div></div>
+
+<div><a href="http://www.wiz.cn/i/60efacb7" title="来自为知笔记(Wiz)" target="_blank" rel="external">来自为知笔记(Wiz)</a></div>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>your support will encourage me to continue to create!</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="RuJia Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/99cbe0dfe754af1522fea6f3a61ada14.html" rel="next" title="【Oracle】查询锁表的用户并处理">
+                <i class="fa fa-chevron-left"></i> 【Oracle】查询锁表的用户并处理
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/e3-80-90-e7-bc-96-e7-a8-8b-e8-af-ad-e8-a8-80-e3-80-91-e9-81-bf-e5-85-8d-e5-88-9b-e5-bb-ba-e4-b8-8d-e5-bf-85-e8-a6-81-e7-9a-84-e5-af-b9-e8-b1-a1.html" rel="prev" title="【编程语言】避免创建不必要的对象">
+                【编程语言】避免创建不必要的对象 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          <pre><code><b>版权声明</b>:自由转载-非商用-非衍生-保持署名<a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" rel="external nofollow" >(创意共享3.0许可证)</a></code></pre>
+
+
+
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="RuJia" />
+          <p class="site-author-name" itemprop="name">RuJia</p>
+          <p class="site-description motion-element" itemprop="description">BlockChain,Distributed Computing</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rjgeek/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Others">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Others
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cs.bham.ac.uk/~mdr/" title="Professor Mark Ryan" target="_blank" rel="external nofollow" >Professor Mark Ryan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cs.bham.ac.uk/~rzb/" title="Dr Rami Bahsoon" target="_blank" rel="external nofollow" >Dr Rami Bahsoon</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sec.cs.bham.ac.uk/people/" title="The Security and Privacy Group" target="_blank" rel="external nofollow" >The Security and Privacy Group</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.yfgeek.com/" title="YFGeek" target="_blank" rel="external nofollow" >YFGeek</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://rjgeek.github.io/CV1.pdf" title="My CV" target="_blank" rel="external nofollow" >My CV</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RuJia</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+  <span id="busuanzi_container_site_pv">
+    Total visited 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  
+  <span id="busuanzi_container_site_uv">
+  Total visitors 本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'ehcoo';
+      var disqus_identifier = '837335d0d798fb1f51576f90057bd463.html';
+      var disqus_title = "【系统架构】高性能网站的十大原则，系统拆分";
+      var disqus_url = 'http://www.ehcoo.com/837335d0d798fb1f51576f90057bd463.html';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

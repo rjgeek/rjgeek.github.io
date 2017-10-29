@@ -1,0 +1,977 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+<meta name="google-site-verification" content="LzR3qfX_YDfkNEusKegSylZBjqRw3vczTwICGpJ1GRI" />
+<meta name="baidu-site-verification" content="IhNq56RJS1" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Ehcoo" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbs">
+<meta name="keywords" content="BlockChain,Distributed Computing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【系统架构】用JS记录整网页的加载时长">
+<meta property="og:url" content="http://www.ehcoo.com/e3-80-90-e7-b3-bb-e7-bb-9f-e6-9e-b6-e6-9e-84-e3-80-91-e7-94-a8js-e8-ae-b0-e5-bd-95-e6-95-b4-e7-bd-91-e9-a1-b5-e7-9a-84-e5-8a-a0-e8-bd-bd-e6-97-b6-e9-95-bf.html">
+<meta property="og:site_name" content="Ehcoo">
+<meta property="og:description" content="&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbs">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-9f1d3d4edf1662ebdd9ebe757beff4e5_23045559.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-9f1d3d4edf1662ebdd9ebe757beff4e5_clip_image002b2db1ce8-b7e2-4467-9d40-fa327ed55aae.jpg">
+<meta property="og:updated_time" content="2017-10-29T15:38:31.054Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【系统架构】用JS记录整网页的加载时长">
+<meta name="twitter:description" content="&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbs">
+<meta name="twitter:image" content="https://rjgeek.github.io/images//2015/12/wpid-9f1d3d4edf1662ebdd9ebe757beff4e5_23045559.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.ehcoo.com/e3-80-90-e7-b3-bb-e7-bb-9f-e6-9e-b6-e6-9e-84-e3-80-91-e7-94-a8js-e8-ae-b0-e5-bd-95-e6-95-b4-e7-bd-91-e9-a1-b5-e7-9a-84-e5-8a-a0-e8-bd-bd-e6-97-b6-e9-95-bf.html"/>
+
+
+  <title> 【系统架构】用JS记录整网页的加载时长 | Ehcoo </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="default">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?83e3b6b55c0e48f5d0848d6a14b76c02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+  
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ehcoo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about-me" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                【系统架构】用JS记录整网页的加载时长
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2014-08-22T18:41:38+00:00" content="2014-08-22">
+              2014-08-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/系统架构/" itemprop="url" rel="index">
+                    <span itemprop="name">系统架构</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/e3-80-90-e7-b3-bb-e7-bb-9f-e6-9e-b6-e6-9e-84-e3-80-91-e7-94-a8js-e8-ae-b0-e5-bd-95-e6-95-b4-e7-bd-91-e9-a1-b5-e7-9a-84-e5-8a-a0-e8-bd-bd-e6-97-b6-e9-95-bf.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="e3-80-90-e7-b3-bb-e7-bb-9f-e6-9e-b6-e6-9e-84-e3-80-91-e7-94-a8js-e8-ae-b0-e5-bd-95-e6-95-b4-e7-bd-91-e9-a1-b5-e7-9a-84-e5-8a-a0-e8-bd-bd-e6-97-b6-e9-95-bf.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+		  
+          
+          
+
+          
+		 
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-用JS记录整网页的加载时长"><a href="#nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-用JS记录整网页的加载时长" class="headerlink" title="&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 用JS记录整网页的加载时长"></a><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 用JS记录整网页的加载时长</strong></h2><a id="more"></a>
+<p><strong>&nbsp; &nbsp; &nbsp; &nbsp;导读：</strong></p>
+<div>&nbsp; &nbsp; &nbsp; &nbsp;随着浏览器的发展的发展，现行的浏览器的插件已经提供了查看时间轨迹的工具，如IE的内置调试工具,火狐的firedug,httpWatch等，为单次调制提供了很大极大便利</div><div>&nbsp; &nbsp; &nbsp; &nbsp;但是如果对于获取多个用户的页面打开统计时长，仍然比较棘手，常用的方式是在服务端进行时间的处理，但是这样会忽略网络请求和网络发送的时长，为了解决这些问题</div><div>&nbsp; &nbsp; &nbsp; &nbsp;可以考虑在浏览中运用JS来记录整个页面的所有加载全部时长。</div><div><br></div><div>　 &nbsp; &nbsp;1.几种常见触发函数的理解<br>　　2.如何判断页面是刷新还是关闭？<br>　　3.深入思考页面的开始渲染时间<br>　　4.前后页面的通讯方式<div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp; &nbsp; &nbsp; 5.获取计算页面加载完成的时间</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; 6.本次计算加载时长最终采用方案</div><div>&nbsp; &nbsp; &nbsp; &nbsp; 7.与真实时间的差异性对比<br><br><strong><font color="#32cd32">　</font>　1.几种常见触发函数的理解</strong><br><div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;pln&quot;&gt;unload&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;，&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;onbeforeunload&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;都是在刷新或关闭时调用，可以在&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;脚本中通过&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;onunload&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;来指定或者在&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;里指定。&lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;pun&quot;&gt;区别在于&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;onbeforeunload&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;在&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;onunload&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;之前执行，它还可以阻止&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;onunload&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;的执行。&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; 　　&lt;/span&gt;</code><br>3.  <code>&lt;span class=&quot;typ&quot;&gt;Onbeforeunload&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;也是在页面刷新或关闭时调用，&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Onbeforeunload&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;是正要去服务器读取新的页面时调用，此时还没开始读取；&lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;pln&quot;&gt;onunload&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;则已经从服务器上读到了需要加载的新的页面，在即将替换掉当前页面时调用。&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Onunload&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;是无法阻止页面的更新和关闭的。而&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Onbeforeunload&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;可以做到。&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>5.  <code>&lt;span class=&quot;pun&quot;&gt;页面加载时只执行&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;onload &lt;/span&gt;</code><br>6.  <code>&lt;span class=&quot;pun&quot;&gt;页面关闭时先执行&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;onbeforeunload&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;，最后&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;onunload &lt;/span&gt;</code><br>7.  <code>&lt;span class=&quot;pun&quot;&gt;页面刷新时先执行&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;onbeforeunload&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;，然后&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;onunload&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;，最后&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;onload&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;。&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code></pre></div></div><div>&gt; &gt; &nbsp; <strong>&nbsp; &nbsp;&nbsp;2.如何判断页面是刷新还是关闭？<font face="Microsoft YaHei UI">&nbsp;</font><font face="Microsoft YaHei UI">&nbsp; <font color="#32cd32">&nbsp;&nbsp;</font></font></strong><font face="Microsoft YaHei UI"><strong>&nbsp;</strong> &nbsp;&nbsp;</font><div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;pln&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;onbeforeunload&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(){&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;kwd&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;clientX&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;clientWidth &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; event&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;clientY &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;||&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; event&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;altKey&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;){&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>3.  <code>&lt;span class=&quot;pln&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;你关闭了浏览器&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>5.  <code>&lt;span class=&quot;pln&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;你正在刷新页面&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>6.  <code>&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>7.  <code>&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code></pre></div><div><font color="#32cd32">&nbsp; &nbsp;<strong> &nbsp;&nbsp; </strong></font><strong>3.深入思考页面的开始渲染时间</strong></div></div><div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;typ&quot;&gt;Onunload&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;，&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;onbeforeunload&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;都是在刷新或关闭时调用，可以在中第一句话开始，获取当前时间作为开始时间，这样得到的时间实际上忽略了去服务器请求的时间与部分页面渲染的时间&lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;pun&quot;&gt;按照&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;中说法，对于首次请求的时间应该有服务器开始处理的时间（忽略了请求时间）对于刷新页面的开始时间应该是上一个页面的关闭后开始去服务器请求的时间，也就是&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Onbeforeunload&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;调用时间&lt;/span&gt;</code></pre></div><div><br><br><strong>　<font color="#32cd32">　</font>4.前后页面的通讯方式</strong><br><div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;pun&quot;&gt;如果放在同一页面中设置全局变量，刷新时无法计算，所以页面刷新的介质一般是&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;cookie&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;，需要注意的是及时对&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;cookie&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;进行清理&lt;/span&gt;</code></pre></div>
+
+<p><strong>　　5.获取计算页面加载完成的时间</strong></p>
+<div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;pun&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: &#39;Microsoft YaHei UI&#39;, &#39;Microsoft YaHei&#39;, SimSun, &#39;Segoe UI&#39;, Tahoma, Helvetica, sans-serif, &#39;Microsoft YaHei&#39;, Georgia, Helvetica, Arial, sans-serif, 宋体, PMingLiU, serif; line-height: 16.799999237060547px; white-space: normal;&quot;&gt;a.常用方式，页面加载完成时会调用onload函数，获取onload中时间即为结束时间，问题：若是主框架中还有异步请求服务器的请求，并不能准确方式判断异步请求的结束时间，若解决这个问题则可以采用以下方式&lt;/span&gt;
+&lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;pun&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;</code><br>3.  <code>&lt;span class=&quot;pun&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;pun&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;script type&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;</code><br>5.  <code>&lt;span class=&quot;kwd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; load&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;()&lt;/span&gt;</code><br>6.  <code>&lt;span class=&quot;pun&quot;&gt;{&lt;/span&gt;</code><br>7.  <font color="#93a1a1">//在此处获取时间</font><br>8.  <code>&lt;span class=&quot;pln&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;Page is loaded&quot;&lt;/span&gt;</code><br>9.  <code>&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;</code><br>10.  <code>&lt;span class=&quot;pun&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;</code><br>11.  <code>&lt;span class=&quot;pun&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;</code><br>12.  <code>&lt;span class=&quot;pun&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;body onload&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;load()&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;</code><br>13.  <code>&lt;span class=&quot;pun&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;</code><br>14.  <code>&lt;span class=&quot;pun&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;</code></pre></div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></div><div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;com&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: &#39;Microsoft YaHei UI&#39;, &#39;Microsoft YaHei&#39;, SimSun, &#39;Segoe UI&#39;, Tahoma, Helvetica, sans-serif, &#39;Microsoft YaHei&#39;, Georgia, Helvetica, Arial, sans-serif, 宋体, PMingLiU, serif; line-height: 16.799999237060547px; white-space: normal;&quot;&gt;b.基于检查的计算时间方式，确定页面全部加载完成标志元素，比如页面的某个元素加载成功,每隔一段时间去检查页面上是否已经含有此元素，若含有则停止检查，执行操作&lt;/span&gt;
+&lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;com&quot;&gt;/*********记录日志开始************/&lt;/span&gt;</code><br>3.  <code>&lt;span class=&quot;kwd&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; ssoTime &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; getCookie&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;enterHomeTime&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;com&quot;&gt;//获取SSO的跳转成功的时间&lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;kwd&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; freTime &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; parent&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;freTime&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;             &lt;/span&gt;&lt;span class=&quot;com&quot;&gt;//获取main页面刚进入的时间&lt;/span&gt;</code><br>5.  <code>&lt;span class=&quot;kwd&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; mlen &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;</code><br>6.  <code>&lt;span class=&quot;kwd&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; mindex &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;</code><br>7.  <code>&lt;span class=&quot;kwd&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;setInterval&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(){&lt;/span&gt;</code><br>8.  <code>&lt;span class=&quot;pln&quot;&gt;    mlen &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; jQuery&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;.mfi_dotline&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;</code><br>9.  <code>&lt;span class=&quot;pln&quot;&gt;    mindex&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;++;&lt;/span&gt;</code><br>10.  <code>&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;mlen&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;23&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;||&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;mindex &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;){&lt;/span&gt;</code><br>11.  <code>&lt;span class=&quot;pln&quot;&gt;        window&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;clearInterval&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;com&quot;&gt;//停止循环&lt;/span&gt;</code><br>12.  <code>&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; curTime &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;getTime&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;();&lt;/span&gt;</code><br>13.  <code>&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; loadTime &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;</code><br>14.  <code>&lt;span class=&quot;pln&quot;&gt;        alert&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;getCookie&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;refresh&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;true&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;</code><br>15.  <code>&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;getCookie&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;refresh&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;true&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;){&lt;/span&gt;</code><br>16.  <code>&lt;span class=&quot;pln&quot;&gt;            loadTime &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;curTime&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;freTime&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)/&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;</code><br>17.  <code>&lt;span class=&quot;pln&quot;&gt;            log_visit&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;&amp;lt;s:property value=&quot;serverip&quot;/&amp;gt;&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;系统首页&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;loadTime&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;后续刷新&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;进入&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;</code><br>18.  <code>&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;{&lt;/span&gt;</code><br>19.  <code>&lt;span class=&quot;pln&quot;&gt;            loadTime &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;curTime&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;ssoTime&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)/&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;com&quot;&gt;//第一次进入&lt;/span&gt;</code><br>20.  <code>&lt;span class=&quot;pln&quot;&gt;            setCookie&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;refresh&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;</code><br>21.  <code>&lt;span class=&quot;pln&quot;&gt;            log_visit&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;&amp;lt;s:property value=&quot;serverip&quot;/&amp;gt;&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;系统首页&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;loadTime&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;首次进入&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;进入&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;</code><br>22.  <code>&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;</code><br>23.  <code>&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;</code><br>24.  <code>&lt;span class=&quot;pun&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;</code><br>25.</pre></div>
+
+<div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;kwd&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: &#39;Microsoft YaHei UI&#39;, &#39;Microsoft YaHei&#39;, SimSun, &#39;Segoe UI&#39;, Tahoma, Helvetica, sans-serif, &#39;Microsoft YaHei&#39;, Georgia, Helvetica, Arial, sans-serif, 宋体, PMingLiU, serif; line-height: 16.799999237060547px; white-space: normal;&quot;&gt;c.基于事件的计算时间方式，在业务处理的代码中添加事件，当满足某种条件则执行操作，这种做法的缺点是与业务代码耦合度过高，【注意清理&lt;span style=&quot;color: rgb(221, 17, 68); font-family: Consolas, &#39;Liberation Mono&#39;, Menlo, Courier, monospace; line-height: 18px; white-space: pre;&quot;&gt;refresh&lt;/span&gt;】&lt;/span&gt;
+&lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;kwd&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;portIndex&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;portTotalNum&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;){  //当满足某种条件时&lt;/span&gt;</code><br>3.  <code>&lt;span class=&quot;pln&quot;&gt;        portIndex &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;999&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;; &lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;pln&quot;&gt;        var ssoTime &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; getCookie&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;enterHomeTime&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;com&quot;&gt;//获取SSO的跳转成功的时间&lt;/span&gt;</code><br>5.  <code>&lt;span class=&quot;pln&quot;&gt;        var freTime &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; getCookie&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;freshToHomeTime&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;</code><br>6.  <code>&lt;span class=&quot;pln&quot;&gt;        var curTime &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;getTime&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;();&lt;/span&gt;</code><br>7.  <code>&lt;span class=&quot;pln&quot;&gt;        var loadTime &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;</code><br>8.  <code>&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;getCookie&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;refresh&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;true&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;){&lt;/span&gt;</code><br>9.  <code>&lt;span class=&quot;pln&quot;&gt;            loadTime &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;curTime&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;freTime&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)/&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;</code><br>10.  <code>&lt;span class=&quot;pln&quot;&gt;            log_visit&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;serverip&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;系统首页&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;loadTime&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;后续刷新&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;进入&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;</code><br>11.  <code>&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;{&lt;/span&gt;</code><br>12.  <code>&lt;span class=&quot;pln&quot;&gt;            loadTime &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;curTime&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;ssoTime&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)/&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;com&quot;&gt;//第一次进入&lt;/span&gt;</code><br>13.  <code>&lt;span class=&quot;pln&quot;&gt;            setCookie&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;refresh&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;</code><br>14.  <code>&lt;span class=&quot;pln&quot;&gt;            log_visit&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;serverip&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;系统首页&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;loadTime&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;首次进入&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;进入&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;</code><br>15.  <code>&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;</code><br>16.  <code>&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;</code></pre></div>
+
+<p><strong>&nbsp;&nbsp;<span style="font-size: 10.5pt; line-height: 1.5;">6.本次计算加载时长最终采用方案</span></strong></p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-9f1d3d4edf1662ebdd9ebe757beff4e5_23045559.png" alt=""></p>
+<p>其中主框架为同步加载，在副框架均为异步加载，首页的整个加载顺序：先加载主框架，然后加载副1，然后加载副2，最后副2中豆腐块</p>
+<p><span style="font-size: 10.5pt; line-height: 1.5;">首次进入的时间：</span><span lang="EN-US" style="font-size: 10.5pt; line-height: 1.5;">SSO</span><span style="font-size: 10.5pt; line-height: 1.5;">跳转进入的时间</span></p>
+<p class="MsoNormal" style="font-family: Arial;"><span lang="EN-US"><font face="宋体">a.</font>&nbsp;SSO</span><span style="font-family: 宋体;">登录跳转成功后</span>&nbsp;<span style="font-family: 宋体;">准备转向首页的代码，核心代码如下</span><br><div style="font-family: Arial;"><pre class="prettyprint linenums prettyprinted" style="font-size: 13px; word-wrap: break-word; tab-size: 4;"><div class="linenums" style="color: rgb(30, 52, 123); margin-top: 0px; margin-bottom: 0px; padding-left: 0px;"><div class="L0" style="color: rgb(190, 190, 197); line-height: 18px; padding-left: 0px; list-style-type: none;"><code>&lt;span class=&quot;pln&quot;&gt;&amp;nbsp;&lt;/span&gt;</code><span style="font-family: Consolas; color: rgb(30, 52, 123); font-size: 13px; line-height: 1.5;">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="pun" style="font-size: 13px;">&lt;</span><span class="pln" style="font-size: 13px;">script</span><span class="pun" style="font-size: 13px;">&gt;</span><span class="pln" style="font-size: 13px;">    </span></div><div class="L1" style="color: rgb(190, 190, 197); line-height: 18px; padding-left: 0px; list-style-type: none;"><code>&lt;span class=&quot;pln&quot;&gt; &amp;nbsp;&lt;/span&gt;</code><span style="font-family: Consolas; color: rgb(30, 52, 123); font-size: 13px; line-height: 1.5;">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="pln" style="font-size: 13px;">setCookie</span><span class="pun" style="font-size: 13px;">(</span><span class="str" style="font-size: 13px;">‘enterHomeTime’</span><span class="pun" style="font-size: 13px;">,</span><span class="kwd" style="font-size: 13px;">new</span><span class="pln" style="font-size: 13px;"> </span><span class="typ" style="font-size: 13px;">Date</span><span class="pun" style="font-size: 13px;">().</span><span class="pln" style="font-size: 13px;">getTime</span><span class="pun" style="font-size: 13px;">());</span><span class="pln" style="font-size: 13px;">                </span></div><div class="L2" style="color: rgb(190, 190, 197); line-height: 18px; padding-left: 0px; list-style-type: none;"><code>&lt;span class=&quot;pln&quot;&gt; &amp;nbsp;&lt;/span&gt;</code><span style="font-family: Consolas; color: rgb(30, 52, 123); font-size: 13px; line-height: 1.5;">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="pln" style="font-size: 13px;">window</span><span class="pun" style="font-size: 13px;">.</span><span class="pln" style="font-size: 13px;">location</span><span class="pun" style="font-size: 13px;">.</span><span class="pln" style="font-size: 13px;">href</span><span class="pun" style="font-size: 13px;">=</span><span class="str" style="font-size: 13px;">“&lt;s:property value=’dispatchUrl.homeUrl’/&gt;”</span><span class="pun" style="font-size: 13px;">;</span><span class="pln" style="font-size: 13px;">          </span></div><div class="L3" style="color: rgb(190, 190, 197); line-height: 18px; padding-left: 0px; list-style-type: none;"><code>&lt;span class=&quot;pln&quot;&gt;&lt;span style=&quot;font-family: Consolas; color: rgb(30, 52, 123); font-size: 13px; line-height: 1.5;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/span&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;</code></div></div></pre></div></p>
+
+<p><span style="font-size: 10.5pt; line-height: 1.5;">后续刷新时间采用函数</span><span lang="EN-US" style="font-size: 10.5pt; line-height: 1.5;">Onbeforeunload</span><span style="font-size: 10.5pt; line-height: 1.5;">，此函数在页面刷新或关闭时调用，是正要去服务器读取新的页面时调用，此时还没开始读取，</span><span style="font-size: 10.5pt; line-height: 1.5;">刷新的时候直接覆盖SSO写过来的时间</span></p>
+<div style="font-family: Arial;"><pre class="prettyprint linenums prettyprinted" style="font-size: 13px; word-wrap: break-word; tab-size: 4;"><div class="linenums" style="color: rgb(30, 52, 123); margin-top: 0px; margin-bottom: 0px; padding-left: 0px;"><div class="L0" style="color: rgb(190, 190, 197); line-height: 18px; padding-left: 0px; list-style-type: none;"><code>&lt;span class=&quot;pln&quot;&gt;&amp;nbsp;&lt;/span&gt;</code><span style="font-family: Consolas; color: rgb(30, 52, 123); font-size: 13px; line-height: 1.5;">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="pln" style="font-size: 13px;"> </span><span class="pun" style="font-size: 13px;">&lt;</span><span class="pln" style="font-size: 13px;">head</span><span class="pun" style="font-size: 13px;">&gt;</span><span class="pln" style="font-size: 13px;">    </span></div><div class="L1" style="color: rgb(190, 190, 197); line-height: 18px; padding-left: 0px; list-style-type: none;"><code>&lt;span class=&quot;pln&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;       &lt;/span&gt;</code></div><div class="L2" style="color: rgb(190, 190, 197); line-height: 18px; padding-left: 0px; list-style-type: none;"><code>&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; writestarttime&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(){&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;com&quot;&gt;//当刷新的时候去执行&lt;/span&gt;</code></div><div class="L3" style="color: rgb(190, 190, 197); line-height: 18px; padding-left: 0px; list-style-type: none;"><code>&lt;span class=&quot;pln&quot;&gt;               &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; freshToHomeTime &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;getTime&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;();&lt;/span&gt;</code></div><div class="L4" style="color: rgb(190, 190, 197); line-height: 18px; padding-left: 0px; list-style-type: none;"><code>&lt;span class=&quot;pln&quot;&gt;               delCookie&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;enterHomeTime&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;</code></div><div class="L5" style="color: rgb(190, 190, 197); line-height: 18px; padding-left: 0px; list-style-type: none;"><code>&lt;span class=&quot;pln&quot;&gt;               setCookie&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;enterHomeTime&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;freshToHomeTime&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;</code></div><div class="L6" style="color: rgb(190, 190, 197); line-height: 18px; padding-left: 0px; list-style-type: none;"><code>&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;</code></div><div class="L7" style="color: rgb(190, 190, 197); line-height: 18px; padding-left: 0px; list-style-type: none;"><code>&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;</code></div><div class="L8" style="color: rgb(190, 190, 197); line-height: 18px; padding-left: 0px; list-style-type: none;"><code>&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;</code></div><div class="L9" style="color: rgb(190, 190, 197); line-height: 18px; padding-left: 0px; list-style-type: none;"><code>&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;body loadWebUI&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;SplitBar&quot;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; scroll&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;no&quot;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; onbeforeunload  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;writestarttime()&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;</code></div><div class="L0" style="color: rgb(190, 190, 197); line-height: 18px; padding-left: 0px; list-style-type: none;"><code>&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;</code></div></div></pre></div><br></div><div><span style="font-size: 10.5pt; line-height: 1.5;">结束时间为，基于事件的记录方式，在页面上所有的豆腐块加载完后进行记录，精确到最后一个加载才开始记录</span></div><div><div style="font-family: Arial;">cent.jsp中</div><div style="font-family: Arial;"><pre class="prettyprint linenums prettyprinted" style="font-size: 13px; word-wrap: break-word; tab-size: 4;"><span class="kwd" style="line-height: 18px; font-size: 13px;"><font face="Consolas">&nbsp;&nbsp;&nbsp;&nbsp;</font><font face="Consolas">&nbsp;&nbsp;&nbsp;</font>if</span><span class="pun" style="line-height: 18px; font-size: 13px;">(</span><span class="pln" style="line-height: 18px; font-size: 13px;">portIndex</span><span class="pun" style="line-height: 18px; font-size: 13px;">==</span><span class="pln" style="line-height: 18px; font-size: 13px;">portTotalNum</span><span class="pun" style="line-height: 18px; font-size: 13px;">){</span><br><br>1.  <code>&lt;span class=&quot;pln&quot;&gt;        portIndex &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;999&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; ssoTime &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; getCookie&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;enterHomeTime&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>3.  <code>&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; curTime &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;getTime&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;();&lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; loadTime &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;curTime&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;ssoTime&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)/&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;</code><br>5.  <code>&lt;span class=&quot;pln&quot;&gt;        log_visit&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;serverip&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;系统首页&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;loadTime&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;首次进入&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;进入&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;</code><br>6.  <code>&lt;span class=&quot;pln&quot;&gt;        console&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;进入首页持续时间&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;loadTime&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;</code><br>7.  <code>&lt;span class=&quot;pun&quot;&gt;&lt;font face=&quot;Consolas&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt;&lt;font face=&quot;Consolas&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt;}&lt;/span&gt;</code></pre></div><div><br><br><strong>&nbsp;7.与真实时间的差异性对比</strong><br><br><table class="MsoTableGrid" border="1" cellspacing="0" cellpadding="0" width="759" style="width:455.4pt;border-collapse:collapse;border:none;mso-border-alt:solid windowtext 1px;
+ mso-yfti-tbllook:480;mso-padding-alt:0cm 5.4pt 0cm 5.4pt;mso-border-insideh:
+ 1px solid windowtext;mso-border-insidev: 1px solid windowtext"><br> <tbody><tr><br>  <td width="98" valign="top" style="width: 58.6pt; border: 1pt solid windowtext; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+  mso-hansi-font-family:&quot;Times New Roman&quot;">所处环 境 &nbsp; &nbsp;</span><br><br>  </td><br>  <td width="136" valign="top" style="width: 81.8pt; border-style: solid solid solid none; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+  mso-hansi-font-family:&quot;Times New Roman&quot;">日志记录时间</span><br><br>  </td><br>  <td width="102" valign="top" style="width: 60.95pt; border-style: solid solid solid none; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+  mso-hansi-font-family:&quot;Times New Roman&quot;">实际时间</span><br><br>  </td><br>  <td width="134" valign="top" style="width: 80.15pt; border-style: solid solid solid none; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+  mso-hansi-font-family:&quot;Times New Roman&quot;">脚本下载时间</span><br><br>  </td><br>  <td width="133" valign="top" style="width: 80.05pt; border-style: solid solid solid none; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+  mso-hansi-font-family:&quot;Times New Roman&quot;">网页渲染时间</span><br><br>  </td><br>  <td width="67" valign="top" style="width: 40.35pt; border-style: solid solid solid none; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+  mso-hansi-font-family:&quot;Times New Roman&quot;">误差</span><br><br>  </td><br>  <td width="89" valign="top" style="width: 53.5pt; border-style: solid solid solid none; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+  mso-hansi-font-family:&quot;Times New Roman&quot;">准确性</span><br><br>  </td><br> </tr><br> <tr><br>  <td width="98" rowspan="5" valign="top" style="width: 58.6pt; border-style: none solid solid; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US"><o:p>&nbsp;</o:p></span><br><br><span lang="EN-US"><o:p>&nbsp;</o:p></span><br><br><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+  mso-hansi-font-family:&quot;Times New Roman&quot;">动态页面</span><br><br>  </td><br>  <td width="136" valign="top" style="width: 81.8pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">13.016s</span><br><br>  </td><br>  <td width="102" valign="top" style="width: 60.95pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">11.54s</span><br><br>  </td><br>  <td width="134" valign="top" style="width: 80.15pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">11.54s</span><br><br>  </td><br>  <td width="133" valign="top" style="width: 80.05pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">3.99s</span><br><br>  </td><br>  <td width="67" valign="top" style="width: 40.35pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">+1.476</span><br><br>  </td><br>  <td width="89" valign="top" style="width: 53.5pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US" style="color:red">88%<o:p></o:p></span><br><br>  </td><br> </tr><br> <tr><br>  <td width="136" valign="top" style="width: 81.8pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">10.879s</span><br><br>  </td><br>  <td width="102" valign="top" style="width: 60.95pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">11.87s</span><br><br>  </td><br>  <td width="134" valign="top" style="width: 80.15pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">11.87s </span><br><br>  </td><br>  <td width="133" valign="top" style="width: 80.05pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">3.77s</span><br><br>  </td><br>  <td width="67" valign="top" style="width: 40.35pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">-0.991</span><br><br>  </td><br>  <td width="89" valign="top" style="width: 53.5pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US" style="color:red">92%<o:p></o:p></span><br><br>  </td><br> </tr><br> <tr><br>  <td width="136" valign="top" style="width: 81.8pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">12.835s</span><br><br>  </td><br>  <td width="102" valign="top" style="width: 60.95pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">13.04s</span><br><br>  </td><br>  <td width="134" valign="top" style="width: 80.15pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">13.04s </span><br><br>  </td><br>  <td width="133" valign="top" style="width: 80.05pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">4.27s</span><br><br>  </td><br>  <td width="67" valign="top" style="width: 40.35pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">-0.161</span><br><br>  </td><br>  <td width="89" valign="top" style="width: 53.5pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US" style="color:red">98%<o:p></o:p></span><br><br>  </td><br> </tr><br> <tr><br>  <td width="136" valign="top" style="width: 81.8pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">12.516s</span><br><br>  </td><br>  <td width="102" valign="top" style="width: 60.95pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">11.67</span><br><br>  </td><br>  <td width="134" valign="top" style="width: 80.15pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">11.67s </span><br><br>  </td><br>  <td width="133" valign="top" style="width: 80.05pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">3.65s</span><br><br>  </td><br>  <td width="67" valign="top" style="width: 40.35pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">+0.846</span><br><br>  </td><br>  <td width="89" valign="top" style="width: 53.5pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US" style="color:red">93%<o:p></o:p></span><br><br>  </td><br> </tr><br> <tr><br>  <td width="136" valign="top" style="width: 81.8pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">12.888s</span><br><br>  </td><br>  <td width="102" valign="top" style="width: 60.95pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">12.36</span><br><br>  </td><br>  <td width="134" valign="top" style="width: 80.15pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">12.36s </span><br><br>  </td><br>  <td width="133" valign="top" style="width: 80.05pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">3.97s</span><br><br>  </td><br>  <td width="67" valign="top" style="width: 40.35pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">+1.528</span><br><br>  </td><br>  <td width="89" valign="top" style="width: 53.5pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US" style="color:red">95%<o:p></o:p></span><br><br>  </td><br> </tr><br> <tr><br>  <td width="98" rowspan="5" valign="top" style="width: 58.6pt; border-style: none solid solid; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US"><o:p>&nbsp;</o:p></span><br><br><span lang="EN-US"><o:p>&nbsp;</o:p></span><br><br><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+  mso-hansi-font-family:&quot;Times New Roman&quot;">静态页面</span><br><br>  </td><br>  <td width="136" valign="top" style="width: 81.8pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">4.757s</span><br><br>  </td><br>  <td width="102" valign="top" style="width: 60.95pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">4.64s</span><br><br>  </td><br>  <td width="134" valign="top" style="width: 80.15pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">4.64s</span><br><br>  </td><br>  <td width="133" valign="top" style="width: 80.05pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">3.39s</span><br><br>  </td><br>  <td width="67" valign="top" style="width: 40.35pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">+0.117</span><br><br>  </td><br>  <td width="89" valign="top" style="width: 53.5pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US" style="color:red">97%<o:p></o:p></span><br><br>  </td><br> </tr><br> <tr><br>  <td width="136" valign="top" style="width: 81.8pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">7.358s</span><br><br>  </td><br>  <td width="102" valign="top" style="width: 60.95pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">7.54s</span><br><br>  </td><br>  <td width="134" valign="top" style="width: 80.15pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">7.54s</span><br><br>  </td><br>  <td width="133" valign="top" style="width: 80.05pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">3.64s</span><br><br>  </td><br>  <td width="67" valign="top" style="width: 40.35pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">-0.182</span><br><br>  </td><br>  <td width="89" valign="top" style="width: 53.5pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US" style="color:red">97%<o:p></o:p></span><br><br>  </td><br> </tr><br> <tr><br>  <td width="136" valign="top" style="width: 81.8pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">4.164s</span><br><br>  </td><br>  <td width="102" valign="top" style="width: 60.95pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">3.65s</span><br><br>  </td><br>  <td width="134" valign="top" style="width: 80.15pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">3.65s</span><br><br>  </td><br>  <td width="133" valign="top" style="width: 80.05pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">2.83s</span><br><br>  </td><br>  <td width="67" valign="top" style="width: 40.35pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">+0.154</span><br><br>  </td><br>  <td width="89" valign="top" style="width: 53.5pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US" style="color:red">87%<o:p></o:p></span><br><br>  </td><br> </tr><br> <tr><br>  <td width="136" valign="top" style="width: 81.8pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">4.768s</span><br><br>  </td><br>  <td width="102" valign="top" style="width: 60.95pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">4.32s</span><br><br>  </td><br>  <td width="134" valign="top" style="width: 80.15pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">4.32s </span><br><br>  </td><br>  <td width="133" valign="top" style="width: 80.05pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">3.71s</span><br><br>  </td><br>  <td width="67" valign="top" style="width: 40.35pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">+0.448</span><br><br>  </td><br>  <td width="89" valign="top" style="width: 53.5pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US" style="color:red">90%<o:p></o:p></span><br><br>  </td><br> </tr><br> <tr><br>  <td width="136" valign="top" style="width: 81.8pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">2.464s</span><br><br>  </td><br>  <td width="102" valign="top" style="width: 60.95pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">3.03s</span><br><br>  </td><br>  <td width="134" valign="top" style="width: 80.15pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">3.03s </span><br><br>  </td><br>  <td width="133" valign="top" style="width: 80.05pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">2.99s</span><br><br>  </td><br>  <td width="67" valign="top" style="width: 40.35pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US">-0.566</span><br><br>  </td><br>  <td width="89" valign="top" style="width: 53.5pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US" style="color:red">81%<o:p></o:p></span><br><br>  </td><br> </tr><br></tbody></table><br><br><span lang="EN-US"><o:p>&nbsp;</o:p></span><br><br><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">备注：</span><br><br>a<span style="font-family:宋体;
+mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">测试环境为北京</span><span lang="EN-US">PC</span><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">机访问福州的数据库和缓存。浏览器为</span><span lang="EN-US">IE9</span><br><br><span lang="EN-US"><img src="https://rjgeek.github.io/images//2015/12/wpid-9f1d3d4edf1662ebdd9ebe757beff4e5_clip_image002b2db1ce8-b7e2-4467-9d40-fa327ed55aae.jpg" alt=""></span><br><br><span lang="EN-US">b.</span><span style="font-family:宋体;
+mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">在页面加载的过程中</span><span lang="EN-US">,</span><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">实际是一边下载一边渲染，渲染时间远小于下载时间，所以取下载时间作为实际时间</span><br><br><span lang="EN-US">c.</span><span style="font-family:宋体;
+mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">特殊说明：由于存在工作台的自刷新的情况，若记录的时间有超过</span><span lang="EN-US">5</span><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">分钟的情况，请自行舍弃</span><br><br><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">结论：<span style="color:red">按照此思路设计的日志时间准确性平均在</span></span><span lang="EN-US" style="color:red">90%</span><span style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;;color:red">以上，符合设计要求</span><br><br><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp;&nbsp;</span><br><br><span style="font-size: 10.5pt; line-height: 1.5;"><br></span><br><br><span style="font-size: 10.5pt; line-height: 1.5;"><br></span><br><br><span style="font-size: 10.5pt; line-height: 1.5;"><br></span><br><br><span style="font-size: 10.5pt; line-height: 1.5;"><br></span><br><br><span style="font-size: 10.5pt; line-height: 1.5;"><br></span><br><br><span style="font-size: 10.5pt; line-height: 1.5;"><br></span><br><br><span style="font-size: 10.5pt; line-height: 1.5;"><br></span><br><br><span style="font-size: 10.5pt; line-height: 1.5;"><br></span><br><br><span style="font-size: 10.5pt; line-height: 1.5;"><br></span><br><br></div></div></div>
+
+<div><a href="http://www.wiz.cn/i/60efacb7" title="来自为知笔记(Wiz)" target="_blank" rel="external">来自为知笔记(Wiz)</a></div>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>your support will encourage me to continue to create!</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="RuJia Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/188e1d0b466344e2ecad5c1e1e53a293.html" rel="next" title="【Linux】Linux下安装Oracle11g服务器">
+                <i class="fa fa-chevron-left"></i> 【Linux】Linux下安装Oracle11g服务器
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/31d2d2ea1404210e91c97ebf8b50eabb.html" rel="prev" title="系统首页架构经典系列—二级缓存的应用与设计中的28法则">
+                系统首页架构经典系列—二级缓存的应用与设计中的28法则 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          <pre><code><b>版权声明</b>:自由转载-非商用-非衍生-保持署名<a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" rel="external nofollow" >(创意共享3.0许可证)</a></code></pre>
+
+
+
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="RuJia" />
+          <p class="site-author-name" itemprop="name">RuJia</p>
+          <p class="site-description motion-element" itemprop="description">BlockChain,Distributed Computing</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rjgeek/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Others">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Others
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cs.bham.ac.uk/~mdr/" title="Professor Mark Ryan" target="_blank" rel="external nofollow" >Professor Mark Ryan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cs.bham.ac.uk/~rzb/" title="Dr Rami Bahsoon" target="_blank" rel="external nofollow" >Dr Rami Bahsoon</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sec.cs.bham.ac.uk/people/" title="The Security and Privacy Group" target="_blank" rel="external nofollow" >The Security and Privacy Group</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.yfgeek.com/" title="YFGeek" target="_blank" rel="external nofollow" >YFGeek</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://rjgeek.github.io/CV1.pdf" title="My CV" target="_blank" rel="external nofollow" >My CV</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-用JS记录整网页的加载时长"><span class="nav-number">1.</span> <span class="nav-text">                                                                    用JS记录整网页的加载时长</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RuJia</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+  <span id="busuanzi_container_site_pv">
+    Total visited 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  
+  <span id="busuanzi_container_site_uv">
+  Total visitors 本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'ehcoo';
+      var disqus_identifier = 'e3-80-90-e7-b3-bb-e7-bb-9f-e6-9e-b6-e6-9e-84-e3-80-91-e7-94-a8js-e8-ae-b0-e5-bd-95-e6-95-b4-e7-bd-91-e9-a1-b5-e7-9a-84-e5-8a-a0-e8-bd-bd-e6-97-b6-e9-95-bf.html';
+      var disqus_title = "【系统架构】用JS记录整网页的加载时长";
+      var disqus_url = 'http://www.ehcoo.com/e3-80-90-e7-b3-bb-e7-bb-9f-e6-9e-b6-e6-9e-84-e3-80-91-e7-94-a8js-e8-ae-b0-e5-bd-95-e6-95-b4-e7-bd-91-e9-a1-b5-e7-9a-84-e5-8a-a0-e8-bd-bd-e6-97-b6-e9-95-bf.html';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

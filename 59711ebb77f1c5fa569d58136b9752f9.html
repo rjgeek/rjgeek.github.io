@@ -1,0 +1,1093 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+<meta name="google-site-verification" content="LzR3qfX_YDfkNEusKegSylZBjqRw3vczTwICGpJ1GRI" />
+<meta name="baidu-site-verification" content="IhNq56RJS1" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Weblogic," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="1.创建weblogic用户 用root用户登入服务器，进行如下操作：">
+<meta name="keywords" content="Weblogic">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Weblogic】32位redhat6系统安装weblogic">
+<meta property="og:url" content="http://www.ehcoo.com/59711ebb77f1c5fa569d58136b9752f9.html">
+<meta property="og:site_name" content="Ehcoo">
+<meta property="og:description" content="1.创建weblogic用户 用root用户登入服务器，进行如下操作：">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_25a40bf7-de4c-4a13-8a80-2460705b756b.jpg">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_bef498c7-0a4f-43a5-80ed-a90dddfacb55.jpg">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_73c1c219-b812-4a25-9c5a-7918ed6887a7.jpg">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_2128d264-9b1e-4690-8bb2-c6ddab461d39.jpg">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_d7bf9a5c-7a9f-4fd3-9c61-f9220859c93a.gif">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_7566f83e-3bca-45c1-aaf6-ab4f1881f053.jpg">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_461bf9d8-79fd-46aa-90e0-e59d27fa3fed.gif">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_46cee60c-b8f4-4c73-a0f5-57327ea9f88a.gif">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_f3000933-0dc6-481e-aed1-91991d21ab4f.gif">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_4de8d1aa-677d-4b62-81b2-52010fe2453d.gif">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_a7168d4e-7e99-470b-b7c6-d32e13cc00f6.gif">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_05b7d415-e8e5-4718-a4e0-f406f3e06cf2.jpg">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_03e77035-991c-4f79-8d39-a19757991055.gif">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_adfdabba-46a2-4513-905b-2b02b44ecb4d.jpg">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_94f413e2-06c8-46a1-85fe-00d63d67863e.gif">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_0377f5e3-85b3-430e-93be-8cb00a8db8a4.jpg">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_edd7c511-6156-47ab-b727-ad01a892b1e5.jpg">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_c9699b60-09df-44f3-8d66-a56b53e69ec2.jpg">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_d18bd833-cffb-4544-802e-8bc4c10db964.jpg">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_fb59c425-fea4-49ee-baea-254c5a841ba0.jpg">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_4ffa87d1-7488-47ea-8753-db2f2254e5b8.jpg">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_7c9e9453-076f-4f7c-8125-4ee6dd8feb02.jpg">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_4dec44c5-184d-45fb-b321-95413014aed4.jpg">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_9b495e46-6580-4b72-a013-33f376b0e985.jpg">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_6d1f52ca-5a4a-47bb-adcd-dc65bd3f1893.jpg">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_clip_image002d8556b24-54b3-496f-b45c-0ed8e2e61d72.jpg">
+<meta property="og:updated_time" content="2017-10-29T15:38:31.046Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【Weblogic】32位redhat6系统安装weblogic">
+<meta name="twitter:description" content="1.创建weblogic用户 用root用户登入服务器，进行如下操作：">
+<meta name="twitter:image" content="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_25a40bf7-de4c-4a13-8a80-2460705b756b.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.ehcoo.com/59711ebb77f1c5fa569d58136b9752f9.html"/>
+
+
+  <title> 【Weblogic】32位redhat6系统安装weblogic | Ehcoo </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="default">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?83e3b6b55c0e48f5d0848d6a14b76c02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+  
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ehcoo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about-me" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                【Weblogic】32位redhat6系统安装weblogic
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2014-11-01T00:04:06+00:00" content="2014-11-01">
+              2014-11-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/应用服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">应用服务器</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/59711ebb77f1c5fa569d58136b9752f9.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="59711ebb77f1c5fa569d58136b9752f9.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+		  
+          
+          
+
+          
+		 
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>        1.创建weblogic用户</strong></p>
+<div><br><br><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; &lt;br /&gt;
+mso-hansi-font-family: 'Times New Roman';">用</span><span style="mso-bidi-font-size: 12.0pt; line-height: 150%;" lang="EN-US">root</span><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: &lt;br /&gt;
+'Times New Roman'; mso-hansi-font-family: 'Times New Roman';">用户登入服务器，进行如下操作：</span><br><br><a id="more"></a><br><br><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US">#groupadd<br>-g 600 weblogic      </span><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">（创建<span lang="EN-US">weblogic</span>组并设置组<span lang="EN-US">id</span>为<span lang="EN-US">600</span>）</span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US">#useradd<br>-u 600 -g 600 weblogic    </span><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">（创建用户<span lang="EN-US">id</span>为<span lang="EN-US">600</span>的<span lang="EN-US">weblogic</span>用户<span lang="EN-US">,</span>并将用户添加到<span lang="EN-US">id</span>为<span lang="EN-US">600</span>的组中）</span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US">#passwd  weblogic</span><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体;">（设置<span lang="EN-US">weblogic</span>密码）</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体;"><strong>2.配置weblogic用户下的jdk</strong></span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US">#su<br>- weblogic  </span><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">（切换到<span lang="EN-US">weblogic</span>用户）</span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US">$vi<br>~/.bash_profile   </span><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">（编辑用户环境变量文件）</span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">按<span lang="EN-US">i</span>键，进入编辑模式，在最后面加入<span lang="EN-US"> JDK</span>环境变量</span><br><br><span lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_25a40bf7-de4c-4a13-8a80-2460705b756b.jpg" alt=""></span><span style="font-size: &lt;br /&gt;
+15.0pt; line-height: 150%; font-family: 仿宋; mso-font-kerning: 0pt;" lang="EN-US"> </span><br><br></p><p class="MsoNormal" style="text-indent: 18.0pt; mso-char-indent-count: 1.5;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">按<span lang="EN-US">ESC</span>键，退出编辑模式，输入命令<span lang="EN-US">:wq</span>保存退出。</span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">检查配置是否生效。</span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US">$source<br>~/.bash_profile</span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US">$java<br>-version</span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US"><span style="text-indent: -4.3333330154418945px;">如果看到</span><span style="text-indent: -4.3333330154418945px;" lang="EN-US">JVM</span><span style="text-indent: -4.3333330154418945px;">版本及相关信息，即环境变量配置生效</span><br></span><br><br><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; &lt;br /&gt;
+mso-no-proof: yes;" lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_bef498c7-0a4f-43a5-80ed-a90dddfacb55.jpg" alt=""></span><br><br></p><p class="MsoNormal" style="margin-left: 23.75pt; mso-para-margin-left: 1.71gd; &lt;br /&gt;
+text-indent: -3.25pt; mso-char-indent-count: -.27;"><strong>3.安装前的准备工作（上传与权限变更）</strong><br><br><span style="font-family: 宋体; line-height: 150%; text-indent: 24pt; font-size: 10.5pt;">使用</span><span style="font-family: 宋体; line-height: 150%; text-indent: 24pt; font-size: 10.5pt;" lang="EN-US">weblogic</span><span style="font-family: 宋体; line-height: 150%; text-indent: 24pt; font-size: 10.5pt;">用户将</span><span style="font-family: 宋体; line-height: 150%; text-indent: 24pt; font-size: 10.5pt;" lang="EN-US">weblogic11g</span><span style="font-family: 宋体; line-height: 150%; text-indent: 24pt; font-size: 10.5pt;">安装包</span><span style="font-family: 宋体; line-height: 150%; text-indent: 24pt; font-size: 10.5pt;" lang="EN-US">wls11gR11036_generic.jar</span><span style="font-family: 宋体; line-height: 150%; text-indent: 24pt; font-size: 10.5pt;">上传至应用服务器</span><span style="font-family: 宋体; line-height: 150%; text-indent: 24pt; font-size: 10.5pt;" lang="EN-US">/u01/app</span><span style="font-family: 宋体; line-height: 150%; text-indent: 24pt; font-size: 10.5pt;">目录下，如下图所示</span><br><br><span lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_73c1c219-b812-4a25-9c5a-7918ed6887a7.jpg" alt=""></span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">使用<span lang="EN-US">chmod</span>命令修改<span lang="EN-US">weblogic</span>安装包可执行权限<span lang="EN-US">,</span>如下图：</span><br><br><span style="font-size: 12.0pt; mso-bidi-font-size: 10.0pt; line-height: &lt;br /&gt;
+150%; font-family: 'Times New Roman','serif'; mso-fareast-font-family: 宋体; &lt;br /&gt;
+mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; &lt;br /&gt;
+mso-bidi-language: AR-SA;" lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_2128d264-9b1e-4690-8bb2-c6ddab461d39.jpg" alt=""></span><br><br><strong>4.执行weblogic安装程序</strong><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">使用可视化工具<span lang="EN-US">(</span>例如：<span lang="EN-US">Xmanager</span>、<span lang="EN-US">VNC)</span>连接到服务器，打开命令操作界面，用<span lang="EN-US">weblogic</span>用户执行如下命令进行<span lang="EN-US">weblogic</span>安装。</span><br><br><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; color: red; background: yellow; mso-font-kerning: &lt;br /&gt;
+0pt;">（注意：如果执行命令无法进入图形界面，请先使用<span lang="EN-US">root</span>用户，执行<span lang="EN-US">xhost<br>+</span>命令，然后重开命令窗口，执行<span lang="EN-US">weblogic</span>安装命令）</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="font-family: 宋体;" lang="EN-US">$java -jar /u01/app/</span><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US">wls11gR11036_generic.jar</span><span style="text-indent: 24pt; font-size: 10.5pt; line-height: 150%; font-family: Wingdings;" lang="EN-US"> </span><span style="text-indent: 24pt; font-size: 10.5pt; line-height: 150%; font-family: 宋体;">安装界面，点击<span lang="EN-US">next</span>，执行下一步</span><br><br><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_d7bf9a5c-7a9f-4fd3-9c61-f9220859c93a.gif" alt=""></span><br><br></p><p class="MsoNormal" style="margin-left: 49.0pt; text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: Wingdings; &lt;br /&gt;
+mso-font-kerning: 0pt;" lang="EN-US">l </span><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt;">选择程序安装目录<span lang="EN-US">(</span><span style="color: red; background: yellow;">可以自定义安装目录，这里我们自定义安装到<span lang="EN-US">/u01/weblogic</span>目录下</span><span lang="EN-US">)</span>，点击<span lang="EN-US">next</span>，执行下一步</span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_7566f83e-3bca-45c1-aaf6-ab4f1881f053.jpg" alt=""></span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: Wingdings; &lt;br /&gt;
+mso-font-kerning: 0pt;" lang="EN-US">l </span><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt;">不设置邮箱信息，点击<span lang="EN-US">next</span>，弹出确认框后点击<span lang="EN-US">yes</span></span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_461bf9d8-79fd-46aa-90e0-e59d27fa3fed.gif" alt=""></span><br><br></p><p class="MsoNormal" style="margin-left: 49.0pt; text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: Wingdings; &lt;br /&gt;
+mso-font-kerning: 0pt;" lang="EN-US">l </span><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt;">弹出确认框后点击<span lang="EN-US">yes</span></span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_46cee60c-b8f4-4c73-a0f5-57327ea9f88a.gif" alt=""></span><br><br></p><p class="MsoNormal" style="margin-left: 49.0pt; text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: Wingdings; &lt;br /&gt;
+mso-font-kerning: 0pt;" lang="EN-US">l </span><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt;">取消选择框，点击<span lang="EN-US">continue</span>，执行下一步</span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_f3000933-0dc6-481e-aed1-91991d21ab4f.gif" alt=""></span><br><br></p><p class="MsoNormal" style="margin-left: 49.0pt; text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: Wingdings; &lt;br /&gt;
+mso-font-kerning: 0pt;" lang="EN-US">l </span><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt;">默认安装即可，点击<span lang="EN-US">next</span>，执行下一步</span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_4de8d1aa-677d-4b62-81b2-52010fe2453d.gif" alt=""></span><br><br></p><p class="MsoNormal" style="margin-left: 49.0pt; text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: Wingdings; &lt;br /&gt;
+mso-font-kerning: 0pt;" lang="EN-US">l </span><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt;">选择<span lang="EN-US">jdk</span>，默认为环境变量配置的<span lang="EN-US">JDK</span>，点击<span lang="EN-US">next</span>，执行下一步</span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_a7168d4e-7e99-470b-b7c6-d32e13cc00f6.gif" alt=""></span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: Wingdings; &lt;br /&gt;
+mso-font-kerning: 0pt;" lang="EN-US">l </span><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt;">选择程序安装目录，默认即可，点击<span lang="EN-US">next</span>，执行下一步</span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_05b7d415-e8e5-4718-a4e0-f406f3e06cf2.jpg" alt=""></span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: Wingdings; &lt;br /&gt;
+mso-font-kerning: 0pt;" lang="EN-US">l </span><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt;">安装信息确认界面，点击<span lang="EN-US">next</span>，执行安装</span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_03e77035-991c-4f79-8d39-a19757991055.gif" alt=""></span><br><br></p><p class="MsoNormal" style="margin-left: 49.0pt; text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: Wingdings; &lt;br /&gt;
+mso-font-kerning: 0pt;" lang="EN-US">l </span><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt;">安装进度显示界面，安装完成后点击<span lang="EN-US">done</span>，完成安装</span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_adfdabba-46a2-4513-905b-2b02b44ecb4d.jpg" alt=""></span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_94f413e2-06c8-46a1-85fe-00d63d67863e.gif" alt=""></span><br><br></p><p class="MsoNormal"><strong>5.创建weblogic域</strong><br><br>&nbsp;<br><br><strong><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-bidi-font-family: 宋体;" lang="EN-US">1)<span style="font-weight: normal; font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">  </span></span>**</strong><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; mso-ascii-font-family: 宋体;">启动安装命令</span><strong><br><br><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US">Linux</span><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">系统：用<span lang="EN-US">weblogic</span>用户执行</span><br><br><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; font-family: 宋体;" lang="EN-US">     /u01/weblogic/Oracle/Middleware/wlserver_10.3/common/bin</span><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">下的<span lang="EN-US">config.sh</span></span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0; &lt;br /&gt;
+mso-outline-level: 1;"><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; font-family: 宋体;" lang="EN-US">$cd /u01/weblogic/Oracle/Middleware/wlserver_10.3/common/bin</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0; &lt;br /&gt;
+mso-outline-level: 1;"><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; font-family: 宋体;" lang="EN-US"><span lang="EN-US">$</span><span style="font-size: 10.5pt; text-indent: 24pt;" lang="EN-US">./</span><span style="font-size: 10.5pt; text-indent: 24pt;" lang="EN-US">co</span><span style="font-size: 10.5pt; text-indent: 24pt;" lang="EN-US">n</span><span style="font-size: 10.5pt; text-indent: 24pt;" lang="EN-US">f</span><span style="font-size: 10.5pt; text-indent: 24pt;">ig.sh</span><br></span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_0377f5e3-85b3-430e-93be-8cb00a8db8a4.jpg" alt=""></span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">接受默认设置，点击“<span lang="EN-US">Next</span>”</span><br><br><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_edd7c511-6156-47ab-b727-ad01a892b1e5.jpg" alt=""></span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">接受默认设置，点击“<span lang="EN-US">Next</span>” </span><br><br><span lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_c9699b60-09df-44f3-8d66-a56b53e69ec2.jpg" alt=""></span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">修改路径和域名点击<span lang="EN-US">NEXT</span></span>
+
+</p></strong><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-bidi-font-family: 宋体;" lang="EN-US">2)<span style="font-weight: normal; font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">  </span></span><strong><strong><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; mso-ascii-font-family: 宋体;">设置</span></strong></strong><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; &lt;br /&gt;
+font-family: 宋体; mso-fareast-font-family: 仿宋_GB2312;" lang="EN-US">console</span><strong>**<span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; mso-ascii-font-family: 宋体;">登入的用户名及密码</span></strong><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;">注意：如果此处不能填用户名和密码，把语言切换成英文后，重新创建域，如下图所示：</span><br><br><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_d18bd833-cffb-4544-802e-8bc4c10db964.jpg" alt=""></span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_fb59c425-fea4-49ee-baea-254c5a841ba0.jpg" alt=""></span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="text-indent: 40px; font-size: 15pt; line-height: 29.629629135131836px;" lang="EN-US"><span style="font-family: 宋体; font-size: 14.074073791503906px; line-height: 20.740739822387695px; text-indent: 32px;">  密</span></span><span style="text-indent: 30pt; font-size: 15pt; line-height: 29.629629135131836px;" lang="EN-US"><span style="font-family: 宋体; font-size: 14.074073791503906px; line-height: 20.740739822387695px; text-indent: 32px;">码：</span><span style="font-family: 宋体; font-size: 14.074073791503906px; line-height: 20.740739822387695px; text-indent: 32px;" lang="EN-US">webl</span></span><span style="text-indent: 30pt; font-size: 15pt; line-height: 29.629629135131836px;" lang="EN-US"><span style="font-family: 宋体; font-size: 14.074073791503906px; line-height: 20.740739822387695px; text-indent: 32px;" lang="EN-US">ogic1</span></span><span style="font-size: 10.5pt; font-family: 宋体; line-height: 20.740739822387695px;">，点击“</span><span style="font-size: 10.5pt; font-family: 宋体; line-height: 20.740739822387695px;" lang="EN-US">Next</span><span style="font-size: 10.5pt; font-family: 宋体; line-height: 20.740739822387695px;">”</span><br><br><strong><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-bidi-font-family: 宋体;" lang="EN-US">3)<span style="font-weight: normal; font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">  </span></span>**</strong><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; mso-ascii-font-family: 宋体;">选择安装模式及</span><strong>**<span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-fareast-font-family: 仿宋_GB2312;" lang="EN-US">JDK</span></strong><br><br></p><p class="MsoListParagraph" style="margin-left: 42.0pt; text-indent: -21.0pt; &lt;br /&gt;
+mso-char-indent-count: 0; mso-list: l0 level1 lfo1;"><span style="font-family: 宋体; line-height: 20.740739822387695px; text-indent: 32px;">此处我们选择生产模式及</span><span style="font-family: 宋体; line-height: 20.740739822387695px; text-indent: 32px;" lang="EN-US">JDK1.6.0_45</span><span style="font-family: 宋体; line-height: 20.740739822387695px; text-indent: 32px;">进行部署。</span><strong><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-fareast-font-family: 仿宋_GB2312;" lang="EN-US"><br></span></strong><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_4ffa87d1-7488-47ea-8753-db2f2254e5b8.jpg" alt=""><br><br><strong><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-bidi-font-family: 宋体;" lang="EN-US">4)<span style="font-weight: normal; font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">  </span></span>**</strong><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; mso-ascii-font-family: 宋体;">选择服务配置设置</span><strong><br><br><p class="MsoListParagraph" style="margin-left: 42.0pt; text-indent: -21.0pt; &lt;br /&gt;
+mso-char-indent-count: 0; mso-list: l0 level1 lfo1;"><span style="font-family: 宋体; line-height: 20.740739822387695px; text-indent: 32px;">选择</span><span style="font-family: 宋体; line-height: 20.740739822387695px; text-indent: 32px;" lang="EN-US">“Administration Server”</span><span style="font-family: 宋体; line-height: 20.740739822387695px; text-indent: 32px;">，点击“</span><span style="font-family: 宋体; line-height: 20.740739822387695px; text-indent: 32px;" lang="EN-US">Next</span><span style="font-family: 宋体; line-height: 20.740739822387695px; text-indent: 32px;">”。</span></p></strong><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; mso-ascii-font-family: 宋体;"><br></span><strong><br><br><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_7c9e9453-076f-4f7c-8125-4ee6dd8feb02.jpg" alt="">
+
+</p></strong><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-bidi-font-family: 宋体;" lang="EN-US">5)<span style="font-weight: normal; font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">  </span></span><strong><strong><span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; mso-ascii-font-family: 宋体;">设置</span></strong></strong><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; &lt;br /&gt;
+font-family: 宋体; mso-fareast-font-family: 仿宋_GB2312;" lang="EN-US">console</span><strong>**<span style="mso-bidi-font-size: 12.0pt; &lt;br /&gt;
+line-height: 150%; mso-ascii-font-family: 宋体;">信息</span></strong><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US">Listen<br>address:localhost </span><span style="mso-bidi-font-size: 12.0pt; line-height: &lt;br /&gt;
+150%; font-family: 宋体; color: red;">（填写<span lang="EN-US">locahost</span>或者服务器<span lang="EN-US">IP</span>）</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="line-height: 20.740739822387695px; font-family: 宋体;" lang="EN-US">Listen port:7001     <span style="color: red;">(</span></span><span style="line-height: 20.740739822387695px; font-family: 宋体; color: red;">控制台的监听端口，默认<span lang="EN-US">7001</span>，也可自行设置<span lang="EN-US">)</span></span><span style="mso-bidi-font-size: 12.0pt; line-height: &lt;br /&gt;
+150%; font-family: 宋体; color: red;"><br></span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_4dec44c5-184d-45fb-b321-95413014aed4.jpg" alt=""></span><br><br><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;">点击“<span lang="EN-US">Next</span>”，继续。</span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_9b495e46-6580-4b72-a013-33f376b0e985.jpg" alt=""></span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt; mso-bidi-font-style: &lt;br /&gt;
+italic;">点击“<span lang="EN-US">Create</span>”，进行域创建。</span><br><br></p><p class="MsoNormal" style="text-indent: 30.0pt;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; mso-no-proof: &lt;br /&gt;
+yes;" lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_6d1f52ca-5a4a-47bb-adcd-dc65bd3f1893.jpg" alt=""></span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt; mso-bidi-font-style: &lt;br /&gt;
+italic;">点击“<span lang="EN-US">Done”</span>完成域创建。</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt; mso-bidi-font-style: &lt;br /&gt;
+italic;"><strong>6.配置weblogic的密码服务</strong></span><br><br><span style="font-weight: normal;"><span style="font-family: 宋体;"><a name="_Toc384758394"></a><span lang="X-NONE"><span style="font-size: 7pt; line-height: normal;"><span style="font-size: 10.5pt;" data-wiz-span="data-wiz-span">a.</span></span></span><span lang="X-NONE"><span style="font-size: 10.5pt;" data-wiz-span="data-wiz-span">创建</span></span><span lang="X-NONE"><span style="font-size: 10.5pt;" data-wiz-span="data-wiz-span">boot.properties</span></span><span lang="X-NONE"><span style="font-size: 10.5pt;" data-wiz-span="data-wiz-span">文件</span></span></span></span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt; mso-bidi-font-style: &lt;br /&gt;
+italic;">为使各<span lang="EN-US">weblogic</span>服务启动时不必每次都输入控制台的用户名和密码，故须设置<span lang="EN-US">weblogic</span>的<span lang="EN-US">boot</span>文件，让服务启动时自动填充用户名、密码。具体操作如下：</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt; mso-bidi-font-style: &lt;br /&gt;
+italic;">使用<span lang="EN-US">weblogic</span>账户登录服务器，进入<span lang="EN-US">weblogic</span>域创建<span lang="EN-US">boot.properties</span>文件</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US">$cd </span><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体;" lang="EN-US">/u01/weblogic/Oracle/Middleware/</span><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; &lt;br /&gt;
+mso-font-kerning: 0pt; mso-bidi-font-style: italic;" lang="EN-US">user_projects/domains/base_domain</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US">$vi boot.properties</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt; mso-bidi-font-style: &lt;br /&gt;
+italic;">按<span lang="EN-US">i</span>键进入编辑模式，输入用户名和密码</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt; mso-bidi-font-style: &lt;br /&gt;
+italic;">例如：</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US">username=weblogic</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US">password=weblogic1</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt; mso-bidi-font-style: &lt;br /&gt;
+italic;">按<span lang="EN-US">ESC</span>退出编辑模式，输入<span lang="EN-US">:wq</span>进行保存。</span><br><br><span style="font-family: 宋体;"><a name="_Toc384758395"></a><span lang="X-NONE"><span style="font-weight: normal;">b.</span></span><span lang="X-NONE">修改</span><span lang="X-NONE">weblogic11g </span><span lang="X-NONE">域下的</span><span lang="X-NONE">/bin/setDomainEnv.sh</span><span lang="X-NONE">文件</span></span><br><br>### <a name="_Toc385361079"></a><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt; mso-bidi-font-style: &lt;br /&gt;
+italic;">由于<span lang="EN-US">weblogic 11g</span>默认的<span lang="EN-US">boot</span>文件路径是在各应用服务的文件夹下的<span lang="EN-US">security</span>目录下，为使同一个<span lang="EN-US">weblogic</span>域下各个应用服务共用同一个<span lang="EN-US">boot</span>文件而不必为每个应用服务创建一个<span lang="EN-US">boot</span>文件，故须修改<span lang="EN-US">setDomainEnv.sh</span>文件，设置默认的<span lang="EN-US">boot</span>文件读取路径。</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US">$cd </span><span style="font-size: &lt;br /&gt;
+10.5pt; line-height: 150%; font-family: 宋体;" lang="EN-US">/u01/weblogic/Oracle/Middleware</span><span style="font-size: 10.5pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US">/user_projects/domains/base_domain/bin</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US">$vi setDomainEnv.sh</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt; mso-bidi-font-style: &lt;br /&gt;
+italic;">将下列值</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US">JAVA_OPTIONS=”${JAVA_OPTIONS}”</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US">export JAVA_OPTIONS</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US"># SET THE CLASSPATH</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: 0pt; mso-bidi-font-style: &lt;br /&gt;
+italic;">修改为</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US">JAVA_OPTIONS=”${JAVA_OPTIONS}<br>-Dweblogic.system.BootIdentityFile=${DOMAIN_HOME}/boot.properties”</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US">export JAVA_OPTIONS</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US"># SET THE CLASSPATH</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-font-kerning: &lt;br /&gt;
+0pt; mso-bidi-font-style: italic;" lang="EN-US"><strong>7.安装成功的验证（启动weblogic控制台）</strong></span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><br><br><span style="line-height: 150%;">使用<span lang="EN-US">weblogic</span>用户登录服务器，进入<span lang="EN-US">weblogic</span>安装域下的<span lang="EN-US">bin</span>目录</span><br><br><span style="line-height: 150%;" lang="EN-US">$cd </span><span style="font-size: 10.5pt; line-height: 150%;" lang="EN-US">/u01/weblogic/Oracle/Middleware</span><span style="font-size: 10.5pt; line-height: 150%;" lang="EN-US">/user_projects/domains/base_domain/bin</span><br><br><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; mso-ascii-font-family: 宋体;">用</span><span style="line-height: 150%;" lang="EN-US">nohup</span><span style="mso-bidi-font-size: 12.0pt; line-height: 150%; &lt;br /&gt;
+mso-ascii-font-family: 宋体;">在后台启动，并制定输出日志路径</span><br><br></p><p class="MsoListParagraph" style="text-indent: 24.0pt;"><span style="line-height: 150%;" lang="EN-US">$nohup ./startWebLogic.sh &gt; startWebLogic.log &amp; tail –f<br>/app/logs/startWebLogic.log</span><br><br><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; mso-ascii-font-family: 宋体;">查看输出日志，如果看到</span><span style="line-height: 150%;" lang="EN-US">Running Mode</span><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; mso-ascii-font-family: 宋体;">则证明控制台启动成功。</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt;"><span lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-1d6151c774b13240063f444c3967c3b6_clip_image002d8556b24-54b3-496f-b45c-0ed8e2e61d72.jpg" alt=""></span><br><br><span lang="EN-US"> </span><br><br>&nbsp;<br><br><span lang="EN-US"><br></span><br><br></p><p class="MsoNormal" style="margin-left: 23.75pt; mso-para-margin-left: 1.71gd; &lt;br /&gt;
+text-indent: -3.25pt; mso-char-indent-count: -.27;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; &lt;br /&gt;
+mso-no-proof: yes;" lang="EN-US"><br></span><br><br></p><p class="MsoNormal" style="margin-left: 23.75pt; mso-para-margin-left: 1.71gd; &lt;br /&gt;
+text-indent: -3.25pt; mso-char-indent-count: -.27;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; &lt;br /&gt;
+mso-no-proof: yes;" lang="EN-US"><br></span><br><br></p><p class="MsoNormal" style="margin-left: 23.75pt; mso-para-margin-left: 1.71gd; &lt;br /&gt;
+text-indent: -3.25pt; mso-char-indent-count: -.27;"><span style="font-size: 15.0pt; line-height: 150%; mso-font-kerning: 0pt; &lt;br /&gt;
+mso-no-proof: yes;" lang="EN-US"><br></span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="mso-bidi-font-size: &lt;br /&gt;
+12.0pt; line-height: 150%; font-family: 宋体;"><br></span><br><br></p></div><br><div><a href="http://www.wiz.cn/i/60efacb7" title="来自为知笔记(Wiz)" target="_blank" rel="external">来自为知笔记(Wiz)</a></div>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>your support will encourage me to continue to create!</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="RuJia Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Weblogic/" rel="tag">#Weblogic</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/7770dc7201024befdd6b5698df1d8280.html" rel="next" title="【Memcache】32位redhat6系统安装memcache">
+                <i class="fa fa-chevron-left"></i> 【Memcache】32位redhat6系统安装memcache
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/c309d07117e8340a6343271615731936.html" rel="prev" title="【Linux】给虚拟机上的LINUX拓展存储">
+                【Linux】给虚拟机上的LINUX拓展存储 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          <pre><code><b>版权声明</b>:自由转载-非商用-非衍生-保持署名<a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" rel="external nofollow" >(创意共享3.0许可证)</a></code></pre>
+
+
+
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="RuJia" />
+          <p class="site-author-name" itemprop="name">RuJia</p>
+          <p class="site-description motion-element" itemprop="description">BlockChain,Distributed Computing</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rjgeek/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Others">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Others
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cs.bham.ac.uk/~mdr/" title="Professor Mark Ryan" target="_blank" rel="external nofollow" >Professor Mark Ryan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cs.bham.ac.uk/~rzb/" title="Dr Rami Bahsoon" target="_blank" rel="external nofollow" >Dr Rami Bahsoon</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sec.cs.bham.ac.uk/people/" title="The Security and Privacy Group" target="_blank" rel="external nofollow" >The Security and Privacy Group</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.yfgeek.com/" title="YFGeek" target="_blank" rel="external nofollow" >YFGeek</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://rjgeek.github.io/CV1.pdf" title="My CV" target="_blank" rel="external nofollow" >My CV</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RuJia</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+  <span id="busuanzi_container_site_pv">
+    Total visited 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  
+  <span id="busuanzi_container_site_uv">
+  Total visitors 本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'ehcoo';
+      var disqus_identifier = '59711ebb77f1c5fa569d58136b9752f9.html';
+      var disqus_title = "【Weblogic】32位redhat6系统安装weblogic";
+      var disqus_url = 'http://www.ehcoo.com/59711ebb77f1c5fa569d58136b9752f9.html';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

@@ -1,0 +1,1008 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+<meta name="google-site-verification" content="LzR3qfX_YDfkNEusKegSylZBjqRw3vczTwICGpJ1GRI" />
+<meta name="baidu-site-verification" content="IhNq56RJS1" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="安全编码,安全功能,安全测试" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="引言当我们考虑一个系统安全时候，往往第一印象是系统是否有漏洞，系统数据是否高可用，但实际上最容易疏漏和引入的安全问题却是系统的功能安全问题，那么评价一个系统的功能是否安全应该从哪几方面考虑？系统应提供多少特性才算做是基本安全的系统">
+<meta name="keywords" content="安全编码,安全功能,安全测试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【安全编码】一个系统应该考虑的安全功能要素">
+<meta property="og:url" content="http://www.ehcoo.com/secureTest01.html">
+<meta property="og:site_name" content="Ehcoo">
+<meta property="og:description" content="引言当我们考虑一个系统安全时候，往往第一印象是系统是否有漏洞，系统数据是否高可用，但实际上最容易疏漏和引入的安全问题却是系统的功能安全问题，那么评价一个系统的功能是否安全应该从哪几方面考虑？系统应提供多少特性才算做是基本安全的系统">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/12/secureTest_1.png?t=2>">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/12/secureTest_2.jpg?t=2>">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/12/secureTest_3.jpg?t=2>">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/12/secureTest_4.jpg?t=2>">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/12/secureTest_5.jpg?t=2>">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/12/secureTest_6.jpg?t=2>">
+<meta property="og:updated_time" content="2017-10-29T15:38:31.058Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【安全编码】一个系统应该考虑的安全功能要素">
+<meta name="twitter:description" content="引言当我们考虑一个系统安全时候，往往第一印象是系统是否有漏洞，系统数据是否高可用，但实际上最容易疏漏和引入的安全问题却是系统的功能安全问题，那么评价一个系统的功能是否安全应该从哪几方面考虑？系统应提供多少特性才算做是基本安全的系统">
+<meta name="twitter:image" content="https://rjgeek.github.io/images/2016/12/secureTest_1.png?t=2>">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.ehcoo.com/secureTest01.html"/>
+
+
+  <title> 【安全编码】一个系统应该考虑的安全功能要素 | Ehcoo </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="default">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?83e3b6b55c0e48f5d0848d6a14b76c02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+  
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ehcoo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about-me" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                【安全编码】一个系统应该考虑的安全功能要素
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-12-21T00:02:09+00:00" content="2016-12-21">
+              2016-12-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/安全编码/" itemprop="url" rel="index">
+                    <span itemprop="name">安全编码</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/secureTest01.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="secureTest01.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+		  
+          
+          
+
+          
+		 
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>当我们考虑一个系统安全时候，往往第一印象是系统是否有漏洞，系统数据是否高可用，但实际上最容易疏漏和引入的安全问题却是系统的功能安全问题，那么评价一个系统的功能是否安全应该从哪几方面考虑？系统应提供多少特性才算做是基本安全的系统<br><img src="https://rjgeek.github.io/images/2016/12/secureTest_1.png?t=2>" width="85%" height="65%" alt="图片名称" align="center"><br><a id="more"></a></p>
+<h2 id="身份和鉴别"><a href="#身份和鉴别" class="headerlink" title="身份和鉴别"></a>身份和鉴别</h2><p>身份和鉴别在系统中扮演者守门员的角色，一旦系统的大门被攻破，系统内的数据将如摆设一般，任人鱼肉宰割。<br><img src="https://rjgeek.github.io/images/2016/12/secureTest_2.jpg?t=2>" width="85%" height="65%" alt="图片名称" align="center">  </p>
+<h3 id="用户标识"><a href="#用户标识" class="headerlink" title="用户标识"></a>用户标识</h3><ul>
+<li>系统应提供独立的登录控制模块，对所有登录用户进行唯一身份标识<h3 id="用户鉴别"><a href="#用户鉴别" class="headerlink" title="用户鉴别"></a>用户鉴别</h3></li>
+<li>系统应不允许匿名用户登录 √ √  </li>
+<li>系统应确保用户在授予敏感权限之前被鉴别 ★ ★  </li>
+<li>系统应具备防篡改和防重放机制的能力 √ x  </li>
+<li>系统应能够支持双向鉴别机制 √ x  </li>
+<li>系统应提供多重鉴别机制以支持用户鉴别 ★ x  </li>
+<li>系统应由系统管理员分发用户的初始口令，并强制用户在初始登录时修改初始口令 ★ ★  </li>
+<li>系统应除了系统管理员之外，不允许其它用户修改非本人的口令  <h3 id="用户口令规范"><a href="#用户口令规范" class="headerlink" title="用户口令规范"></a>用户口令规范</h3></li>
+<li>鉴别信系统应具备复杂度的功能 ★ ★</li>
+<li>系统应具备检查口令的有效期的能力 √ √</li>
+<li>系统的用户口令应有历史重复次数的限制<h3 id="鉴别失败"><a href="#鉴别失败" class="headerlink" title="鉴别失败"></a>鉴别失败</h3></li>
+<li>系统应能够对失败的标识和鉴别尝试进行锁定 ★ ★</li>
+<li>系统应能够对鉴别尝试失败的次数和锁定时间进行设置<h3 id="用户-客户端绑定"><a href="#用户-客户端绑定" class="headerlink" title="用户-客户端绑定"></a>用户-客户端绑定</h3></li>
+<li>系统应能够设置客户端登录系统的用户属性<h3 id="会话鉴别"><a href="#会话鉴别" class="headerlink" title="会话鉴别"></a>会话鉴别</h3></li>
+<li>系统应具有鉴别初始会话连接请求的能力 ★ ★</li>
+<li>系统应能够检测和处理会话的异常状态 ★ √<h3 id="用户角色"><a href="#用户角色" class="headerlink" title="用户角色"></a>用户角色</h3></li>
+<li>系统的管理权限单独赋予各级系统管理帐号，这类帐号（角色）仅负责进行系统级的管理，不具备任何业务操作的权限★ ★</li>
+<li>系统应设置审核管理员，对关键的系统管理和特殊业务操作进行审批生效 √ √</li>
+<li>系统应保证审核管理员与系统管理员不是同一账户 √ √</li>
+<li>系统应通过设置审计管理员，对系统的所有安全功能进行管理和监视 ★ ★</li>
+<li>系统应将业务操作权限赋予非系统管理员，且业务操作用户不能具备任何系统级的管理权限 ★ ★<h2 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h2>本部分的核心是，不同的角色应该具备他所应有的最小权限，并且不同角色之间不能越权访问、处理数据。<br><img src="https://rjgeek.github.io/images/2016/12/secureTest_3.jpg?t=2>" width="85%" height="65%" alt="图片名称" align="center">  <h3 id="访问控制管理"><a href="#访问控制管理" class="headerlink" title="访问控制管理"></a>访问控制管理</h3></li>
+<li>系统应提供用户授权的管理功能<h3 id="访问控制策略"><a href="#访问控制策略" class="headerlink" title="访问控制策略"></a>访问控制策略</h3></li>
+<li>系统应由授权主体配置访问控制策略，限制默认用户的访问权限 ★ ★</li>
+<li>系统应授予不同用户为完成各自承担任务所需的最小权限，且相互制约 ★ ★</li>
+<li>系统应能够设置权限互斥原则 √ √</li>
+<li>访问控制功能</li>
+<li>系统应实现完整的访问控制功能，依据安全策略控制用户对文件、数据库表等客体的访问 ★ ★<h3 id="标记"><a href="#标记" class="headerlink" title="标记"></a>标记</h3></li>
+<li>系统应具有对重要信息资源设置敏感标记的功能 √ x</li>
+<li>系统应依据安全策略控制用户对敏感标记信息的操作 √ x<h2 id="安全审计"><a href="#安全审计" class="headerlink" title="安全审计"></a>安全审计</h2>审计的功能一方面是发现异常，另一方面可以对系统有企图的人起到震慑作用。<br><img src="https://rjgeek.github.io/images/2016/12/secureTest_4.jpg?t=2>" width="85%" height="65%" alt="图片名称" align="center">  <h3 id="审计数据产生"><a href="#审计数据产生" class="headerlink" title="审计数据产生"></a>审计数据产生</h3></li>
+<li>系统应提供覆盖到每个用户的安全审计功能，对应用系统重要安全事件能进行审计 ★ ★</li>
+<li>被检软件的审计事件类型至少应包括系统事件、业务事件、成功事件、失败事件及对审计功能的操作。 ★ ★</li>
+<li>系统审计记录中应包括了以下基本信息：日期、事件类型和内容、主体身份、事件的描述和结果等 ★ ★<h3 id="审计查阅"><a href="#审计查阅" class="headerlink" title="审计查阅"></a>审计查阅</h3></li>
+<li>系统应具有对审计数据的搜索、查询、分析、统计、分类、排序的功能。★ √<h3 id="审计响应"><a href="#审计响应" class="headerlink" title="审计响应"></a>审计响应</h3></li>
+<li>系统应定义分级的系统异常事件类型，并根据异常的严重程度采用不同的通知方式 √ x<h3 id="审计事件存储"><a href="#审计事件存储" class="headerlink" title="审计事件存储"></a>审计事件存储</h3></li>
+<li>系统应保证无法删除、修改或覆盖审计记录 ★ ★</li>
+<li>系统应对审计数据具有手动或自动备份的功能 √ x<h3 id="审计事件选择"><a href="#审计事件选择" class="headerlink" title="审计事件选择"></a>审计事件选择</h3></li>
+<li>系统应具有对审计信息的访问控制机制 ★ x</li>
+<li>系统应允许审计管理员选择需要进行审计的事件项目，并提供对审计数据的管理功能 √ x<h2 id="数据完整性"><a href="#数据完整性" class="headerlink" title="数据完整性"></a>数据完整性</h2><img src="https://rjgeek.github.io/images/2016/12/secureTest_5.jpg?t=2>" width="85%" height="65%" alt="图片名称" align="center"><br>数据的完整性主要体现在存储完完整性和传输完整性上。<h3 id="存储完整性"><a href="#存储完整性" class="headerlink" title="存储完整性"></a>存储完整性</h3></li>
+<li>系统应采用校验技术保证存储过程中数据的完整性 ★ ★</li>
+<li>系统应能在检测到完整性错误时采取必要的恢复行动 ★ x<h3 id="传输完整性"><a href="#传输完整性" class="headerlink" title="传输完整性"></a>传输完整性</h3></li>
+<li>系统应采用密码技术保证传输过程中数据的完整性 ★ ★</li>
+<li>系统应检测到系统管理数据、鉴别信息和重要业务数据在传输过程中完整性受到破坏，并在检测到完整性错误时采取必要的恢复措施 √ √<h2 id="数据保密性"><a href="#数据保密性" class="headerlink" title="数据保密性"></a>数据保密性</h2>数据保密性是指数据无论在传输过程中还是存储过程中，及时被截获或者获取依然不知道数据的真实意思<br><img src="https://rjgeek.github.io/images/2016/12/secureTest_6.jpg?t=2>" width="85%" height="65%" alt="图片名称" align="center">  <h3 id="会话初始化验证"><a href="#会话初始化验证" class="headerlink" title="会话初始化验证"></a>会话初始化验证</h3></li>
+<li>系统应在通信双方建立连接之前，利用密码技术进行会话初始化验证 √ x<h3 id="数据存储保密性"><a href="#数据存储保密性" class="headerlink" title="数据存储保密性"></a>数据存储保密性</h3></li>
+<li>系统应采用加密或其他保护措施实现系统管理数据、鉴别信息和重要业务数据存储的保密性。 ★ ★<h3 id="数据传输保密性"><a href="#数据传输保密性" class="headerlink" title="数据传输保密性"></a>数据传输保密性</h3></li>
+<li>系统应对通信过程中的整个报文或会话过程进行加密 ★ x</li>
+<li>系统应采用加密或其他有效措施实现系统管理数据、鉴别信息和重要业务数据传输保密性。 ★ ★</li>
+<li>系统应保证向客户端提供的数据信息中不包含会泄露应用系统安全数据的内容，及与用户请求无关的数据★ ★<h2 id="抗抵赖"><a href="#抗抵赖" class="headerlink" title="抗抵赖"></a>抗抵赖</h2></li>
+<li>原发抗抵赖 系统应具有原发抗抵赖的功能 √ x</li>
+<li>接收抗抵赖 系统应具有接收抗抵赖的功能 √ x<h2 id="软件容错"><a href="#软件容错" class="headerlink" title="软件容错"></a>软件容错</h2>软件的容错有点类似数据库高可用<h3 id="数据有效性"><a href="#数据有效性" class="headerlink" title="数据有效性"></a>数据有效性</h3></li>
+<li>验证系统应提供数据有效性检测功能，保证通过人机接口输入或通过通信接口输入的数据符合系统设定的安全属性要求★ ★  <h3 id="故障与恢复"><a href="#故障与恢复" class="headerlink" title="故障与恢复"></a>故障与恢复</h3></li>
+<li>系统应提供自动保护功能，当故障发生时自动保护当前所有状态，保证系统能够进行恢复 ★ ★  <h2 id="资源控制"><a href="#资源控制" class="headerlink" title="资源控制"></a>资源控制</h2></li>
+<li>会话超时 系统应能根据设定时间（用户非活动期的间隔）自动终止用户会话。 ★ ★</li>
+<li>并发会话限制系统应能够限制属于同一用户（或同一组用户）的并发会话的最大数量 ★ ★</li>
+<li>系统应能够限制单个用户的多重并发会话的限制，防止单用户会话的重用 ★ ★</li>
+<li>资源分配系统应对一个访问帐户或一个请求进程占用的资源分配最大限额和最小限额 √ x</li>
+<li>系统应能够对系统服务水平降低到预先规定的最小值进行检测和报警 √ x</li>
+<li>服务优先级系统应能提供服务优先级的功能，并根据优先级分配系统资源 √ x<h2 id="备份与恢复"><a href="#备份与恢复" class="headerlink" title="备份与恢复"></a>备份与恢复</h2></li>
+<li>系统应提供本地数据备份与恢复功能。 ★ ★<h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2>本文30%为组合,70%为原创<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2>中国某院信息通信研究所资料</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>your support will encourage me to continue to create!</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="RuJia Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/安全编码/" rel="tag">#安全编码</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Reserve Ratio.html" rel="next" title="【金融知识】Reserve Ratio (准备金率)">
+                <i class="fa fa-chevron-left"></i> 【金融知识】Reserve Ratio (准备金率)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/hashFunction.html" rel="prev" title="【密码学】Hash Function(哈希函数)">
+                【密码学】Hash Function(哈希函数) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          <pre><code><b>版权声明</b>:自由转载-非商用-非衍生-保持署名<a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" rel="external nofollow" >(创意共享3.0许可证)</a></code></pre>
+
+
+
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="RuJia" />
+          <p class="site-author-name" itemprop="name">RuJia</p>
+          <p class="site-description motion-element" itemprop="description">BlockChain,Distributed Computing</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rjgeek/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Others">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Others
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cs.bham.ac.uk/~mdr/" title="Professor Mark Ryan" target="_blank" rel="external nofollow" >Professor Mark Ryan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cs.bham.ac.uk/~rzb/" title="Dr Rami Bahsoon" target="_blank" rel="external nofollow" >Dr Rami Bahsoon</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sec.cs.bham.ac.uk/people/" title="The Security and Privacy Group" target="_blank" rel="external nofollow" >The Security and Privacy Group</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.yfgeek.com/" title="YFGeek" target="_blank" rel="external nofollow" >YFGeek</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://rjgeek.github.io/CV1.pdf" title="My CV" target="_blank" rel="external nofollow" >My CV</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#身份和鉴别"><span class="nav-number">2.</span> <span class="nav-text">身份和鉴别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用户标识"><span class="nav-number">2.1.</span> <span class="nav-text">用户标识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户鉴别"><span class="nav-number">2.2.</span> <span class="nav-text">用户鉴别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户口令规范"><span class="nav-number">2.3.</span> <span class="nav-text">用户口令规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#鉴别失败"><span class="nav-number">2.4.</span> <span class="nav-text">鉴别失败</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户-客户端绑定"><span class="nav-number">2.5.</span> <span class="nav-text">用户-客户端绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话鉴别"><span class="nav-number">2.6.</span> <span class="nav-text">会话鉴别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户角色"><span class="nav-number">2.7.</span> <span class="nav-text">用户角色</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问控制"><span class="nav-number">3.</span> <span class="nav-text">访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#访问控制管理"><span class="nav-number">3.1.</span> <span class="nav-text">访问控制管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问控制策略"><span class="nav-number">3.2.</span> <span class="nav-text">访问控制策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标记"><span class="nav-number">3.3.</span> <span class="nav-text">标记</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安全审计"><span class="nav-number">4.</span> <span class="nav-text">安全审计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#审计数据产生"><span class="nav-number">4.1.</span> <span class="nav-text">审计数据产生</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#审计查阅"><span class="nav-number">4.2.</span> <span class="nav-text">审计查阅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#审计响应"><span class="nav-number">4.3.</span> <span class="nav-text">审计响应</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#审计事件存储"><span class="nav-number">4.4.</span> <span class="nav-text">审计事件存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#审计事件选择"><span class="nav-number">4.5.</span> <span class="nav-text">审计事件选择</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据完整性"><span class="nav-number">5.</span> <span class="nav-text">数据完整性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储完整性"><span class="nav-number">5.1.</span> <span class="nav-text">存储完整性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传输完整性"><span class="nav-number">5.2.</span> <span class="nav-text">传输完整性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据保密性"><span class="nav-number">6.</span> <span class="nav-text">数据保密性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#会话初始化验证"><span class="nav-number">6.1.</span> <span class="nav-text">会话初始化验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据存储保密性"><span class="nav-number">6.2.</span> <span class="nav-text">数据存储保密性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据传输保密性"><span class="nav-number">6.3.</span> <span class="nav-text">数据传输保密性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#抗抵赖"><span class="nav-number">7.</span> <span class="nav-text">抗抵赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件容错"><span class="nav-number">8.</span> <span class="nav-text">软件容错</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据有效性"><span class="nav-number">8.1.</span> <span class="nav-text">数据有效性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#故障与恢复"><span class="nav-number">8.2.</span> <span class="nav-text">故障与恢复</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#资源控制"><span class="nav-number">9.</span> <span class="nav-text">资源控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备份与恢复"><span class="nav-number">10.</span> <span class="nav-text">备份与恢复</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#声明"><span class="nav-number">11.</span> <span class="nav-text">声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">12.</span> <span class="nav-text">引用</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RuJia</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+  <span id="busuanzi_container_site_pv">
+    Total visited 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  
+  <span id="busuanzi_container_site_uv">
+  Total visitors 本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'ehcoo';
+      var disqus_identifier = 'secureTest01.html';
+      var disqus_title = "【安全编码】一个系统应该考虑的安全功能要素";
+      var disqus_url = 'http://www.ehcoo.com/secureTest01.html';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

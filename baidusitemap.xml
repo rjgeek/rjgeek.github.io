@@ -1,0 +1,1801 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+    
+    
+  <url>
+    <loc>http://www.ehcoo.com/technicalTebt.html</loc>
+    <lastmod>2017-10-29T15:38:31.058Z</lastmod>
+    <data>
+        <display>
+        <title>【系统架构】数据库演进过程中的技术债务探讨</title>
+        <pubTime>2017-01-11T00:20:09.000Z</pubTime>
+        
+        <tag>系统架构</tag>
+         
+        <tag>技术债务</tag>
+         
+        <tag>Technical debt</tag>
+         
+         
+           
+             
+              <breadCrumb title="系统架构" url="http://www.ehcoo.com/categories/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
+    
+  <url>
+    <loc>http://www.ehcoo.com/tcp.html</loc>
+    <lastmod>2017-10-29T15:38:31.058Z</lastmod>
+    <data>
+        <display>
+        <title>【编程语言】聊聊TCP协议 Version 0.1</title>
+        <pubTime>2016-11-25T18:05:54.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="网络知识" url="http://www.ehcoo.com/categories/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/web-e5-ae-89-e5-85-a8-e5-9f-ba-e7-a1-80-e7-9f-a5-e8-af-86-e7-b3-bb-e5-88-97-e8-b7-a8-e7-ab-99-e8-af-b7-e6-b1-82-e4-bc-aa-e9-80-a0csrf.html</loc>
+    <lastmod>2017-10-29T15:38:31.058Z</lastmod>
+    <data>
+        <display>
+        <title>【WEB安全】WEB安全基础知识系列-跨站请求伪造(CSRF)</title>
+        <pubTime>2016-06-09T16:48:46.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="WEB安全" url="http://www.ehcoo.com/categories/WEB%E5%AE%89%E5%85%A8/"/>
+          
+             
+              <breadCrumb title="编程语言" url="http://www.ehcoo.com/categories/WEB%E5%AE%89%E5%85%A8/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/zerocash.html</loc>
+    <lastmod>2017-10-29T15:38:31.058Z</lastmod>
+    <data>
+        <display>
+        <title>【Paper review】Decentralized Anonymous Payments from Bitcoin</title>
+        <pubTime>2017-03-28T15:37:09.000Z</pubTime>
+        
+        <tag>Bitcoin</tag>
+         
+         
+           
+             
+              <breadCrumb title="Paper review" url="http://www.ehcoo.com/categories/Paper-review/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
+  <url>
+    <loc>http://www.ehcoo.com/tcp1.html</loc>
+    <lastmod>2017-10-29T15:38:31.058Z</lastmod>
+    <data>
+        <display>
+        <title>【编程语言】聊聊网络传输层 Version 0.1</title>
+        <pubTime>2016-11-12T18:05:54.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="网络知识" url="http://www.ehcoo.com/categories/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/seo.html</loc>
+    <lastmod>2017-10-29T15:38:31.058Z</lastmod>
+    <data>
+        <display>
+        <title>【搜索优化】Hexo-next百度和谷歌搜索优化</title>
+        <pubTime>2016-12-19T23:12:09.000Z</pubTime>
+        
+        <tag>搜索优化</tag>
+         
+         
+           
+             
+              <breadCrumb title="搜索优化" url="http://www.ehcoo.com/categories/%E6%90%9C%E7%B4%A2%E4%BC%98%E5%8C%96/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/synchronous-non-blocking-server-based-on-nodejs.html</loc>
+    <lastmod>2017-10-29T15:38:31.058Z</lastmod>
+    <data>
+        <display>
+        <title>【论文】Synchronous Non-blocking Server Based on Nodejs</title>
+        <pubTime>2015-10-22T18:37:08.000Z</pubTime>
+        
+        <tag>Node.js</tag>
+         
+         
+           
+             
+              <breadCrumb title="应用服务器" url="http://www.ehcoo.com/categories/%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/springBootDockerMySQLDemo.html</loc>
+    <lastmod>2017-10-29T15:38:31.058Z</lastmod>
+    <data>
+        <display>
+        <title>【Docker】Spring Boot Docker MySQL Demo</title>
+        <pubTime>2017-02-26T22:02:09.000Z</pubTime>
+        
+        <tag>Docker</tag>
+         
+         
+           
+             
+              <breadCrumb title="Docker" url="http://www.ehcoo.com/categories/Docker/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/secureTest01.html</loc>
+    <lastmod>2017-10-29T15:38:31.058Z</lastmod>
+    <data>
+        <display>
+        <title>【安全编码】一个系统应该考虑的安全功能要素</title>
+        <pubTime>2016-12-21T00:02:09.000Z</pubTime>
+        
+        <tag>安全编码</tag>
+         
+         
+           
+             
+              <breadCrumb title="安全编码" url="http://www.ehcoo.com/categories/%E5%AE%89%E5%85%A8%E7%BC%96%E7%A0%81/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/rsa.html</loc>
+    <lastmod>2017-10-29T15:38:31.058Z</lastmod>
+    <data>
+        <display>
+        <title>【密码学】RSA算法解析-数论基础</title>
+        <pubTime>2016-11-13T21:15:54.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="密码学" url="http://www.ehcoo.com/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/rsa_extend.html</loc>
+    <lastmod>2017-10-29T15:38:31.058Z</lastmod>
+    <data>
+        <display>
+        <title>【密码学】RSA算法解析-加密解密</title>
+        <pubTime>2016-11-16T21:15:54.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="密码学" url="http://www.ehcoo.com/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/travel.html</loc>
+    <lastmod>2017-10-29T15:38:31.058Z</lastmod>
+    <data>
+        <display>
+        <title>【个人生活】大不列颠及北爱尔兰联合王国首都伦敦之3日游记</title>
+        <pubTime>2016-12-17T16:15:54.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="个人生活" url="http://www.ehcoo.com/categories/%E4%B8%AA%E4%BA%BA%E7%94%9F%E6%B4%BB/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/puzzle8.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>【算法整理】A $*$ search 算法实现八数码问题</title>
+        <pubTime>2016-12-28T21:53:09.000Z</pubTime>
+        
+        <tag>算法整理</tag>
+         
+        <tag>八数码问题</tag>
+         
+         
+           
+             
+              <breadCrumb title="算法整理" url="http://www.ehcoo.com/categories/%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/mongo-e9-9b-86-e7-be-a4-e5-8a-a0-e5-af-86-e4-b8-8e-e7-a8-8b-e5-ba-8f-e5-8f-98-e6-9b-b4.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>【Mongodb】低版本Mongodb集群加密-用户认证</title>
+        <pubTime>2015-10-12T11:49:20.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="数据库知识" url="http://www.ehcoo.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/presentation.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>【分布式数据库】区域链技术（Blockchain Technology）</title>
+        <pubTime>2016-12-06T17:15:54.000Z</pubTime>
+        
+        <tag>区块链</tag>
+         
+         
+           
+             
+              <breadCrumb title="区块链" url="http://www.ehcoo.com/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/linuxport.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>【Linux】linux查看端口占用情况</title>
+        <pubTime>2015-11-21T22:23:05.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="操作系统" url="http://www.ehcoo.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/mathJax.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>【数学工具】数学工具MathJax整理</title>
+        <pubTime>2014-01-24T16:20:09.000Z</pubTime>
+        
+        <tag>MathJax</tag>
+         
+         
+           
+             
+              <breadCrumb title="数学工具" url="http://www.ehcoo.com/categories/%E6%95%B0%E5%AD%A6%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/json-hijacking.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>​【WEB安全】WEB安全基础知识系列- JSON Hijacking</title>
+        <pubTime>2016-06-11T00:01:36.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="WEB安全" url="http://www.ehcoo.com/categories/WEB%E5%AE%89%E5%85%A8/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/e3-80-90-e7-b3-bb-e7-bb-9f-e6-9e-b6-e6-9e-84-e3-80-91-e7-94-a8js-e8-ae-b0-e5-bd-95-e6-95-b4-e7-bd-91-e9-a1-b5-e7-9a-84-e5-8a-a0-e8-bd-bd-e6-97-b6-e9-95-bf.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>【系统架构】用JS记录整网页的加载时长</title>
+        <pubTime>2014-08-22T18:41:38.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="系统架构" url="http://www.ehcoo.com/categories/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/e3-80-90-e7-bc-96-e7-a8-8b-e8-af-ad-e8-a8-80-e3-80-91-e9-81-bf-e5-85-8d-e5-88-9b-e5-bb-ba-e4-b8-8d-e5-bf-85-e8-a6-81-e7-9a-84-e5-af-b9-e8-b1-a1.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>【编程语言】避免创建不必要的对象</title>
+        <pubTime>2015-02-09T22:10:48.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="编程语言" url="http://www.ehcoo.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/e3-80-90-e7-bc-96-e7-a8-8b-e8-af-ad-e8-a8-80-e3-80-91-e6-b7-b1-e5-88-bb-e7-90-86-e8-a7-a3javascript-e5-8e-9f-e5-9e-8b-ef-bc-88-proto-ef-bc-89.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>【编程语言】深刻理解javascript原型（_proto_）</title>
+        <pubTime>2016-05-10T21:19:47.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="编程语言" url="http://www.ehcoo.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/e3-80-90-e7-bc-96-e7-a8-8b-e8-af-ad-e8-a8-80-e3-80-91java-e8-ae-be-e8-ae-a1-e5-8e-9f-e5-88-99-e4-be-9d-e8-b5-96-e5-80-92-e7-bd-ae-e5-8e-9f-e5-88-99-ef-bc-88-e9-9d-a2-e5-90-91-e6-8e-a5-e5-8f-a3-2.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>【编程语言】Java设计原则-依赖倒置原则（面向接口编程）</title>
+        <pubTime>2016-02-12T13:34:56.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="JAVA设计模式" url="http://www.ehcoo.com/categories/JAVA%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+          
+             
+              <breadCrumb title="编程语言" url="http://www.ehcoo.com/categories/JAVA%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/e3-80-90-e7-bc-96-e7-a8-8b-e8-af-ad-e8-a8-80-e3-80-91java-e8-ae-be-e8-ae-a1-e5-8e-9f-e5-88-99-e5-8d-95-e4-b8-80-e8-81-8c-e8-b4-a3-e5-8e-9f-e5-88-99.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>【编程语言】Java设计原则-单一职责原则</title>
+        <pubTime>2016-02-12T15:25:24.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="JAVA设计模式" url="http://www.ehcoo.com/categories/JAVA%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+          
+             
+              <breadCrumb title="编程语言" url="http://www.ehcoo.com/categories/JAVA%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/e3-80-90-e7-bc-96-e7-a8-8b-e8-af-ad-e8-a8-80-e3-80-91java-e8-ae-be-e8-ae-a1-e5-8e-9f-e5-88-99-e8-bf-aa-e7-b1-b3-e7-89-b9-e6-b3-95-e5-88-99.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>【编程语言】Java设计原则-迪米特法则</title>
+        <pubTime>2016-02-12T16:33:15.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="JAVA设计模式" url="http://www.ehcoo.com/categories/JAVA%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+          
+             
+              <breadCrumb title="编程语言" url="http://www.ehcoo.com/categories/JAVA%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/e3-80-90-e7-bc-96-e7-a8-8b-e8-af-ad-e8-a8-80-e3-80-91java-e8-ae-be-e8-ae-a1-e5-8e-9f-e5-88-99-e6-8e-a5-e5-8f-a3-e9-9a-94-e7-a6-bb-e5-8e-9f-e5-88-99.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>【编程语言】Java设计原则-接口隔离原则</title>
+        <pubTime>2016-02-12T16:02:41.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="JAVA设计模式" url="http://www.ehcoo.com/categories/JAVA%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+          
+             
+              <breadCrumb title="编程语言" url="http://www.ehcoo.com/categories/JAVA%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/e3-80-90mongodb-e3-80-91mongodb-e7-9a-84-e8-81-94-e5-90-88-e7-b4-a2-e5-bc-95-e4-b8-8e-e5-86-85-e5-b5-8c-e7-b4-a2-e5-bc-95.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>【Mongodb】Mongodb的联合索引与内嵌索引</title>
+        <pubTime>2015-03-01T11:12:09.000Z</pubTime>
+        
+        <tag>Mongodb</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据库知识" url="http://www.ehcoo.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/e3-80-90-e7-bc-96-e7-a8-8b-e8-af-ad-e8-a8-80-e3-80-91java-e8-ae-be-e8-ae-a1-e5-8e-9f-e5-88-99-e9-87-8c-e6-b0-8f-e6-9b-bf-e6-8d-a2-e5-8e-9f-e5-88-99.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>【编程语言】Java设计原则-里氏替换原则</title>
+        <pubTime>2016-02-12T15:01:45.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="JAVA设计模式" url="http://www.ehcoo.com/categories/JAVA%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+          
+             
+              <breadCrumb title="编程语言" url="http://www.ehcoo.com/categories/JAVA%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/e5-8d-95-e6-9c-ba-e9-83-a8-e7-bd-b2-ef-bc-88stand-alone-ef-bc-89-ef-bc-9a-e5-8f-aa-e6-9c-89-e4-b8-80-e4-b8-aa-e9-a5-ae-e6-b0-b4-e6-9c-ba-e6-8f-90-e4-be-9b-e6-9c-8d-e5-8a-a1.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>【系统架构】通俗理论解释常用部署方案</title>
+        <pubTime>2015-11-11T18:27:28.000Z</pubTime>
+        
+        <tag>数据库知识</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程语言" url="http://www.ehcoo.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/e6-95-b0-e6-8d-ae-e5-ba-93-e5-b8-b8-e8-a7-81-e6-9e-b6-e6-9e-84-e5-88-86-e6-9e-90.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>【系统架构】数据库常见架构分析</title>
+        <pubTime>2015-11-16T15:41:45.000Z</pubTime>
+        
+        <tag>数据库知识</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据库知识" url="http://www.ehcoo.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/ether1.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>【区块链】从0开始搭建基于以太坊的区块链开发环境</title>
+        <pubTime>2017-02-21T14:45:09.000Z</pubTime>
+        
+        <tag>以太坊,区块链,ethereum</tag>
+         
+         
+           
+             
+              <breadCrumb title="区块链" url="http://www.ehcoo.com/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/f3a2ec311e9deddee0b29a1bc9636c25.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>【Yum】32位redhat6系统安装yum</title>
+        <pubTime>2014-09-10T01:33:21.000Z</pubTime>
+        
+        <tag>Yum</tag>
+         
+         
+           
+             
+              <breadCrumb title="应用服务器" url="http://www.ehcoo.com/categories/%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/fb09177eaf1586b386fa86c99ee81433.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>【Oracle】利用数据泵迁移数据库，以迁移用户schema为例</title>
+        <pubTime>2015-03-06T00:54:17.000Z</pubTime>
+        
+        <tag>Oracle</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据库知识" url="http://www.ehcoo.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/fdb751020f885c25b4a7cf224541d33c.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>【Linux】linux下权限知识整理</title>
+        <pubTime>2014-11-21T22:30:54.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="操作系统" url="http://www.ehcoo.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/e5-9b-bd-e7-bd-91-e5-8d-8f-e5-90-8c-e5-8a-9e-e5-85-ac-e4-b8-80-e7-ba-a7-e9-83-a8-e7-bd-b2-e4-b8-admongodb-e9-85-8d-e7-bd-ae-e6-93-8d-e4-bd-9c-e5-ae-9e-e4-be-8b.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>【Mongodb】MongoDB分片备份策略示例与配置迁移示例</title>
+        <pubTime>2014-09-25T02:00:22.000Z</pubTime>
+        
+        <tag>Mongodb</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据库知识" url="http://www.ehcoo.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/heuristic_evaluation.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>【Interaction design】10 Usability Heuristics for User Interface Design（transmit）</title>
+        <pubTime>2016-11-21T14:15:54.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="人机交互" url="http://www.ehcoo.com/categories/%E4%BA%BA%E6%9C%BA%E4%BA%A4%E4%BA%92/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/hashFunction.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>【密码学】Hash Function(哈希函数)</title>
+        <pubTime>2016-12-21T14:02:09.000Z</pubTime>
+        
+        <tag>密码学</tag>
+         
+         
+           
+             
+              <breadCrumb title="密码学" url="http://www.ehcoo.com/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/httpsWork.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>【HTTPS】什么是SSL，HTTPS是如何工作的？</title>
+        <pubTime>2017-02-05T12:37:09.000Z</pubTime>
+        
+        <tag>HTTPS,TSL,SSL</tag>
+         
+         
+           
+             
+              <breadCrumb title="网络知识" url="http://www.ehcoo.com/categories/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/news_0.html</loc>
+    <lastmod>2017-10-29T15:38:31.054Z</lastmod>
+    <data>
+        <display>
+        <title>Study identifies a new way to prevent a deadly fungal infection spreading to the brain</title>
+        <pubTime>2011-12-28T21:53:09.000Z</pubTime>
+        
+        <tag>算法整理</tag>
+         
+        <tag>八数码问题</tag>
+         
+         
+           
+             
+              <breadCrumb title="算法整理" url="http://www.ehcoo.com/categories/%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/ccd2152002b3c50692e2566884595817.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>【Linux】虚拟机下linux网络设置</title>
+        <pubTime>2014-09-09T22:35:31.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="操作系统" url="http://www.ehcoo.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/complexity.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>【算法整理】听说你写的算法很牛？-优质算法衡量标准探讨</title>
+        <pubTime>2017-01-25T20:20:09.000Z</pubTime>
+        
+        <tag>算法整理</tag>
+         
+         
+           
+             
+              <breadCrumb title="算法整理" url="http://www.ehcoo.com/categories/%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/cryptology.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>【密码学】一万字带您走进密码学的世界（上）</title>
+        <pubTime>2017-01-03T00:20:09.000Z</pubTime>
+        
+        <tag>密码学</tag>
+         
+         
+           
+             
+              <breadCrumb title="密码学" url="http://www.ehcoo.com/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/cryptology1.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>【密码学】一万字带您走进密码学的世界（下）</title>
+        <pubTime>2017-01-12T16:20:09.000Z</pubTime>
+        
+        <tag>密码学</tag>
+         
+         
+           
+             
+              <breadCrumb title="密码学" url="http://www.ehcoo.com/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/e2-80-8bweb-e5-ae-89-e5-85-a8-e5-9f-ba-e7-a1-80-e7-9f-a5-e8-af-86-e7-b3-bb-e5-88-97-e7-82-b9-e5-87-bb-e5-8a-ab-e6-8c-81-ef-bc-88clickjacking-ef-bc-89.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>​【WEB安全】WEB安全基础知识系列-点击劫持（CLICKJACKING）</title>
+        <pubTime>2016-06-10T10:48:44.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="WEB安全" url="http://www.ehcoo.com/categories/WEB%E5%AE%89%E5%85%A8/"/>
+          
+             
+              <breadCrumb title="编程语言" url="http://www.ehcoo.com/categories/WEB%E5%AE%89%E5%85%A8/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/e2c6f029977a8f38d983f0f2fdaa1d69.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>【密码知识】An introduction to Digital Signatures(数字证书的介绍)</title>
+        <pubTime>2015-12-07T18:50:10.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="编程语言" url="http://www.ehcoo.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/aaf5ef736546f8609aab82ef94134980.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>【Mongodb】Mongodb常用查询命令总结</title>
+        <pubTime>2015-12-08T17:57:59.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="数据库知识" url="http://www.ehcoo.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/Observer.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>【编程语言】Java设计模式-观察者模式</title>
+        <pubTime>2016-12-25T22:02:09.000Z</pubTime>
+        
+        <tag>编程语言</tag>
+         
+        <tag>设计模式</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程语言" url="http://www.ehcoo.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/Reading%20Notes%20Of%20RFC%202616%20P1.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>Reading Notes Of 《RFC 2616, HTTP/1.1》 Part1</title>
+        <pubTime>2016-11-04T16:20:06.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="网络知识" url="http://www.ehcoo.com/categories/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/Reserve%20Ratio.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>【金融知识】Reserve Ratio (准备金率)</title>
+        <pubTime>2016-12-20T21:12:09.000Z</pubTime>
+        
+        <tag>金融知识</tag>
+         
+         
+           
+             
+              <breadCrumb title="金融知识" url="http://www.ehcoo.com/categories/%E9%87%91%E8%9E%8D%E7%9F%A5%E8%AF%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/Runtime.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>【编程语言】Runtime.getRuntime().addShutdownHook（Thread hook）学习</title>
+        <pubTime>2016-12-24T14:02:09.000Z</pubTime>
+        
+        <tag>编程语言</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程语言" url="http://www.ehcoo.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/Thread.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>【编程语言】java的线程的实现方式</title>
+        <pubTime>2016-12-24T17:02:09.000Z</pubTime>
+        
+        <tag>编程语言</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程语言，java" url="http://www.ehcoo.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%EF%BC%8Cjava/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/ThreadPoolExecutor.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>【编程语言】ThreadPoolExecutor – Java Thread Pool Example</title>
+        <pubTime>2016-12-26T16:38:11.000Z</pubTime>
+        
+        <tag>编程语言</tag>
+         
+        <tag>java</tag>
+         
+        <tag>ThreadPoolExecutor</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程语言" url="http://www.ehcoo.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/ThreadWork.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>【编程语言】java的线程是如何工作的（How threads work？)</title>
+        <pubTime>2016-12-24T17:02:09.000Z</pubTime>
+        
+        <tag>编程语言，java</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程语言" url="http://www.ehcoo.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/Using%20Frankencerts%20for%20Automated%20Adversarial%20Testing.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>【Paper review】Using Frankencerts for Automated Adversarial Testing of Certificate Validation in SSL/TLS Implementations</title>
+        <pubTime>2017-03-22T15:37:09.000Z</pubTime>
+        
+        <tag>SSL/TLS</tag>
+         
+         
+           
+             
+              <breadCrumb title="Paper review" url="http://www.ehcoo.com/categories/Paper-review/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/a9f0ca6e8ec035725bb7b69972e4f315.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>【Nginx】32位redhat6系统安装nginx</title>
+        <pubTime>2014-10-01T23:05:35.000Z</pubTime>
+        
+        <tag>Nginx</tag>
+         
+         
+           
+             
+              <breadCrumb title="应用服务器" url="http://www.ehcoo.com/categories/%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/aotoWechat.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>【编程语言】30行代码实现一个微信自动回复的机器人</title>
+        <pubTime>2017-02-18T12:37:09.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程语言" url="http://www.ehcoo.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/b15a2d7569b341bd4cbf61a9cfe6824c.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>【Memcache】32位Linux下的Memcache安装</title>
+        <pubTime>2014-08-13T00:18:13.000Z</pubTime>
+        
+        <tag>Memcache</tag>
+         
+         
+           
+             
+              <breadCrumb title="应用服务器" url="http://www.ehcoo.com/categories/%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/bd77c13f2f0aa9c920b09fa28203a6c9.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>【Linux】手动释放linux内存</title>
+        <pubTime>2014-11-22T00:09:14.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="操作系统" url="http://www.ehcoo.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/blockchain_confirmation_mechanism.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>【区块链技术系列】 区块链共识机制总结(上)</title>
+        <pubTime>2017-09-20T15:37:09.000Z</pubTime>
+        
+        <tag>区块链</tag>
+         
+         
+           
+             
+              <breadCrumb title="区块链" url="http://www.ehcoo.com/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/blockchain_tech_company.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>【区块链资讯系列】 国外优秀区块链创业公司梳理</title>
+        <pubTime>2017-09-28T15:37:09.000Z</pubTime>
+        
+        <tag>区块链</tag>
+         
+         
+           
+             
+              <breadCrumb title="区块链" url="http://www.ehcoo.com/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/boat.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>【文学艺术】船 ——白桦</title>
+        <pubTime>2016-12-26T12:02:09.000Z</pubTime>
+        
+        <tag>文学艺术</tag>
+         
+        <tag>船</tag>
+         
+         
+           
+             
+              <breadCrumb title="文学艺术" url="http://www.ehcoo.com/categories/%E6%96%87%E5%AD%A6%E8%89%BA%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/c309d07117e8340a6343271615731936.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>【Linux】给虚拟机上的LINUX拓展存储</title>
+        <pubTime>2014-11-21T02:51:26.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="操作系统" url="http://www.ehcoo.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/c36a998751bfa6c62be8eccad11fc6b2.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>【系统架构】跨域解决方案汇总</title>
+        <pubTime>2014-09-04T18:21:38.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="系统架构" url="http://www.ehcoo.com/categories/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/c7e17ddcdd976d3300d357de40f10873.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>【Jdk】32位redhat6系统安装jdk</title>
+        <pubTime>2014-09-12T00:52:46.000Z</pubTime>
+        
+        <tag>Jdk</tag>
+         
+         
+           
+             
+              <breadCrumb title="应用服务器" url="http://www.ehcoo.com/categories/%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/c_point.html</loc>
+    <lastmod>2017-10-29T15:38:31.050Z</lastmod>
+    <data>
+        <display>
+        <title>【编程语言】C语言指针整理1</title>
+        <pubTime>2016-11-12T18:05:54.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="编程语言" url="http://www.ehcoo.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/Mysql_Replication.html</loc>
+    <lastmod>2017-10-29T15:38:31.046Z</lastmod>
+    <data>
+        <display>
+        <title>【数据库知识】MySQL英文文档翻译-16.0 复制配置</title>
+        <pubTime>2016-12-22T02:02:09.000Z</pubTime>
+        
+        <tag>Mysql</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据库知识" url="http://www.ehcoo.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/99cbe0dfe754af1522fea6f3a61ada14.html</loc>
+    <lastmod>2017-10-29T15:38:31.046Z</lastmod>
+    <data>
+        <display>
+        <title>【Oracle】查询锁表的用户并处理</title>
+        <pubTime>2014-12-28T21:59:15.000Z</pubTime>
+        
+        <tag>Oracle</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据库知识" url="http://www.ehcoo.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/MasteringBitcoin.html</loc>
+    <lastmod>2017-10-29T15:38:31.046Z</lastmod>
+    <data>
+        <display>
+        <title>【精通比特币，解码电子货币】第1章 介绍（译）</title>
+        <pubTime>2017-05-28T15:37:09.000Z</pubTime>
+        
+        <tag>区块链</tag>
+         
+         
+           
+             
+              <breadCrumb title="区块链" url="http://www.ehcoo.com/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/ManhattanDistance.html</loc>
+    <lastmod>2017-10-29T15:38:31.046Z</lastmod>
+    <data>
+        <display>
+        <title>【算法整理】曼哈顿距离</title>
+        <pubTime>2016-12-28T21:53:09.000Z</pubTime>
+        
+        <tag>曼哈顿距离</tag>
+         
+        <tag>算法整理</tag>
+         
+         
+           
+             
+              <breadCrumb title="算法整理" url="http://www.ehcoo.com/categories/%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/Interaction%20Design%20Mistakes%20That%20Drive%20Us%20Nuts.html</loc>
+    <lastmod>2017-10-29T15:38:31.046Z</lastmod>
+    <data>
+        <display>
+        <title>【Interaction design】11个令人抓乱的错误交互设计（11 Interactions Design Mistakes That Drive Us Nuts）</title>
+        <pubTime>2016-11-21T17:15:54.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="人机交互" url="http://www.ehcoo.com/categories/%E4%BA%BA%E6%9C%BA%E4%BA%A4%E4%BA%92/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/IP.html</loc>
+    <lastmod>2017-10-29T15:38:31.046Z</lastmod>
+    <data>
+        <display>
+        <title>【计算机网络】网络层-IPv4是什么？IPv4怎么划分的？</title>
+        <pubTime>2016-12-13T16:15:54.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="网络知识" url="http://www.ehcoo.com/categories/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/Exploring%20technical%20debt%20of%20database.html</loc>
+    <lastmod>2017-10-29T15:38:31.046Z</lastmod>
+    <data>
+        <display>
+        <title>【Technical debt】Exploring technical debt of database architecture evolution</title>
+        <pubTime>2017-03-18T12:37:09.000Z</pubTime>
+        
+        <tag>technical debt</tag>
+         
+         
+           
+             
+              <breadCrumb title="technical debt" url="http://www.ehcoo.com/categories/technical-debt/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/EventDrivingProgrammingModel.html</loc>
+    <lastmod>2017-10-29T15:38:31.046Z</lastmod>
+    <data>
+        <display>
+        <title>【编程语言】事件模型驱动编程</title>
+        <pubTime>2016-12-27T13:17:09.000Z</pubTime>
+        
+        <tag>编程语言</tag>
+         
+        <tag>事件驱动</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程语言" url="http://www.ehcoo.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/Diffie-Hellman.html</loc>
+    <lastmod>2017-10-29T15:38:31.046Z</lastmod>
+    <data>
+        <display>
+        <title>【密码学】Diffie-Hellman密钥交换</title>
+        <pubTime>2016-11-30T21:15:54.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="密码学" url="http://www.ehcoo.com/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/Bitcoin_key_address.html</loc>
+    <lastmod>2017-10-29T15:38:31.046Z</lastmod>
+    <data>
+        <display>
+        <title>【比特币技术系列】 比特币的地址，密钥，钱包之间的关系</title>
+        <pubTime>2017-05-30T15:37:09.000Z</pubTime>
+        
+        <tag>区块链</tag>
+         
+         
+           
+             
+              <breadCrumb title="区块链" url="http://www.ehcoo.com/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/Bitcoin_ECDSA.html</loc>
+    <lastmod>2017-10-29T15:38:31.046Z</lastmod>
+    <data>
+        <display>
+        <title>【比特币技术系列】 椭圆曲线加密算法 - ECDSA</title>
+        <pubTime>2017-06-03T15:37:09.000Z</pubTime>
+        
+        <tag>区块链</tag>
+         
+         
+           
+             
+              <breadCrumb title="区块链" url="http://www.ehcoo.com/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/A%20Peer-to-Peer%20Electronic%20Cash%20System.html</loc>
+    <lastmod>2017-10-29T15:38:31.046Z</lastmod>
+    <data>
+        <display>
+        <title>一种点对点的电子现金系统（A Peer-to-Peer Electronic Cash System）-中本聪</title>
+        <pubTime>2016-12-12T17:15:54.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="区块链" url="http://www.ehcoo.com/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/MerkleTree.html</loc>
+    <lastmod>2017-10-29T15:38:31.046Z</lastmod>
+    <data>
+        <display>
+        <title>【区块链】区块链中的 Merkle Tree 的java实现.</title>
+        <pubTime>2017-01-28T17:02:09.000Z</pubTime>
+        
+        <tag>区块链</tag>
+         
+         
+           
+             
+              <breadCrumb title="区块链" url="http://www.ehcoo.com/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/8a3f0f6b234e02e107992b55cae6c012.html</loc>
+    <lastmod>2017-10-29T15:38:31.046Z</lastmod>
+    <data>
+        <display>
+        <title>The Principle of Quick Response Code</title>
+        <pubTime>2016-04-19T03:33:58.000Z</pubTime>
+        
+        <tag>数据库知识</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程语言" url="http://www.ehcoo.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/837335d0d798fb1f51576f90057bd463.html</loc>
+    <lastmod>2017-10-29T15:38:31.046Z</lastmod>
+    <data>
+        <display>
+        <title>【系统架构】高性能网站的十大原则，系统拆分</title>
+        <pubTime>2015-02-07T23:41:20.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="系统架构" url="http://www.ehcoo.com/categories/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/7770dc7201024befdd6b5698df1d8280.html</loc>
+    <lastmod>2017-10-29T15:38:31.046Z</lastmod>
+    <data>
+        <display>
+        <title>【Memcache】32位redhat6系统安装memcache</title>
+        <pubTime>2014-10-31T22:07:05.000Z</pubTime>
+        
+        <tag>Memcache</tag>
+         
+         
+           
+             
+              <breadCrumb title="应用服务器" url="http://www.ehcoo.com/categories/%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/1d59179ae8a72ce763744f4f829fdea8.html</loc>
+    <lastmod>2017-10-29T15:38:31.046Z</lastmod>
+    <data>
+        <display>
+        <title>【Single Sign On】Domino平台应用与构异系统实现单点登录</title>
+        <pubTime>2015-12-07T21:15:54.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="编程语言" url="http://www.ehcoo.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/59711ebb77f1c5fa569d58136b9752f9.html</loc>
+    <lastmod>2017-10-29T15:38:31.046Z</lastmod>
+    <data>
+        <display>
+        <title>【Weblogic】32位redhat6系统安装weblogic</title>
+        <pubTime>2014-11-01T00:04:06.000Z</pubTime>
+        
+        <tag>Weblogic</tag>
+         
+         
+           
+             
+              <breadCrumb title="应用服务器" url="http://www.ehcoo.com/categories/%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/5907e39990a954e2e85959b50b1bca17.html</loc>
+    <lastmod>2017-10-29T15:38:31.046Z</lastmod>
+    <data>
+        <display>
+        <title>【Oracle】【Sql】视图的建立与dml</title>
+        <pubTime>2014-11-30T21:09:58.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="数据库知识" url="http://www.ehcoo.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/5%20Common%20Server%20Setups%20For%20Your%20Web%20Application.html</loc>
+    <lastmod>2017-10-29T15:38:31.046Z</lastmod>
+    <data>
+        <display>
+        <title>【系统架构】五种通用WEB应用服务架构（5 Common Server Setups For Your Web Application）</title>
+        <pubTime>2016-11-29T18:05:54.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="系统架构" url="http://www.ehcoo.com/categories/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/445d8f034e6cdb3945d279103076df2b.html</loc>
+    <lastmod>2017-10-29T15:38:31.046Z</lastmod>
+    <data>
+        <display>
+        <title>【系统架构】memcached全面剖析--5. memcached的应用和兼容程序</title>
+        <pubTime>2015-12-07T17:51:14.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="编程语言" url="http://www.ehcoo.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/31d2d2ea1404210e91c97ebf8b50eabb.html</loc>
+    <lastmod>2017-10-29T15:38:31.046Z</lastmod>
+    <data>
+        <display>
+        <title>系统首页架构经典系列—二级缓存的应用与设计中的28法则</title>
+        <pubTime>2014-08-28T01:45:07.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="系统架构" url="http://www.ehcoo.com/categories/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/2f00dfaf87bbfa2a5ee961ec223db126.html</loc>
+    <lastmod>2017-10-29T15:38:31.046Z</lastmod>
+    <data>
+        <display>
+        <title>【Mongodb】Mongodb查询优化一合理利用片键</title>
+        <pubTime>2014-12-11T17:43:34.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="数据库知识" url="http://www.ehcoo.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/2e1c3eb3f9248952b33b5780b356d5c3.html</loc>
+    <lastmod>2017-10-29T15:38:31.046Z</lastmod>
+    <data>
+        <display>
+        <title>【Linux】linux常用缩写含义</title>
+        <pubTime>2014-11-21T22:23:05.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="操作系统" url="http://www.ehcoo.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/13398c19511b11a7b9ecdfcfc5c5295d.html</loc>
+    <lastmod>2017-10-29T15:38:31.042Z</lastmod>
+    <data>
+        <display>
+        <title>【Mongodb】集群分片环境mongodb的版本升级</title>
+        <pubTime>2015-03-31T07:23:46.000Z</pubTime>
+        
+        <tag>Mongodb</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据库知识" url="http://www.ehcoo.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/188e1d0b466344e2ecad5c1e1e53a293.html</loc>
+    <lastmod>2017-10-29T15:38:31.042Z</lastmod>
+    <data>
+        <display>
+        <title>【Linux】Linux下安装Oracle11g服务器</title>
+        <pubTime>2014-08-15T22:20:06.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="数据库知识" url="http://www.ehcoo.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ehcoo.com/01ee46195698d061ab87e4ff17816a48.html</loc>
+    <lastmod>2017-10-29T15:38:31.042Z</lastmod>
+    <data>
+        <display>
+        <title>【WEB安全】WEB安全基础知识系列-DATA URI</title>
+        <pubTime>2016-06-09T20:41:52.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="WEB安全" url="http://www.ehcoo.com/categories/WEB%E5%AE%89%E5%85%A8/"/>
+          
+        </display>
+    </data>
+    </url>
+
+</urlset>

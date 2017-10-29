@@ -1,0 +1,990 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+<meta name="google-site-verification" content="LzR3qfX_YDfkNEusKegSylZBjqRw3vczTwICGpJ1GRI" />
+<meta name="baidu-site-verification" content="IhNq56RJS1" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Ehcoo" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="声明本文70%为组合翻译，详见最后引用，30%为原创内容定版为version1.0,目前为 Version 0.1 表示正在撰写或者翻译 传输层（Transport layer） vs 网络层(network layer)network layer: logical communication between hosts网络层：主机之间的逻辑通信  transport layer: logical">
+<meta name="keywords" content="BlockChain,Distributed Computing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【编程语言】聊聊网络传输层 Version 0.1">
+<meta property="og:url" content="http://www.ehcoo.com/tcp1.html">
+<meta property="og:site_name" content="Ehcoo">
+<meta property="og:description" content="声明本文70%为组合翻译，详见最后引用，30%为原创内容定版为version1.0,目前为 Version 0.1 表示正在撰写或者翻译 传输层（Transport layer） vs 网络层(network layer)network layer: logical communication between hosts网络层：主机之间的逻辑通信  transport layer: logical">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/11/transport_layer_1.png?t=2>">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/11/transport_layer_2.png">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/11/transport_layer_3.png">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/11/transport_layer_4.png">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/11/transport_layer_5.png">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/11/transport_layer_6.png">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/11/transport_layer_7.png">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/11/transport_layer_8.png?">
+<meta property="og:updated_time" content="2017-10-29T15:38:31.058Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【编程语言】聊聊网络传输层 Version 0.1">
+<meta name="twitter:description" content="声明本文70%为组合翻译，详见最后引用，30%为原创内容定版为version1.0,目前为 Version 0.1 表示正在撰写或者翻译 传输层（Transport layer） vs 网络层(network layer)network layer: logical communication between hosts网络层：主机之间的逻辑通信  transport layer: logical">
+<meta name="twitter:image" content="https://rjgeek.github.io/images/2016/11/transport_layer_1.png?t=2>">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.ehcoo.com/tcp1.html"/>
+
+
+  <title> 【编程语言】聊聊网络传输层 Version 0.1 | Ehcoo </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="default">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?83e3b6b55c0e48f5d0848d6a14b76c02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+  
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ehcoo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about-me" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                【编程语言】聊聊网络传输层 Version 0.1
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-11-12T18:05:54+00:00" content="2016-11-12">
+              2016-11-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/网络知识/" itemprop="url" rel="index">
+                    <span itemprop="name">网络知识</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/tcp1.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="tcp1.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+		  
+          
+          
+
+          
+		 
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><p>本文70%为组合翻译，详见最后引用，30%为原创内容<br>定版为version1.0,目前为 Version 0.1 表示正在撰写或者翻译</p>
+<h2 id="传输层（Transport-layer）-vs-网络层-network-layer"><a href="#传输层（Transport-layer）-vs-网络层-network-layer" class="headerlink" title="传输层（Transport layer） vs 网络层(network layer)"></a>传输层（Transport layer） vs 网络层(network layer)</h2><p>network layer: logical communication between hosts<br><strong>网络层：主机之间的逻辑通信  </strong><br>transport layer: logical communication between processes–relies on, enhances, network layer services<br><strong>传输层:是主机之间的进程通信，是用来加强网络层的</strong><br><img src="https://rjgeek.github.io/images/2016/11/transport_layer_1.png?t=2>" width="400" height="300" alt="图片名称" align="center"><br><a id="more"></a><br>transport protocols run in end systems<br>&nbsp;&nbsp;&nbsp;&nbsp;–send side: breaks app messages into segments, passes to  network layer<br>&nbsp;&nbsp;&nbsp;&nbsp;–rcv side: reassembles segments into messages, passes to app layer<br><strong>传输层工作在系统末端，发送消息时传输的报文拆分成小的片段然后发给网络层，接收消息时将报文组装应用层</strong></p>
+<h3 id="传输层的协议（Internet-transport-layer-protocols）"><a href="#传输层的协议（Internet-transport-layer-protocols）" class="headerlink" title="传输层的协议（Internet transport-layer protocols）"></a>传输层的协议（Internet transport-layer protocols）</h3><p>reliable,in-order delivery(TCP)<br>&nbsp;&nbsp;&nbsp;&nbsp;–congestion control<br>&nbsp;&nbsp;&nbsp;&nbsp;–flow control<br>&nbsp;&nbsp;&nbsp;&nbsp;–connetion setup<br><strong>可信的有序的TCP协议，提供拥塞控制，流量控制等功能</strong><br>unreliable,unordered delivery(UDP)<br><strong>不可信的无序的UDP协议</strong>  </p>
+<h3 id="复用和解复用（-Multiplexing-and-Demultiplexing）"><a href="#复用和解复用（-Multiplexing-and-Demultiplexing）" class="headerlink" title="复用和解复用（ Multiplexing and Demultiplexing）"></a>复用和解复用（ Multiplexing and Demultiplexing）</h3><p>Multiplexing is the process in which multiple Data Streams, coming from different Sources, are combined and Transmitted over a Single Data Channel or Data Stream.<br><strong>并发传输是将多个数据流，从不同来源，合并和传播在一个单一的数据通道或数据流的过程。</strong><br>In Electronic Communications, the two basic forms of Multiplexing are Time Division Multiplexing (TDM) and Frequency Division Multiplexing (FDM).<br><strong>在电子通信中，复用的两种基本形式是时分复用（TDM）和频分复用（FDM）。</strong><br>In Time Division Multiplexing, Transmission Time on a Single Channel is divided into non-overlapped Time Slots. Data Streams from different Sources are divided into Units with same size and interleaved successively into the Time Slots.<br><strong>在时分复用，在一个通道传输时间被分为非重叠时隙。不同来源的数据流被分成大小相同的单位，先后交错成时隙。</strong><br>In Frequency Division Multiplexing, Data Streams are carried simultaneously on the same Transmission medium by allocating to each of them a different Frequency Band within the Bandwidth of the Single Channel.<br><strong>在频分复用，数据流同时相同的传输介质上的单信道的带宽内分配给他们每个人不同的频段进行。</strong><br>Multiplexing is done by an equipment called Multiplexer (MUX). It is placed at the Transmitting End of the communication link. At the Receiving End, the Composite Signal is separated by an equipment called Demultiplexer (DEMUX). Demultiplexer performs the reverse process of Multiplexing and routes the separated signals to their corresponding Receivers or Destinations.<br><strong>多路复用是通过称为多路复用器（MUX）的设备完成的。它被放置在通信链路的发送端。在接收端，复合信号是由称为解复用器（DEMUX）的设备分离。多路分解器执行复用和路由的分离的信号的逆过程到其对应的接收器或目的地。</strong><br>Figure 1 shows how TDM interleaves small Units of each Data Stream into the corresponding Time Slots. It Transmits the Data Streams from three Signal Sources (Red, Green and Blue) simultaneously by combining them into a Single Data Stream.<br><strong>图1显示了TDM如何交织每个数据流的小单位到相应的时隙。它通过将它们合并为单个数据流传输数据流从三个信号源（红，绿，蓝）同时进行。</strong><br><img src="https://rjgeek.github.io/images/2016/11/transport_layer_2.png" width="350" height="280" alt="图片名称" align="center"> </p>
+<h2 id="解复用是如何工作的-How-demultiplexing-works"><a href="#解复用是如何工作的-How-demultiplexing-works" class="headerlink" title="解复用是如何工作的 How demultiplexing works"></a>解复用是如何工作的 How demultiplexing works</h2><h3 id="发送和接收"><a href="#发送和接收" class="headerlink" title="发送和接收"></a>发送和接收</h3><p>delivering    received segments to correct socket<br><strong>发送：从多个套接字收集数据，用传输层首部封装数据(以后用于分解 )  </strong><br>Multiplexing at send host<br><strong>接收：将接收的段交付给正确的套接字，(利用传输层首部信息进行分解)</strong><br>host receive IP datagrams,each datagrams hava source IP address,destination address,Each datagrams carreies transport-layer segment,each segment have source destination port number,host use IP address and port to appropriate socket<br><strong>实际上，复用与分解是针对多个SOCKET与一个网络层通道的关系</strong><br><img src="https://rjgeek.github.io/images/2016/11/transport_layer_3.png" width="300" height="280" alt="图片名称" align="center"> </p>
+<h3 id="面向连接的分解（connection-oriented-demux）"><a href="#面向连接的分解（connection-oriented-demux）" class="headerlink" title="面向连接的分解（connection-oriented demux）"></a>面向连接的分解（connection-oriented demux）</h3><p>TCP socket identified by 4-tuple:<br>&nbsp;&nbsp;&nbsp;&nbsp;–source IP address<br>&nbsp;&nbsp;&nbsp;&nbsp;–source port address<br>&nbsp;&nbsp;&nbsp;&nbsp;–dest IP address<br>&nbsp;&nbsp;&nbsp;&nbsp;–dest port address<br>demux: receiver uses all four values to direct segment to approprite socket<br><strong>接收主机使用这四个值将段定位到对应的套接字(也就对应了特定应用程序)  </strong><br><img src="https://rjgeek.github.io/images/2016/11/transport_layer_4.png" width="420" height="350" alt="图片名称" align="center"><br>server host may support many simultaneous TCP socket,web servers have different sockets for each connecting client,non-persistent HTTP will have different socket for each resquest<br><strong>服务器可以同时支持很多个TCP套接字同时工作，对于非持续连接的HTTP的请求，每次都要建立一个请求套接字</strong><br><img src="https://rjgeek.github.io/images/2016/11/transport_layer_5.png" width="420" height="350" alt="图片名称" align="center">   </p>
+<h3 id="无连接分解-Connectionless-demultiplexing"><a href="#无连接分解-Connectionless-demultiplexing" class="headerlink" title="无连接分解(Connectionless demultiplexing)"></a>无连接分解(Connectionless demultiplexing)</h3><p>Create socket with port numbers:<br>DatagarmSocket mysocket = new DatagarmSocket(11111);<br>UDP socket identified by two tuple:<br>&nbsp;&nbsp;&nbsp;&nbsp;–dest IP address<br>&nbsp;&nbsp;&nbsp;&nbsp;–dest port address<br>when host receives UDP segment,checks destination in segement.directs UDP segment to socket with that port number,IP datagrams with different source IP addresses and/or source port numbers can be directed to same socket<br><strong>一个应用程序可以有多个套接字,一个套接字只能属于一个应用程序</strong><br><strong>无连接的分解只考虑目的IP和目的地址，如果目的IP和地址相同，他们可以被分配到相同的套接字</strong><br><img src="https://rjgeek.github.io/images/2016/11/transport_layer_6.png" width="420" height="350" alt="图片名称" align="center">  </p>
+<h2 id="UDP-User-Datagram-Protocol-RFC-768"><a href="#UDP-User-Datagram-Protocol-RFC-768" class="headerlink" title="UDP: User Datagram Protocol [RFC 768]"></a>UDP: User Datagram Protocol [RFC 768]</h2><p>“best effort” service, UDP segments may be “尽力而为”服务，UDP段可能：<br>&nbsp;&nbsp;&nbsp;&nbsp;– lost 丢包<br>&nbsp;&nbsp;&nbsp;&nbsp;– delivered out-of-order to app 交付给应用程序的报文可能失序<br>connectionless: 无连接:<br>&nbsp;&nbsp;&nbsp;&nbsp;– no handshaking between UDP sender, receiver   在UDP发送方和接收方之间无握手<br>&nbsp;&nbsp;&nbsp;&nbsp;– – each UDP segment handled independently of others每个UDP段的处理独立于其他段，无状态传递<br><strong>UDP应用场景，对数据丢失不敏感的流式数据（视屏，音频），DNS，SNMP</strong></p>
+<h3 id="UDP头格式化-（UDP-segment-header）"><a href="#UDP头格式化-（UDP-segment-header）" class="headerlink" title="UDP头格式化 （UDP segment header）"></a>UDP头格式化 （UDP segment header）</h3><p><img src="https://rjgeek.github.io/images/2016/11/transport_layer_7.png" width="320" height="300" alt="图片名称" align="center"><br>其中length为UDP数据和头的长度</p>
+<h3 id="UDP校验和-（UDP-checksum）"><a href="#UDP校验和-（UDP-checksum）" class="headerlink" title="UDP校验和 （UDP checksum）"></a>UDP校验和 （UDP checksum）</h3><p>Goal:detect “errors” in transmitted segment<br>sender:<br><strong>目标：监听传输过程中的错误 </strong><br>The checksum field is the 16 bit one’s complement of the one’s complement sum of all 16-bit words in the header and text.If a segment contains an odd number of header and text octets to be checksummed, the last octet is padded on the right with zeros to form a 16-bit word for checksum purposes. The pad is not transmitted as part of the segment. While computing the checksum, the checksum field itself is replaced with zeros.</p>
+<p>Header Checksum区域有16位。它是这样获得的，从header取得除checksum之外的0/1序列，比如：<br>9194 8073 0000 4000 4011 C0A8 0001 C0A8 00C7 (十六进制hex, 这是一个为演示运算过程而设计的header)<br>按照十六位(也就是4位hex)分割整个序列。将分割后的各个4位hex累积相加。如果有超过16位的进位出现，则将进位加到后16位结果的最后一位：</p>
+<p>  Binary                Hex</p>
+<p>  1001000110010100      9194</p>
+<p> +1000000001110011      8073</p>
+<hr>
+<p>1 0001001000000111     11207</p>
+<pre><code>1
+</code></pre><hr>
+<p>  0001001000001000      1208<br>上面的计算叫做one’s complement sum。求得所有十六位数的和，<br>one’s complement sum(4500, 0073, 0000, 4000, 4011, C0A8, 0001, C0A8, 00C7) = 1433<br>然后，将1433的每一位取反(0-&gt;1, 1-&gt;0)， 就得到checksum：EBCC<br>这样，我们的header就是:<br>9194 8073 0000 4000 4011 EBCC C0A8 0001 C0A8 00C7<br>IP包的接收方在接收到IP包之后，可以求上面各个16位数的one’s complement sum，应该得到FFFF。如果不是FFFF，那么header是不正确的，整个IP包会被丢弃。<br>Here is Checksum calculation for a very small UDP user datagram with only 7 bytes of data. Because the number of bytes of data is odd, padding is added for checksum calculation.<br>The pseudo header as well as the padding will be dropped when the user datagram is delivered to IP layer.<br><img src="https://rjgeek.github.io/images/2016/11/transport_layer_8.png?" width="500" height="280" alt="图片名称" align="center">  </p>
+<h2 id="构造可靠的数据传输协议"><a href="#构造可靠的数据传输协议" class="headerlink" title="构造可靠的数据传输协议"></a>构造可靠的数据传输协议</h2><h3 id="完全可靠信道上的可靠数据传输-rdt1-0"><a href="#完全可靠信道上的可靠数据传输-rdt1-0" class="headerlink" title="完全可靠信道上的可靠数据传输(rdt1.0)"></a>完全可靠信道上的可靠数据传输(rdt1.0)</h3><p>最简单的情况，假设底层的信道是完全可靠的，<br>所有分组从发送方流向接收方，有了完全可靠的信道，接收方不需要提供任何反馈消息给发送方，因为不会发生任何差错</p>
+<h3 id="完全可靠信道上的可靠数据传输-rdt2-0"><a href="#完全可靠信道上的可靠数据传输-rdt2-0" class="headerlink" title="完全可靠信道上的可靠数据传输(rdt2.0)"></a>完全可靠信道上的可靠数据传输(rdt2.0)</h3><p>在现实中，在实际传输中有些比特可能会受损或者丢失，接了解决这个问题采用，服务应答机制<br>接收肯定确认（positive acknowledgment），否定确认(negative acknowledgment)，自动重传请求(Automatic Repeat Request ARQ)<br>ARQ协议提供了三种协议来处理比特差错，1差错检测，2接收方反馈，3重传<br>rdt2.0 看着似乎可是运行了，但是有个致命的缺陷，没有考虑到ACK或者NAK的分组受损的情况，<br>rdt2.1<br>为了解决ACK或者NAK丢失的问题，有三种方案可以考虑，<br>第一种：重发ACK或者NAK，但是同样面临含糊丢失的问题<br>第二种：增加足够的检测和比特，可以直接恢复比特差错<br>第三种：收到含糊不清的ACK，重发整个分组，但是会产生冗余分组（duplicate packet）的问题，解决此类问题的方法是在数据分组中添加一个新字段，即将发送的数据分组的序号放入字段中，接收方可以检测序号（sequence number）判断是否为冗余分组<br>rdt2.2<br>如果分组报文接收不成功接收方不发送NAC，转而发送上一次正确接收的ACK</p>
+<h3 id="具有比特差错的丢包信道上的可靠数据传输-rdt3-0"><a href="#具有比特差错的丢包信道上的可靠数据传输-rdt3-0" class="headerlink" title="具有比特差错的丢包信道上的可靠数据传输(rdt3.0)"></a>具有比特差错的丢包信道上的可靠数据传输(rdt3.0)</h3><p>除了比特受损之外，底层信道还会丢包，假定让发送方负责检测和恢复丢包，发送方确定一个合适的时间值<br>倒数定时器（countdown timer）<br>1.每次发送一个分组，启动定时器<br>2.响应定时器中断（采取合适的动作）<br>3.终止定时器  </p>
+<h2 id="流水线可靠数据传输协议-Pipelined-protocols"><a href="#流水线可靠数据传输协议-Pipelined-protocols" class="headerlink" title="流水线可靠数据传输协议(Pipelined protocols)"></a>流水线可靠数据传输协议(Pipelined protocols)</h2><p>模型：为了评估停等对性能的影响，可以考虑一种两台主机理想化的情况，一台位于美国位于美国东海岸，一台位于美国西海岸，两个系统光速往返传播时延（RTT）大约为30ms,假如彼此通过一条传输速率为R=1Gbps(10^9bps),包括首部字段和数据分组的长L=1000字节（8000比特），实际发送一个分组到1Gbps链路所需的时间是<br>$$\phi{n}=\frac{L}{R}=\frac{8000\quad bit/packet}{10^9\quad bit/s}=9us$$<br>如果发送方在t=0的时刻发送分组，在t=L/R=8us后，最后一个比特数据进入发送方信道，经过15ms的垮美国旅行后到达接收方，该分组的最后1比特在时刻t=RTT/2+L/R=15.008时到达接收方，接收方在收到最后一个分组的最后1个比特后立刻发动ACK，ACK在时刻t=RTT+L/R=30.008ms到达发送方，（假设ACK分组很小，我们忽略其发送时间），此时发送方可以发送下一个报文，因此在30.008ms内，发送方值发送了0.008ms<br>定义发送方信道的利用率：<br>$$\phi{n}=\frac{L/R}{RTT+L/R}=\frac{0.008\quad ms}{30.008\quad ms}=0.000267us$$<br>发送方只有万分之2.67的时间是繁忙的，发送方在30.008ms内只发送了1000字节，有效的吞吐量为267kbps<br>为了解决这个问题引用新的方法：不使用停等协议，允许发送方发送多个分组，而且不用确认，下图的例子，在等待确认之前发送3个分组，利用率提高3倍，此种方式称为流水线，但是流水线对可靠数据传输协议带来的如下影响：<br>1.每个传输分组必须有分组序号<br>2.协议发发送方和接收方必须可以缓存多个分组，发送方最低限度是缓冲那些没有确认的分组<br>3.所需的序号范围和对缓冲的要求取决于数据传输协议处理丢失、损坏以及过度延时分组的方式<br>解决流水线分的方式有两种：回退N部，选择重传，  </p>
+<h3 id="回退N部（Go-back-N）"><a href="#回退N部（Go-back-N）" class="headerlink" title="回退N部（Go-back-N）"></a>回退N部（Go-back-N）</h3><p>Go-back-N简称GBN<br>Go-back-N，sender can have up to N unacked packets in pipeline<br>• receiver only sends cumulative ack doesn’t ack packet if there’s a gap<br>• sender has timer for oldest unacked packet when timer expires, retransmit all unacked packets  </p>
+<h4 id="滑动窗口协议（sliding-window-protocol）"><a href="#滑动窗口协议（sliding-window-protocol）" class="headerlink" title="滑动窗口协议（sliding-window protocol）"></a>滑动窗口协议（sliding-window protocol）</h4><p>我么将最早的未确认的分组的序号定义为基序号(base)，下一个序号（nextsqnum）定义为最小的未使用的序号，可以将序号范围分为以下四部分，详见下图<br>已经被发送，但是还么有收到确认的分组的许可范围可以被看成是一个在序号范围内长度为N的窗口，随着协议的运行，该窗口在序号空间内向前滑动，N被称为窗口长度，GBN协议被称为滑动窗口协议（slinding-window protocol）</p>
+<p>GNB响应一下三种类型的事件<br>1.上层的调用，上层调用rdt_send()时，发送方首先检查发送窗口是否已满，即是否有N个已经发送但是未被确认的分组，如果窗口未满，则创建一个分组将其发送，如果窗口已满，告诉上层一会重试，目前繁忙<br>2.收到ACK，采用累积确认的方式，如收到的序号为m,则m之前的序号已经完成发送<br>3.超时事件，收到下一组发送的ACK，但是上一组没有收到，则从上一组开始恢复</p>
+<h3 id="选择重传（Selective-repeat）"><a href="#选择重传（Selective-repeat）" class="headerlink" title="选择重传（Selective repeat）"></a>选择重传（Selective repeat）</h3><p>GBN的问题，出现任何一个差错，其后的所有分组都将收到影响，为了解决这个问题引入了选择重传的功能<br>发送：<br>1.如果下一个可用的序号在窗口内，则发送包<br>2.每个分组都拥有自己逻辑定时器，超时只发送当前这个分组<br>3.收到ACK，如果该分组在窗口内，在SR发送方将那个未被确认的分组标示为已经接收 ，如果该分组的序号等于send_base,则窗口基序号向前移动到最小序号的未确认分组处，如果窗口移动了并且有序号落在窗口内的未发送分组，则发送这些分组<br>接收：</p>
+<pre><code>#include &lt;stdio.h&gt;
+int main(){
+
+    char a = 15;
+    char *pa = &amp;a;
+
+    int b = 55;
+    int *pb = &amp;b;
+
+    double c =     11;
+    double *pc = &amp;c;
+
+    printf(&quot;%#X,%#X,%#X\n&quot; , pa, pb,pc);  
+    printf(&quot;%d,%d,%d\n&quot;, *pa, *pb,c); 
+    pa++;
+    pb++;
+    pc++;
+    printf(&quot;%#X,%#X,%#X\n&quot; , pa, pb,pc); 
+    return 0;
+}
+</code></pre><h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p><a href="http://macao.communications.museum/eng/exhibition/secondfloor/moreinfo/2_8_6_Multiplexing.html" target="_blank" rel="external">http://macao.communications.museum/eng/exhibition/secondfloor/moreinfo/2_8_6_Multiplexing.html</a><br><a href="http://blog.chinaunix.net/uid-26758209-id-3146230.html" target="_blank" rel="external">http://blog.chinaunix.net/uid-26758209-id-3146230.html</a><br>《计算机网络-自顶向下方法(原书第4版)》  </p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>your support will encourage me to continue to create!</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="RuJia Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Reading Notes Of RFC 2616 P1.html" rel="next" title="Reading Notes Of 《RFC 2616, HTTP/1.1》 Part1">
+                <i class="fa fa-chevron-left"></i> Reading Notes Of 《RFC 2616, HTTP/1.1》 Part1
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/c_point.html" rel="prev" title="【编程语言】C语言指针整理1">
+                【编程语言】C语言指针整理1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          <pre><code><b>版权声明</b>:自由转载-非商用-非衍生-保持署名<a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" rel="external nofollow" >(创意共享3.0许可证)</a></code></pre>
+
+
+
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="RuJia" />
+          <p class="site-author-name" itemprop="name">RuJia</p>
+          <p class="site-description motion-element" itemprop="description">BlockChain,Distributed Computing</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rjgeek/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Others">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Others
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cs.bham.ac.uk/~mdr/" title="Professor Mark Ryan" target="_blank" rel="external nofollow" >Professor Mark Ryan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cs.bham.ac.uk/~rzb/" title="Dr Rami Bahsoon" target="_blank" rel="external nofollow" >Dr Rami Bahsoon</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sec.cs.bham.ac.uk/people/" title="The Security and Privacy Group" target="_blank" rel="external nofollow" >The Security and Privacy Group</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.yfgeek.com/" title="YFGeek" target="_blank" rel="external nofollow" >YFGeek</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://rjgeek.github.io/CV1.pdf" title="My CV" target="_blank" rel="external nofollow" >My CV</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#声明"><span class="nav-number">1.</span> <span class="nav-text">声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传输层（Transport-layer）-vs-网络层-network-layer"><span class="nav-number">2.</span> <span class="nav-text">传输层（Transport layer） vs 网络层(network layer)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#传输层的协议（Internet-transport-layer-protocols）"><span class="nav-number">2.1.</span> <span class="nav-text">传输层的协议（Internet transport-layer protocols）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复用和解复用（-Multiplexing-and-Demultiplexing）"><span class="nav-number">2.2.</span> <span class="nav-text">复用和解复用（ Multiplexing and Demultiplexing）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解复用是如何工作的-How-demultiplexing-works"><span class="nav-number">3.</span> <span class="nav-text">解复用是如何工作的 How demultiplexing works</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#发送和接收"><span class="nav-number">3.1.</span> <span class="nav-text">发送和接收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面向连接的分解（connection-oriented-demux）"><span class="nav-number">3.2.</span> <span class="nav-text">面向连接的分解（connection-oriented demux）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无连接分解-Connectionless-demultiplexing"><span class="nav-number">3.3.</span> <span class="nav-text">无连接分解(Connectionless demultiplexing)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UDP-User-Datagram-Protocol-RFC-768"><span class="nav-number">4.</span> <span class="nav-text">UDP: User Datagram Protocol [RFC 768]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP头格式化-（UDP-segment-header）"><span class="nav-number">4.1.</span> <span class="nav-text">UDP头格式化 （UDP segment header）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP校验和-（UDP-checksum）"><span class="nav-number">4.2.</span> <span class="nav-text">UDP校验和 （UDP checksum）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造可靠的数据传输协议"><span class="nav-number">5.</span> <span class="nav-text">构造可靠的数据传输协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#完全可靠信道上的可靠数据传输-rdt1-0"><span class="nav-number">5.1.</span> <span class="nav-text">完全可靠信道上的可靠数据传输(rdt1.0)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完全可靠信道上的可靠数据传输-rdt2-0"><span class="nav-number">5.2.</span> <span class="nav-text">完全可靠信道上的可靠数据传输(rdt2.0)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具有比特差错的丢包信道上的可靠数据传输-rdt3-0"><span class="nav-number">5.3.</span> <span class="nav-text">具有比特差错的丢包信道上的可靠数据传输(rdt3.0)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流水线可靠数据传输协议-Pipelined-protocols"><span class="nav-number">6.</span> <span class="nav-text">流水线可靠数据传输协议(Pipelined protocols)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#回退N部（Go-back-N）"><span class="nav-number">6.1.</span> <span class="nav-text">回退N部（Go-back-N）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#滑动窗口协议（sliding-window-protocol）"><span class="nav-number">6.1.1.</span> <span class="nav-text">滑动窗口协议（sliding-window protocol）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择重传（Selective-repeat）"><span class="nav-number">6.2.</span> <span class="nav-text">选择重传（Selective repeat）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">7.</span> <span class="nav-text">引用</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RuJia</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+  <span id="busuanzi_container_site_pv">
+    Total visited 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  
+  <span id="busuanzi_container_site_uv">
+  Total visitors 本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'ehcoo';
+      var disqus_identifier = 'tcp1.html';
+      var disqus_title = "【编程语言】聊聊网络传输层 Version 0.1";
+      var disqus_url = 'http://www.ehcoo.com/tcp1.html';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

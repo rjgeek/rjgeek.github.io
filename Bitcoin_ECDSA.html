@@ -1,0 +1,995 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+<meta name="google-site-verification" content="LzR3qfX_YDfkNEusKegSylZBjqRw3vczTwICGpJ1GRI" />
+<meta name="baidu-site-verification" content="IhNq56RJS1" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Bitcoin, blochain, 区块链" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="引言上次文章中提到椭圆曲线加密算法，因为此部分过于学术就没有详细讲解，最近有读者问及,索性写篇文章整理下此算法，首先椭圆曲线加密算法是用于比特币中的公钥私钥的生成。需要指出的是在非对称密钥体系中，椭圆曲线加密算法只是其中的一种，可能还有其他的算法，比如Elgamal，DSA等。今天的主要内容包括：群(GROUP)组的概念，椭圆曲线加密算法与相关的类比与例子">
+<meta name="keywords" content="Bitcoin, blochain, 区块链">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【比特币技术系列】 椭圆曲线加密算法 - ECDSA">
+<meta property="og:url" content="http://www.ehcoo.com/Bitcoin_ECDSA.html">
+<meta property="og:site_name" content="Ehcoo">
+<meta property="og:description" content="引言上次文章中提到椭圆曲线加密算法，因为此部分过于学术就没有详细讲解，最近有读者问及,索性写篇文章整理下此算法，首先椭圆曲线加密算法是用于比特币中的公钥私钥的生成。需要指出的是在非对称密钥体系中，椭圆曲线加密算法只是其中的一种，可能还有其他的算法，比如Elgamal，DSA等。今天的主要内容包括：群(GROUP)组的概念，椭圆曲线加密算法与相关的类比与例子">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://www.ehcoo.com/images/2017/05/Bitcoin_ECDSA_0.jpg">
+<meta property="og:image" content="http://www.ehcoo.com/images/2017/05/Bitcoin_ECDSA_1.jpg">
+<meta property="og:image" content="http://www.ehcoo.com/images/2017/05/Bitcoin_ECDSA_2.gif">
+<meta property="og:image" content="http://www.ehcoo.com/images/2017/05/Bitcoin_ECDSA_3.jpg">
+<meta property="og:image" content="http://www.ehcoo.com/images/2017/05/Bitcoin_ECDSA_4.jpg">
+<meta property="og:image" content="http://www.ehcoo.com/images/2017/05/Bitcoin_ECDSA_5.jpg">
+<meta property="og:updated_time" content="2017-10-29T15:38:31.046Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【比特币技术系列】 椭圆曲线加密算法 - ECDSA">
+<meta name="twitter:description" content="引言上次文章中提到椭圆曲线加密算法，因为此部分过于学术就没有详细讲解，最近有读者问及,索性写篇文章整理下此算法，首先椭圆曲线加密算法是用于比特币中的公钥私钥的生成。需要指出的是在非对称密钥体系中，椭圆曲线加密算法只是其中的一种，可能还有其他的算法，比如Elgamal，DSA等。今天的主要内容包括：群(GROUP)组的概念，椭圆曲线加密算法与相关的类比与例子">
+<meta name="twitter:image" content="http://www.ehcoo.com/images/2017/05/Bitcoin_ECDSA_0.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.ehcoo.com/Bitcoin_ECDSA.html"/>
+
+
+  <title> 【比特币技术系列】 椭圆曲线加密算法 - ECDSA | Ehcoo </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="default">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?83e3b6b55c0e48f5d0848d6a14b76c02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+  
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ehcoo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about-me" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                【比特币技术系列】 椭圆曲线加密算法 - ECDSA
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-06-03T15:37:09+00:00" content="2017-06-03">
+              2017-06-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/区块链/" itemprop="url" rel="index">
+                    <span itemprop="name">区块链</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/Bitcoin_ECDSA.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="Bitcoin_ECDSA.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+		  
+          
+          
+
+          
+		 
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>上次<a href="http://www.ehcoo.com/Bitcoin_key_address.html">文章</a>中提到椭圆曲线加密算法，因为此部分过于学术就没有详细讲解，最近有读者问及,索性写篇文章整理下此算法，首先椭圆曲线加密算法是用于比特币中的公钥私钥的生成。需要指出的是在非对称密钥体系中，椭圆曲线加密算法只是其中的一种，可能还有其他的算法，比如Elgamal，DSA等。今天的主要内容包括：群(GROUP)组的概念，椭圆曲线加密算法与相关的类比与例子</p>
+<a id="more"></a>
+<h2 id="单向陷门函数"><a href="#单向陷门函数" class="headerlink" title="单向陷门函数"></a>单向陷门函数</h2><blockquote>
+<p>A trapdoor function is a function that is easy to compute in one direction, yet difficult to compute in the opposite direction (finding its inverse) without special information, called the “trapdoor”. Trapdoor functions are widely used in cryptography.   –wikipedia</p>
+</blockquote>
+<p><img src="http://www.ehcoo.com/images/2017/05/Bitcoin_ECDSA_0.jpg" width="90%" height="90%" alt="图片名称" align="center"><br>一个trapdoor函数最大的功能就是单向计算非常容易，在缺少必要信息的情况下逆向计算非常困难，这就是公私钥密码使用的基础：用私钥推出公钥很容易，有公钥反推出私钥却很困难，除非具备了某些必要的参数。非对称密钥的发展史就是一个在不停的寻找优秀单项函数的过程，目前常用有DH,DSA,ECDH,ECDSA.我们今天探讨的椭圆曲线加密算法(ECDSA)，只是其中的一种。下面开始探讨椭圆曲线加密算法为何是一个优秀的Trapdoor函数。</p>
+<h2 id="一个有趣的类比"><a href="#一个有趣的类比" class="headerlink" title="一个有趣的类比"></a>一个有趣的类比</h2><p>一个椭圆曲线是满足一个特殊方程的点集。一个椭圆曲线方程看起来有点像这个：$y^2 = x^3 + ax + b$<br><img src="http://www.ehcoo.com/images/2017/05/Bitcoin_ECDSA_1.jpg" width="90%" height="90%" alt="图片名称" align="center"></p>
+<p>也有其他椭圆曲线的代表，但学术上一个椭圆曲线是一个满足一个变量为二阶，另一个变量为3阶的二元方程。一个椭圆曲线不仅仅是一个漂亮的图片，它也有一些使它成为密码学的一个好环境的性能。</p>
+<p>靠近看上文标绘的椭圆曲线。它有几个有趣的特性。<br>其中一个是水平对称。曲线上的任何点以X轴反射并且仍然是同样的曲线。一个更加有趣的特性是任何不垂直的线穿过曲线最多有三个交点。让我们来把曲线想象成一个奇异的桌球游戏。取曲线上的任意两点并且把他们连起来；这条线与曲线有两个以上的交点。在这个桌球游戏里，你拿球从A射向B.当它撞上曲线，这个球向上反弹（它位于X轴以下）或者向下反弹到曲线的另一边。</p>
+<p><img src="http://www.ehcoo.com/images/2017/05/Bitcoin_ECDSA_2.gif" width="90%" height="90%" alt="图片名称" align="center"></p>
+<p>我们把球移向两点叫“打点（dot）”。曲线上的任意两点能被同时打点得到一个新点。</p>
+<p>A dot B = C</p>
+<p>我们也能同时做一串移动来用它自己反复“打点”。</p>
+<p>A dot A = B</p>
+<p>A dot B = C</p>
+<p>A dot C = D<br>…</p>
+<p>事实证明如果你有两个点，一个最初的点用它自己打点n次到达一个最终点，在你只知道最重点时找到n和最初点是很难的。继续我们的奇异桌球比喻，想象一个人在一段任意时间里在一个房间里单独玩我们游戏。对他来说，他跟着上述规则来反复击球是容易的。如果一个人后来走进房间并且看到球最终的位置，即使他们知道这个游戏的所有规则和球的起点，在没有全程观察游戏直到球到达同一点的情况下，他们也不能算出球击打到那的次数。容易做，但很难解开。这就是一个非常棒的trapdoor函数的基础。</p>
+<h2 id="椭圆曲线"><a href="#椭圆曲线" class="headerlink" title="椭圆曲线"></a>椭圆曲线</h2><p>按照上面的例子，如果我们需要桌球进行反弹来确定不同的点，那么桌面一定是具有一定范围的，不然发射出去永远接触不到面永远找不到反射点了，在数学中我们把这个桌面成为定义成一个群，为了便于讲解我们将其定义为一个有限域，NOTE：域其实是群的一种特例，在此不深究。</p>
+<h3 id="Group"><a href="#Group" class="headerlink" title="Group"></a>Group</h3><p>Group的标准定义：<br><img src="http://www.ehcoo.com/images/2017/05/Bitcoin_ECDSA_3.jpg" width="90%" height="90%" alt="图片名称" align="center"></p>
+<p>我们把它实例化，针对椭圆上的点，我们可以认为他是一个有限域，因为他满足上面的特征</p>
+<ul>
+<li>Fp中只有p（p为素数）个元素0,1,2 …… p-2,p-1；  </li>
+<li>Fp 的加法（a+b）法则是 $a+b≡c (mod p)$；即，$(a+c)÷p$的余数 和$c÷p$的余数相同。  </li>
+<li>Fp 的乘法(a×b)法则是  $a×b≡c (mod p)$；  </li>
+<li>Fp 的除法(a÷b)法则是  $a/b≡c (mod p)$；</li>
+<li>Fp 的单位元是1，零元是 0。  </li>
+</ul>
+<p>同时，并不是所有的椭圆曲线都适合加密。$y^2=x^3+ax+b$是一类可以用来加密的椭圆曲线，也是最为简单的一类。下面我们就把$y2=x3+ax+b$ 这条曲线定义在Fp上：选择两个满足下列条件的小于p(p为素数)的非负整数a、b  </p>
+<p>  $4a^3+27b^2≠0　(mod p)$</p>
+<p>则满足下列方程的所有点(x,y)，再加上 无穷远点O∞ ，构成一条椭圆曲线。其中 x,y属于0到p-1间的整数，并将这条椭圆曲线记为Ep(a,b)。</p>
+<p>$y^2=x^3+ax+b  (mod p)$</p>
+<h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><p>我们看一下$y^2=x^3+x+1  (mod 23)$的图像，满足这个点是所有数据<br><img src="http://www.ehcoo.com/images/2017/05/Bitcoin_ECDSA_4.jpg" width="90%" height="90%" alt="图片名称" align="center"></p>
+<p>上面的结果推到公式涉及高等数学部分，我们再此就直接给出结果</p>
+<ul>
+<li>无穷远点 O∞是零元，有O∞+ O∞= O∞，O∞+P=P  </li>
+<li>P(x,y)的负元是 (x,-y)，有P+(-P)= O∞  </li>
+<li>P(x1,y1),Q(x2,y2)的和R(x3,y3) 有如下关系：  </li>
+</ul>
+<p>$$x3≡k^2-x1-x2(mod p)$$<br>$$y3≡k(x1-x3)-y1(mod p)$$</p>
+<p>理想的情况下，上面的k其实就上上面直线的斜率，<br>$$若P=Q 则 k=(3x^2+a)/2y1$$<br>$$若P≠Q，则k=(y2-y1)/(x2-x1)$$</p>
+<p><img src="http://www.ehcoo.com/images/2017/05/Bitcoin_ECDSA_5.jpg" width="90%" height="90%" alt="图片名称" align="center"></p>
+<blockquote>
+<p>例5.1 已知E23(1,1)上两点P(3,10)，Q(9,7)，求1)-P，2)P+Q，3) 2P。  </p>
+<p>1)  –P的值为(3,-10)<br>2)  k=(7-10)/(9-3)=-1/2，2的乘法逆元为12 因为2<em>12≡1 (mod 23)<br> k≡-1</em>12 (mod 23) 故 k=11。<br> x=112-3-9=109≡17 (mod 23);<br> y=11[3-(-6)]-10=89≡20 (mod 23)<br> 故P+Q的坐标为(17,20)<br>3)  k=[3(32)+1]/(2*10)=1/4≡6 (mod 23)<br> x=62-3-3=30≡20 (mod 23)<br> y=6(3-7)-10=-34≡12 (mod 23)<br> 故2P的坐标为(7,12)  </p>
+</blockquote>
+<p>在上面这个例子中如果已经知道2P = (7,12)和P(3,10)，Q(9,7)，你很难计算出2这个参数.</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文深入介绍了椭圆曲线加密算法。</p>
+<h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><p>本文50%为翻译组合,<strong>50%为原创</strong><br>d3d3LmVoY29vLmNvbSwg5L2c6ICFOmVoY29v（BASE64编码）</p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p><a href="http://8btc.com/article-138-1.html" target="_blank" rel="external">http://8btc.com/article-138-1.html</a><br><a href="http://8btc.com/article-140-1.html" target="_blank" rel="external">http://8btc.com/article-140-1.html</a><br><a href="https://arstechnica.com/security/2013/10/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/" target="_blank" rel="external">https://arstechnica.com/security/2013/10/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>your support will encourage me to continue to create!</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="RuJia Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/区块链/" rel="tag">#区块链</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Bitcoin_key_address.html" rel="next" title="【比特币技术系列】 比特币的地址，密钥，钱包之间的关系">
+                <i class="fa fa-chevron-left"></i> 【比特币技术系列】 比特币的地址，密钥，钱包之间的关系
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blockchain_confirmation_mechanism.html" rel="prev" title="【区块链技术系列】 区块链共识机制总结(上)">
+                【区块链技术系列】 区块链共识机制总结(上) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          <pre><code><b>版权声明</b>:自由转载-非商用-非衍生-保持署名<a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" rel="external nofollow" >(创意共享3.0许可证)</a></code></pre>
+
+
+
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="RuJia" />
+          <p class="site-author-name" itemprop="name">RuJia</p>
+          <p class="site-description motion-element" itemprop="description">BlockChain,Distributed Computing</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rjgeek/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Others">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Others
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cs.bham.ac.uk/~mdr/" title="Professor Mark Ryan" target="_blank" rel="external nofollow" >Professor Mark Ryan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cs.bham.ac.uk/~rzb/" title="Dr Rami Bahsoon" target="_blank" rel="external nofollow" >Dr Rami Bahsoon</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sec.cs.bham.ac.uk/people/" title="The Security and Privacy Group" target="_blank" rel="external nofollow" >The Security and Privacy Group</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.yfgeek.com/" title="YFGeek" target="_blank" rel="external nofollow" >YFGeek</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://rjgeek.github.io/CV1.pdf" title="My CV" target="_blank" rel="external nofollow" >My CV</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单向陷门函数"><span class="nav-number">2.</span> <span class="nav-text">单向陷门函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个有趣的类比"><span class="nav-number">3.</span> <span class="nav-text">一个有趣的类比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#椭圆曲线"><span class="nav-number">4.</span> <span class="nav-text">椭圆曲线</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Group"><span class="nav-number">4.1.</span> <span class="nav-text">Group</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#举例"><span class="nav-number">4.2.</span> <span class="nav-text">举例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#声明"><span class="nav-number">6.</span> <span class="nav-text">声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">7.</span> <span class="nav-text">引用</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RuJia</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+  <span id="busuanzi_container_site_pv">
+    Total visited 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  
+  <span id="busuanzi_container_site_uv">
+  Total visitors 本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'ehcoo';
+      var disqus_identifier = 'Bitcoin_ECDSA.html';
+      var disqus_title = "【比特币技术系列】 椭圆曲线加密算法 - ECDSA";
+      var disqus_url = 'http://www.ehcoo.com/Bitcoin_ECDSA.html';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

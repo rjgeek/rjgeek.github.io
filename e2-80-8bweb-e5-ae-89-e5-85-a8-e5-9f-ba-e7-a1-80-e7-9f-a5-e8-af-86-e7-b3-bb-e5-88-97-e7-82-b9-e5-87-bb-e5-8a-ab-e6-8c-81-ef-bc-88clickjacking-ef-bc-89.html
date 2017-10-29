@@ -1,0 +1,1008 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+<meta name="google-site-verification" content="LzR3qfX_YDfkNEusKegSylZBjqRw3vczTwICGpJ1GRI" />
+<meta name="baidu-site-verification" content="IhNq56RJS1" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Ehcoo" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="“ Clickjacking （点击劫持）是由互联网安全专家罗伯特·汉森和耶利米·格劳斯曼在 2008 年提出的。 是一种视觉欺骗手段，在 web 端就是 iframe 嵌套一个透明不可见的页面，让用户在不知情的情况下，点击攻击者想要欺骗用户点击的位置。” 1.攻击原理:点击劫持（ClickJacking）是一种视觉上的欺骗手段。大概有两种方式，一是攻击者使用一个透明的iframe，覆盖在一个网页">
+<meta name="keywords" content="BlockChain,Distributed Computing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="​【WEB安全】WEB安全基础知识系列-点击劫持（CLICKJACKING）">
+<meta property="og:url" content="http://www.ehcoo.com/e2-80-8bweb-e5-ae-89-e5-85-a8-e5-9f-ba-e7-a1-80-e7-9f-a5-e8-af-86-e7-b3-bb-e5-88-97-e7-82-b9-e5-87-bb-e5-8a-ab-e6-8c-81-ef-bc-88clickjacking-ef-bc-89.html">
+<meta property="og:site_name" content="Ehcoo">
+<meta property="og:description" content="“ Clickjacking （点击劫持）是由互联网安全专家罗伯特·汉森和耶利米·格劳斯曼在 2008 年提出的。 是一种视觉欺骗手段，在 web 端就是 iframe 嵌套一个透明不可见的页面，让用户在不知情的情况下，点击攻击者想要欺骗用户点击的位置。” 1.攻击原理:点击劫持（ClickJacking）是一种视觉上的欺骗手段。大概有两种方式，一是攻击者使用一个透明的iframe，覆盖在一个网页">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/06/061016_0248_WEBWEB11.png">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/06/061016_0248_WEBWEB21.png">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/06/061016_0248_WEBWEB31.png">
+<meta property="og:updated_time" content="2017-10-29T15:38:31.050Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="​【WEB安全】WEB安全基础知识系列-点击劫持（CLICKJACKING）">
+<meta name="twitter:description" content="“ Clickjacking （点击劫持）是由互联网安全专家罗伯特·汉森和耶利米·格劳斯曼在 2008 年提出的。 是一种视觉欺骗手段，在 web 端就是 iframe 嵌套一个透明不可见的页面，让用户在不知情的情况下，点击攻击者想要欺骗用户点击的位置。” 1.攻击原理:点击劫持（ClickJacking）是一种视觉上的欺骗手段。大概有两种方式，一是攻击者使用一个透明的iframe，覆盖在一个网页">
+<meta name="twitter:image" content="https://rjgeek.github.io/images/2016/06/061016_0248_WEBWEB11.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.ehcoo.com/e2-80-8bweb-e5-ae-89-e5-85-a8-e5-9f-ba-e7-a1-80-e7-9f-a5-e8-af-86-e7-b3-bb-e5-88-97-e7-82-b9-e5-87-bb-e5-8a-ab-e6-8c-81-ef-bc-88clickjacking-ef-bc-89.html"/>
+
+
+  <title> ​【WEB安全】WEB安全基础知识系列-点击劫持（CLICKJACKING） | Ehcoo </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="default">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?83e3b6b55c0e48f5d0848d6a14b76c02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+  
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ehcoo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about-me" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ​【WEB安全】WEB安全基础知识系列-点击劫持（CLICKJACKING）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-06-10T10:48:44+00:00" content="2016-06-10">
+              2016-06-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/WEB安全/" itemprop="url" rel="index">
+                    <span itemprop="name">WEB安全</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/WEB安全/编程语言/" itemprop="url" rel="index">
+                    <span itemprop="name">编程语言</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/e2-80-8bweb-e5-ae-89-e5-85-a8-e5-9f-ba-e7-a1-80-e7-9f-a5-e8-af-86-e7-b3-bb-e5-88-97-e7-82-b9-e5-87-bb-e5-8a-ab-e6-8c-81-ef-bc-88clickjacking-ef-bc-89.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="e2-80-8bweb-e5-ae-89-e5-85-a8-e5-9f-ba-e7-a1-80-e7-9f-a5-e8-af-86-e7-b3-bb-e5-88-97-e7-82-b9-e5-87-bb-e5-8a-ab-e6-8c-81-ef-bc-88clickjacking-ef-bc-89.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+		  
+          
+          
+
+          
+		 
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><span style="color: #585858; font-family: 仿宋; font-size: 12pt;">“ Clickjacking （点击劫持）是由互联网安全专家罗伯特·汉森和耶利米·格劳斯曼在 2008 年提出的。 是一种视觉欺骗手段，在 web 端就是 iframe 嵌套一个透明不可见的页面，让用户在不知情的情况下，点击攻击者想要欺骗用户点击的位置。”<br></span></p>
+<h2 id="1-攻击原理"><a href="#1-攻击原理" class="headerlink" title="1.攻击原理:"></a>1.攻击原理:</h2><p><span style="color: #585858;"><span style="font-family: 仿宋;"><span style="font-size: 12pt;">点击劫持（ClickJacking）是一种视觉上的欺骗手段。大概有两种方式，一是攻击者使用一个透明的iframe，覆盖在一个<a href="http://www.07net01.com/tags-%E7%BD%91%E9%A1%B5-0.html" target="_blank" rel="external">网页</a>上，然后诱使用户在该页面上进行操作，此时用户将在不知情的情况下点击透明的iframe页面；二是攻击者使用一张<a href="http://www.wredian.com/tags-%E5%9B%BE%E7%89%87-0.html" target="_blank" rel="external">图片</a>覆盖在网页，遮挡网页原有位置的含义；</span><span style="color: #069aef; font-size: 9pt;"><br></span></span><br><img src="https://rjgeek.github.io/images/2016/06/061016_0248_WEBWEB11.png" alt=""></span></p>
+<p><span style="color: #585858;"><a id="more"></a><br></span><span style="font-family: 宋体; font-size: 12pt;"><br></span></p>
+<h2 id="2-攻击举例"><a href="#2-攻击举例" class="headerlink" title="2.攻击举例"></a><span style="font-size: 1.7em;">2.攻击举例</span></h2><p><span style="color: #585858; font-family: 仿宋; font-size: 12pt;">假如我们在<a href="http://www.07net01.com/tags-%E7%99%BE%E5%BA%A6-0.html" target="_blank" rel="external">百度</a>有个贴吧，想偷偷让别人关注它。于是我们准备一个页面：<br></span></p>
+<div><br><table style="border-collapse: collapse; background: #fabf8f;" border="0"><colgroup> <col style="width: 590px;"></colgroup><br><tbody valign="top"><br><tr><br><td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;"><span style="font-size: 7pt;">&lt;!DOCTYPE HTML&gt;<br></span><span style="font-size: 7pt;">&lt;html&gt;<br></span><span style="font-size: 7pt;">&lt;meta http-equiv=”Content-Type” content=”text/html; charset=gb2312” /&gt;<br></span><br><br><span style="font-size: 7pt;">&lt;head&gt;<br></span><br><br><span style="font-size: 7pt;">&lt;title&gt;点击劫持&lt;/title&gt;<br></span><br><br><span style="font-size: 7pt;">&lt;style&gt;<br></span><br><br><span style="font-size: 7pt;"> html,body,iframe{<br></span><br><br><span style="font-size: 7pt;"> display: block;<br></span><br><br><span style="font-size: 7pt;"> height: 100%;<br></span><br><br><span style="font-size: 7pt;"> width: 100%;<br></span><br><br><span style="font-size: 7pt;"> margin: 0;<br></span><br><br><span style="font-size: 7pt;"> padding: 0;<br></span><br><br><span style="font-size: 7pt;"> border:none;<br></span><br><br><span style="font-size: 7pt;"> }<br></span><br><br><span style="font-size: 7pt;"> iframe{<br></span><br><br><span style="font-size: 7pt;"> opacity:0;<br></span><br><br><span style="font-size: 7pt;"> filter:alpha(opacity=0);<br></span><br><br><span style="font-size: 7pt;"> position:absolute;<br></span><br><br><span style="font-size: 7pt;"> z-index:2;<br></span><br><br><span style="font-size: 7pt;"> }<br></span><br><br><span style="font-size: 7pt;"> button{<br></span><br><br><span style="font-size: 7pt;"> position:absolute;<br></span><br><br><span style="font-size: 7pt;"> top: 315px;<br></span><br><br><span style="font-size: 7pt;"> left: 462px;<br></span><br><br><span style="font-size: 7pt;"> z-index: 1;<br></span><br><br><span style="font-size: 7pt;"> width: 72px;<br></span><br><br><span style="font-size: 7pt;"> height: 26px;<br></span><br><br><span style="font-size: 7pt;"> }<br></span><br><br><span style="font-size: 7pt;">&lt;/style&gt;<br></span><br><br><span style="font-size: 7pt;">&lt;/head&gt;<br></span><br><br><span style="font-size: 7pt;"> &lt;body&gt;<br></span><br><br><span style="font-size: 7pt;"> 那些不能说的秘密<br></span><br><br><span style="font-size: 7pt;"> &lt;button&gt;查看详情&lt;/button&gt;<br></span><br><br><span style="font-size: 7pt;"> &lt;iframe src=”<a href="http://tieba.baidu.com/f?kw=%C3%C0%C5%AE&quot;&gt;&lt;/iframe&amp;gt" target="_blank" rel="external">http://tieba.baidu.com/f?kw=%C3%C0%C5%AE&quot;&gt;&lt;/iframe&amp;gt</a>;<br></span><br><br><span style="font-size: 7pt;"> &lt;/body&gt;<br></span><br><br><span style="font-size: 7pt;">&lt;/html</span></td><br></tr><br></tbody><br></table><br></div>
+
+<p><span style="color: #585858; font-family: 仿宋; font-size: 12pt;">PS：页面看起来就这样，当然真正攻击的页面会精致些，不像这么简陋。<br></span></p>
+<p><span style="color: #585858; font-family: 仿宋; font-size: 12pt;">2. 网址传播出去后，用户手贱点击了查看详情后，其实就会点到关注按钮。<br></span></p>
+<p><img src="https://rjgeek.github.io/images/2016/06/061016_0248_WEBWEB21.png" alt=""><span style="color: #444444; font-family: 微软雅黑; font-size: 13pt;"><br></span></p>
+<p><span style="color: #585858; font-family: 仿宋; font-size: 12pt;">PS：可以把iframe透明设为0.3看下实际点到的东西。<br></span></p>
+<p><span style="color: #585858; font-family: 仿宋; font-size: 12pt;">3. 这样贴吧就多了一个粉丝了。<br></span></p>
+<p><img src="https://rjgeek.github.io/images/2016/06/061016_0248_WEBWEB31.png" alt=""><span style="color: #444444; font-family: 微软雅黑; font-size: 13pt;"><br></span></p>
+<h2 id="4-漏洞防御"><a href="#4-漏洞防御" class="headerlink" title="4.漏洞防御:"></a>4.漏洞防御:</h2><h3 id="Client-Side-Mitigations（客户端防护）"><a href="#Client-Side-Mitigations（客户端防护）" class="headerlink" title="Client Side Mitigations（客户端防护）"></a>Client Side Mitigations（客户端防护）</h3><div><br><table style="border-collapse: collapse; background: #fabf8f;" border="0"><colgroup> <col style="width: 590px;"></colgroup><br><tbody valign="top"><br><tr><br><td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;"><span style="font-size: 7pt;"><strong>NoScript plugin
+</strong></span><span style="font-size: 7pt;">这是一种简单的一种防御方法，就是在浏览器层面阻止js的运行。FireFox的Noscript插件就可以做到这一点。这个插件有一个选项可以使用户免于遭受clickjacking的攻击。实现原理是，这个插件阻止JS创建iframe。不过这个插件只能运行于firefox和基于其内核的浏览器。<br></span><span style="font-size: 7pt;"><strong>GuardedID
+</strong></span><br><br><span style="font-size: 7pt;">GuardedID是一个用于保护用户免受包括clickijack在内的诸多攻击的商业软件。GuardedID不直接干扰浏览器的解析，只是把所用iframe强制设为可见。GuardedID只能在IE firefox浏览器下工作。</span></td><br></tr><br></tbody><br></table><br></div>
+
+<h3 id="Server-Side-Mitigations（服务端防护）"><a href="#Server-Side-Mitigations（服务端防护）" class="headerlink" title="Server Side Mitigations（服务端防护）"></a>Server Side Mitigations（服务端防护）</h3><h4 id="JS防御方案"><a href="#JS防御方案" class="headerlink" title="JS防御方案"></a>JS防御方案</h4><div><br><table style="border-collapse: collapse; background: #fabf8f;" border="0"><colgroup> <col style="width: 590px;"></colgroup><br><tbody valign="top"><br><tr><br><td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;"><span style="font-size: 7pt;">&lt;script&gt;<br></span><span style="font-size: 7pt;">if (self == top) {<br></span><span style="font-size: 7pt;"> var theBody = document.getElementsByTagName(‘body’)[0];<br></span><br><br><span style="font-size: 7pt;"> theBody.style.display = “block”;<br></span><br><br><span style="font-size: 7pt;">} else {<br></span><br><br><span style="font-size: 7pt;"> top.location = self.location;<br></span><br><br><span style="font-size: 7pt;">}<br></span><br><br><span style="font-size: 7pt;">&lt;/script&gt;</span></td><br></tr><br></tbody><br></table><br></div>
+
+<h4 id="X-Frame-Options"><a href="#X-Frame-Options" class="headerlink" title="X-Frame-Options"></a>X-Frame-Options</h4><p><div></div></p>
+<p><table style="border-collapse: collapse; background: #fabf8f;" border="0"><colgroup> <col style="width: 590px;"></colgroup></table></p>
+<p><tbody valign="top"></tbody></p>
+<p><tr></tr></p>
+<p><td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;"><span style="font-size: 7pt;">X-Frame-Options 共有三个值：<br></span><span style="font-size: 7pt;">DENY 任何页面都不能被嵌入到 iframe 或者 frame 中。<br></span><span style="font-size: 7pt;">SAMEORIGIN 页面只能被本站页面嵌入到 iframe 或者 frame 中。<br></span></td></p>
+<p><span style="font-size: 7pt;">ALLOW-FROM uri 页面自能被指定的 Uri 嵌入到 iframe 或 frame 中。<br></span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 7pt;"><strong>Apache 配置 X-Frame-Options
+</strong></span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 7pt;">在站点配置文件 httpd.conf 中添加如下配置，限制只有站点内的页面才可以嵌入 iframe 。<br></span></p>
+<p><span style="font-size: 7pt;">Header always append X-Frame-Options SAMEORIGIN<br></span></p>
+<p><span style="font-size: 7pt;">配置之后重启 apache 使其生效。该配置方式对 IBM HTTP Server 同样适用。<br></span></p>
+<p><span style="font-size: 7pt;">如果同一 apache 服务器上有多个站点，只想针对一个站点进行配置，可以修改 .htaccess 文件，添加如下内容：<br></span></p>
+<p><span style="font-size: 7pt;">Header append X-FRAME-OPTIONS “SAMEORIGIN”<br></span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 7pt;"><strong>Nginx 配置 X-Frame-Options
+</strong></span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 7pt;">到 nginx/conf 文件夹下，修改 nginx.conf ，添加如下内容：<br></span></p>
+<p><span style="font-size: 7pt;">add_header X-Frame-Options “SAMEORIGIN”;<br></span></p>
+<p><span style="font-size: 7pt;">重启 Nginx 服务。<br></span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 7pt;"><strong>Node Express服务器防止点击劫持劫持
+</strong></span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 7pt;">npm install helmet –save<br></span></p>
+<p><span style="font-size: 7pt;">var express = require(‘express’);<br></span></p>
+<p><span style="font-size: 7pt;">var helmet = require(‘helmet’);<br></span></p>
+<p><span style="font-size: 7pt;">var app = express();<br></span></p>
+<p><span style="font-size: 7pt;">app.use(helmet.frameguard(‘sameorigin’));<br></span></p>
+<p><span style="font-size: 7pt;">PS：可以把iframe透明设为0.3看下实际点到的东西。<br></span><br><br><br><br><br><span style="font-size: 12pt;"><span style="color: black; font-family: 仿宋;"><strong>4.总结与思考:</strong></span><span style="font-family: 宋体;"><br></span></span></p>
+<ul>
+<li><span style="color: #585858;"><span style="font-family: 仿宋; font-size: 12pt;">点击劫持核心思想是利用利用隐藏的IFRAME诱骗用户去点击，<span style="color: black;">隐藏的<span style="color: #585858;">IFRAME<span style="color: black;">的链接可共享主域名的COOKIE等信息</span></span></span></span><span style="font-family: 微软雅黑; font-size: 13pt;"><br></span></span></li>
+<li><p><span style="color: #585858;"><span style="font-family: 仿宋; font-size: 12pt;">安全起见，最好在开发时屏蔽IFRAME的调用，迫不得已的情况下，优先考虑使用X-FRAME-OPTION的相应策略</span><span style="color: black; font-family: 微软雅黑; font-size: 13pt;"><br></span></span><br><span style="font-size: 12pt;"><span style="color: black; font-family: 仿宋;"><strong>5.引用:</strong></span><span style="font-family: 宋体;"><br></span></span></p>
+</li>
+<li><p><span style="color: black;"><span style="font-family: 仿宋; font-size: 12pt;"><a href="http://www.07net01.com/2016/03/1339679.html" target="_blank" rel="external">http://www.07net01.com/2016/03/1339679.html</a> </span><span style="font-family: 微软雅黑; font-size: 13pt;"><br></span></span></p>
+</li>
+<li><span style="color: black;"><span style="font-family: 仿宋; font-size: 12pt;"><a href="https://qjzd.net/topic/55a13be30fcea8a4423a2cef" target="_blank" rel="external">https://qjzd.net/topic/55a13be30fcea8a4423a2cef</a></span><span style="font-family: 微软雅黑; font-size: 10pt;"><br></span></span></li>
+<li><span style="color: black; font-family: 仿宋; font-size: 12pt;"><a href="http://www.freebuf.com/articles/web/22999.html" target="_blank" rel="external">http://www.freebuf.com/articles/web/22999.html</a></span></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>your support will encourage me to continue to create!</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="RuJia Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/01ee46195698d061ab87e4ff17816a48.html" rel="next" title="【WEB安全】WEB安全基础知识系列-DATA URI">
+                <i class="fa fa-chevron-left"></i> 【WEB安全】WEB安全基础知识系列-DATA URI
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/json-hijacking.html" rel="prev" title="​【WEB安全】WEB安全基础知识系列- JSON Hijacking">
+                ​【WEB安全】WEB安全基础知识系列- JSON Hijacking <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          <pre><code><b>版权声明</b>:自由转载-非商用-非衍生-保持署名<a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" rel="external nofollow" >(创意共享3.0许可证)</a></code></pre>
+
+
+
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="RuJia" />
+          <p class="site-author-name" itemprop="name">RuJia</p>
+          <p class="site-description motion-element" itemprop="description">BlockChain,Distributed Computing</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rjgeek/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Others">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Others
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cs.bham.ac.uk/~mdr/" title="Professor Mark Ryan" target="_blank" rel="external nofollow" >Professor Mark Ryan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cs.bham.ac.uk/~rzb/" title="Dr Rami Bahsoon" target="_blank" rel="external nofollow" >Dr Rami Bahsoon</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sec.cs.bham.ac.uk/people/" title="The Security and Privacy Group" target="_blank" rel="external nofollow" >The Security and Privacy Group</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.yfgeek.com/" title="YFGeek" target="_blank" rel="external nofollow" >YFGeek</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://rjgeek.github.io/CV1.pdf" title="My CV" target="_blank" rel="external nofollow" >My CV</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-攻击原理"><span class="nav-number">1.</span> <span class="nav-text">1.攻击原理:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-攻击举例"><span class="nav-number">2.</span> <span class="nav-text">2.攻击举例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-漏洞防御"><span class="nav-number">3.</span> <span class="nav-text">4.漏洞防御:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Client-Side-Mitigations（客户端防护）"><span class="nav-number">3.1.</span> <span class="nav-text">Client Side Mitigations（客户端防护）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Server-Side-Mitigations（服务端防护）"><span class="nav-number">3.2.</span> <span class="nav-text">Server Side Mitigations（服务端防护）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JS防御方案"><span class="nav-number">3.2.1.</span> <span class="nav-text">JS防御方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#X-Frame-Options"><span class="nav-number">3.2.2.</span> <span class="nav-text">X-Frame-Options</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RuJia</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+  <span id="busuanzi_container_site_pv">
+    Total visited 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  
+  <span id="busuanzi_container_site_uv">
+  Total visitors 本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'ehcoo';
+      var disqus_identifier = 'e2-80-8bweb-e5-ae-89-e5-85-a8-e5-9f-ba-e7-a1-80-e7-9f-a5-e8-af-86-e7-b3-bb-e5-88-97-e7-82-b9-e5-87-bb-e5-8a-ab-e6-8c-81-ef-bc-88clickjacking-ef-bc-89.html';
+      var disqus_title = "​【WEB安全】WEB安全基础知识系列-点击劫持（CLICKJACKING）";
+      var disqus_url = 'http://www.ehcoo.com/e2-80-8bweb-e5-ae-89-e5-85-a8-e5-9f-ba-e7-a1-80-e7-9f-a5-e8-af-86-e7-b3-bb-e5-88-97-e7-82-b9-e5-87-bb-e5-8a-ab-e6-8c-81-ef-bc-88clickjacking-ef-bc-89.html';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

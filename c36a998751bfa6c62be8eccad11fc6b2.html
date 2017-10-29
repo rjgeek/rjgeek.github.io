@@ -1,0 +1,986 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+<meta name="google-site-verification" content="LzR3qfX_YDfkNEusKegSylZBjqRw3vczTwICGpJ1GRI" />
+<meta name="baidu-site-verification" content="IhNq56RJS1" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Ehcoo" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="系统首页架构经典系列—跨域解决方案汇总1.什么是跨域？&amp;nbsp; &amp;nbsp; &amp;nbsp; —1.1 同源策略&amp;nbsp; &amp;nbsp; &amp;nbsp; —1.2&amp;nbsp;同源策略规则2.解决跨域之间的数据交互">
+<meta name="keywords" content="BlockChain,Distributed Computing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【系统架构】跨域解决方案汇总">
+<meta property="og:url" content="http://www.ehcoo.com/c36a998751bfa6c62be8eccad11fc6b2.html">
+<meta property="og:site_name" content="Ehcoo">
+<meta property="og:description" content="系统首页架构经典系列—跨域解决方案汇总1.什么是跨域？&amp;nbsp; &amp;nbsp; &amp;nbsp; —1.1 同源策略&amp;nbsp; &amp;nbsp; &amp;nbsp; —1.2&amp;nbsp;同源策略规则2.解决跨域之间的数据交互">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-4df9d899ffa9c54c20a71fa2ceda54c4_9b75ce9f-fcfa-4011-9710-541eaa67cc12.gif">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-4df9d899ffa9c54c20a71fa2ceda54c4_493ef814-f231-47b7-b0da-979578ab28ed.gif">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-4df9d899ffa9c54c20a71fa2ceda54c4_331413c5-fbe7-46f1-9c64-6b6ad20d0b40.gif">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-4df9d899ffa9c54c20a71fa2ceda54c4_3874a5e4-680e-465d-bff5-9ce11f296f8b.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-4df9d899ffa9c54c20a71fa2ceda54c4_40542741.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-4df9d899ffa9c54c20a71fa2ceda54c4_24416574.png">
+<meta property="og:updated_time" content="2017-10-29T15:38:31.050Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【系统架构】跨域解决方案汇总">
+<meta name="twitter:description" content="系统首页架构经典系列—跨域解决方案汇总1.什么是跨域？&amp;nbsp; &amp;nbsp; &amp;nbsp; —1.1 同源策略&amp;nbsp; &amp;nbsp; &amp;nbsp; —1.2&amp;nbsp;同源策略规则2.解决跨域之间的数据交互">
+<meta name="twitter:image" content="https://rjgeek.github.io/images//2015/12/wpid-4df9d899ffa9c54c20a71fa2ceda54c4_9b75ce9f-fcfa-4011-9710-541eaa67cc12.gif">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.ehcoo.com/c36a998751bfa6c62be8eccad11fc6b2.html"/>
+
+
+  <title> 【系统架构】跨域解决方案汇总 | Ehcoo </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="default">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?83e3b6b55c0e48f5d0848d6a14b76c02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+  
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ehcoo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about-me" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                【系统架构】跨域解决方案汇总
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2014-09-04T18:21:38+00:00" content="2014-09-04">
+              2014-09-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/系统架构/" itemprop="url" rel="index">
+                    <span itemprop="name">系统架构</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/c36a998751bfa6c62be8eccad11fc6b2.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="c36a998751bfa6c62be8eccad11fc6b2.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+		  
+          
+          
+
+          
+		 
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="系统首页架构经典系列—跨域解决方案汇总"><a href="#系统首页架构经典系列—跨域解决方案汇总" class="headerlink" title="系统首页架构经典系列—跨域解决方案汇总"></a>系统首页架构经典系列—跨域解决方案汇总</h2><div><br></div><div>1.什么是跨域？</div><div>&nbsp; &nbsp; &nbsp; —1.1 同源策略</div><div>&nbsp; &nbsp; &nbsp; —1.2&nbsp;<span data-wiz-span="data-wiz-span">同源策略规则</span></div><div>2.解决跨域之间的数据交互</div><a id="more"></a><div>&nbsp; &nbsp; &nbsp; —2.1&nbsp;<span style="font-size: 1.2em; font-family: 宋体; line-height: 1.3em;">document.domain+iframe</span></div><div>&nbsp; &nbsp; &nbsp; —2.2&nbsp;<span style="background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: 宋体; font-size: 14px; line-height: 28px; text-indent: 28px;">动态脚本注入</span></div><div>&nbsp; &nbsp; &nbsp; —2.3&nbsp;<span style="font-size: 10.5pt; line-height: 1.5;">跨域代理</span><span style="background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: 宋体; font-size: 14px; line-height: 28px; text-indent: 28px;"><br></span></div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp; &nbsp;&nbsp;</span><span style="font-size: 10.5pt; line-height: 1.5;">—2.4 JSONP的形式</span></div><div>&nbsp; &nbsp; &nbsp; —2.5 使用HTML5 postMessage</div><div>3.<span style="font-size: 10.5pt; line-height: 1.5;">在首页展现架构中实际应用</span></div><div>&nbsp; &nbsp; &nbsp;—3.1 运用嵌套<span style="font-family: 宋体; font-size: 16.799999237060547px; line-height: 21.837499618530273px;">iframe</span><br></div><div>&nbsp; &nbsp; &nbsp;—3.2 运用<span style="font-size: 10.5pt; line-height: 1.5;">JSONP</span><span style="font-family: 宋体; font-size: 16.799999237060547px; line-height: 21.837499618530273px;"><br></span></div><div><span style="font-family: 宋体; font-size: 16.799999237060547px; line-height: 21.837499618530273px;">&nbsp;&nbsp;</span></div>
+
+<h2 id="1-什么是跨域？"><a href="#1-什么是跨域？" class="headerlink" title="1.什么是跨域？"></a>1.什么是跨域？</h2><div><span style="background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: Tahoma, Arial, 宋体, sans-serif; font-size: 14px; line-height: 21px; text-indent: 28px;">跨域，简单地理解就是因为JavaScript同源策略的限制，a.com 域名下的js无法操作b.com或是c.a.com域名下的对象</span>&nbsp;<span style="font-size: 10.5pt; line-height: 1.5; text-indent: 2em;">所谓同源是指，域名，协议，端口相同。</span><span style="font-size: 10.5pt; line-height: 1.5; text-indent: 2em;">当一个浏览器的两个</span></div><div><span style="font-size: 10.5pt; line-height: 1.5; text-indent: 2em;">tab页中分别打开来 百度和谷歌的页面</span><span style="font-size: 10.5pt; line-height: 1.5; text-indent: 2em;">当浏览器的百度tab页执行一个脚本的时候会检查这个脚本是属于哪个页面的，</span><span style="font-size: 10.5pt; line-height: 1.5; text-indent: 2em;">即检查是否同源，只有和百度同源的脚本才会被执行。</span><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp; &nbsp;</span></div><div><span style="font-size: 10.5pt; line-height: 1.5;">以下是维基百科上的解释</span></div>
+
+<h3 id="1-1同源策略"><a href="#1-1同源策略" class="headerlink" title="1.1同源策略"></a>1.1同源策略</h3><div>In&nbsp;<a href="http://en.wikipedia.org/wiki/Computing" title="Computing" target="_blank" rel="external">computing</a>, the&nbsp;<font color="#252525" face="sans-serif"><span style="font-size: 14px; line-height: 22.3999996185303px; background-color: rgb(255, 255, 255);">same-origin policy</span></font>&nbsp;is an important concept in the&nbsp;<a href="http://en.wikipedia.org/wiki/Web_application" title="Web application" target="_blank" rel="external">web application</a>&nbsp;<a href="http://en.wikipedia.org/wiki/Computer_security_model" title="Computer security model" target="_blank" rel="external">security model</a>. The policy permits scripts running on pages originating from the same site&nbsp;</div><div>– a combination of&nbsp;<a href="http://en.wikipedia.org/wiki/URI_scheme" title="URI scheme" target="_blank" rel="external">scheme</a>,&nbsp;<a href="http://en.wikipedia.org/wiki/Hostname" title="Hostname" target="_blank" rel="external">hostname</a>, and&nbsp;<a href="http://en.wikipedia.org/wiki/Port_(computer_networking" target="_blank" rel="external">port number</a> “Port (computer networking)”)<a href="http://en.wikipedia.org/wiki/Same-origin_policy#cite_note-w3c_sop-1" target="_blank" rel="external">[1]</a><span style="unicode-bidi: -webkit-isolate;">&nbsp;– to access each other’s&nbsp;</span><a href="http://en.wikipedia.org/wiki/Document_Object_Model" title="Document Object Model" target="_blank" rel="external">DOM</a><span style="unicode-bidi: -webkit-isolate;">&nbsp;with no specific restrictions, but prevents access to&nbsp;</span><a href="http://en.wikipedia.org/wiki/Document_Object_Model" title="Document Object Model" target="_blank" rel="external">DOM</a><span style="unicode-bidi: -webkit-isolate;">&nbsp;on different sites.</span><a href="http://en.wikipedia.org/wiki/Same-origin_policy#cite_note-w3c_sop-1" target="_blank" rel="external">[1]</a><span style="unicode-bidi: -webkit-isolate;">&nbsp;<br>The same-origin policy also applies to&nbsp;</span><a href="http://en.wikipedia.org/wiki/XMLHttpRequest" title="XMLHttpRequest" target="_blank" rel="external">XMLHttpRequest</a><span style="unicode-bidi: -webkit-isolate;">&nbsp;and to&nbsp;</span><a href="http://en.wikipedia.org/wiki/WebSocket" title="WebSocket" target="_blank" rel="external">WebSocket</a><span style="unicode-bidi: -webkit-isolate;">.</span></div>
+
+<h3 id="1-2-同源策略规则"><a href="#1-2-同源策略规则" class="headerlink" title="1.2 同源策略规则"></a>1.2 同源策略规则</h3><div><span style="font-size: 10.5pt; line-height: 1.5;">To illustrate, the following table gives an overview of typical outcomes for checks against the </span><a href="http://en.wikipedia.org/wiki/Uniform_Resource_Locator" title="Uniform Resource Locator" target="_blank" rel="external">URL</a><span style="font-size: 10.5pt; line-height: 1.5;"> “<a href="http://www.example.com/dir/page.html" target="_blank" rel="external">http://www.example.com/dir/page.html</a>“.</span></div><div><br><table class="wikitable" style="font-size: 14px; margin: 1em 0px; border: 1px solid rgb(170, 170, 170); border-collapse: collapse; font-family: sans-serif; line-height: 22.3999996185303px; background-color: rgb(249, 249, 249);"><tbody><tr><th style="border: 1px solid rgb(170, 170, 170); padding: 0.2em; text-align: center; background-color: rgb(242, 242, 242);">Compared URL</th><th style="border: 1px solid rgb(170, 170, 170); padding: 0.2em; text-align: center; background-color: rgb(242, 242, 242);">Outcome</th><th style="border: 1px solid rgb(170, 170, 170); padding: 0.2em; text-align: center; background-color: rgb(242, 242, 242);">Reason</th></tr><tr><td style="border: 1px solid rgb(170, 170, 170); padding: 0.2em;"><strong><a href="http://www.example.com" target="_blank" rel="external">http://www.example.com</a></strong>/dir/page2.html</td><td class="table-yes" style="border: 1px solid rgb(170, 170, 170); padding: 0.2em; vertical-align: middle; text-align: center; background: rgb(153, 255, 153);">Success</td><td style="border: 1px solid rgb(170, 170, 170); padding: 0.2em;">Same protocol and host</td></tr><tr><td style="border: 1px solid rgb(170, 170, 170); padding: 0.2em;"><strong><a href="http://www.example.com" target="_blank" rel="external">http://www.example.com</a></strong>/dir2/other.html</td><td class="table-yes" style="border: 1px solid rgb(170, 170, 170); padding: 0.2em; vertical-align: middle; text-align: center; background: rgb(153, 255, 153);">Success</td><td style="border: 1px solid rgb(170, 170, 170); padding: 0.2em;">Same protocol and host</td></tr><tr><td style="border: 1px solid rgb(170, 170, 170); padding: 0.2em;"><strong>http://</strong>username:password@<strong>www.example.com</strong>/dir2/other.html</td><td class="table-yes" style="border: 1px solid rgb(170, 170, 170); padding: 0.2em; vertical-align: middle; text-align: center; background: rgb(153, 255, 153);">Success</td><td style="border: 1px solid rgb(170, 170, 170); padding: 0.2em;">Same protocol and host</td></tr><tr><td style="border: 1px solid rgb(170, 170, 170); padding: 0.2em;"><a href="http://www.example.com:**81**/dir/other.html" target="_blank" rel="external">http://www.example.com:**81**/dir/other.html</a></td><td class="table-no" style="border: 1px solid rgb(170, 170, 170); padding: 0.2em; vertical-align: middle; text-align: center; background: rgb(255, 153, 153);">Failure</td><td style="border: 1px solid rgb(170, 170, 170); padding: 0.2em;">Same protocol and host but different port 端口不同</td></tr><tr><td style="border: 1px solid rgb(170, 170, 170); padding: 0.2em;"><strong>https</strong>://www.example.com/dir/other.html</td><td class="table-no" style="border: 1px solid rgb(170, 170, 170); padding: 0.2em; vertical-align: middle; text-align: center; background: rgb(255, 153, 153);">Failure</td><td style="border: 1px solid rgb(170, 170, 170); padding: 0.2em;">Different protocol 协议不同</td></tr><tr><td style="border: 1px solid rgb(170, 170, 170); padding: 0.2em;"><a href="http://**en.example.com**/dir/other.html" target="_blank" rel="external">http://**en.example.com**/dir/other.html</a></td><td class="table-no" style="border: 1px solid rgb(170, 170, 170); padding: 0.2em; vertical-align: middle; text-align: center; background: rgb(255, 153, 153);">Failure</td><td style="border: 1px solid rgb(170, 170, 170); padding: 0.2em;">Different host 仅主域名相同</td></tr><tr><td style="border: 1px solid rgb(170, 170, 170); padding: 0.2em;"><a href="http://**example.com**/dir/other.html" target="_blank" rel="external">http://**example.com**/dir/other.html</a></td><td class="table-no" style="border: 1px solid rgb(170, 170, 170); padding: 0.2em; vertical-align: middle; text-align: center; background: rgb(255, 153, 153);">Failure</td><td style="border: 1px solid rgb(170, 170, 170); padding: 0.2em;">Different host (exact match required)</td></tr><tr><td style="border: 1px solid rgb(170, 170, 170); padding: 0.2em;"><a href="http://**v2.www.example.com**/dir/other.html" target="_blank" rel="external">http://**v2.www.example.com**/dir/other.html</a></td><td class="table-no" style="border: 1px solid rgb(170, 170, 170); padding: 0.2em; vertical-align: middle; text-align: center; background: rgb(255, 153, 153);">Failure</td><td style="border: 1px solid rgb(170, 170, 170); padding: 0.2em;">Different host (exact match required)</td></tr><tr><td style="border: 1px solid rgb(170, 170, 170); padding: 0.2em;"><a href="http://www.example.com:**80**/dir/other.html" target="_blank" rel="external">http://www.example.com:**80**/dir/other.html</a></td><td class="table-na" style="border: 1px solid rgb(170, 170, 170); padding: 0.2em; color: grey; vertical-align: middle; text-align: center; background: rgb(236, 236, 236);"><small>Depends</small></td><td style="border: 1px solid rgb(170, 170, 170); padding: 0.2em;">Port explicit. Depends on implementation in browser.<br><br></td></tr></tbody></table><br><br>## 2.解决跨域之间的数据交互<br><div>以下总结了5种解决跨域之间数据交互的策略，<span style="font-family: 宋体; font-size: 16.799999237060547px; line-height: 21.837499618530273px;">document.domain+iframe、</span><span style="background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: 宋体; line-height: 28px; text-indent: 28px; font-size: 10.5pt;">动态脚本注入、</span><span style="font-size: 10.5pt; line-height: 1.5;">跨域代理、</span><span style="font-size: 10.5pt; line-height: 1.5;">JSONP的形式、</span><span style="font-size: 10.5pt; line-height: 1.5;">使用HTML5 postMessage</span></div><div><span style="font-size: 10.5pt; line-height: 1.5;">其中JSONP的是原理和动态脚本注入的原理一致</span></div>
+
+<h3 id="2-1-document-domain-iframe"><a href="#2-1-document-domain-iframe" class="headerlink" title="2.1 document.domain+iframe"></a><strong>2.1 document.domain+iframe</strong></h3><div><br><br>对于主域相同而子域不同的例子，可以通过设置document.domain的办法来解决。<span style="text-indent: 2em;">举www.a.test.com/a.html和</span><span style="text-indent: 28px; font-size: 10.5pt; line-height: 1.5;">www.b.test.com/b.html</span><span style="text-indent: 2em; font-size: 10.5pt; line-height: 1.5;">为例，只需在a.html中添加一个b.html的iframe，</span><br><br><span style="text-indent: 2em;"> 并且设置两个页面的document.domain都为’a.com’（只能为主域名），两个页面之间即可互相访问了，代码如下：</span><br><br><span style="text-indent: 28px; font-size: 10.5pt; line-height: 1.5;">a.htm可以</span>选择动态生成<span style="font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace; line-height: 18px; white-space: pre; font-size: 10.5pt; background-color: rgb(247, 247, 249);">iframe，也可以选择在</span><span style="font-size: 10.5pt; line-height: 1.5;">a.html</span>用<span style="background-color: rgb(247, 247, 249); font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace; line-height: 18px; white-space: pre; font-size: 10.5pt;">iframe</span><span style="font-size: 10.5pt; line-height: 1.5;">直接引用b页面</span><br><br>I.采用动态创建<span style="background-color: rgb(247, 247, 249); font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace; line-height: 18px; white-space: pre; font-size: 10.5pt;">iframe的形式 </span><span style="text-indent: 28px; font-size: 10.5pt; line-height: 1.5;">a.htm的js中填写</span><br><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;pln&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;domain&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;a.com&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;kwd&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; ifr &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; document&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;iframe&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;</code><br>3.  <code>&lt;span class=&quot;pln&quot;&gt;ifr&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;src &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Arial; line-height: 16.799999237060547px; text-indent: 28px; white-space: normal;&quot;&gt;www.b.test.com/b.html&lt;/span&gt;&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;pln&quot;&gt;ifr&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;display &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;none&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;</code><br>5.  <code>&lt;span class=&quot;pln&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;appendChild&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;ifr&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;</code><br>6.  <code>&lt;span class=&quot;pln&quot;&gt;ifr&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;onload &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(){&lt;/span&gt;</code><br>7.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; doc &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; ifr&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;contentDocument &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;||&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; ifr&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;contentWindow&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;</code><br>8.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;com&quot;&gt;// 在这里操纵b.html&lt;/span&gt;</code><br>9.  <code>&lt;span class=&quot;pln&quot;&gt;  alert&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;doc&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;test&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;innerHTML&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;</code><br>10.  <code>&lt;span class=&quot;pun&quot;&gt;};&lt;/span&gt;</code></pre><br><br><span style="font-size: 10.5pt; line-height: 1.5;">II采用直接引用</span><span style="background-color: rgb(247, 247, 249); font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace; line-height: 18px; white-space: pre; font-size: 10.5pt;">iframe的形式</span><span style="background-color: rgb(247, 247, 249); color: rgb(221, 17, 68); font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace; line-height: 18px; white-space: pre; font-size: 10.5pt;"> </span><span style="text-indent: 28px; font-size: 10.5pt; line-height: 1.5;">a.htm的内容</span><br><div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;dec&quot;&gt;&amp;lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;&amp;gt;&lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;</code><br>3.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;title&amp;gt;&amp;lt;/title&amp;gt;&lt;/span&gt;</code><br>5.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;script&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;atn&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;atv&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;gt;&lt;/span&gt;</code><br>6.  <code>&lt;span class=&quot;pln&quot;&gt;  document&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;domain&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;test.com&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;</code><br>7.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;</code><br>8.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;</code><br>9.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;</code><br>10.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;iframe src =&quot;www.b.test.com/b.html&quot;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;atn&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;atv&quot;&gt;&quot;solrIframe&quot; style =&quot;display:none&quot; &lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/iframe&amp;gt;&lt;/span&gt;</code><br>11.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;</code><br>12.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;</code></pre></div>
+
+<p><span style="font-size: 10.5pt; line-height: 1.5;">http://</span><span style="font-size: 10.5pt; line-height: 1.5;">www.c.</span>a.com/b.html</p>
+<div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;dec&quot;&gt;&amp;lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;&amp;gt;&lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;</code><br>3.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;title&amp;gt;&amp;lt;/title&amp;gt;&lt;/span&gt;</code><br>5.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;script&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;atn&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;atv&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;gt;&lt;/span&gt;</code><br>6.  <code>&lt;span class=&quot;pln&quot;&gt;  document&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;domain&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;a.com&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;</code><br>7.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;</code><br>8.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;</code><br>9.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;</code><br>10.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;h1&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;atn&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;atv&quot;&gt;&quot;test&quot;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;Hello World&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;</code><br>11.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;</code><br>12.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;</code></pre></div>
+
+<p>如果b.html要访问a.html，可在子窗口（iframe）中通过window.parent来访问父窗口的window对象，然后就可以为所欲为了（window对象都有了，还有啥不行的），同理子窗口也可以和子窗口之间通信。</p>
+<p><span style="font-family: 宋体; font-size: 14px; line-height: 28px; text-indent: 28px; background-color: rgb(255, 255, 255);"><font color="#ff0000">我们可以通过b.html的XMLHttpRequest来获取数据，再传给a.html，从而解决跨子域获取数据的问题。</font></span></p>
+<p><dt style="margin: 0px; padding: 0px; font-weight: bold; color: rgb(51, 51, 51); font-family: Tahoma, Arial, 宋体, sans-serif; font-size: 14px; line-height: 21px; background-color: rgb(255, 255, 255);">问题：</dt><dd style="margin: 0px 0px 8px 40px; padding: 0px; color: rgb(51, 51, 51); font-family: Tahoma, Arial, 宋体, sans-serif; font-size: 14px; line-height: 21px; background-color: rgb(255, 255, 255);">1、安全性，当一个站点（b.a.com）被攻击后，另一个站点（c.a.com）会引起安全漏洞。</dd><dd style="margin: 0px 0px 8px 40px; padding: 0px; color: rgb(51, 51, 51); font-family: Tahoma, Arial, 宋体, sans-serif; font-size: 14px; line-height: 21px; background-color: rgb(255, 255, 255);">2、如果一个页面中引入多个iframe，要想能够操作所有iframe，必须都得设置相同domain。</dd></p>
+<h3 id="2-2-动态脚本注入"><a href="#2-2-动态脚本注入" class="headerlink" title="2.2 动态脚本注入"></a><span style="color: rgb(51, 51, 51); font-family: 宋体; line-height: 28px; text-indent: 28px; background-color: rgb(255, 255, 255);">2.2 动态脚本注入</span></h3><p><span class="highlight" style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(51, 51, 51); font-family: Tahoma, Arial, 宋体, sans-serif; font-size: 14px; text-indent: 28px; background-color: rgb(255, 255, 255);">浏览器默认禁止了跨域访问，但并不禁止在页面中引用其他域的JS文件，并可以自由执行引入的JS文件中的function（包括操作cookie、Dom等等）</span><span style="color: rgb(51, 51, 51); font-family: Tahoma, Arial, 宋体, sans-serif; font-size: 14px; line-height: 21px; text-indent: 28px; background-color: rgb(255, 255, 255);">。根据这一点，可以方便地通过创建script节点的方法来实现完全</span></p>
+<p><span style="color: rgb(51, 51, 51); font-family: Tahoma, Arial, 宋体, sans-serif; font-size: 14px; line-height: 21px; text-indent: 28px; background-color: rgb(255, 255, 255);">跨域的通信。具体的做法可以参考YUI的</span><a href="http://developer.yahoo.com/yui/get/" target="_blank" rel="external">Get Utility</a><span style="color: rgb(51, 51, 51); font-family: 宋体; line-height: 28px; text-indent: 28px; background-color: rgb(255, 255, 255);"><br></span></p>
+<p><span style="color: rgb(51, 51, 51); font-family: 宋体; font-size: 14px; line-height: 28px; text-indent: 28px; background-color: rgb(255, 255, 255);">这种技术克服了XMLHttpRequest的最大限制，也就是跨域请求数据。直接用JavaScript创建一个新的脚本标签，然后设置它的src属性为不同域的URL。</span></p>
+<p><span style="color: rgb(51, 51, 51); font-family: 宋体; font-size: 14px; line-height: 28px; text-indent: 28px; background-color: rgb(255, 255, 255);">www.a.com/a.html中的script</span></p>
+<p><span style="color: rgb(51, 51, 51); font-family: 宋体; font-size: 14px; line-height: 28px; text-indent: 28px; background-color: rgb(255, 255, 255);"> </span></p>
+<div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;kwd&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; dynScript &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; document&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;script&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;pln&quot;&gt;dynScript&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;src &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;http://www.b.com/b.js&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;</code><br>3.  <code>&lt;span class=&quot;pln&quot;&gt;dynScript&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;setAttribute&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;pln&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;getElementsByTagName&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;head&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;appendChild&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dynScript&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;</code></pre></div><div><span style="color: rgb(221, 17, 68); font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace; line-height: 18px; white-space: pre; background-color: rgb(247, 247, 249);">b.js可以选择调用去</span><span style="background-color: rgb(247, 247, 249); color: rgb(221, 17, 68); font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace; line-height: 18px; white-space: pre; font-size: 10.5pt;">www.b.com服务器中</span><font color="#ff0000"><span style="background-color: rgb(247, 247, 249); font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace; line-height: 18px; white-space: pre; font-size: 10.5pt;">调用请求并将返回的数据放入</span><span style="background-color: rgb(247, 247, 249); font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace; line-height: 18px; white-space: pre; font-size: 10.5pt;">dynCallback中，而</span><span style="background-color: rgb(247, 247, 249); font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace; line-height: 18px; white-space: pre; font-size: 10.5pt;">dynCallback实质处理函数则写在a.html的页面中,然后</span><font face="宋体"><span style="font-size: 10.5pt; line-height: 28px; text-indent: 28px;">www.a.com/a.html</span></font>获取了域名<span style="background-color: rgb(247, 247, 249); font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace; line-height: 18px; white-space: pre; font-size: 10.5pt;">www.b.com</span><span style="font-size: 10.5pt; line-height: 1.5;">上的数据</span></font></div><div><font face="宋体"><span style="line-height: 28px; text-indent: 28px;">a.html</span></font>中<span style="color: rgb(51, 51, 51); font-family: 宋体; font-size: 14px; line-height: 28px; text-indent: 28px; background-color: rgb(255, 255, 255);">回调函数如下：</span><br></div><div><div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;kwd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; dynCallback&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;){&lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;com&quot;&gt;//处理www.b.com返回的数据  &lt;/span&gt;</code><br>3.  <code>&lt;span class=&quot;pln&quot;&gt;  alert&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;</code><span style="color: gray; font-size: 10.5pt; line-height: 1.5; font-family: Arial;">&nbsp;</span></pre></div></div></div>
+
+<h3 id="2-3、跨域代理"><a href="#2-3、跨域代理" class="headerlink" title="2.3、跨域代理"></a><strong>2.3、跨域代理</strong></h3><p>一种简单的办法，就是把跨域的工作交给服务器，从后台获取其他站点的数据再返回给前台，也就是<a href="http://developer.yahoo.com/javascript/howto-proxy.html" title="Use a Web Proxy for Cross-Domain XMLHttpRequest Calls" target="_blank" rel="external">跨域代理（Cross Domain Proxy）</a>。这段英文比较简单，就不再翻译，请读者自行理解吧</p>
+<p>All modern web browsers impose a security restriction on network connections, which includes calls to XMLHttpRequest. This restriction prevents a script or application from making a connection to any web server other than the one the web page originally came from (Internet Explorer will allow cross-domain requests if the option has been enabled in the preferences). If both your web application and the XML data that application uses come directly from the same server, then you do not run into this restriction.</p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-4df9d899ffa9c54c20a71fa2ceda54c4_9b75ce9f-fcfa-4011-9710-541eaa67cc12.gif" alt=""></p>
+<p>If, however, you serve your web application from one web server and you make web service data requests to another server – for example, to the Yahoo! Web Services – then the browser prevents the connection from being opened at all. Bummer.</p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-4df9d899ffa9c54c20a71fa2ceda54c4_493ef814-f231-47b7-b0da-979578ab28ed.gif" alt=""></p>
+<p>There are a number of solutions to this problem but the most commonly-used one is to install a proxy on your web server. Instead of making your XMLHttpRequest calls directly to the web service, you make your calls to your web server proxy. The proxy then passes the call onto the web service and in return passes the data back to your client application. Because the connection is made to your server, and the data comes back from your server, the browser has nothing to complain about.</p>
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-4df9d899ffa9c54c20a71fa2ceda54c4_331413c5-fbe7-46f1-9c64-6b6ad20d0b40.gif" alt=""></p>
+<p>For security reasons it’s a good idea for any proxy you install on your web server should be limited in use. An open proxy that passes on connections to any web site URL is open to abuse. Although it is difficult to limit the connections to your proxy from only your application, you can prevent the proxy from making connections to servers other than those you specify. Hard code the URL to connect to in the proxy itself or provide limited options. This makes the proxy less open and less useful to users other than your client application.</p>
+<p><span style="background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: 宋体; font-size: 14px; line-height: 28px; text-indent: 2em;">这种方法似乎蛮简单的，改动也不太大。不过就是http请求多了些，响应慢了些，服务器的负载重了些</span></p>
+<h3 id="2-4-JSONP的形式"><a href="#2-4-JSONP的形式" class="headerlink" title="2.4 JSONP的形式"></a><span style="text-indent: 0px;">2.4 JSONP的形式</span></h3><p><span style="text-indent: 0px;">JSONP的底层原理实际就是动态创建脚本，</span><span style="background-color: rgb(255, 255, 255); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 21px; text-indent: 0px;">利用script标签绕过同源策略，获得一个类似这样的数据，jsonpcallback是页面存在的回调方法，参数就是想得到的json。</span></p>
+<p><span style="background-color: rgb(255, 255, 255); font-size: 14px; text-indent: 0px;">按照动态创建脚本的方式，</span><span style="background-color: rgb(255, 255, 255); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 21px; text-indent: 0px;">又要插入script标签，又要定义一个回调，略显麻烦，利用jQuery可以直接得到想要的json数据，同样是上面的jsonp：</span></p>
+<div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;pln&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;#getJsonpByJquery&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;{&lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;pln&quot;&gt;    $&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;ajax&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;({&lt;/span&gt;</code><br>3.  <code>&lt;span class=&quot;pln&quot;&gt;        url&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&#39;http://localhost:2701/home/somejsonp&#39;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;pln&quot;&gt;        dataType&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;jsonp&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;</code><br>5.  <code>&lt;span class=&quot;pln&quot;&gt;        jsonp&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;callback&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;</code><br>6.  <code>&lt;span class=&quot;pln&quot;&gt;        success&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;{&lt;/span&gt;</code><br>7.  <code>&lt;span class=&quot;pln&quot;&gt;            console&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;</code><br>8.  <code>&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;</code><br>9.  <code>&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;})&lt;/span&gt;</code><br>10.  <code>&lt;span class=&quot;pun&quot;&gt;})&lt;/span&gt;</code></pre></div>
+
+<h3 id="2-5-使用HTML5-postMessage"><a href="#2-5-使用HTML5-postMessage" class="headerlink" title="2.5 使用HTML5 postMessage"></a><span style="text-indent: 0px;">2.5 使用HTML5 postMessage</span></h3><div><span style="text-indent: 0px;"><span data-wiz-span="data-wiz-span" style="font-size: 13px;">​</span><br></span></div><div><br><br>HTML5提供了跨文档消息机制（Cross Document Messaging），它提供了跨越frame、tabs或windows通信的能力。<br><br><span style="font-size: 10.5pt; line-height: 1.5;">要接收消息的页面需要添加相应的事件监听器，在消息到来时你可以检测其来源来并判断是否处理。</span><br><br><span id="more-429" style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;"></span><br><br>浏览器的支持情况：<br><br><a href="http://www.grati.org/wp-content/uploads/2010/12/2010-12-15-205541_398x221_scrot.png" target="_blank" rel="external"><img src="https://rjgeek.github.io/images//2015/12/wpid-4df9d899ffa9c54c20a71fa2ceda54c4_3874a5e4-680e-465d-bff5-9ce11f296f8b.png" alt="浏览器支持" title="2010-12-15-205541_398x221_scrot"></a><br><br>检测浏览器支持：<br><br>if (typeof window.postMessage === “undefined”) {<br>// postMessage not supported in this browser<br>}<br><br>发送消息：<br><br>发送消息给另一个页面：<br>window.postMessage(“Hello, world”, “portal.example.com”);<br><br><span style="font-size: 10.5pt; line-height: 1.5;">发送消息给iframe：</span><br><br>document.getElementsByTagName(“iframe”)[0].contentWindow.postMessage(“Hello, world”,<br>“chat.example.net”);<br><br>监听消息，<span style="background-color: rgb(255, 255, 255); color: rgb(59, 59, 59); font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size: 13px; line-height: 1.8em; word-spacing: 2px;">首先设置白名单，对接受到的消息进行过滤，只处理信任页面发送的消息。</span><br><div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;kwd&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; originWhiteList &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;[“&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;portal&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;”,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;“&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;games&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;”,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;“&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;www&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;”];&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;kwd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; checkWhiteList&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;origin&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;</code><br>3.  <code>&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; i&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; i&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;originWhiteList&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; i&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;++)&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;origin &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;===&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; originWhiteList&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;</code><br>5.  <code>&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;</code><br>6.  <code>&lt;span class=&quot;pln&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;</code><br>7.  <code>&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;</code><br>8.  <code>&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;</code><br>9.  <code>&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;</code><br>10.  <code>&lt;span class=&quot;kwd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; messageHandler&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;</code><br>11.  <code>&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;checkWhiteList&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;origin&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;</code><br>12.  <code>&lt;span class=&quot;pln&quot;&gt;        processMessage&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;</code><br>13.  <code>&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;</code><br>14.  <code>&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;com&quot;&gt;// ignore messages from unrecognized origins  &lt;/span&gt;</code><br>15.  <code>&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;</code><br>16.  <code>&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;</code><br>17.  <code>&lt;span class=&quot;pln&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(“&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;”,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; messageHandler&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;</code></pre></div></div></div><div><br><br>## <span style="color: rgb(0, 0, 0); font-family: Arial; line-height: 16.799999237060547px; text-indent: 0px;">3 在首页展现架构中实际应用</span><br><div>在网站的首页设计中既用到了来自SOLR的数据下图的【会议预告】，又用到了来自流程引擎的数据【待办工作】，因此首页在展现数据时用到了如下策略</div><div><img src="https://rjgeek.github.io/images//2015/12/wpid-4df9d899ffa9c54c20a71fa2ceda54c4_40542741.png" alt="">&nbsp;</div><div><br></div>
+
+<h3 id="3-1运用嵌套iframe"><a href="#3-1运用嵌套iframe" class="headerlink" title="3.1运用嵌套iframe"></a><span style="color: rgb(51, 51, 51); font-size: 10.5pt; text-indent: 2em; line-height: 1.5;">3.1运用嵌套</span><span style="color: rgb(51, 51, 51); font-family: 宋体; text-indent: 2em; font-size: 16.799999237060547px; line-height: 21.837499618530273px;">iframe</span></h3><div><span style="color: rgb(51, 51, 51); font-family: 宋体; text-indent: 2em; font-size: 16.799999237060547px; line-height: 21.837499618530273px;"><br></span></div>
+
+<p><img src="https://rjgeek.github.io/images//2015/12/wpid-4df9d899ffa9c54c20a71fa2ceda54c4_24416574.png" alt="">&nbsp;</p>
+<p>遇到问题：home在去调用SOLR页面时，<span style="font-size: 10.5pt; line-height: 1.5;">SOLR页面页面并没有完全加载，造成调用失败，</span></p>
+<p>应对策略：在SOLR页面添加标志位，待确认加载完全后，home再去调用，代码如下；</p>
+<font face="Verdana, Arial, Helvetica, sans-serif"><span style="line-height: 25.200000762939453px;">home页面中代码如下：</span></font><br><div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>3.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;script&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;atn&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;atv&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;gt;&lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;kwd&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; isChildLoaded&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;com&quot;&gt;//标志位，判断嵌套的solr页面是否完全加载&lt;/span&gt;</code><br>5.  <code>&lt;span class=&quot;pln&quot;&gt;displayXmlToPage&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;resp&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;){&lt;/span&gt;</code><br>6.  <code>&lt;span class=&quot;com&quot;&gt;//在home页面上展现SOLR返回的数据&lt;/span&gt;</code><br>7.  <code>&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;</code><br>8.  <code>&lt;span class=&quot;kwd&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;isChildLoaded&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;){&lt;/span&gt;</code><br>9.  <code>&lt;span class=&quot;pln&quot;&gt;   getSolrXml&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;com&quot;&gt;//执行iframe的上的函数&lt;/span&gt;</code><br>10.  <code>&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;{&lt;/span&gt;</code><br>11.  <code>&lt;span class=&quot;pln&quot;&gt;   setTimeOut&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;getSolrXml&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;</code><br>12.  <code>&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;</code><br>13.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>14.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>15.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;body&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;gt;&lt;/span&gt;</code><br>16.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;iframe&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;atn&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;atv&quot;&gt;&quot;${solrSearchURL}/searcher/solr.jsp &quot;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;atn&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;atv&quot;&gt;&quot;solrIframe&quot;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;atn&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;atv&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;atv&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;gt;&amp;lt;/iframe&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;gt;&lt;/span&gt;</code><br>17.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>18.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;</code></pre></div><br><br><font face="Verdana, Arial, Helvetica, sans-serif"><span style="line-height: 25.200000762939453px;">solr页面如下：</span></font><br><div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>3.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;script&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;atn&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;atv&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;gt;&lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;com&quot;&gt;//获取Solr服务器上的数据&lt;/span&gt;</code><br>5.  <code>&lt;span class=&quot;kwd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; getSolrXml&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;){&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>6.  <code>&lt;span class=&quot;pln&quot;&gt;          &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; url&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;http://search.sgcc.com.cn:8088/searcher/SearcherSelectServlet/select&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>7.  <code>&lt;span class=&quot;pln&quot;&gt;           jQuery&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;ajax&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>8.  <code>&lt;span class=&quot;pln&quot;&gt;                      type&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;post&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>9.  <code>&lt;span class=&quot;pln&quot;&gt;                      url&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; url&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;</code><br>10.  <code>&lt;span class=&quot;pln&quot;&gt;                      data&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; encodeURIComponent&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;queryService&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>11.  <code>&lt;span class=&quot;pln&quot;&gt;                      async&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>12.  <code>&lt;span class=&quot;pln&quot;&gt;                      cache&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>13.  <code>&lt;span class=&quot;pln&quot;&gt;                      timeout&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;60000&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>14.  <code>&lt;span class=&quot;pln&quot;&gt;                      success&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;resp&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;){&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>15.  <code>&lt;span class=&quot;pln&quot;&gt;                                       parent&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;displayXmlToPage&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;resp&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;com&quot;&gt;//回调主页面的函数，在home页面上进行展现 &lt;/span&gt;</code><br>16.  <code>&lt;span class=&quot;pln&quot;&gt;                      &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>17.  <code>&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;})&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>18.  <code>&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;</code><br>19.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>20.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>21.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;body&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;atn&quot;&gt;onload&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;atv&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;parent&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;isChildLoaded &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;atv&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;测试solr&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>22.  <code>&lt;span class=&quot;tag&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;</code></pre></div><br><br>### 3.2 运用<span style="font-size: 10.5pt; line-height: 1.5;">JSONP</span><br><div><br><br>1.jsonp的后台action中处理方式：<br><br>public void jsonpMethod (){&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PrintWriter out=null;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; try{&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jsonmap = new HashMap();&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jsonmap.put(“successed”, true);&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String callBack = “”+ callback +”(“+ JSONUtil.serialize(jsonmap) +”)”;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; response.setCharacterEncoding(“utf-8”);&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; response.setContentType(“text/javascript;charset=utf-8”);&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; response.setHeader(“Cache-Control”, “no-cache”);&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out = response.getWriter();&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out.write(callBack);&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } catch (Exception e) {&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; throwException(e);&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp;<br>&nbsp;&nbsp;&nbsp; }<br><br>&nbsp;<br><br>备注：callback 属于前台传来的参数<br><br><div style="color:gray"><br><br>jsonp的前台调用形式<br><br>var url=<a href="http://log.coa.sgcc.com.cn:8006/coa-webapp/json/getVisitLogBeanList.action" target="_blank" rel="external">http://log.coa.sgcc.com.cn:8006/coa-webapp/json/jsonpMethod .action</a><br><br>jQuery.ajax({&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type : “get”,&nbsp; //获取形式&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; url : url,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //请求url&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dataType : “jsonp”,&nbsp;&nbsp;&nbsp;&nbsp; //标明是jsonp的形式&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jsonpCallback:”callback”,&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; async : false,&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cache : false,&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; data: {querycond:querycond},&nbsp; //条件&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; success : function(json) {&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; alert(json.list[0].unitName)&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp;<br>})<br></div><small><small>&nbsp;</small></small></div><div>引用附录</div>来源：&nbsp;&lt;<a href="http://en.wikipedia.org/wiki/Same-origin_policy" target="_blank" rel="external">http://en.wikipedia.org/wiki/Same-origin_policy</a>&gt;<br><span style="text-indent: 28px;">来源：&nbsp;&lt;</span><a href="https://developer.yahoo.com/javascript/howto-proxy.html" target="_blank" rel="external">https://developer.yahoo.com/javascript/howto-proxy.html</a><font color="#808080" face="宋体"><span style="line-height: 28px; text-indent: 28px; background-color: rgb(255, 255, 255);">&gt;</span></font><br>来源：&nbsp;&lt;<a href="http://www.2cto.com/kf/201111/110813.html" target="_blank" rel="external">http://www.2cto.com/kf/201111/110813.html</a><font color="#808080">&gt;</font></div><div>来源：&lt;<a href="http://www.grati.org/?p=429" target="_blank" rel="external">http://www.grati.org/?p=429</a><font color="#808080" face="Consolas, Courier New, Courier, mono"><span style="line-height: 14px; background-color: rgb(255, 255, 255);">&gt;</span></font></div><div>来源：&nbsp;&lt;<a href="http://www.cnblogs.com/lijiaxuan/" target="_blank" rel="external">http://www.cnblogs.com/lijiaxuan/</a><font color="#808080">&gt;</font></div><div>来源：&nbsp;&lt;<a href="http://www.cnblogs.com/yuzhongwusan/archive/2012/12/11/2812849.html" target="_blank" rel="external">http://www.cnblogs.com/yuzhongwusan/archive/2012/12/11/2812849.html</a><font color="#808080">&gt;<span style="font-size: 12px;"><span style="line-height: 13.600000381469727px;"><br></span></span></font>
+
+<p></p></div><div><br></div><p></p>
+<div><a href="http://www.wiz.cn/i/60efacb7" title="来自为知笔记(Wiz)" target="_blank" rel="external">来自为知笔记(Wiz)</a></div>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>your support will encourage me to continue to create!</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="RuJia Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/31d2d2ea1404210e91c97ebf8b50eabb.html" rel="next" title="系统首页架构经典系列—二级缓存的应用与设计中的28法则">
+                <i class="fa fa-chevron-left"></i> 系统首页架构经典系列—二级缓存的应用与设计中的28法则
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/ccd2152002b3c50692e2566884595817.html" rel="prev" title="【Linux】虚拟机下linux网络设置">
+                【Linux】虚拟机下linux网络设置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          <pre><code><b>版权声明</b>:自由转载-非商用-非衍生-保持署名<a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" rel="external nofollow" >(创意共享3.0许可证)</a></code></pre>
+
+
+
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="RuJia" />
+          <p class="site-author-name" itemprop="name">RuJia</p>
+          <p class="site-description motion-element" itemprop="description">BlockChain,Distributed Computing</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rjgeek/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Others">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Others
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cs.bham.ac.uk/~mdr/" title="Professor Mark Ryan" target="_blank" rel="external nofollow" >Professor Mark Ryan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cs.bham.ac.uk/~rzb/" title="Dr Rami Bahsoon" target="_blank" rel="external nofollow" >Dr Rami Bahsoon</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sec.cs.bham.ac.uk/people/" title="The Security and Privacy Group" target="_blank" rel="external nofollow" >The Security and Privacy Group</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.yfgeek.com/" title="YFGeek" target="_blank" rel="external nofollow" >YFGeek</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://rjgeek.github.io/CV1.pdf" title="My CV" target="_blank" rel="external nofollow" >My CV</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#系统首页架构经典系列—跨域解决方案汇总"><span class="nav-number">1.</span> <span class="nav-text">系统首页架构经典系列—跨域解决方案汇总</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-什么是跨域？"><span class="nav-number">2.</span> <span class="nav-text">1.什么是跨域？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1同源策略"><span class="nav-number">2.1.</span> <span class="nav-text">1.1同源策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-同源策略规则"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 同源策略规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-document-domain-iframe"><span class="nav-number">2.3.</span> <span class="nav-text">2.1 document.domain+iframe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-动态脚本注入"><span class="nav-number">2.4.</span> <span class="nav-text">2.2 动态脚本注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3、跨域代理"><span class="nav-number">2.5.</span> <span class="nav-text">2.3、跨域代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-JSONP的形式"><span class="nav-number">2.6.</span> <span class="nav-text">2.4 JSONP的形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-使用HTML5-postMessage"><span class="nav-number">2.7.</span> <span class="nav-text">2.5 使用HTML5 postMessage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1运用嵌套iframe"><span class="nav-number">2.8.</span> <span class="nav-text">3.1运用嵌套iframe</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RuJia</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+  <span id="busuanzi_container_site_pv">
+    Total visited 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  
+  <span id="busuanzi_container_site_uv">
+  Total visitors 本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'ehcoo';
+      var disqus_identifier = 'c36a998751bfa6c62be8eccad11fc6b2.html';
+      var disqus_title = "【系统架构】跨域解决方案汇总";
+      var disqus_url = 'http://www.ehcoo.com/c36a998751bfa6c62be8eccad11fc6b2.html';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

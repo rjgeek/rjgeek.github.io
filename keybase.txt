@@ -1,0 +1,55 @@
+==================================================================
+https://keybase.io/ehcoo
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://ehcoo.com
+  * I am ehcoo (https://keybase.io/ehcoo) on keybase.
+  * I have a public key ASAbSnFhYZDuBhUoQMyQXiwv3e3zU6yCBVGi-y5jLLPKLwo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "01201b4a71616190ee06152840cc905e2c2fddedf353ac820551a2fb2e632cb3ca2f0a",
+      "host": "keybase.io",
+      "kid": "01201b4a71616190ee06152840cc905e2c2fddedf353ac820551a2fb2e632cb3ca2f0a",
+      "uid": "0e7d296f9c4e81a432d4b78f8421c719",
+      "username": "ehcoo"
+    },
+    "merkle_root": {
+      "ctime": 1507361428,
+      "hash": "f9f3a0a40da7631ce44352c2757e1a77ff1a37b71483c18914235e9e53a684632a0770bd6748b68855c4a65d53c1995e58bd0383c954f9a05b8cb3cb227d8f2d",
+      "hash_meta": "f786342746114384aeb139a552be7ecfe12a63fe58a77bcfc9a95cb3ca2b5fee",
+      "seqno": 1532996
+    },
+    "service": {
+      "hostname": "ehcoo.com",
+      "protocol": "http:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "1.0.33"
+  },
+  "ctime": 1507361472,
+  "expire_in": 504576000,
+  "prev": "9fa5de5acc94998927abd31294ad1fb233bc143f92efdbe0682f7518074190f2",
+  "seqno": 15,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgG0pxYWGQ7gYVKEDMkF4sL93t81OsggVRovsuYyyzyi8Kp3BheWxvYWTFAz57ImJvZHkiOnsia2V5Ijp7ImVsZGVzdF9raWQiOiIwMTIwMWI0YTcxNjE2MTkwZWUwNjE1Mjg0MGNjOTA1ZTJjMmZkZGVkZjM1M2FjODIwNTUxYTJmYjJlNjMyY2IzY2EyZjBhIiwiaG9zdCI6ImtleWJhc2UuaW8iLCJraWQiOiIwMTIwMWI0YTcxNjE2MTkwZWUwNjE1Mjg0MGNjOTA1ZTJjMmZkZGVkZjM1M2FjODIwNTUxYTJmYjJlNjMyY2IzY2EyZjBhIiwidWlkIjoiMGU3ZDI5NmY5YzRlODFhNDMyZDRiNzhmODQyMWM3MTkiLCJ1c2VybmFtZSI6ImVoY29vIn0sIm1lcmtsZV9yb290Ijp7ImN0aW1lIjoxNTA3MzYxNDI4LCJoYXNoIjoiZjlmM2EwYTQwZGE3NjMxY2U0NDM1MmMyNzU3ZTFhNzdmZjFhMzdiNzE0ODNjMTg5MTQyMzVlOWU1M2E2ODQ2MzJhMDc3MGJkNjc0OGI2ODg1NWM0YTY1ZDUzYzE5OTVlNThiZDAzODNjOTU0ZjlhMDViOGNiM2NiMjI3ZDhmMmQiLCJoYXNoX21ldGEiOiJmNzg2MzQyNzQ2MTE0Mzg0YWViMTM5YTU1MmJlN2VjZmUxMmE2M2ZlNThhNzdiY2ZjOWE5NWNiM2NhMmI1ZmVlIiwic2Vxbm8iOjE1MzI5OTZ9LCJzZXJ2aWNlIjp7Imhvc3RuYW1lIjoiZWhjb28uY29tIiwicHJvdG9jb2wiOiJodHRwOiJ9LCJ0eXBlIjoid2ViX3NlcnZpY2VfYmluZGluZyIsInZlcnNpb24iOjF9LCJjbGllbnQiOnsibmFtZSI6ImtleWJhc2UuaW8gZ28gY2xpZW50IiwidmVyc2lvbiI6IjEuMC4zMyJ9LCJjdGltZSI6MTUwNzM2MTQ3MiwiZXhwaXJlX2luIjo1MDQ1NzYwMDAsInByZXYiOiI5ZmE1ZGU1YWNjOTQ5OTg5MjdhYmQzMTI5NGFkMWZiMjMzYmMxNDNmOTJlZmRiZTA2ODJmNzUxODA3NDE5MGYyIiwic2Vxbm8iOjE1LCJ0YWciOiJzaWduYXR1cmUifaNzaWfEQEnvFXySZcVz4EFq/6FcTZ5mJbAghpwjZes6TZH4zbofGE0Tp8/Yl2fkgrPsqXOrLAlXHOmG9Nz3nK9IBkLxBwuoc2lnX3R5cGUgpGhhc2iCpHR5cGUIpXZhbHVlxCCOLfzPsmSiEcd6c1/OAi9sCVAHdcD7iOVzW/2RjbiGV6N0YWfNAgKndmVyc2lvbgE=
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/ehcoo
+
+==================================================================

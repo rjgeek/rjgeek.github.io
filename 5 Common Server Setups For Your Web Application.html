@@ -1,0 +1,986 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+<meta name="google-site-verification" content="LzR3qfX_YDfkNEusKegSylZBjqRw3vczTwICGpJ1GRI" />
+<meta name="baidu-site-verification" content="IhNq56RJS1" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Ehcoo" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="简介（Introduction）When deciding which server architecture to use for your environment, there are many factors to consider, such as performance, scalability, availability, reliability, cost, and ease of">
+<meta name="keywords" content="BlockChain,Distributed Computing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【系统架构】五种通用WEB应用服务架构（5 Common Server Setups For Your Web Application）">
+<meta property="og:url" content="http://www.ehcoo.com/5 Common Server Setups For Your Web Application.html">
+<meta property="og:site_name" content="Ehcoo">
+<meta property="og:description" content="简介（Introduction）When deciding which server architecture to use for your environment, there are many factors to consider, such as performance, scalability, availability, reliability, cost, and ease of">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/11/5_Common_Server_Setups_Twitter-01.png?t=2>">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/11/5_single_server.png?t=2>">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/11/5_separate_database.png?t=2>">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/11/5_load_balancer.png?t=2>">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/11/5_load_balancer.png?t=2>">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/11/5_master_slave_database_replication.png?t=2>">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/11/5_combined.png?t=2>">
+<meta property="og:updated_time" content="2017-10-29T15:38:31.046Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【系统架构】五种通用WEB应用服务架构（5 Common Server Setups For Your Web Application）">
+<meta name="twitter:description" content="简介（Introduction）When deciding which server architecture to use for your environment, there are many factors to consider, such as performance, scalability, availability, reliability, cost, and ease of">
+<meta name="twitter:image" content="https://rjgeek.github.io/images/2016/11/5_Common_Server_Setups_Twitter-01.png?t=2>">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.ehcoo.com/5 Common Server Setups For Your Web Application.html"/>
+
+
+  <title> 【系统架构】五种通用WEB应用服务架构（5 Common Server Setups For Your Web Application） | Ehcoo </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="default">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?83e3b6b55c0e48f5d0848d6a14b76c02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+  
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ehcoo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about-me" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                【系统架构】五种通用WEB应用服务架构（5 Common Server Setups For Your Web Application）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-11-29T18:05:54+00:00" content="2016-11-29">
+              2016-11-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/系统架构/" itemprop="url" rel="index">
+                    <span itemprop="name">系统架构</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/5 Common Server Setups For Your Web Application.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="5 Common Server Setups For Your Web Application.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+		  
+          
+          
+
+          
+		 
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="简介（Introduction）"><a href="#简介（Introduction）" class="headerlink" title="简介（Introduction）"></a>简介（Introduction）</h2><p>When deciding which server architecture to use for your environment, there are many factors to consider, such as performance, scalability, availability, reliability, cost, and ease of management.<br>Here is a list of commonly used server setups, with a short description of each, including pros and cons. Keep in mind that all of the concepts covered here can be used in various combinations with one another, and that every environment has different requirements, so there is no single, correct configuration.<br><img src="https://rjgeek.github.io/images/2016/11/5_Common_Server_Setups_Twitter-01.png?t=2>" width="90%" height="90%" alt="图片名称" align="center"><br><a id="more"></a></p>
+<p>在决定为您的环境使用哪种服务器体系结构时，需要考虑很多因素，如性能，可扩展性，可用性，可靠性，成本和易于管理。<br>这里是常用的服务器设置列表，每个都有简短的描述，包括利弊。 请记住，此处涵盖的所有概念可以彼此不同的组合使用，并且每个环境都有不同的要求，因此没有单一，正确的配置。</p>
+<h2 id="所有东西都放在一个服务器上（Everything-On-One-Server）"><a href="#所有东西都放在一个服务器上（Everything-On-One-Server）" class="headerlink" title="所有东西都放在一个服务器上（Everything On One Server）"></a>所有东西都放在一个服务器上（Everything On One Server）</h2><p>The entire environment resides on a single server. For a typical web application, that would include the web server, application server, and database server. A common variation of this setup is a LAMP stack, which stands for Linux, Apache, MySQL, and PHP, on a single server.  </p>
+<p><strong>Use Case:</strong> Good for setting up an application quickly, as it is the simplest setup possible, but it offers little in the way of scalability and component isolation.  </p>
+<p><strong>Pros:</strong>Simple  </p>
+<p><strong>Cons:</strong><br>1.Application and database contend for the same server resources (CPU, Memory, I/O, etc.) which, aside from possible poor performance, can make it difficult to determine the source (application or database) of poor performance<br>2.Not readily horizontally scalable<br>整个环境驻留在单个服务器上。 典型的Web应用程序将包括Web服务器，应用程序服务器和数据库服务器。 这种设置的一个常见变体是LAMP堆栈，它的代表Linux，Apache，MySQL和PHP，部署在单个服务器上。<br><strong>使用案例：</strong>适合快速设置应用程序，因为它是可能的最简单的设置，但它不提供可扩展性和组件隔离的方式。<br><img src="https://rjgeek.github.io/images/2016/11/5_single_server.png?t=2>" width="90%" height="90%" alt="图片名称" align="center"><br><strong>优点：</strong>简单<br><strong>缺点：</strong><br>1.应用程序和数据库争用相同的服务器资源（CPU，内存，I / O等），除了可能的性能低下外，你也很难确定到底是谁的性能问题<br>2.不容易水平扩展  </p>
+<h2 id="数据服务器分离（Separate-Database-Server）"><a href="#数据服务器分离（Separate-Database-Server）" class="headerlink" title="数据服务器分离（Separate Database Server）"></a>数据服务器分离（Separate Database Server）</h2><p>The database management system (DBMS) can be separated from the rest of the environment to eliminate the resource contention between the application and the database, and to increase security by removing the database from the DMZ, or public internet.    </p>
+<p><strong>Use Case:</strong> Good for setting up an application quickly, but keeps application and database from fighting over the same system resources.</p>
+<p><strong>Pros:</strong><br>1.Application and database tiers do not contend for the same server resources (CPU, Memory, I/O, etc.)<br>You may vertically scale each tier separately, by adding more resources to whichever server needs increased capacity<br>2.Depending on your setup, it may increase security by removing your database from the DMZ  </p>
+<p><strong>Cons:</strong><br>1.Slightly more complex setup than single server<br>2.Performance issues can arise if the network connection between the two servers is high-latency (i.e. the servers are geographically distant from each other), or the bandwidth is too low for the amount of data being transferred  </p>
+<p>数据库管理系统（DBMS）可以与环境的其余部分分离，以消除应用程序和数据库之间的资源争用，并且通过从DMZ或公共因特网移除数据库来增加安全性。<br><strong>使用案例：</strong>适合快速设置应用程序，避免了应用程序和数据库在同一系统资源上的战斗。<br><img src="https://rjgeek.github.io/images/2016/11/5_separate_database.png?t=2>" width="90%" height="90%" alt="图片名称" align="center"><br><strong>优点：</strong><br>1.应用程序和数据库层不竞争相同的服务器资源（CPU，内存，I / O等）,您可以通过向任何服务器需要增加的容量添加更多资源来单独垂直扩展每个层<br>2.根据您的设置，它可以通过从DMZ中删除数据库来提高安全性<br><strong>缺点：</strong><br>1.比单服务器设置更复杂<br>2.如果两个服务器之间的网络连接是高延迟（即，服务器在地理上彼此远离），或者带宽对于传送的数据量太低，则可能出现性能问题    </p>
+<h2 id="负载均衡（Load-Balancer-Reverse-Proxy）"><a href="#负载均衡（Load-Balancer-Reverse-Proxy）" class="headerlink" title="负载均衡（Load Balancer-Reverse Proxy）"></a>负载均衡（Load Balancer-Reverse Proxy）</h2><p>Load balancers can be added to a server environment to improve performance and reliability by distributing the workload across multiple servers. If one of the servers that is load balanced fails, the other servers will handle the incoming traffic until the failed server becomes healthy again. It can also be used to serve multiple applications through the same domain and port, by using a layer 7 (application layer) reverse proxy.<br>Examples of software capable of reverse proxy load balancing: HAProxy, Nginx, and Varnish.</p>
+<p><strong>Use Case:</strong> Useful in an environment that requires scaling by adding more servers, also known as horizontal scaling.   </p>
+<p><strong>Pros:</strong><br>1.Enables horizontal scaling, i.e. environment capacity can be scaled by adding more servers to it<br>2.Can protect against DDOS attacks by limiting client connections to a sensible amount and frequency  </p>
+<p><strong>Cons:</strong><br>1.The load balancer can become a performance bottleneck if it does not have enough resources, or if it is configured poorly<br>2.Can introduce complexities that require additional consideration, such as where to perform SSL termination and how to handle applications that require sticky sessions<br>3.The load balancer is a single point of failure; if it goes down, your whole service can go down. A high availability (HA) setup is an infrastructure without a single point of failure. To learn how to implement an HA setup, you can read this section of How To Use Floating IPs.  </p>
+<p>负载平衡器可以添加到服务器环境中，以通过在多个服务器之间分配工作负载来提高性能和可靠性。如果其中一个负载平衡的服务器失败，其他服务器将处理传入流量，直到失败的服务器再次变得健康。它还可以用于通过使用第7层（应用层）反向代理通过相同的域和端口服务多个应用。能够进行逆向代理负载平衡的软件示例：HAProxy，Nginx和Varnish。<br><strong>用例：</strong>在需要通过添加更多服务器进行扩展的环境中有用，也称为水平缩放。<br><img src="https://rjgeek.github.io/images/2016/11/5_load_balancer.png?t=2>" width="90%" height="90%" alt="图片名称" align="center"><br><strong>优点：</strong><br>1.启用水平扩展，即可通过向其中添加更多服务器来扩展环境容量<br>2.通过将客户端连接限制在明显的数量和频率，可防止DDOS攻击<br><strong>缺点：</strong><br>1.如果负载均衡器没有足够的资源或者配置不当，它可能会成为性能瓶颈<br>2.可能引入需要额外考虑的复杂性，例如在何处执行SSL终止以及如何处理需要粘性会话的应用程序<br>3.负载均衡器是单点故障;如果它下降，你的整个服务可以下降。高可用性（HA）设置是没有单点故障的基础设施。要了解如何实施HA设置，您可以阅读如何使用浮动IP的此部分。  </p>
+<h2 id="HTTP-Accelerator-Caching-Reverse-Proxy"><a href="#HTTP-Accelerator-Caching-Reverse-Proxy" class="headerlink" title="HTTP Accelerator (Caching Reverse Proxy)"></a>HTTP Accelerator (Caching Reverse Proxy)</h2><p>An HTTP accelerator, or caching HTTP reverse proxy, can be used to reduce the time it takes to serve content to a user through a variety of techniques. The main technique employed with an HTTP accelerator is caching responses from a web or application server in memory, so future requests for the same content can be served quickly, with less unnecessary interaction with the web or application servers.</p>
+<p>Examples of software capable of HTTP acceleration: Varnish, Squid, Nginx.</p>
+<p><strong>Use Case:</strong> Useful in an environment with content-heavy dynamic web applications, or with many commonly accessed files.<br><strong>Pros:</strong><br>1.Increase site performance by reducing CPU load on web server, through caching and compression, thereby increasing user capacity<br>2.Can be used as a reverse proxy load balancer<br>3.Some caching software can protect against DDOS attacks<br><strong>Cons:</strong><br>1.Requires tuning to get best performance out of it<br>2.If the cache-hit rate is low, it could reduce performance  </p>
+<p>HTTP加速器或缓存HTTP反向代理可用于减少通过各种技术向用户提供内容所需的时间。 HTTP加速器采用的主要技术是缓存来自内存中的Web或应用程序服务器的响应，因此可以快速提供对相同内容的未来请求，同时减少与Web或应用程序服务器之间的不必要的交互。  </p>
+<p>能够进行HTTP加速的软件示例：Varnish，Squid，Nginx。<br><img src="https://rjgeek.github.io/images/2016/11/5_load_balancer.png?t=2>" width="90%" height="90%" alt="图片名称" align="center"><br><strong>用例：</strong>适用于内容繁多的动态Web应用程序或许多常用文件的环境。<br><strong>优点：</strong><br>1.通过减少Web服务器上的CPU负载，通过缓存和压缩来提高站点性能，从而提高用户容量<br>可用作逆向代理负载均衡器<br>2.一些缓存软件可以防止DDOS攻击<br><strong>缺点：</strong><br>1.需要调整以获得最佳性能<br>2.如果缓存命中率低，则可能降低性能  </p>
+<h2 id="主备互用，读写分离（Master-Slave-Database-Replication）"><a href="#主备互用，读写分离（Master-Slave-Database-Replication）" class="headerlink" title="主备互用，读写分离（Master-Slave Database Replication）"></a>主备互用，读写分离（Master-Slave Database Replication）</h2><p>One way to improve performance of a database system that performs many reads compared to writes, such as a CMS, is to use master-slave database replication. Master-slave replication requires a master and one or more slave nodes. In this setup, all updates are sent to the master node and reads can be distributed across all nodes.</p>
+<p><strong>Use Case:</strong> Good for increasing the read performance for the database tier of an application.</p>
+<p>Here is an example of a master-slave replication setup, with a single slave node:</p>
+<p><strong>Pros:</strong><br>1.Improves database read performance by spreading reads across slaves<br>2.Can improve write performance by using master exclusively for updates (it spends no time serving read requests)<br><strong>Cons:</strong><br>1.The application accessing the database must have a mechanism to determine which database nodes it should send update and read requests to<br>2.Updates to slaves are asynchronous, so there is a chance that their contents could be out of date<br>3.If the master fails, no updates can be performed on the database until the issue is corrected<br>4.Does not have built-in failover in case of failure of master node  </p>
+<p>与写操作（例如CMS）相比，提高执行许多读取操作的数据库系统性能的一种方法是使用主从数据库复制。主从复制需要主节点和一个或多个从节点。在此设置中，所有更新都发送到主节点，读取可以分布在所有节点上。</p>
+<p><strong>用例：</strong>适用于提高应用程序的数据库层的读取性能。</p>
+<p>以下是具有单个从节点的主从复制设置的示例：<br><img src="https://rjgeek.github.io/images/2016/11/5_master_slave_database_replication.png?t=2>" width="90%" height="90%" alt="图片名称" align="center"><br><strong>优点：</strong><br>1.通过在从机之间传播读，提高数据库读性能<br>2.可以通过使用专用于更新的主机来提高写入性能（它不需要时间提供读取请求）<br><strong>缺点：</strong><br>1.访问数据库的应用程序必须有一个机制来确定它应该向其发送更新和读取请求的数据库节点<br>2.更新到从属设备是异步的，因此有可能它们的内容可能已过期<br>3.如果主服务器失败，则无法对数据库执行更新，直到问题得到纠正<br>4.在主节点故障的情况下没有内置故障转移</p>
+<h2 id="综合用法（Combining-the-Concepts）"><a href="#综合用法（Combining-the-Concepts）" class="headerlink" title="综合用法（Combining the Concepts）"></a>综合用法（Combining the Concepts）</h2><p>It is possible to load balance the caching servers, in addition to the application servers, and use database replication in a single environment. The purpose of combining these techniques is to reap the benefits of each without introducing too many issues or complexity. Here is an example diagram of what a server environment could look like:  </p>
+<p>Let’s assume that the load balancer is configured to recognize static requests (like images, css, javascript, etc.) and send those requests directly to the caching servers, and send other requests to the application servers.</p>
+<p>Here is a description of what would happen when a user sends a requests dynamic content:  </p>
+<p>The user requests dynamic content from <a href="http://example.com/" target="_blank" rel="external">http://example.com/</a> (load balancer)<br>The load balancer sends request to app-backend<br>app-backend reads from the database and returns requested content to load balancer<br>The load balancer returns requested data to the user<br>If the user requests static content:  </p>
+<p>The load balancer checks cache-backend to see if the requested content is cached (cache-hit) or not (cache-miss)<br>If cache-hit: return the requested content to the load balancer and jump to Step 7. If cache-miss: the cache server forwards the request to app-backend, through the load balancer<br>The load balancer forwards the request through to app-backend<br>app-backend reads from the database then returns requested content to the load balancer<br>The load balancer forwards the response to cache-backend<br>cache-backend caches the content then returns it to the load balancer<br>The load balancer returns requested data to the user<br>This environment still has two single points of failure (load balancer and master database server), but it provides the all of the other reliability and performance benefits that were described in each section above.</p>
+<p>除了应用程序服务器之外，还可以对缓存服务器进行负载平衡，并在单个环境中使用数据库复制。组合这些技术的目的是获得每个技术的益处而不引入太多的问题或复杂性。以下是服务器环境可能类似的示例图：<br><img src="https://rjgeek.github.io/images/2016/11/5_combined.png?t=2>" width="90%" height="90%" alt="图片名称" align="center"><br>让我们假设负载均衡器被配置为识别静态请求（如图像，css，javascript等），并将这些请求直接发送到缓存服务器，并向应用服务器发送其他请求。</p>
+<p>以下是用户发送请求动态内容时会发生什么的说明：</p>
+<p>用户从<a href="http://example.com/（负载平衡器）请求动态内容，" target="_blank" rel="external">http://example.com/（负载平衡器）请求动态内容，</a><br>负载均衡器向app-backend发送请求<br>app-backend从数据库读取并将请求的内容返回到负载平衡器<br>负载平衡器将请求的数据返回给用户<br>如果用户请求静态内容：</p>
+<p>负载平衡器检查缓存后端以查看请求的内容是否被缓存（缓存命中）或不缓存（缓存未命中）<br>如果cache-hit：将请求的内容返回到负载均衡器并跳转到步骤7.如果cache-miss：缓存服务器通过负载均衡器将请求转发到app-backend<br>负载平衡器将请求转发到应用后端<br>应用程序后端读取从数据库然后返回请求的内容到负载平衡器<br>负载平衡器将响应转发到缓存后端<br>缓存后端缓存内容，然后将其返回到负载均衡器<br>负载平衡器将请求的数据返回给用户<br>此环境仍然有两个单点故障（负载平衡器和主数据库服务器），但它提供了上面每个部分中描述的所有其他可靠性和性能优势。</p>
+<h2 id="结论（Conclusion）"><a href="#结论（Conclusion）" class="headerlink" title="结论（Conclusion）"></a>结论（Conclusion）</h2><p>Now that you are familiar with some basic server setups, you should have a good idea of what kind of setup you would use for your own application(s). If you are working on improving your own environment, remember that an iterative process is best to avoid introducing too many complexities too quickly.  </p>
+<p>Let us know of any setups you recommend or would like to learn more about in the comments below!  </p>
+<p>By Mitchell Anicas  </p>
+<p>现在你已经熟悉了一些基本的服务器设置，你应该明白你将在你自己的应用程序中使用什么样的设置。 如果你正在努力改善你自己的环境，记住一个迭代的过程是最好避免太快地引入太多的复杂性。  </p>
+<p>让我们知道您推荐的任何设置，或者想在下面的评论中了解更多信息！</p>
+<p>作者：Mitchell Anicas</p>
+<h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><p>本文100%为组合翻译，详见引用,0%为原创</p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p><a href="https://www.digitalocean.com/community/tutorials/5-common-server-setups-for-your-web-application" target="_blank" rel="external">https://www.digitalocean.com/community/tutorials/5-common-server-setups-for-your-web-application</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>your support will encourage me to continue to create!</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="RuJia Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/tcp.html" rel="next" title="【编程语言】聊聊TCP协议 Version 0.1">
+                <i class="fa fa-chevron-left"></i> 【编程语言】聊聊TCP协议 Version 0.1
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Diffie-Hellman.html" rel="prev" title="【密码学】Diffie-Hellman密钥交换">
+                【密码学】Diffie-Hellman密钥交换 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          <pre><code><b>版权声明</b>:自由转载-非商用-非衍生-保持署名<a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" rel="external nofollow" >(创意共享3.0许可证)</a></code></pre>
+
+
+
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="RuJia" />
+          <p class="site-author-name" itemprop="name">RuJia</p>
+          <p class="site-description motion-element" itemprop="description">BlockChain,Distributed Computing</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rjgeek/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Others">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Others
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cs.bham.ac.uk/~mdr/" title="Professor Mark Ryan" target="_blank" rel="external nofollow" >Professor Mark Ryan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cs.bham.ac.uk/~rzb/" title="Dr Rami Bahsoon" target="_blank" rel="external nofollow" >Dr Rami Bahsoon</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sec.cs.bham.ac.uk/people/" title="The Security and Privacy Group" target="_blank" rel="external nofollow" >The Security and Privacy Group</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.yfgeek.com/" title="YFGeek" target="_blank" rel="external nofollow" >YFGeek</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://rjgeek.github.io/CV1.pdf" title="My CV" target="_blank" rel="external nofollow" >My CV</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介（Introduction）"><span class="nav-number">1.</span> <span class="nav-text">简介（Introduction）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#所有东西都放在一个服务器上（Everything-On-One-Server）"><span class="nav-number">2.</span> <span class="nav-text">所有东西都放在一个服务器上（Everything On One Server）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据服务器分离（Separate-Database-Server）"><span class="nav-number">3.</span> <span class="nav-text">数据服务器分离（Separate Database Server）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#负载均衡（Load-Balancer-Reverse-Proxy）"><span class="nav-number">4.</span> <span class="nav-text">负载均衡（Load Balancer-Reverse Proxy）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-Accelerator-Caching-Reverse-Proxy"><span class="nav-number">5.</span> <span class="nav-text">HTTP Accelerator (Caching Reverse Proxy)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主备互用，读写分离（Master-Slave-Database-Replication）"><span class="nav-number">6.</span> <span class="nav-text">主备互用，读写分离（Master-Slave Database Replication）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#综合用法（Combining-the-Concepts）"><span class="nav-number">7.</span> <span class="nav-text">综合用法（Combining the Concepts）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论（Conclusion）"><span class="nav-number">8.</span> <span class="nav-text">结论（Conclusion）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#声明"><span class="nav-number">9.</span> <span class="nav-text">声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">10.</span> <span class="nav-text">引用</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RuJia</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+  <span id="busuanzi_container_site_pv">
+    Total visited 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  
+  <span id="busuanzi_container_site_uv">
+  Total visitors 本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'ehcoo';
+      var disqus_identifier = '5 Common Server Setups For Your Web Application.html';
+      var disqus_title = "【系统架构】五种通用WEB应用服务架构（5 Common Server Setups For Your Web Application）";
+      var disqus_url = 'http://www.ehcoo.com/5 Common Server Setups For Your Web Application.html';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

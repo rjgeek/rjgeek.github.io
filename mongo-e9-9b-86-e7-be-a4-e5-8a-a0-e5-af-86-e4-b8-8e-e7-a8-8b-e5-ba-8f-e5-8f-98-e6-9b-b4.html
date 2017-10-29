@@ -1,0 +1,1052 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+<meta name="google-site-verification" content="LzR3qfX_YDfkNEusKegSylZBjqRw3vczTwICGpJ1GRI" />
+<meta name="baidu-site-verification" content="IhNq56RJS1" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Ehcoo" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="1  数据库调整本文适用于对Mongo有一定了解到操作人员 以下操作基于以下条件 操作系统：Red Hat 6.4 Mongo版本：2.6.3 已经完成集群分片，已经存在数据库pmr 因为Mongo升级的原因，以下方法仅适用于2.6.3 以前的版本 1.1  创建用户本次一共预留4个用户 用户名                密码                备注 admin">
+<meta name="keywords" content="BlockChain,Distributed Computing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Mongodb】低版本Mongodb集群加密-用户认证">
+<meta property="og:url" content="http://www.ehcoo.com/mongo-e9-9b-86-e7-be-a4-e5-8a-a0-e5-af-86-e4-b8-8e-e7-a8-8b-e5-ba-8f-e5-8f-98-e6-9b-b4.html">
+<meta property="og:site_name" content="Ehcoo">
+<meta property="og:description" content="1  数据库调整本文适用于对Mongo有一定了解到操作人员 以下操作基于以下条件 操作系统：Red Hat 6.4 Mongo版本：2.6.3 已经完成集群分片，已经存在数据库pmr 因为Mongo升级的原因，以下方法仅适用于2.6.3 以前的版本 1.1  创建用户本次一共预留4个用户 用户名                密码                备注 admin">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2017-10-29T15:38:31.054Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【Mongodb】低版本Mongodb集群加密-用户认证">
+<meta name="twitter:description" content="1  数据库调整本文适用于对Mongo有一定了解到操作人员 以下操作基于以下条件 操作系统：Red Hat 6.4 Mongo版本：2.6.3 已经完成集群分片，已经存在数据库pmr 因为Mongo升级的原因，以下方法仅适用于2.6.3 以前的版本 1.1  创建用户本次一共预留4个用户 用户名                密码                备注 admin">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.ehcoo.com/mongo-e9-9b-86-e7-be-a4-e5-8a-a0-e5-af-86-e4-b8-8e-e7-a8-8b-e5-ba-8f-e5-8f-98-e6-9b-b4.html"/>
+
+
+  <title> 【Mongodb】低版本Mongodb集群加密-用户认证 | Ehcoo </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="default">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?83e3b6b55c0e48f5d0848d6a14b76c02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+  
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ehcoo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about-me" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                【Mongodb】低版本Mongodb集群加密-用户认证
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-10-12T11:49:20+00:00" content="2015-10-12">
+              2015-10-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据库知识/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库知识</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/mongo-e9-9b-86-e7-be-a4-e5-8a-a0-e5-af-86-e4-b8-8e-e7-a8-8b-e5-ba-8f-e5-8f-98-e6-9b-b4.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="mongo-e9-9b-86-e7-be-a4-e5-8a-a0-e5-af-86-e4-b8-8e-e7-a8-8b-e5-ba-8f-e5-8f-98-e6-9b-b4.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+		  
+          
+          
+
+          
+		 
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-数据库调整"><a href="#1-数据库调整" class="headerlink" title="1  数据库调整"></a><span style="line-height: 1.2;">1  数据库调整</span></h1><p>本文适用于对Mongo有一定了解到操作人员</p>
+<p>以下操作基于以下条件</p>
+<p>操作系统：Red Hat 6.4</p>
+<p>Mongo版本：2.6.3</p>
+<p>已经完成集群分片，已经存在数据库pmr</p>
+<p>因为Mongo升级的原因，以下方法仅适用于2.6.3 以前的版本</p>
+<h2 id="1-1-创建用户"><a href="#1-1-创建用户" class="headerlink" title="1.1  创建用户"></a>1.1  创建用户</h2><p>本次一共预留4个用户</p>
+<p>用户名                密码                备注</p>
+<p>admin                123root           超级管理员</p>
+<p>admin_read           123root_read      只读超级管理员</p>
+<p>pmr_admin            123root_pmr        pmr库管理员</p>
+<p>pmr_admin_read      123root_pmr_read   pmr库可读管理员</p>
+<p>在无命令的情况下进行登录,（蓝色字体表示需敲入的语句，黑色字体表示执行成功的控制台输出的部分）</p>
+<p>   [root@master ~]# mongo 192.168.0.178:20000/admin</p>
+<p>MongoDB shell version: 2.6.1</p>
+<p>connecting to: 192.168.0.178:20000/admin</p>
+<p>mongos&gt;db.addUser(‘admin’,’123root’)  #添加超级管理员用户</p>
+<p>mongos&gt;db.addUser(‘admin_read’,123root_read’，true) #添加超级管理员可读用</p>
+<p>mongos&gt;use pmr</p>
+<p>mongos&gt; db.addUser(‘pmr_admin’,’123root_pmr’)  #添加pmr库管理员</p>
+<p>mongos&gt; db.addUser(‘pmr_admin_read ‘,’123root_pmr_read ‘)  #添加pmr可读管理员用户</p>
+<p>命令执行成功标志：出现</p>
+<p>Successfully added user: { }</p>
+<p>在执行过程中会出现WARNING，提示方法已经过期，不影响最终结果</p>
+<h2 id="1-2-关闭服务器的mongod-mongos和config服务"><a href="#1-2-关闭服务器的mongod-mongos和config服务" class="headerlink" title="1.2  关闭服务器的mongod,mongos和config服务"></a>1.2  关闭服务器的mongod,mongos和config服务</h2><p>执行ps –ef|grep mongo 查出所有mongo正在运行的进程</p>
+<p>执行 kill -2 进程ID   杀掉所有进程</p>
+<h2 id="1-3-停生成密钥文件keyfile"><a href="#1-3-停生成密钥文件keyfile" class="headerlink" title="1.3  停生成密钥文件keyfile"></a>1.3  停生成密钥文件keyfile</h2><p>切换到root的跟目录下执行以下命令</p>
+<p>openssl rand -base64 753 &gt;keyfile</p>
+<p>chmod 600 keyfile #重点 必须</p>
+<p>cat keyfile   #查看</p>
+<p>4a7w479ouV6fY5CASqxeWzzPhPLzZgYnHKWOFSIxjMABjaWK7up6Keb2+ZKz1C2Rtfl7ukCBelW2xOL0h3gOSAdIhUi0j8IMBYZV/kbUSSf0987xIur3lHZqUINPVVyl</p>
+<p>ib+XPrg3SO4IG25tCQbEf/twvS1CxiDmi/GtQZfqOjUX7MEJK3ynFBsB/9wU1nf1</p>
+<p>6rLhBPIdmSnpNf5s9yGohx2wn6dQcJ8o0wn75oOBysX2mPkLI0tEu4//7x1PgY9Q</p>
+<p>Ws4XdXs1MFqUYXkh8K6RFd/TKB2zs5fonzqiXrgwpaW1KUFZB1lAfQwWePmxsWul</p>
+<p>HqR96/yTGPxQKOVpm1Zdj2LGa616X3Www16Td4c2UVoM7mPi+Js8R2Flc6oV9H+</p>
+<h2 id="1-4-将keyfile分发到各个库中"><a href="#1-4-将keyfile分发到各个库中" class="headerlink" title="1.4  将keyfile分发到各个库中"></a>1.4  将keyfile分发到各个库中</h2><p>#将生成的keyfile 拷贝到mongod/mongos/config 进程对应的文件夹（依据自己的库而定）</p>
+<p>[root@master ~]# cp keyfile /data/mongodb/config/data/</p>
+<p>[root@master ~]# cp keyfile /data/mongodb/mongos/</p>
+<p>[root@master ~]# cp keyfile /data/mongodb/shard1/data/</p>
+<p>[root@master ~]# cp keyfile /data/mongodb/shard2/data/</p>
+<p>[root@master ~]# cp keyfile /data/mongodb/shard3/data/</p>
+<p>依次将keyfile拷贝到另外两台机器上的数据文件</p>
+<p>   全部执行完之后，依次变更权限，下面为其中一个例子</p>
+<p>执行    chmod 600  /data/mongodb/mongos/keyfile</p>
+<h2 id="1-5-变更脚本文件"><a href="#1-5-变更脚本文件" class="headerlink" title="1.5  变更脚本文件"></a>1.5  变更脚本文件</h2><p>原脚本</p>
+<p>${MONGODB}/bin/mongod -fork -shardsvr -replSet shard1 -port 10001 -dbpath ${MONGO_DATA}/shard1 -logpath ${MONGO_LOG}/shard1/shard1.log</p>
+<p>变更后的脚本，在最后添加上权限</p>
+<p>${MONGODB}/bin/mongod -fork -shardsvr -replSet shard1 -port 10001 -dbpath ${MONGO_DATA}/shard1 -logpath ${MONGO_LOG}/shard1/shard1.log</p>
+<p>–keyFile /data/mongodb/shard1/data/keyfile</p>
+<p>请依次变更所有服务的脚本（3台shard,config,mongo）</p>
+<h2 id="1-6-启动脚本"><a href="#1-6-启动脚本" class="headerlink" title="1.6  启动脚本"></a>1.6  启动脚本</h2><p>进入脚本目录下，依次执行所有shard和config脚本后，然后在执行mongo服务，顺序很重要</p>
+<h2 id="1-7-确认权限是否添加成功"><a href="#1-7-确认权限是否添加成功" class="headerlink" title="1.7  确认权限是否添加成功"></a>1.7  确认权限是否添加成功</h2><p>验证超级管理员, 账户认证前状态</p>
+<p>[Mongo@master ~]# mongo 10.142.51.43:30000</p>
+<p>MongoDB shell version: 2.6.1</p>
+<p>connecting to: localhost: 10.142.51.43:30000/test</p>
+<p>Error while trying to show server startup warnings: not authorized on admin to execute command { getLog: “startupWarnings” }</p>
+<p>mongos&gt; show collections;</p>
+<p>2014-08-03T12:02:48.535+0800 error: {</p>
+<p>  “$err” : “not authorized for query on test.system.namespaces”,</p>
+<p>  “code” : 13</p>
+<p>} at src/mongo/shell/query.js:131</p>
+<p>mongos&gt; use pmr</p>
+<p>switched to db pmr</p>
+<p>mongos&gt; show collections;</p>
+<p>2014-08-03T12:03:10.923+0800 error: { “$err” : “not authorized for query on uba.system.namespaces”, “code” : 13 } at src/mongo/shell/query.js:131</p>
+<p>验证超级管理员, 账户认证后状态</p>
+<p>#admin库认证</p>
+<p>[Mongo @master ~]# mongo 10.142.51.43:30000/admin -u admin -p 123root</p>
+<p>MongoDB shell version: 2.6.1</p>
+<p>connecting to: localhost:20000/admin</p>
+<p>mongos&gt; show collections;</p>
+<p>system.indexes</p>
+<p>system.users</p>
+<p>system.version</p>
+<p>#pmr库认证 读写权限用户</p>
+<p>[Mongo@master ~]# mongo 10.142.51.44:30000/pmr -u pmr_admin -p 123root_pmr</p>
+<p>MongoDB shell version: 2.6.1</p>
+<p>connecting to: 10.142.51.44:30000/pmr</p>
+<p>Error while trying to show server startup warnings: not authorized on admin to execute command { getLog: “startupWarnings” }</p>
+<p>mongos&gt; show collections;</p>
+<p>system.indexes</p>
+<p>table1</p>
+<p>mongos&gt; db.table1.count()</p>
+<p>0</p>
+<p>mongos&gt; for (var i = 1; i &lt;= 1000; i++)db.table1.save({id:i,name:”username”+i,age:i});</p>
+<p>WriteResult({ “nInserted” : 1 })</p>
+<p>mongos&gt; db.table1.count()</p>
+<p>1000</p>
+<p>mongos&gt; db.table1.findOne()</p>
+<p>{</p>
+<p>  “_id” : ObjectId(“53ddb52a65bb900f61e458a1”),</p>
+<p>  “id” : 1,</p>
+<p>  “name” : “username1”,</p>
+<p>  “age” : 1</p>
+<p>}</p>
+<p>#pmr库 只读权限用户</p>
+<p>[Mongo@master ~]# mongo localhost:20000/pmr -u pmr_read -p 123root_pmr_read</p>
+<p>MongoDB shell version: 2.6.1</p>
+<p>connecting to: localhost:20000/pmr</p>
+<p>Error while trying to show server startup warnings: not authorized on admin to execute command { getLog: “startupWarnings” }</p>
+<p>mongos&gt; db.auth(‘sa_read’,’123root_pmr_read’)</p>
+<p>1</p>
+<p>mongos&gt; for (var i = 1; i &lt;= 1000; i++)db.table1.save({id:i,name:”username”+i,age:i});</p>
+<p>WriteResult({</p>
+<p>  “writeError” : {</p>
+<p>   “code” : 13,</p>
+<pre><code>&quot;errmsg&quot; : &quot;not authorized on uba to execute command { insert: \&quot;table1\&quot;, documents: [ { id: 1000.0, name: \&quot;username1000\&quot;, age: 1000.0, _id: ObjectId(&apos;53ddb5d62390d9a487087c87&apos;) } ], ordered: true }&quot;
+</code></pre><p>  }</p>
+<p>})</p>
+<p>mongos&gt; db.table1.findOne()</p>
+<p>{</p>
+<p>  “_id” : ObjectId(“53ddb52a65bb900f61e458a1”),</p>
+<p> “id” : 1,</p>
+<p>  “name” : “username1”,</p>
+<p>  “age” : 1</p>
+<p>}</p>
+<p>mongos&gt; db.table1.count()</p>
+<p>1000</p>
+<p>也可用工具MongoVUE执行验证，这里不再描述</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>your support will encourage me to continue to create!</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="RuJia Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/13398c19511b11a7b9ecdfcfc5c5295d.html" rel="next" title="【Mongodb】集群分片环境mongodb的版本升级">
+                <i class="fa fa-chevron-left"></i> 【Mongodb】集群分片环境mongodb的版本升级
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/synchronous-non-blocking-server-based-on-nodejs.html" rel="prev" title="【论文】Synchronous Non-blocking Server Based on Nodejs">
+                【论文】Synchronous Non-blocking Server Based on Nodejs <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          <pre><code><b>版权声明</b>:自由转载-非商用-非衍生-保持署名<a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" rel="external nofollow" >(创意共享3.0许可证)</a></code></pre>
+
+
+
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="RuJia" />
+          <p class="site-author-name" itemprop="name">RuJia</p>
+          <p class="site-description motion-element" itemprop="description">BlockChain,Distributed Computing</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rjgeek/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Others">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Others
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cs.bham.ac.uk/~mdr/" title="Professor Mark Ryan" target="_blank" rel="external nofollow" >Professor Mark Ryan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cs.bham.ac.uk/~rzb/" title="Dr Rami Bahsoon" target="_blank" rel="external nofollow" >Dr Rami Bahsoon</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sec.cs.bham.ac.uk/people/" title="The Security and Privacy Group" target="_blank" rel="external nofollow" >The Security and Privacy Group</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.yfgeek.com/" title="YFGeek" target="_blank" rel="external nofollow" >YFGeek</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://rjgeek.github.io/CV1.pdf" title="My CV" target="_blank" rel="external nofollow" >My CV</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-数据库调整"><span class="nav-number">1.</span> <span class="nav-text">1  数据库调整</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-创建用户"><span class="nav-number">1.1.</span> <span class="nav-text">1.1  创建用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-关闭服务器的mongod-mongos和config服务"><span class="nav-number">1.2.</span> <span class="nav-text">1.2  关闭服务器的mongod,mongos和config服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-停生成密钥文件keyfile"><span class="nav-number">1.3.</span> <span class="nav-text">1.3  停生成密钥文件keyfile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-将keyfile分发到各个库中"><span class="nav-number">1.4.</span> <span class="nav-text">1.4  将keyfile分发到各个库中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-变更脚本文件"><span class="nav-number">1.5.</span> <span class="nav-text">1.5  变更脚本文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-启动脚本"><span class="nav-number">1.6.</span> <span class="nav-text">1.6  启动脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-确认权限是否添加成功"><span class="nav-number">1.7.</span> <span class="nav-text">1.7  确认权限是否添加成功</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RuJia</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+  <span id="busuanzi_container_site_pv">
+    Total visited 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  
+  <span id="busuanzi_container_site_uv">
+  Total visitors 本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'ehcoo';
+      var disqus_identifier = 'mongo-e9-9b-86-e7-be-a4-e5-8a-a0-e5-af-86-e4-b8-8e-e7-a8-8b-e5-ba-8f-e5-8f-98-e6-9b-b4.html';
+      var disqus_title = "【Mongodb】低版本Mongodb集群加密-用户认证";
+      var disqus_url = 'http://www.ehcoo.com/mongo-e9-9b-86-e7-be-a4-e5-8a-a0-e5-af-86-e4-b8-8e-e7-a8-8b-e5-ba-8f-e5-8f-98-e6-9b-b4.html';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

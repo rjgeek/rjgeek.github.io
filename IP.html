@@ -1,0 +1,958 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+<meta name="google-site-verification" content="LzR3qfX_YDfkNEusKegSylZBjqRw3vczTwICGpJ1GRI" />
+<meta name="baidu-site-verification" content="IhNq56RJS1" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Ehcoo" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="引言你需要上网，你在浏览器中输入一个网址，实际是你和服务器之间的沟通，两者之前需要沟通，就要知道两个的位置，IP就是用来标记你的位置的，告诉外部网络，你是谁？我以什么样的方式与外部通信，IP的地址是怎么样划分的，IP不够用的时候怎么处理，带着这些问题，开始本文的阅读。你可以通过百度直接输入IP查询你是谁？">
+<meta name="keywords" content="BlockChain,Distributed Computing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【计算机网络】网络层-IPv4是什么？IPv4怎么划分的？">
+<meta property="og:url" content="http://www.ehcoo.com/IP.html">
+<meta property="og:site_name" content="Ehcoo">
+<meta property="og:description" content="引言你需要上网，你在浏览器中输入一个网址，实际是你和服务器之间的沟通，两者之前需要沟通，就要知道两个的位置，IP就是用来标记你的位置的，告诉外部网络，你是谁？我以什么样的方式与外部通信，IP的地址是怎么样划分的，IP不够用的时候怎么处理，带着这些问题，开始本文的阅读。你可以通过百度直接输入IP查询你是谁？">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/12/ip_1.png?t=1>">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/12/ip_2.png?t=1>">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/12/ip_3.png?t=1>">
+<meta property="og:updated_time" content="2017-10-29T15:38:31.046Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【计算机网络】网络层-IPv4是什么？IPv4怎么划分的？">
+<meta name="twitter:description" content="引言你需要上网，你在浏览器中输入一个网址，实际是你和服务器之间的沟通，两者之前需要沟通，就要知道两个的位置，IP就是用来标记你的位置的，告诉外部网络，你是谁？我以什么样的方式与外部通信，IP的地址是怎么样划分的，IP不够用的时候怎么处理，带着这些问题，开始本文的阅读。你可以通过百度直接输入IP查询你是谁？">
+<meta name="twitter:image" content="https://rjgeek.github.io/images/2016/12/ip_1.png?t=1>">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.ehcoo.com/IP.html"/>
+
+
+  <title> 【计算机网络】网络层-IPv4是什么？IPv4怎么划分的？ | Ehcoo </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="default">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?83e3b6b55c0e48f5d0848d6a14b76c02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+  
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ehcoo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about-me" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                【计算机网络】网络层-IPv4是什么？IPv4怎么划分的？
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-12-13T16:15:54+00:00" content="2016-12-13">
+              2016-12-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/网络知识/" itemprop="url" rel="index">
+                    <span itemprop="name">网络知识</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/IP.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="IP.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+		  
+          
+          
+
+          
+		 
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>你需要上网，你在浏览器中输入一个网址，实际是你和服务器之间的沟通，两者之前需要沟通，就要知道两个的位置，IP就是用来标记你的位置的，告诉外部网络，你是谁？我以什么样的方式与外部通信，IP的地址是怎么样划分的，IP不够用的时候怎么处理，带着这些问题，开始本文的阅读。<br>你可以通过百度直接输入IP查询你是谁？</p>
+<p><img src="https://rjgeek.github.io/images/2016/12/ip_1.png?t=1>" width="85%" height="65%" alt="图片名称" align="center"><br><a id="more"></a><br>你也通过 <a href="https://wq.apnic.net/whois-search" target="_blank" rel="external">https://wq.apnic.net/whois-search</a> 通过查询对方是谁？</p>
+<p><img src="https://rjgeek.github.io/images/2016/12/ip_2.png?t=1>" width="85%" height="65%" alt="图片名称" align="center">  </p>
+<h2 id="IP是什么？"><a href="#IP是什么？" class="headerlink" title="IP是什么？"></a>IP是什么？</h2><p>互联网协议地址（英语：Internet Protocol Address，又译为网际协议地址），缩写为IP地址（英语：IP Address），是分配给网络上使用网际协议（英语：Internet Protocol, IP）的设备的数字标签。常见的IP地址分为IPv4与IPv6两大类。</p>
+<p>由32位二进制数组成，为便于使用，常以XXX.XXX.XXX.XXX形式表现，每组XXX代表小于或等于255的10进制数。例如维基媒体的一个IP地址是208.80.152.2。地址可分为A,B,C,D,E五大类，其中E类属于特殊保留地址。</p>
+<h2 id="IP地址分类"><a href="#IP地址分类" class="headerlink" title="IP地址分类"></a>IP地址分类</h2><p>拿那上面的百度IP，103.235.46.39作为例子，因为人类依赖十进制，所以这里的IP地址用十进制的方式表示，要让机器识别，还是得转为二进制<br>(十进制IP地址) 103.235.46.39<br>(二进制IP地址) 1110011.11101011.101110.100111<br>一共有8乘4=32位，这种IP方式的表示方法，叫做IPV4，这样的话，一共有多少个IP地址呢？<br><strong>最小地址 00000000 00000000 00000000 00000000 也就是 0.0.0.0</strong><br><strong>最大地址 11111111 11111111 11111111 11111111 也就是 255.255.255.255</strong><br>IPV4的方式，最多可以表示 255 乘 255 乘255 乘 255 = 4228250625 个ip地址 = 40亿,40亿的IPV4地址，预计将会在2020年年前后分配完毕 （具体数字记不清）,目前世界有70亿人口，本来这些IP就不够分的，偏偏还有人搞三六九等，搞出A类，B类，C类地址<br>其中分类的标准是这样的</p>
+<p><img src="https://rjgeek.github.io/images/2016/12/ip_3.png?t=1>" width="85%" height="65%" alt="图片名称" align="center">  </p>
+<h3 id="A类IP地址"><a href="#A类IP地址" class="headerlink" title="A类IP地址"></a>A类IP地址</h3><p>A类地址前8位表示网络地址，后24位表示表示主机地址，那么可以容纳的主机数是2的24次方，就是16,777,214，翻译成中文，就是一千六百七十万个，差不多就是深圳+香港的人口总数。  </p>
+<p>A类地址范围：1.0.0.1到126.255.255.254，为什么明明是8位，为什么只能只到126，其中最前面1位为固定位0，为什么要这样设计？二进制数里全是“0”和全是“1”的要保留。“0”做为网络号，“1”做为广播号。所以A类地址的网段为1—126.，这样能表示的范围是就是7位了，但是 127.0.0.0到127.255.255.255是保留地址，用做循环测试用的。A类地址中的私有地址和保留地址： 10.0.0.0到10.255.255.255是私有地址（所谓的私有地址就是在互联网上不使用，而被用在局域网络中的地址）。  </p>
+<p>顺便解释下私有私有地址<br>上面提到IP地址在全世界范围内唯一，看到这句话你可能有这样的疑问，像192.168.0.1这样的地址在许多地方都能看到，并不唯一，这是为 何？Internet管理委员会规定如下地址段为私有地址，私有地址可以自己组网时用，但不能在Internet网上用，Internet网没有这些地址 的路由，有这些地址的计算机要上网必须转换成为合法的IP地址,也称为公网地址，这就像有很到的世界公园，每个公园内都可命名相同的大街，如香榭丽舍大街，但对外我们只能看到公园的地址和真正的香榭丽舍大街。下面是A、B、C类网络中的私有地址段。你自己组网时就可以用这些地址了。<br>      10.0.0.0～10.255.255.255<br>      172.16.0.0～172.131.255.255<br>      192.168.0.0～192.168.255.255  </p>
+<p>那么谁在使用A类地址，100%都在美国的大公司，在本来地址不足的情况下，非要搞出一个Ａ类地址，一方面是当时没有预想到网络的发展会如此迅速，另一方面也体现了美国的特权主义，“爷就是网络的规定制定者，有意见您就别用”<br>3.0.0.0/8：通用<br>9.0.0.0/8：IBM<br>11.0.0.0/8：国防部<br>12.0.0.0/8：AT&amp;T贝尔实验室<br>13.0.0.0/8：施乐<br>15.0.0.0/8：HP<br>16.0.0.0/8：DEC<br>17.0.0.0/8：苹果<br>18.0.0.0/8：MIT<br>19.0.0.0/8：福特汽车<br>55.0.0.0/8：波音<br>56.0.0.0/8：邮政局<br>至于上面的/8是什么意思，我以后的文章会解释</p>
+<h3 id="B类IP地址"><a href="#B类IP地址" class="headerlink" title="B类IP地址"></a>B类IP地址</h3><p>B类地址，前16位表示网络地址，后16位表示主机地址，需要指出的是B类网络地址的前两位也是固定的为1,0，其中预留的地址的上面已经写过，大部分的B类地址在欧洲，如伯明翰大学的就是B类地址，而且还有两个，而多数的中国大学都没有这么幸运，基本都是C类地址，还有可能是附庸的C类地址。</p>
+<p>那么一共有多少个B类地址可以容纳多少个主机呢<br>16位是主机标识，所以主机数应该是2的16次幂 65536，扣除两个保留地址后，主机最大数应该是65534个。</p>
+<h3 id="C类IP地址"><a href="#C类IP地址" class="headerlink" title="C类IP地址"></a>C类IP地址</h3><p>C类地址其中24位网络地址，8位位主机地址，24位的网络的地址中前三位110也已经被固定，实际C类地址的操作位数为21位，因为是二进制数，所以网段数应该为：2的21次幂个网段，等于2097152，扣除两个全“0”，全“1”的保留地址，所以B类网络可以有2097150个网段。而转换成十进制后，IP地址的第一个小数点前的数字应该是多少呢？因为第一段是110XXXXX，所以应该是 2的5次幂，等于32个。所以网段应该是从192开始，到192+32-1=223. 即十进制IP的第一段数字是在192—223之间。</p>
+<p>C类主机数计算：因为后面8位是主机标识，所以主机数应该是 2的8次幂 256，扣除两个保留地址后，主机最大数应该是254个</p>
+<p>如果全世界全都按照C类地址去分，虽然总得网络容量不会变，但是机会会更均等，不会出现像以上那样无耻的A类地址垄断，那么这个分配的权利在谁手里？<br>世界上四个掌管IP地址分配的四个组织：<br>APNIC (Asia Pacific Network Information Centre) - 亚太地区<br>ARIN (American Registry for Internet Numbers) - 北美、南部非洲<br>LACNIC (Regional Latin-American and Caribbean IP Address Registry) – 拉美和加勒比海地区<br>RIPE NCC (Réseaux IP Européens) - 欧洲、中东、中亚、北部非洲</p>
+<h3 id="D类IP地址"><a href="#D类IP地址" class="headerlink" title="D类IP地址"></a>D类IP地址</h3><p>D类IP地址第一个字节以“1110”开始 。它并不指向特定的网络，目前这一类地址被用在多点广播（Multicast）中。多点广播地址用来一次寻址一组计算机，它标识共享同一协议的一组计算机。</p>
+<h3 id="E类IP地址"><a href="#E类IP地址" class="headerlink" title="E类IP地址"></a>E类IP地址</h3><p>以“1111”开始，为将来使用保留。<br>全零（“0．0．0．0”）地址对应于当前主机。全“1”的IP地址（“255．255．255．255”）是当前子网的广播地址。 </p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><font color="#00ffff">上面讲了什么是IP<br>从IP的分配的角度深深的痛斥了美国的特权主义与霸权主义！<br></font><br>中国多数都是C类地址，一个C类IP地址，只能分配254个主机，该如何解决中国几十亿的设备上网问题，下一次博客我将继续深入~</p>
+<h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><p>本文30%为组合,70%为原创</p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p><a href="https://www.zhihu.com/question/29723388/answer/66737890" target="_blank" rel="external">https://www.zhihu.com/question/29723388/answer/66737890</a><br><a href="http://www.xitong8.com/xtjc/20120217/2576.html、" target="_blank" rel="external">http://www.xitong8.com/xtjc/20120217/2576.html、</a><br><a href="http://blog.sina.com.cn/s/blog_6de000c20101jj8b.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_6de000c20101jj8b.html</a><br><a href="https://zh.wikipedia.org/wiki/IP%E5%9C%B0%E5%9D%80" target="_blank" rel="external">https://zh.wikipedia.org/wiki/IP%E5%9C%B0%E5%9D%80</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>your support will encourage me to continue to create!</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="RuJia Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/A Peer-to-Peer Electronic Cash System.html" rel="next" title="一种点对点的电子现金系统（A Peer-to-Peer Electronic Cash System）-中本聪">
+                <i class="fa fa-chevron-left"></i> 一种点对点的电子现金系统（A Peer-to-Peer Electronic Cash System）-中本聪
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/travel.html" rel="prev" title="【个人生活】大不列颠及北爱尔兰联合王国首都伦敦之3日游记">
+                【个人生活】大不列颠及北爱尔兰联合王国首都伦敦之3日游记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          <pre><code><b>版权声明</b>:自由转载-非商用-非衍生-保持署名<a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" rel="external nofollow" >(创意共享3.0许可证)</a></code></pre>
+
+
+
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="RuJia" />
+          <p class="site-author-name" itemprop="name">RuJia</p>
+          <p class="site-description motion-element" itemprop="description">BlockChain,Distributed Computing</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rjgeek/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Others">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Others
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cs.bham.ac.uk/~mdr/" title="Professor Mark Ryan" target="_blank" rel="external nofollow" >Professor Mark Ryan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cs.bham.ac.uk/~rzb/" title="Dr Rami Bahsoon" target="_blank" rel="external nofollow" >Dr Rami Bahsoon</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sec.cs.bham.ac.uk/people/" title="The Security and Privacy Group" target="_blank" rel="external nofollow" >The Security and Privacy Group</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.yfgeek.com/" title="YFGeek" target="_blank" rel="external nofollow" >YFGeek</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://rjgeek.github.io/CV1.pdf" title="My CV" target="_blank" rel="external nofollow" >My CV</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP是什么？"><span class="nav-number">2.</span> <span class="nav-text">IP是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP地址分类"><span class="nav-number">3.</span> <span class="nav-text">IP地址分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A类IP地址"><span class="nav-number">3.1.</span> <span class="nav-text">A类IP地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B类IP地址"><span class="nav-number">3.2.</span> <span class="nav-text">B类IP地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C类IP地址"><span class="nav-number">3.3.</span> <span class="nav-text">C类IP地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D类IP地址"><span class="nav-number">3.4.</span> <span class="nav-text">D类IP地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E类IP地址"><span class="nav-number">3.5.</span> <span class="nav-text">E类IP地址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#声明"><span class="nav-number">5.</span> <span class="nav-text">声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">6.</span> <span class="nav-text">引用</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RuJia</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+  <span id="busuanzi_container_site_pv">
+    Total visited 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  
+  <span id="busuanzi_container_site_uv">
+  Total visitors 本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'ehcoo';
+      var disqus_identifier = 'IP.html';
+      var disqus_title = "【计算机网络】网络层-IPv4是什么？IPv4怎么划分的？";
+      var disqus_url = 'http://www.ehcoo.com/IP.html';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

@@ -1,0 +1,970 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+<meta name="google-site-verification" content="LzR3qfX_YDfkNEusKegSylZBjqRw3vczTwICGpJ1GRI" />
+<meta name="baidu-site-verification" content="IhNq56RJS1" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Yum," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="## 32位redhat6系统安装yum由于&amp;nbsp;redhat的yum在线更新是收费的，如果没有注册的话不能使用，如果要使用，需将redhat的yum卸载后，重启安装，再配置其他源，以下为详细过程：&amp;nbsp;### 一，安装国内在线yum源(网易163提供的)">
+<meta name="keywords" content="Yum">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Yum】32位redhat6系统安装yum">
+<meta property="og:url" content="http://www.ehcoo.com/f3a2ec311e9deddee0b29a1bc9636c25.html">
+<meta property="og:site_name" content="Ehcoo">
+<meta property="og:description" content="## 32位redhat6系统安装yum由于&amp;nbsp;redhat的yum在线更新是收费的，如果没有注册的话不能使用，如果要使用，需将redhat的yum卸载后，重启安装，再配置其他源，以下为详细过程：&amp;nbsp;### 一，安装国内在线yum源(网易163提供的)">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://rjgeek.github.io/images/2015/01/wpid-8038b5bf3528405ad9bb840c5ee69824_6aeeca23-32d1-4e01-bf79-daca79563a56.gif">
+<meta property="og:updated_time" content="2017-10-29T15:38:31.054Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【Yum】32位redhat6系统安装yum">
+<meta name="twitter:description" content="## 32位redhat6系统安装yum由于&amp;nbsp;redhat的yum在线更新是收费的，如果没有注册的话不能使用，如果要使用，需将redhat的yum卸载后，重启安装，再配置其他源，以下为详细过程：&amp;nbsp;### 一，安装国内在线yum源(网易163提供的)">
+<meta name="twitter:image" content="https://rjgeek.github.io/images/2015/01/wpid-8038b5bf3528405ad9bb840c5ee69824_6aeeca23-32d1-4e01-bf79-daca79563a56.gif">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.ehcoo.com/f3a2ec311e9deddee0b29a1bc9636c25.html"/>
+
+
+  <title> 【Yum】32位redhat6系统安装yum | Ehcoo </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="default">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?83e3b6b55c0e48f5d0848d6a14b76c02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+  
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ehcoo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about-me" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                【Yum】32位redhat6系统安装yum
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2014-09-10T01:33:21+00:00" content="2014-09-10">
+              2014-09-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/应用服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">应用服务器</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/f3a2ec311e9deddee0b29a1bc9636c25.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="f3a2ec311e9deddee0b29a1bc9636c25.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+		  
+          
+          
+
+          
+		 
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <div><br><br>## <strong>32位redhat6系统安装yum</strong><br><br>由于&nbsp;<a href="http://space.itpub.net/25313300/viewspace-708509" target="_blank" rel="external"><strong>redhat</strong></a>的yum在线更新是收费的，如果没有注册的话不能使用，如果要使用，需将redhat的yum卸载后，重启<a href="http://space.itpub.net/25313300/viewspace-708509" target="_blank" rel="external"><strong>安装</strong></a>，再配置其他源，以下为详细过程：&nbsp;<br><br>### <strong>一，安装国内在线yum源(网易163提供的)</strong><br><a id="more"></a><div><a><a href="http://mirrors.163.com/centos/" target="_blank" rel="external">http://mirrors.163.com/centos/</a></a></div></div>
+
+<h4 id="1-删除redhat原有的yum-nbsp"><a href="#1-删除redhat原有的yum-nbsp" class="headerlink" title="1.删除redhat原有的yum&nbsp;"></a><strong>1.删除redhat原有的yum</strong>&nbsp;</h4><p>rpm -aq|grep yum|xargs rpm -e –nodeps </p>
+<h4 id="2-下载yum安装文件-需要有连接上web"><a href="#2-下载yum安装文件-需要有连接上web" class="headerlink" title="2.下载yum安装文件 (需要有连接上web)"></a><strong>2.下载yum安装文件 (需要有连接上web)</strong></h4><p>wget <a href="http://mirrors.163.com/centos/6/os/i386/Packages/yum-3.2.29-40.el6.centos.noarch.rpm" target="_blank" rel="external">http://mirrors.163.com/centos/6/os/i386/Packages/yum-3.2.29-40.el6.centos.noarch.rpm</a><br>wget <a href="http://mirrors.163.com/centos/6/os/i386/Packages/yum-metadata-parser-1.1.2-16.el6.i686.rpm" target="_blank" rel="external">http://mirrors.163.com/centos/6/os/i386/Packages/yum-metadata-parser-1.1.2-16.el6.i686.rpm</a><br>wget <a href="http://mirrors.163.com/centos/6/os/i386/Packages/yum-plugin-fastestmirror-1.1.30-14.el6.noarch.rpm" target="_blank" rel="external">http://mirrors.163.com/centos/6/os/i386/Packages/yum-plugin-fastestmirror-1.1.30-14.el6.noarch.rpm</a><br>wget <a href="http://mirrors.163.com/centos/6/os/i386/Packages/" target="_blank" rel="external">http://mirrors.163.com/centos/6/os/i386/Packages/</a><span data-wiz-span="data-wiz-span" style="font-size: 13px;">python-iniparse-0.3.1-2.1.el6.noarch.rpm</span></p>
+<h4 id="3-进行安装yum-nbsp"><a href="#3-进行安装yum-nbsp" class="headerlink" title="3.进行安装yum&nbsp;"></a><strong>3.进行安装yum&nbsp;</strong></h4><p>rpm -ivh python-iniparse-0.3.1-2.1.el6.noarch.rpm&nbsp;<br>rpm -ivh yum-metadata-parser-1.1.2-16.1.el6.i686.rpm&nbsp;<br>rpm -ivh yum-3.2.29-40.el6.centos.noarch.rpm yum-plugin-fastestmirror-1.1.30-14.el6.noarch.rpm&nbsp;&nbsp;<br><strong>注意最后两个包必需同时安装，否则会相互依赖 </strong></p>
+<h4 id="4-编辑repo仓库服务器配置文件"><a href="#4-编辑repo仓库服务器配置文件" class="headerlink" title="4.编辑repo仓库服务器配置文件"></a><strong>4.编辑repo仓库服务器配置文件</strong></h4><p>在配置文件中配置如下：/etc/yum.repos.d/rhel-source.repo</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><br></div><div>[base]<br>name=CentOS-<span style="color: #800080;">$releasever</span>&nbsp;-&nbsp;Base<br>baseurl=<a href="http://mirrors" target="_blank" rel="external">http://mirrors</a>.<span style="color: #800000;">163</span>.com/centos/<span style="color: #800000;">6</span>/os/<span style="color: #800080;">$basearch</span>/<br>gpgcheck=<span style="color: #800000;">1</span><br>gpgkey=<a href="http://mirrors" target="_blank" rel="external">http://mirrors</a>.<span style="color: #800000;">163</span>.com/centos/RPM-GPG-KEY-CentOS-<span style="color: #800000;">6</span><br><br><span style="color: #008000;">#</span><span style="color: #008000;">released&nbsp;updates</span><span style="color: #008000;"><br></span>[updates]<br>name=CentOS-<span style="color: #800080;">$releasever</span>&nbsp;-&nbsp;Updates<br>baseurl=<a href="http://mirrors" target="_blank" rel="external">http://mirrors</a>.<span style="color: #800000;">163</span>.com/centos/<span style="color: #800000;">6</span>/updates/<span style="color: #800080;">$basearch</span>/<br>gpgcheck=<span style="color: #800000;">1</span><br>gpgkey=<a href="http://mirrors" target="_blank" rel="external">http://mirrors</a>.<span style="color: #800000;">163</span>.com/centos/RPM-GPG-KEY-CentOS-<span style="color: #800000;">6</span><br><br><span style="color: #008000;">#</span><span style="color: #008000;">packages&nbsp;used/produced&nbsp;in&nbsp;the&nbsp;build&nbsp;but&nbsp;not&nbsp;released<br>#[addons]<br>#name=CentOS-$releasever&nbsp;-&nbsp;Addons<br>#baseurl=<a href="http://mirrors.163.com/centos/$releasever/addons/$basearch/" target="_blank" rel="external">http://mirrors.163.com/centos/$releasever/addons/$basearch/</a><br>#gpgcheck=1<br>#gpgkey=<a href="http://mirrors.163.com/centos/RPM-GPG-KEY-CentOS-6" target="_blank" rel="external">http://mirrors.163.com/centos/RPM-GPG-KEY-CentOS-6</a><br>#additional&nbsp;packages&nbsp;that&nbsp;may&nbsp;be&nbsp;useful</span><span style="color: #008000;"><br></span><br>[extras]<br>name=CentOS-<span style="color: #800080;">$releasever</span>&nbsp;-&nbsp;Extras<br>baseurl=<a href="http://mirrors" target="_blank" rel="external">http://mirrors</a>.<span style="color: #800000;">163</span>.com/centos/<span style="color: #800000;">6</span>/extras/<span style="color: #800080;">$basearch</span>/<br>gpgcheck=<span style="color: #800000;">1</span><br>gpgkey=<a href="http://mirrors" target="_blank" rel="external">http://mirrors</a>.<span style="color: #800000;">163</span>.com/centos/RPM-GPG-KEY-CentOS-<span style="color: #800000;">6</span><br><span style="color: #008000;">#</span><span style="color: #008000;">additional&nbsp;packages&nbsp;that&nbsp;extend&nbsp;functionality&nbsp;of&nbsp;existing&nbsp;packages</span><span style="color: #008000;"><br></span>[centosplus]<br>name=CentOS-<span style="color: #800080;">$releasever</span>&nbsp;-&nbsp;Plus<br>baseurl=<a href="http://mirrors" target="_blank" rel="external">http://mirrors</a>.<span style="color: #800000;">163</span>.com/centos/<span style="color: #800000;">6</span>/centosplus/<span style="color: #800080;">$basearch</span>/<br>gpgcheck=<span style="color: #800000;">1</span><br>gpgkey=<a href="http://mirrors" target="_blank" rel="external">http://mirrors</a>.<span style="color: #800000;">163</span>.com/centos/RPM-GPG-KEY-CentOS-<span style="color: #800000;">6</span></div><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="&quot;复制代码&quot;"><img src="https://rjgeek.github.io/images/2015/01/wpid-8038b5bf3528405ad9bb840c5ee69824_6aeeca23-32d1-4e01-bf79-daca79563a56.gif" alt="复制代码"></a></span></div></div>
+
+<h4 id="5-清除yum缓存"><a href="#5-清除yum缓存" class="headerlink" title="5.清除yum缓存"></a><strong>5.清除yum缓存</strong></h4><p>yum clean all</p>
+<h4 id="6-构建数据源基本资料"><a href="#6-构建数据源基本资料" class="headerlink" title="6.构建数据源基本资料"></a><strong>6.构建数据源基本资料</strong></h4><p>yum repolist all</p>
+<p>(如果这时运行正常，且enabld字段为1,那么表示yum源配置成功了)</p>
+<h4 id="7-尝试安装"><a href="#7-尝试安装" class="headerlink" title="7.尝试安装"></a><strong>7.尝试安装</strong></h4><p>yum install vim</p>
+<h3 id="二-配置命令解释"><a href="#二-配置命令解释" class="headerlink" title="二 配置命令解释"></a><strong>二 配置命令解释</strong></h3><div><p>注:当第一次使用yum或yum资源库有更新时,yum会自动下载所有所需的headers放置于/var/cache/yum目录下,所需时间可能较长.<br><br><strong>系统更新(更新所有可以升级的rpm包,包括kernel)</strong><br>#yum -y update<br><br><strong>每天定期执行系统更新</strong><br>#chkconfig yum on<br>#service yum start<br><br><strong>*rpm包的更新，检查可更新的rpm包</strong><br>#yum check-update<br><br><strong>更新所有的rpm包</strong><br>#yum update<br><br><strong>更新指定的rpm包,如更新kernel和kernel source</strong><br>#yum update kernel kernel-source<br><br><strong>大规模的版本升级,与yum update不同的是,连旧的淘汰的包也升级</strong><br>#yum upgrade<br><br><strong>*rpm包的安装和删除</strong><br>安装rpm包,如xmms-mp3<br>#yum install xmms-mp3<br><br><strong>删除rpm包,包括与该包有倚赖性的包</strong><br>#yum remove licq<br>注:同时会提示删除licq-gnome,licq-qt,licq-text<br><br><strong>*yum暂存(/var/cache/yum/)的相关参数</strong><br>清除暂存中rpm包文件<br>#yum clean packages<br><br><strong>清除暂存中rpm头文件</strong><br>#yum clean headers<br><br><strong>清除暂存中旧的rpm头文件</strong><br>#yum clean oldheaders<br><br><strong>清除暂存中旧的rpm头文件和包文件</strong><br>#yum clean 或#yum clean all<br>注:相当于yum clean packages + yum clean oldheaders<br><br><strong>*rpm包列表</strong><br>列出资源库中所有可以安装或更新的rpm包<br>#yum list<br><br><strong>列出资源库中特定的可以安装或更新以及已经安装的rpm包</strong><br>#yum list mozilla<br>#yum list mozilla<em><br>注:可以在rpm包名中使用匹配符,如列出所有以mozilla开头的rpm包<br><br><strong>列出资源库中所有可以更新的rpm包</strong><br>#yum list updates<br><br><strong>列出已经安装的所有的rpm包</strong><br>#yum list installed<br><br><strong>列出已经安装的但是不包含在资源库中的rpm包</strong><br>#yum list extras<br>注:通过其它网站下载安装的rpm包
+</em>rpm包信息显示(info参数同list)<br><br><strong>列出资源库中所有可以安装或更新的rpm包的信息</strong><br>#yum info<br><br><strong>列出资源库中特定的可以安装或更新以及已经安装的rpm包的信息</strong><br>#yum info mozilla<br>#yum info mozilla<em><br>注:可以在rpm包名中使用匹配符,如列出所有以mozilla开头的rpm包的信息<br><br><strong>列出资源库中所有可以更新的rpm包的信息</strong><br>#yum info updates<br><br><strong>列出已经安装的所有的rpm包的信息</strong><br>#yum info installed<br><br><strong>列出已经安装的但是不包含在资源库中的rpm包的信息</strong><br>#yum info extras<br>注:通过其它网站下载安装的rpm包的信息<br><br>**</em>搜索rpm包<strong><br>搜索匹配特定字符的rpm包<br>#yum search mozilla<br>注:在rpm包名,包描述等中搜索
+
+</strong>搜索有包含特定文件名的rpm包<strong><br>#yum provides realplay<br><br>&nbsp;<br><br>### </strong>三 常见问题解决<strong>
+
+</strong>1、如果网速慢的话可以通过增加yum的超时时间，这样就不会总是因为超时而退出。<strong><br>#vi /etc/yum.conf<br>#加上这么一句<br>timeout=120<br><br>&nbsp;
+
+</strong>2、yum Existing lock错误的解决办法<em>*<br>如果系统启动的时候， yum出现Existing lock /var/run/yum.pid: another copy is running as pid 3380. Aborting.可以用下面的办法解决：<br>方法一<br>etc/init.d/yum-updatesd stop<br><br>方法二<br>#rm -f /var/run/yum.pid<br>主要原因就是yum在自动更新，只要关掉它就可以了。<br><br>&nbsp;
+
+</em> <em> </em><br><br>先安装fastestmirror，让系统yum的时候自动选择最快的镜像：<br><br><em>#yum install yum-fastestmirror -y</em><br><br>接下来说说RPMForge。<br><br><a href="http://rpmforge.net/" target="_blank" rel="external">RPMForge</a>是一个安全、稳定并且更新及时的软件仓库，通过安装RPMForge可以是CentOS在进行yum update的时候多一个选择，有时候甚至是唯一的选择，比如想要升级rsync到3.0.x版本，如果懒得自己编译安装，就得依靠RPMForge了。<br><br>1、先安装priority这个yum的插件，这个插件用来设定安装软件时候软件仓库的优先级，一般是默认先从官方base或者镜像安装，然后从社区用户contribute的软件中安装，再从第三方软件仓库中安装。<br><em>#yum install yum-priorities</em><br><br>2、手动编辑 /etc/yum.repos.d/ 目录中后缀为.repos的文件来设置软件仓库的优先级<br><em>priority=N</em>(N是整数，范围从1-99，数字越小代表优先级越高)<br><br>官方推荐配置是<br>[base], [addons], [updates], [extras]&nbsp;这几部分 priority=1<br>[centosplus],[contrib] 这几部分priority=2<br>Third Party Repos such as rpmforge … priority=N&nbsp; (where N is &gt; 10 and based on your preference)<br><br>3、现在开始安装rpmforge的软件仓库<br>先下载rpmforge的安装包<br>&nbsp; &nbsp; &nbsp; i386&nbsp;&nbsp;<em>wget&nbsp;</em><a href="http://apt.sw.be/redhat/el5/en/i386/RPMS.dag/rpmforge-release-0.3.6-1.el5.rf.i386.rpm" target="_blank" rel="external"><em>http://apt.sw.be/redhat/el5/en/i386/RPMS.dag/rpmforge-release-0.3.6-1.el5.rf.i386.rpm</em></a><br><br>&nbsp; &nbsp; &nbsp; x86_64&nbsp;<em>wget&nbsp;</em><a href="http://apt.sw.be/redhat/el5/en/x86_64/RPMS.dag/rpmforge-release-0.3.6-1.el5.rf.x86_64.rpm" target="_blank" rel="external">_http://apt.sw.be/redhat/el5/en/x86_64/RPMS.dag/rpmforge-release-0.3.6-1.el5.rf.x86<em>64.rpm</em></a><br><br>安装<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>rpm -i rpmforge-release-0.3.6-1.el5.rf.*.rpm</em><br><br>更改 /etc/yum.repos.d/rpmforge.repo 配置文件，添加<br><em>priority=1</em>（或者2.3.4….）<br><br><div style="color:gray"><small>来源：&nbsp;&lt;<a href="http://www.cnblogs.com/shuaixf/archive/2011/11/30/2268496.html" target="_blank" rel="external">http://www.cnblogs.com/shuaixf/archive/2011/11/30/2268496.html</a><small>&gt;</small></small></div></p></div><p></p><div style="color:gray"><small>来源：&nbsp;&lt;<a href="http://www.cnblogs.com/mailingfeng/archive/2012/09/01/2666745.html" target="_blank" rel="external">http://www.cnblogs.com/mailingfeng/archive/2012/09/01/2666745.html</a><small>&gt;</small></small></div>
+
+<p><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp;</span>&nbsp;</p>
+<div><a href="http://www.wiz.cn/i/60efacb7" title="来自为知笔记(Wiz)" target="_blank" rel="external">来自为知笔记(Wiz)</a></div>
+
+<div><br><br>### 附件列表<br><br>*   <a href="https://rjgeek.github.io/images/2015/01/wpid-8038b5bf3528405ad9bb840c5ee69824_redhat6_yum安装包.rar" target="_blank" rel="external">redhat6_yum安装包.rar</a></div>
+
+<p>&nbsp;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>your support will encourage me to continue to create!</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="RuJia Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Yum/" rel="tag">#Yum</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/ccd2152002b3c50692e2566884595817.html" rel="next" title="【Linux】虚拟机下linux网络设置">
+                <i class="fa fa-chevron-left"></i> 【Linux】虚拟机下linux网络设置
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/c7e17ddcdd976d3300d357de40f10873.html" rel="prev" title="【Jdk】32位redhat6系统安装jdk">
+                【Jdk】32位redhat6系统安装jdk <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          <pre><code><b>版权声明</b>:自由转载-非商用-非衍生-保持署名<a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" rel="external nofollow" >(创意共享3.0许可证)</a></code></pre>
+
+
+
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="RuJia" />
+          <p class="site-author-name" itemprop="name">RuJia</p>
+          <p class="site-description motion-element" itemprop="description">BlockChain,Distributed Computing</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rjgeek/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Others">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Others
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cs.bham.ac.uk/~mdr/" title="Professor Mark Ryan" target="_blank" rel="external nofollow" >Professor Mark Ryan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cs.bham.ac.uk/~rzb/" title="Dr Rami Bahsoon" target="_blank" rel="external nofollow" >Dr Rami Bahsoon</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sec.cs.bham.ac.uk/people/" title="The Security and Privacy Group" target="_blank" rel="external nofollow" >The Security and Privacy Group</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.yfgeek.com/" title="YFGeek" target="_blank" rel="external nofollow" >YFGeek</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://rjgeek.github.io/CV1.pdf" title="My CV" target="_blank" rel="external nofollow" >My CV</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-删除redhat原有的yum-nbsp"><span class="nav-number">1.</span> <span class="nav-text">1.删除redhat原有的yum </span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-下载yum安装文件-需要有连接上web"><span class="nav-number">2.</span> <span class="nav-text">2.下载yum安装文件 (需要有连接上web)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-进行安装yum-nbsp"><span class="nav-number">3.</span> <span class="nav-text">3.进行安装yum </span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-编辑repo仓库服务器配置文件"><span class="nav-number">4.</span> <span class="nav-text">4.编辑repo仓库服务器配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-清除yum缓存"><span class="nav-number">5.</span> <span class="nav-text">5.清除yum缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-构建数据源基本资料"><span class="nav-number">6.</span> <span class="nav-text">6.构建数据源基本资料</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-尝试安装"><span class="nav-number">7.</span> <span class="nav-text">7.尝试安装</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-配置命令解释"><span class="nav-number"></span> <span class="nav-text">二 配置命令解释</span></a></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RuJia</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+  <span id="busuanzi_container_site_pv">
+    Total visited 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  
+  <span id="busuanzi_container_site_uv">
+  Total visitors 本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'ehcoo';
+      var disqus_identifier = 'f3a2ec311e9deddee0b29a1bc9636c25.html';
+      var disqus_title = "【Yum】32位redhat6系统安装yum";
+      var disqus_url = 'http://www.ehcoo.com/f3a2ec311e9deddee0b29a1bc9636c25.html';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

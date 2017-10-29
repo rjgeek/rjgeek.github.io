@@ -1,0 +1,992 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+<meta name="google-site-verification" content="LzR3qfX_YDfkNEusKegSylZBjqRw3vczTwICGpJ1GRI" />
+<meta name="baidu-site-verification" content="IhNq56RJS1" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Ehcoo" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="质（素）数（Prime Number）定义：大于 1 且只能被 1 和自身整除的正整数称为素数或质数. 大于 1 且不是素数的正整数称为合数.例如,  2,3,5,7,11是素数, 4,6,8,9是合数.一个好玩的现象，如果将所有素数进行螺旋排列，所有素数呈现斐波那契螺旋线排列，在计算机下的模拟如下：">
+<meta name="keywords" content="BlockChain,Distributed Computing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【密码学】RSA算法解析-数论基础">
+<meta property="og:url" content="http://www.ehcoo.com/rsa.html">
+<meta property="og:site_name" content="Ehcoo">
+<meta property="og:description" content="质（素）数（Prime Number）定义：大于 1 且只能被 1 和自身整除的正整数称为素数或质数. 大于 1 且不是素数的正整数称为合数.例如,  2,3,5,7,11是素数, 4,6,8,9是合数.一个好玩的现象，如果将所有素数进行螺旋排列，所有素数呈现斐波那契螺旋线排列，在计算机下的模拟如下：">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/11/rsa_1.png">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/11/rsa_2.png">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/11/rsa_4.png">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/11/rsa_11.png">
+<meta property="og:image" content="https://rjgeek.github.io/images/2016/11/rsa_12.png">
+<meta property="og:updated_time" content="2017-10-29T15:38:31.058Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【密码学】RSA算法解析-数论基础">
+<meta name="twitter:description" content="质（素）数（Prime Number）定义：大于 1 且只能被 1 和自身整除的正整数称为素数或质数. 大于 1 且不是素数的正整数称为合数.例如,  2,3,5,7,11是素数, 4,6,8,9是合数.一个好玩的现象，如果将所有素数进行螺旋排列，所有素数呈现斐波那契螺旋线排列，在计算机下的模拟如下：">
+<meta name="twitter:image" content="https://rjgeek.github.io/images/2016/11/rsa_1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.ehcoo.com/rsa.html"/>
+
+
+  <title> 【密码学】RSA算法解析-数论基础 | Ehcoo </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="default">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?83e3b6b55c0e48f5d0848d6a14b76c02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+  
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ehcoo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about-me" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                【密码学】RSA算法解析-数论基础
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-11-13T21:15:54+00:00" content="2016-11-13">
+              2016-11-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/密码学/" itemprop="url" rel="index">
+                    <span itemprop="name">密码学</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/rsa.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="rsa.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+		  
+          
+          
+
+          
+		 
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+<h3 id="质（素）数（Prime-Number）"><a href="#质（素）数（Prime-Number）" class="headerlink" title="质（素）数（Prime Number）"></a>质（素）数（Prime Number）</h3><p>定义：大于 1 且只能被 1 和自身整除的正整数称为<strong>素数或质数</strong>. 大于 1 且不是素数的正整数称为<strong>合数</strong>.<br>例如,  2,3,5,7,11是素数, 4,6,8,9是合数.<br>一个好玩的现象，如果将所有素数进行螺旋排列，所有素数呈现斐波那契螺旋线排列，在计算机下的模拟如下：<br><img src="https://rjgeek.github.io/images/2016/11/rsa_1.png" width="70%" height="auto" alt="图片名称" align="center"><br><a id="more"></a><br>当有足够多的数据进行模拟时，展现的图形如下：<br><img src="https://rjgeek.github.io/images/2016/11/rsa_2.png" width="70%" height="auto" alt="图片名称" align="center"><br>自然界中也有很多如贝类的螺旋轮廓线、向日葵轮廓、银河、人的耳朵等这种天然的“黄金螺旋”。至于素数为什么也有这样的特征我的答案是我也不知道<br><img src="https://rjgeek.github.io/images/2016/11/rsa_4.png" width="70%" height="auto" alt="图片名称" align="center">   </p>
+<h3 id="任何合数-Composite-Number-都是有若干素数（Prime-Number）组成的"><a href="#任何合数-Composite-Number-都是有若干素数（Prime-Number）组成的" class="headerlink" title="任何合数(Composite Number)都是有若干素数（Prime Number）组成的"></a>任何合数(Composite Number)都是有若干素数（Prime Number）组成的</h3><p>素数是构成元素的基本要素,素数本身是不可再分的，素数是构建，每一个数有且只有一种素数的分解方法，没有两个数会分享同一个素数因子分解,  (算术基本定理)设a&gt;1, 则<br>$$a=p_1^{k1}p_2^{k2}p_3^{k3}….p_r^{kr}$$,<br>其中p1,p2,…,pk是不相同的素数, r1,r2,…,rk是正整数, 并且在不计顺序的情况下, 该表示是惟一的.<br>     该表达式称作整数 a 的素因子分解.<br>例如   30=2×3×5, 117=32×13, 1024=210 </p>
+<h3 id="数论倒数-Multiplicative-Inverse"><a href="#数论倒数-Multiplicative-Inverse" class="headerlink" title="数论倒数(Multiplicative Inverse)"></a>数论倒数(Multiplicative Inverse)</h3><p>在数论中，还有数论倒数的概念，如果两个数a和b，它们的乘积关于模m余1，那么我们称它们互为关于模m的数论倒数.比如 3是2关于5的数论倒数.数论倒数在中国剩余定理中非常重要.而辗转相除法提供了计算数论倒数的方法,数论的倒数实际就是指定整数范围内的互质关系</p>
+<h3 id="互质-素-关系"><a href="#互质-素-关系" class="headerlink" title="互质(素)关系"></a>互质(素)关系</h3><p>如果两个正整数，除了1以外，没有其他公因子，我们就称这两个数是互质关系（coprime）。比如，15和32没有公因子，所以它们是互质关系。这说明，不是质数也可以构成互质关系。<br>关于互质关系，不难得到以下结论： </p>
+<blockquote>
+<p>　　1. 任意两个质数构成互质关系，比如13和61。<br>　　2. 一个数是质数，另一个数只要不是前者的倍数，两者就构成互质关系，比如3和10。<br>　　3. 如果两个数之中，较大的那个数是质数，则两者构成互质关系，比如97和57。<br>　　4. 1和任意一个自然数是都是互质关系，比如1和99。<br>　　5. p是大于1的整数，则p和p-1构成互质关系，比如57和56。<br>　　6. p是大于1的奇数，则p和p-2构成互质关系，比如17和15。  </p>
+</blockquote>
+<p>官方给的定义：<br><img src="https://rjgeek.github.io/images/2016/11/rsa_11.png" width="70%" height="auto" alt="图片名称" align="center">  </p>
+<h3 id="同余"><a href="#同余" class="headerlink" title="同余"></a>同余</h3><p>定义 设m是正整数, a和b是整数. 如果m|a-b, 则称a模<br>m同余于b, 或a与b模m同余, 记作a≡b(mod m). 如果a与b模<br>m不同余, 则记作a!≡b(mod m).  </p>
+<blockquote>
+<p>例如, 15≡3(mod 4), 16≡0(mod 4), 14≡-2(mod 4), 15!≡16(mod 4). </p>
+</blockquote>
+<p>下述两条都是a与b模m同余的充分必要条件:<br>(1) a mod m = b mod m.<br>(2) a=b+km, 其中k是整数.  </p>
+<h3 id="中国剩余定理"><a href="#中国剩余定理" class="headerlink" title="中国剩余定理"></a>中国剩余定理</h3><h3 id="最大公约数"><a href="#最大公约数" class="headerlink" title="最大公约数"></a>最大公约数</h3><p>a,b属于Z，能同时被a和b整除的最大的那个数，成为最大公约数，或者公因子  </p>
+<h3 id="欧几里得算法-Euclidean-Algorithm"><a href="#欧几里得算法-Euclidean-Algorithm" class="headerlink" title="欧几里得算法(Euclidean Algorithm)"></a>欧几里得算法(Euclidean Algorithm)</h3><p>欧几里德算法又称辗转相除法，用于计算两个整数a,b的最大公约数。<br>其计算原理依赖于下面的定理：<br>定理：gcd(a,b) = gcd(b,a mod b)   </p>
+<blockquote>
+<p>证明：a可以表示成a = kb + r ，则r = a mod b<br>假设d是a,b的一个公约数，则有<br>d|a, d|b，而r = a - kb，因此d|r<br>因此d是(b,a mod b)的公约数   </p>
+<p>假设d 是(b,a mod b)的公约数，则<br>d | b , d |r ，但是a = kb +r<br>因此d也是(a,b)的公约数<br>因此(a,b)和(b,a mod b)的公约数是一样的，其最大公约数也必然相等，得证。  </p>
+</blockquote>
+<p>设两数为a、b(a&gt;b)，求a和b最大公约数(a，b)的步骤如下：用a除以b，得a÷b=q……r1(0≤r1)。若r1=0，则(a，b)=b；若r1≠0，则再用b除以r1，得b÷r1=q……r2 (0≤r2）.若r2=0，则(a，b)=r1，若r2≠0，则继续用r1除以r2，……如此下去，直到能整除为止。其最后一个为被除数的余数的除数即为(a, b)。<br>例如：a=25,b=15，a/b=1……10,b/10=1……5,10/5=2…….0,最后一个为被除数余数的除数就是5,5就是所求最大公约数。</p>
+<h3 id="扩展欧几里得算法（Extended-Euclidean-algorithm）"><a href="#扩展欧几里得算法（Extended-Euclidean-algorithm）" class="headerlink" title="扩展欧几里得算法（Extended Euclidean algorithm）"></a>扩展欧几里得算法（Extended Euclidean algorithm）</h3><p>已知整数a、b，扩展欧几里得算法可以在求得a、b的最大公约数的同时，能找到整数x、y（其中一个很可能是负数），使它们满足贝祖等式<br>$$a\ast x+b\ast y = gcd(a,b)$$<br>算法例子：<br>用类似辗转相除法，求二元一次不定方程<br>$$47\ast x+30\ast y = 1$$<br>的整数解。  </p>
+<blockquote>
+<p>$$47=30+17\ast1$$<br>$$30=17+13\ast1$$<br>$$17=13+4\ast1$$<br>$$13=4\ast3+1\ast1$$<br>用余数的形式进行表达<br>$$17=47+30\ast（-1）$$<br>$$13=30+17\ast（-1）$$<br>$$4=17+13\ast（-1）$$<br>$$1=13+4\ast（-3）$$<br>然后把他倒回去<br>$$1=13-4\ast（3）$$<br>$$1=13 +[17+13\ast（-1）]\ast（-3）$$<br>$$1=13\ast4+17\ast(-3)$$<br>$$1=[30+17\ast（-1）]\ast4+17\ast(-3)$$<br>$$1=30\ast4+17\ast(-7)$$<br>$$1=30\ast4+[47+30\ast（-1）]\ast(-7)$$<br>$$1=30\ast11+47\ast(-7)$$<br>得解x=-7, y=11。</p>
+</blockquote>
+<h3 id="贝祖定理"><a href="#贝祖定理" class="headerlink" title="贝祖定理"></a>贝祖定理</h3><p>一次不定方程是形式如<br>$$a_1x_1+a_2x_2+a_3x_3+a_nx_n=c$$<br>的方程，一次不定方程有整数解的充要条件为：<br>$$gcd(a_1,a_2,….,a_n)|c$$<br>换言之 a1,a2,a3的最大公约数须是c的因数</p>
+<p>倍祖等式是上面的一种特殊情况<br>$$a\ast x+b\ast y = c$$<br>贝祖等式有解时必然有无穷多个整数解，每组解 x、y都称为裴蜀数</p>
+<p>所谓贝祖定理是说：<br>两个整数 a、b 是互质的，等价于方程 ax+by=1有整数解。<br>方程 ax+by=1有整数解，两个整数 a、b 是互质的<br>$$\frac{a}{c}\ast x-\frac{b}{c}\ast y = 1$$</p>
+<h3 id="模幂运算-Modular-exponentiation"><a href="#模幂运算-Modular-exponentiation" class="headerlink" title="模幂运算(Modular exponentiation)"></a>模幂运算(Modular exponentiation)</h3><ul>
+<li><strong>定义</strong><br>模运算即求余运算。“模”是“Mod”的音译，模运算多应用于程序编写中。 Mod的含义为求余。模运算在数论和程序设计中都有着广泛的应用，从奇偶数的判别到素数的判别，从模幂运算到最大公约数的求法，从孙子问题到凯撒密码问题，无不充斥着模运算的身影。虽然很多数论教材上对模运算都有一定的介绍，但多数都是以纯理论为主，对于模运算在程序设计中的应用涉及不多。<br>模幂运算则是指先进行幂运算，在进行模运算。<br>In symbols, given base b(底数), exponent e（指数）, and modulus m（模量）, the modular exponentiation<br>c is:<br>$$c \equiv b^e (mod\quad m).$$<br>Given integers b and e, and a positive integer m, a unique solution c exists with the property 0 ≤ c &lt; m.<br>Modular exponentiation can be performed with a negative(负指数) exponent e by finding the modular multiplicative inverse d of b modulo m using the extended Euclidean algorithm. That is:<br>$$c \equiv b^e \equiv d^{-e} (mod\quad m).$$<br>where e &lt; 0 and b ⋅ d ≡ 1 mod m.<br>Modular exponentiation similar to the one described above are considered easy to compute, even when the numbers involved are enormous. On the other hand, computing the discrete logarithm – that is, the task of finding the exponent e when given b, c, and m – is believed to be difficult. This one-way function behavior makes modular exponentiation a candidate for use in cryptographic algorithms.</li>
+<li><strong>如何计算</strong>  </li>
+<li>1.直接计算  </li>
+<li>2.蒙哥马利模乘<br>蒙哥马利模乘的优点在于减少了取模的次数（在大数的条件下）以及简化了除法的复杂度（在2的k次幂的进制下除法仅需要进行左移操作）。模幂运算是RSA 的核心算法，gh最直接地决定了RSA 算法的性能。 针对快速模幂运算这一课题，西方现代数学家提出了大量的解决方案，通常都是先将幂模运算转化为乘模运算<br>首先由模运算的性质，可以得到下面的公式：<br>(a<em>b) % c = (a%c) </em> b % c        【公式一】<br>将【公式一】继续展开，可得下面的公式：<br>(a<em>b) % c = (a%c) </em> b % c = (b%c) <em> (a%c) % c = (a%c) </em> (b%c) % c        【公式二】  <blockquote>
+<p>例题：计算<br>$$4^{13} mod\quad 11$$<br>$$=(4^{6}mod\quad11)\ast(4^{7}mod\quad11) mod \quad11$$<br>$$=[(4^{3}mod\quad11)\ast(4^{3}mod\quad11)mod\quad11]\ast [(4^{3}mod\quad11)\ast(4^{4}mod\quad11)mod\quad11]mod \quad11$$<br>$$=((-2)\ast(-2)mod\quad11)\ast((-2)\ast(3)mod\quad11) mod 11$$<br>$$=(4mod\quad11)\ast(5mod\quad11) mod 11$$<br>$$=20mod\quad11$$<br>$$=9$$</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="欧拉函数"><a href="#欧拉函数" class="headerlink" title="欧拉函数"></a>欧拉函数</h3><p>请思考以下问题：  </p>
+<hr>
+<p>任意给定正整数n，请问在小于等于n的正整数之中，有多少个与n构成互质关系？（比如，在1到8之中，有多少个数与8构成互质关系？）</p>
+<hr>
+<p>计算这个值的方法就叫做欧拉函数，官方定义:<br><img src="https://rjgeek.github.io/images/2016/11/rsa_12.png" width="70%" height="auto" alt="图片名称" align="center"><br>invertible elements 表示数论倒数，数论倒数实际是对互质（素）的表示<br>以φ(n)表示。在1到8之中，与8形成互质关系的是1、3、5、7，所以 φ(n) = 4。<br>φ(n) 的计算方法并不复杂，但是为了得到最后那个公式，需要一步步讨论。  </p>
+<ul>
+<li><strong>第一种情况</strong><br>如果n=1，则 φ(1) = 1 。因为1与任何数（包括自身）都构成互质关系。</li>
+<li><strong>第二种情况</strong><br>如果n是质数，则 φ(n)=n-1 。因为质数与小于它的每一个数，都构成互质关系。比如5与1、2、3、4都构成互质关系。</li>
+<li><strong>第三种情况</strong><br>如果n是质数的某一个次方，即 n = p^k (p为质数，k为大于等于1的整数)，则<br>$$\phi{(p^k)}=p^k-p^{k-1}$$<br>比如 φ(8) = φ(2^3) =2^3 - 2^2 = 8 -4 = 4。<br>这是因为只有当一个数不包含质数p，才可能与n互质。而包含质数p的数一共有p^(k-1)个，即1×p、2×p、3×p、…、p^(k-1)×p，把它们去除，剩下的就是与n互质的数。<br>上面的式子还可以写成下面的形式：<br>$$\phi{(p^k)}=p^k-p^{k-1}=p^k(1-\frac{1}{p})$$<br>可以看出，上面的第二种情况是 k=1 时的特例。</li>
+<li><strong>第四种情况</strong><br>如果n可以分解成两个互质的整数之积，<br>　　n = p1 × p2<br>则<br>　　φ(n) = φ(p1p2) = φ(p1)φ(p2)<br>即积的欧拉函数等于各个因子的欧拉函数之积。比如，φ(56)=φ(8×7)=φ(8)×φ(7)=4×6=24。<br>这一条的证明要用到”中国剩余定理”，这里就不展开了，只简单说一下思路：如果a与p1互质(a&lt;p1)，b与p2互质(b&lt;p2)，c与p1p2互质(c&lt;p1p2)，则c与数对 (a,b) 是一一对应关系。由于a的值有φ(p1)种可能，b的值有φ(p2)种可能，则数对 (a,b) 有φ(p1)φ(p2)种可能，而c的值有φ(p1p2)种可能，所以φ(p1p2)就等于φ(p1)φ(p2)。</li>
+<li><strong> 第五种情况</strong><br>因为任意一个大于1的正整数，都可以写成一系列质数的积。<br>$$n=p_1^{k1}p_2^{k2}p_3^{k3}….p_r^{kr}$$<br>根据第4条的结论，得到<br>$$\phi{n}=\phi({p_1^{k1}})\phi(p_2^{k2})\phi(p_3^{k3})….\phi(p_r^{kr})$$<br>再根据第3条的结论，得到<br>$$\phi{n}=p_1^{k1}p_2^{k2}p_3^{k3}….p_r^{kr}(1-\frac{1}{p_1})(1-\frac{1}{p_2})(1-\frac{1}{p_3})(1-\frac{1}{p_r})$$<br>也就等于<br>$$\phi{n}=n(1-\frac{1}{p_1})(1-\frac{1}{p_2})(1-\frac{1}{p_3})(1-\frac{1}{p_r})$$<br>这就是欧拉函数的通用计算公式。比如，1323的欧拉函数，计算过程如下：<br>$$\phi{1323}=\phi({3^3\ast7^2})=1323(1-\frac{1}{3})(1-\frac{1}{7})=756$$</li>
+</ul>
+<h3 id="欧拉定理"><a href="#欧拉定理" class="headerlink" title="欧拉定理"></a>欧拉定理</h3><p>欧拉函数的用处，在于欧拉定理。”欧拉定理”指的是：<br>如果两个正整数a和n互质，则n的欧拉函数 φ(n) 可以让下面的等式成立：<br>$$a^{\phi({n})}\equiv 1(mod\quad n)$$<br>也就是说，a的φ(n)次方被n除的余数为1。或者说，a的φ(n)次方减去1，可以被n整除。比如，3和7互质，而7的欧拉函数φ(7)等于6，所以3的6次方（729）减去1，可以被7整除（728/7=104）。<br>欧拉定理的证明比较复杂，这里就省略了。我们只要记住它的结论就行了。<br>欧拉定理可以大大简化某些运算。比如，7和10互质，根据欧拉定理，<br>$$7^{\phi({10})}\equiv 1(mod\quad 10)$$<br>已知 φ(10) 等于4，所以马上得到7的4倍数次方的个位数肯定是1。<br>$$7^{\phi({4k})}\equiv 1(mod\quad 10)$$<br>因此，7的任意次方的个位数（例如7的222次方），心算就可以算出来。<br>欧拉定理有一个特殊情况。<br>假设正整数a与质数p互质，因为质数p的φ(p)等于p-1，则欧拉定理可以写成<br>$$7^{\phi({p-1})}\equiv 1(mod\quad p)$$<br>这就是著名的费马小定理。它是欧拉定理的特例。<br>欧拉定理是RSA算法的核心。理解了这个定理，就可以理解RSA。</p>
+<h3 id="模反元素"><a href="#模反元素" class="headerlink" title="模反元素"></a>模反元素</h3><p>还剩下最后一个概念：<br>如果两个正整数a和n互质，那么一定可以找到整数b，使得 ab-1 被n整除，或者说ab被n除的余数是1。<br>$$ab\equiv 1(mod\quad n)$$<br>这时，b就叫做a的”模反元素”。<br>比如，3和11互质，那么3的模反元素就是4，因为 (3 × 4)-1 可以被11整除。显然，模反元素不止一个， 4加减11的整数倍都是3的模反元素 {…,-18,-7,4,15,26,…}，即如果b是a的模反元素，则 b+kn 都是a的模反元素。<br>欧拉定理可以用来证明模反元素必然存在。<br>$$a^{\phi({n})}=a*a^{\phi({n})-1}\equiv 1(mod\quad n)$$<br>可以看到，a的 φ(n)-1 次方，就是a的模反元素。</p>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p><a href="http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html</a><br><a href="http://www.cnblogs.com/ziwuge/archive/2011/09/18/2180480.html" target="_blank" rel="external">http://www.cnblogs.com/ziwuge/archive/2011/09/18/2180480.html</a><br><a href="https://en.wikipedia.org/wiki/Modular_exponentiation" target="_blank" rel="external">https://en.wikipedia.org/wiki/Modular_exponentiation</a><br><a href="http://baike.baidu.com/link?url=o9Fn53FTV7r99qWNCYJGa3oR8yhjWV25RDvOMs0N4CCACOTFtsVzpwEAoVp50ecoYG5REZ2ksjQMfWiWw7y9Y18Y3CW1juoE7wC77h929B9tUysp4WjEt26BzMh1CA1539ZOoeUAZsucN0kz_ZVg9V-Fpt-_Z4nsiX0q9jOHm_jcDNw7Y2lL8BdRoFtmtJao" target="_blank" rel="external">http://baike.baidu.com/link?url=o9Fn53FTV7r99qWNCYJGa3oR8yhjWV25RDvOMs0N4CCACOTFtsVzpwEAoVp50ecoYG5REZ2ksjQMfWiWw7y9Y18Y3CW1juoE7wC77h929B9tUysp4WjEt26BzMh1CA1539ZOoeUAZsucN0kz_ZVg9V-Fpt-_Z4nsiX0q9jOHm_jcDNw7Y2lL8BdRoFtmtJao</a><br><a href="http://blog.csdn.net/delphiwcdj/article/details/5973026" target="_blank" rel="external">http://blog.csdn.net/delphiwcdj/article/details/5973026</a><br><a href="https://zh.wikipedia.org/wiki/%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95" target="_blank" rel="external">https://zh.wikipedia.org/wiki/%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95</a><br><a href="http://w3.math.sinica.edu.tw/math_media/d294/29408.pdf" target="_blank" rel="external">http://w3.math.sinica.edu.tw/math_media/d294/29408.pdf</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>your support will encourage me to continue to create!</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="RuJia Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/c_point.html" rel="next" title="【编程语言】C语言指针整理1">
+                <i class="fa fa-chevron-left"></i> 【编程语言】C语言指针整理1
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/rsa_extend.html" rel="prev" title="【密码学】RSA算法解析-加密解密">
+                【密码学】RSA算法解析-加密解密 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          <pre><code><b>版权声明</b>:自由转载-非商用-非衍生-保持署名<a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" rel="external nofollow" >(创意共享3.0许可证)</a></code></pre>
+
+
+
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="RuJia" />
+          <p class="site-author-name" itemprop="name">RuJia</p>
+          <p class="site-description motion-element" itemprop="description">BlockChain,Distributed Computing</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rjgeek/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Others">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Others
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cs.bham.ac.uk/~mdr/" title="Professor Mark Ryan" target="_blank" rel="external nofollow" >Professor Mark Ryan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cs.bham.ac.uk/~rzb/" title="Dr Rami Bahsoon" target="_blank" rel="external nofollow" >Dr Rami Bahsoon</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sec.cs.bham.ac.uk/people/" title="The Security and Privacy Group" target="_blank" rel="external nofollow" >The Security and Privacy Group</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.yfgeek.com/" title="YFGeek" target="_blank" rel="external nofollow" >YFGeek</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://rjgeek.github.io/CV1.pdf" title="My CV" target="_blank" rel="external nofollow" >My CV</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#质（素）数（Prime-Number）"><span class="nav-number">1.</span> <span class="nav-text">质（素）数（Prime Number）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#任何合数-Composite-Number-都是有若干素数（Prime-Number）组成的"><span class="nav-number">2.</span> <span class="nav-text">任何合数(Composite Number)都是有若干素数（Prime Number）组成的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数论倒数-Multiplicative-Inverse"><span class="nav-number">3.</span> <span class="nav-text">数论倒数(Multiplicative Inverse)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#互质-素-关系"><span class="nav-number">4.</span> <span class="nav-text">互质(素)关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同余"><span class="nav-number">5.</span> <span class="nav-text">同余</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中国剩余定理"><span class="nav-number">6.</span> <span class="nav-text">中国剩余定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最大公约数"><span class="nav-number">7.</span> <span class="nav-text">最大公约数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#欧几里得算法-Euclidean-Algorithm"><span class="nav-number">8.</span> <span class="nav-text">欧几里得算法(Euclidean Algorithm)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展欧几里得算法（Extended-Euclidean-algorithm）"><span class="nav-number">9.</span> <span class="nav-text">扩展欧几里得算法（Extended Euclidean algorithm）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#贝祖定理"><span class="nav-number">10.</span> <span class="nav-text">贝祖定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模幂运算-Modular-exponentiation"><span class="nav-number">11.</span> <span class="nav-text">模幂运算(Modular exponentiation)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#欧拉函数"><span class="nav-number">12.</span> <span class="nav-text">欧拉函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#欧拉定理"><span class="nav-number">13.</span> <span class="nav-text">欧拉定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模反元素"><span class="nav-number">14.</span> <span class="nav-text">模反元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用"><span class="nav-number">15.</span> <span class="nav-text">引用</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RuJia</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+  <span id="busuanzi_container_site_pv">
+    Total visited 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  
+  <span id="busuanzi_container_site_uv">
+  Total visitors 本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'ehcoo';
+      var disqus_identifier = 'rsa.html';
+      var disqus_title = "【密码学】RSA算法解析-数论基础";
+      var disqus_url = 'http://www.ehcoo.com/rsa.html';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

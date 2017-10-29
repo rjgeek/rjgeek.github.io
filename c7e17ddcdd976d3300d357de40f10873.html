@@ -1,0 +1,980 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+<meta name="google-site-verification" content="LzR3qfX_YDfkNEusKegSylZBjqRw3vczTwICGpJ1GRI" />
+<meta name="baidu-site-verification" content="IhNq56RJS1" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Jdk," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="1.所需环境准备">
+<meta name="keywords" content="Jdk">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Jdk】32位redhat6系统安装jdk">
+<meta property="og:url" content="http://www.ehcoo.com/c7e17ddcdd976d3300d357de40f10873.html">
+<meta property="og:site_name" content="Ehcoo">
+<meta property="og:description" content="1.所需环境准备">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-750c05d7de2e966ae4b28e32d67f94d3_e5bc9949-a5ea-488b-bd3e-5f0cbe7a3c27.jpg">
+<meta property="og:updated_time" content="2017-10-29T15:38:31.050Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【Jdk】32位redhat6系统安装jdk">
+<meta name="twitter:description" content="1.所需环境准备">
+<meta name="twitter:image" content="https://rjgeek.github.io/images//2015/01/wpid-750c05d7de2e966ae4b28e32d67f94d3_e5bc9949-a5ea-488b-bd3e-5f0cbe7a3c27.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.ehcoo.com/c7e17ddcdd976d3300d357de40f10873.html"/>
+
+
+  <title> 【Jdk】32位redhat6系统安装jdk | Ehcoo </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="default">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?83e3b6b55c0e48f5d0848d6a14b76c02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+  
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ehcoo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about-me" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                【Jdk】32位redhat6系统安装jdk
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2014-09-12T00:52:46+00:00" content="2014-09-12">
+              2014-09-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/应用服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">应用服务器</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/c7e17ddcdd976d3300d357de40f10873.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="c7e17ddcdd976d3300d357de40f10873.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+		  
+          
+          
+
+          
+		 
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><span data-wiz-span="data-wiz-span" style="font-size: 12pt;"><strong>1.所需环境准备</strong></span><div></div></p>
+<div><table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style="border: none; margin-left: 5.4pt;"><tbody><tr style="height: 27.5pt;"><td width="165" style="border-width: 1pt; border-color: windowtext; width: 99.25pt; background-color: rgb(191, 191, 191); padding: 0cm 5.4pt; height: 27.5pt;" wiz_tag_attr_bk_color="rgb(191, 191, 191)"><a id="more"></a><br><br><span style="line-height: 21.600000381469727px; font-family: 宋体;">需求</span><span lang="EN-US" style="line-height: 21.600000381469727px;"><o:p></o:p></span><br></td><td width="600" style="border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; border-left-style: none; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; width: 359.7pt; background-color: rgb(191, 191, 191); padding: 0cm 5.4pt; height: 27.5pt;" wiz_tag_attr_bk_color="rgb(191, 191, 191)"><br><br><span style="line-height: 21.600000381469727px; font-family: 宋体;">备注</span><span lang="EN-US" style="line-height: 21.600000381469727px;"><o:p></o:p></span><br></td></tr><tr style="height: 27.5pt;"><td width="165" style="border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; border-top-style: none; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; width: 99.25pt; padding: 0cm 5.4pt; height: 27.5pt;" wiz_tag_attr_bk_color=""><br><br><span style="font-family: 宋体;">操作系统<span lang="EN-US"><o:p></o:p></span></span><br></td><td width="600" style="border-right-width: 1pt; border-bottom-width: 1pt; border-top-style: none; border-left-style: none; border-right-color: windowtext; border-bottom-color: windowtext; width: 359.7pt; padding: 0cm 5.4pt; height: 27.5pt;" wiz_tag_attr_bk_color=""><br><br><span lang="EN-US" style="font-family: 宋体;">Red Hat Linux Server 6</span><span style="font-family: 宋体;">（32位）<span lang="EN-US"><o:p></o:p></span></span><br></td></tr><tr style="height: 27.5pt;"><td width="165" style="border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; border-top-style: none; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; width: 99.25pt; padding: 0cm 5.4pt; height: 27.5pt;" wiz_tag_attr_bk_color="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; JDK安装包</td><td width="600" style="border-right-width: 1pt; border-bottom-width: 1pt; border-top-style: none; border-left-style: none; border-right-color: windowtext; border-bottom-color: windowtext; width: 359.7pt; padding: 0cm 5.4pt; height: 27.5pt;" wiz_tag_attr_bk_color="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; jdk-6u20-linux-i586.bin<br></td></tr></tbody></table><br><span data-wiz-span="data-wiz-span" style="font-size: 12pt;"><strong>2.开始安装</strong></span></div><div><br><br><span style="mso-bidi-font-size:12.0pt;line-height:150%;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">a.使用</span><span lang="EN-US" style="mso-bidi-font-size:12.0pt;
+line-height:150%">root</span><span style="mso-bidi-font-size:12.0pt;line-height:
+150%;font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">用户将</span><span lang="EN-US" style="mso-bidi-font-size:12.0pt;
+line-height:150%">jdk1.6</span><span style="mso-bidi-font-size:12.0pt;
+line-height:150%;font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">安装包</span><span style="mso-bidi-font-size:12.0pt;line-height:150%;font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">上传至</span><span lang="EN-US" style="mso-bidi-font-size:12.0pt;line-height:150%">linux</span><span style="mso-bidi-font-size:12.0pt;line-height:150%;font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">服务器上的</span><span lang="EN-US" style="mso-bidi-font-size:12.0pt;line-height:150%">/app/install</span><span style="mso-bidi-font-size:12.0pt;line-height:150%;font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">目录下，并使用</span><span lang="EN-US" style="mso-bidi-font-size:12.0pt;line-height:150%">root</span><span style="mso-bidi-font-size:12.0pt;line-height:150%;font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">用户登录上述服务器进行如下安装操作</span><br><br><span style="mso-bidi-font-size:12.0pt;line-height:150%;font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">b.修改jdk的权限，执行以下命令</span><br><div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;pln&quot;&gt;chmod &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;755&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;  jdk&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;6u20&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;i586&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;bin&lt;/span&gt;</code></pre></div><div>c.准备工作完成后开始安装.执行</div></div><div><div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;pun&quot;&gt;./&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;jdk&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;6u20&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;i586&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;bin&lt;/span&gt;</code></pre></div><div>d.<span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; &nbsp;界面首先提示&nbsp;</span></div><div><div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;typ&quot;&gt;Sun&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Microsystems&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Inc&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Binary&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Code&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;License&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Agreement&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;kwd&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; the JAVA SE DEVELOPMENT KIT &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;JDK&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; VERSION &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>3.  <code>&lt;span class=&quot;pun&quot;&gt;……&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;pun&quot;&gt;会提示“&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;More&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;”，按空格键翻页&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code></pre></div></div><br>e.输入“&nbsp;yes&nbsp;”确认同意；&nbsp;</div><div><div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;typ&quot;&gt;Do&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; you agree to the above license terms&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;yes or no&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;pln&quot;&gt;yes &lt;/span&gt;</code><br>3.  <code>&lt;span class=&quot;pun&quot;&gt;安装程序自动解压缩安装，直至提示安装成功&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;按回车键（&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Enter&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;）完成安装；&lt;/span&gt;</code></pre></div><div><span data-wiz-span="data-wiz-span" style="font-size: 12pt;"><strong>3.配置环境变量</strong></span></div><div><br><br><span lang="EN-US" style="mso-bidi-font-size:12.0pt;
+line-height:150%">#vi ~/.bash_profile<o:p></o:p></span><br><br><span style="mso-bidi-font-size:12.0pt;line-height:150%;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">按</span><span lang="EN-US" style="mso-bidi-font-size:12.0pt;
+line-height:150%">i</span><span style="mso-bidi-font-size:12.0pt;line-height:
+150%;font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">键，进入编辑模式，在最后面加入</span><span lang="EN-US" style="mso-bidi-font-size:
+12.0pt;line-height:150%"> JDK</span><span style="mso-bidi-font-size:12.0pt;
+line-height:150%;font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">环境变量（JAVA_HOME的地址按实际jdk配置）</span><br><br><span lang="EN-US" style="mso-bidi-font-size:12.0pt;line-height:150%">&nbsp;</span><span lang="EN-US" style="font-size:15.0pt;
+line-height:150%;mso-font-kerning:0pt;mso-no-proof:yes"><img src="https://rjgeek.github.io/images//2015/01/wpid-750c05d7de2e966ae4b28e32d67f94d3_e5bc9949-a5ea-488b-bd3e-5f0cbe7a3c27.jpg" alt="C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml\wps_clip_image7.png"></span><span lang="EN-US" style="mso-bidi-font-size:12.0pt;line-height:150%"><o:p></o:p></span><br><br><span style="mso-bidi-font-size:12.0pt;line-height:150%;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">按</span><span lang="EN-US" style="mso-bidi-font-size:12.0pt;
+line-height:150%">ESC</span><span style="mso-bidi-font-size:12.0pt;line-height:
+150%;font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">键，退出编辑模式，输入命令</span><span lang="EN-US" style="mso-bidi-font-size:
+12.0pt;line-height:150%">:wq</span><span style="mso-bidi-font-size:12.0pt;
+line-height:150%;font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">保存退出。</span><span lang="EN-US" style="mso-bidi-font-size:12.0pt;line-height:150%"><o:p></o:p></span><br><br><span style="text-align: justify;"># . /etc/profile</span><br><span style="text-align: justify;">注意: . 和 /etc/profile 有空格.</span><span style="mso-bidi-font-size:12.0pt;
+line-height:150%;font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;"><br></span><br><br><font face="宋体"><span style="line-height: 21.600000381469727px;"><span data-wiz-span="data-wiz-span" style="font-size: 12pt;"><strong>4.检验JDK是否安装成功</strong></span></span></font><br><br><font face="宋体"><span style="line-height: 21.600000381469727px;">&nbsp; &nbsp; &nbsp;<font color="#ff0000">重新启动系统或者注销当前用户</font>&nbsp;</span></font><span style="line-height: 21.600000381469727px; font-family: 宋体; font-size: 10.5pt;">打开客户端执行javac</span><br><div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;pun&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;root@localhost &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Desktop&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;]#&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; javac&lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;typ&quot;&gt;Usage&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; javac &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;source files&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;</code><br>3.  <code>&lt;span class=&quot;pln&quot;&gt;where possible options include&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;g                         &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Generate&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; all debugging info&lt;/span&gt;</code><br>5.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;none                    &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Generate&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; no debugging info&lt;/span&gt;</code><br>6.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:{&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;lines&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;vars&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;     &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Generate&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; only some debugging info&lt;/span&gt;</code><br>7.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;nowarn                    &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Generate&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; no warnings&lt;/span&gt;</code><br>8.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;verbose                   &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Output&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; messages about what the compiler is doing&lt;/span&gt;</code><br>9.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;deprecation               &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Output&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; source locations where deprecated &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;APIs&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; are used&lt;/span&gt;</code><br>10.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;classpath &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;          &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Specify&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; where to find user class files and annotation processors&lt;/span&gt;</code><br>11.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;cp &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;                 &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Specify&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; where to find user class files and annotation processors&lt;/span&gt;</code><br>12.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;sourcepath &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;         &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Specify&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; where to find input source files&lt;/span&gt;</code><br>13.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;bootclasspath &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Override&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; location of bootstrap class files&lt;/span&gt;</code><br>14.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;extdirs &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dirs&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;            &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Override&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; location of installed extensions&lt;/span&gt;</code><br>15.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;endorseddirs &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;dirs&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;       &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Override&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; location of endorsed standards path&lt;/span&gt;</code><br>16.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;proc&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:{&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;only&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;          &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Control&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; whether annotation processing and&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;or compilation is &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;done&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;</code><br>17.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;processor &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;class1&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;[,&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;class2&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;,&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;class3&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;...]&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Names&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; of the annotation processors to run&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; bypasses default discovery process&lt;/span&gt;</code><br>18.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;processorpath &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Specify&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; where to find annotation processors&lt;/span&gt;</code><br>19.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;d &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;directory&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;             &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Specify&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; where to place generated class files&lt;/span&gt;</code><br>20.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;s &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;directory&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;             &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Specify&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; where to place generated source files&lt;/span&gt;</code><br>21.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;implicit&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;:{&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;     &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Specify&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; whether or not to generate class files &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; implicitly referenced files &lt;/span&gt;</code><br>22.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;encoding &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;encoding&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;       &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Specify&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; character encoding used by source files&lt;/span&gt;</code><br>23.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;source &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;release&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;          &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Provide&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; source compatibility with specified release&lt;/span&gt;</code><br>24.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;target &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;release&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;          &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Generate&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; class files &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; specific VM version&lt;/span&gt;</code><br>25.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;version                   &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Version&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; information&lt;/span&gt;</code><br>26.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;help                      &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Print&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; a synopsis of standard options&lt;/span&gt;</code><br>27.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Akey&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;[=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;              &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Options&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; to pass to annotation processors&lt;/span&gt;</code><br>28.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;X                         &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Print&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; a synopsis of nonstandard options&lt;/span&gt;</code><br>29.  <code>&lt;span class=&quot;pln&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;J&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;flag&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;                   &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Pass&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;flag&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; directly to the runtime system&lt;/span&gt;</code></pre></div>
+
+<p><span lang="EN-US" style="mso-bidi-font-size:12.0pt;line-height:150%">执行 java -version，</span><span style="text-indent: 24pt; font-size: 10.5pt; line-height: 150%; font-family: 宋体;">如果看到</span><span lang="EN-US" style="text-indent: 24pt; font-size: 10.5pt; line-height: 150%;">JVM</span><span style="text-indent: 24pt; font-size: 10.5pt; line-height: 150%; font-family: 宋体;">版本及相关信息，即安装成功</span></p>
+<div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;pun&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;root@localhost &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Desktop&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;]#&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; java &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;version&lt;/span&gt;</code><br>2.  <code>&lt;span class=&quot;pln&quot;&gt;java version &lt;/span&gt;&lt;span class=&quot;str&quot;&gt;&quot;1.6.0_20&quot;&lt;/span&gt;</code><br>3.  <code>&lt;span class=&quot;typ&quot;&gt;Java&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;TM&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; SE &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Runtime&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Environment&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;build &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;1.6&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;0_20&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;b02&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;</code><br>4.  <code>&lt;span class=&quot;typ&quot;&gt;Java&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;HotSpot&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;TM&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;Server&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; VM &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;build &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;16.3&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;b01&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; mixed mode&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;</code></pre></div><div><strong><span data-wiz-span="data-wiz-span" style="font-size: 12pt;"><br></span></strong></div><div><strong><span data-wiz-span="data-wiz-span" style="font-size: 12pt;">5.常见问题分析</span></strong></div><div><strong><span data-wiz-span="data-wiz-span" style="font-size: 12pt;"><br></span></strong></div><div><span style="font-size: 10.5pt; line-height: 1.5;">&nbsp; 1.解决在root中配置JDK其他用户不生效，</span><span style="font-size: 10.5pt; line-height: 1.5;">当时设置时用的命令是</span></div><div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;pln&quot;&gt;vi &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;~/.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;bash_profile&lt;/span&gt;</code></pre></div><div>原因分析，<font face="Consolas, Liberation Mono, Menlo, Courier, monospace"><span style="font-size: 12.800000190734863px; line-height: 15.199999809265137px;">~/</span></font><span style="font-size: 10.5pt; line-height: 1.5;">此时是指当前目录,此句话的意思是配置了root用户的环境变量文件，对于其他文件会因为权限问题导致问题</span></div><div><span style="font-size: 10.5pt; line-height: 1.5;">解决环境变量配置到全局变量中</span></div><div><pre class="prettyprint linenums prettyprinted"><br><br>1.  <code>&lt;span class=&quot;pln&quot;&gt;vi &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;etc&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;profile&lt;/span&gt;</code></pre></div><div><span style="background-color: rgb(247, 247, 249); color: rgb(72, 72, 76); font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace; font-size: 12.800000190734863px; line-height: 18px; white-space: pre;">profile是</span>系统文件,对系统下全体用户起作用<br></div></div><div><br></div>&nbsp;</div><br><div style="color:gray"><br></div><small><small>&nbsp;</small></small><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div>
+
+<div><a href="http://www.wiz.cn/i/60efacb7" title="来自为知笔记(Wiz)" target="_blank" rel="external">来自为知笔记(Wiz)</a></div>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>your support will encourage me to continue to create!</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="RuJia Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Jdk/" rel="tag">#Jdk</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/f3a2ec311e9deddee0b29a1bc9636c25.html" rel="next" title="【Yum】32位redhat6系统安装yum">
+                <i class="fa fa-chevron-left"></i> 【Yum】32位redhat6系统安装yum
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/e5-9b-bd-e7-bd-91-e5-8d-8f-e5-90-8c-e5-8a-9e-e5-85-ac-e4-b8-80-e7-ba-a7-e9-83-a8-e7-bd-b2-e4-b8-admongodb-e9-85-8d-e7-bd-ae-e6-93-8d-e4-bd-9c-e5-ae-9e-e4-be-8b.html" rel="prev" title="【Mongodb】MongoDB分片备份策略示例与配置迁移示例">
+                【Mongodb】MongoDB分片备份策略示例与配置迁移示例 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          <pre><code><b>版权声明</b>:自由转载-非商用-非衍生-保持署名<a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" rel="external nofollow" >(创意共享3.0许可证)</a></code></pre>
+
+
+
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="RuJia" />
+          <p class="site-author-name" itemprop="name">RuJia</p>
+          <p class="site-description motion-element" itemprop="description">BlockChain,Distributed Computing</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rjgeek/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Others">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Others
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cs.bham.ac.uk/~mdr/" title="Professor Mark Ryan" target="_blank" rel="external nofollow" >Professor Mark Ryan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cs.bham.ac.uk/~rzb/" title="Dr Rami Bahsoon" target="_blank" rel="external nofollow" >Dr Rami Bahsoon</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sec.cs.bham.ac.uk/people/" title="The Security and Privacy Group" target="_blank" rel="external nofollow" >The Security and Privacy Group</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.yfgeek.com/" title="YFGeek" target="_blank" rel="external nofollow" >YFGeek</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://rjgeek.github.io/CV1.pdf" title="My CV" target="_blank" rel="external nofollow" >My CV</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RuJia</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+  <span id="busuanzi_container_site_pv">
+    Total visited 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  
+  <span id="busuanzi_container_site_uv">
+  Total visitors 本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'ehcoo';
+      var disqus_identifier = 'c7e17ddcdd976d3300d357de40f10873.html';
+      var disqus_title = "【Jdk】32位redhat6系统安装jdk";
+      var disqus_url = 'http://www.ehcoo.com/c7e17ddcdd976d3300d357de40f10873.html';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

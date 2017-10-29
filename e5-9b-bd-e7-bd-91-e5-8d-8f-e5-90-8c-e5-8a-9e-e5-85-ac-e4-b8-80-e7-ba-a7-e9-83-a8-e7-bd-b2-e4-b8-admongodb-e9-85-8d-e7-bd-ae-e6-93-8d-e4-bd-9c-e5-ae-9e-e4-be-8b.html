@@ -1,0 +1,1090 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+<meta name="google-site-verification" content="LzR3qfX_YDfkNEusKegSylZBjqRw3vczTwICGpJ1GRI" />
+<meta name="baidu-site-verification" content="IhNq56RJS1" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Mongodb," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="以下内容针对Linux系统配置MongoDB集群过程，具体的Windows平台自行进行修改： 部署模式：1、Replica Set + Sharding ### 1.1.1准备工作">
+<meta name="keywords" content="Mongodb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Mongodb】MongoDB分片备份策略示例与配置迁移示例">
+<meta property="og:url" content="http://www.ehcoo.com/e5-9b-bd-e7-bd-91-e5-8d-8f-e5-90-8c-e5-8a-9e-e5-85-ac-e4-b8-80-e7-ba-a7-e9-83-a8-e7-bd-b2-e4-b8-admongodb-e9-85-8d-e7-bd-ae-e6-93-8d-e4-bd-9c-e5-ae-9e-e4-be-8b.html">
+<meta property="og:site_name" content="Ehcoo">
+<meta property="og:description" content="以下内容针对Linux系统配置MongoDB集群过程，具体的Windows平台自行进行修改： 部署模式：1、Replica Set + Sharding ### 1.1.1准备工作">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_clip_image002ba1a8041-7d7d-49ca-95cd-882760f6d82a.jpg">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_559644114970fcdc2db003ee4d5eb3b4.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_a851c3740c7f8ed8a623fe95a9d347ad.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_908a45abc97733e8faefc6ad79532695.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_d1cca730827559fd5eefebd0b72980e5.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_81090258219c4eb30a3907d160865323.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_836dde6525a281b02d51b9af2b0cf3a3.png">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_83e74839797dd91bb712c55ee8b900ab.png">
+<meta property="og:updated_time" content="2017-10-29T15:38:31.054Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【Mongodb】MongoDB分片备份策略示例与配置迁移示例">
+<meta name="twitter:description" content="以下内容针对Linux系统配置MongoDB集群过程，具体的Windows平台自行进行修改： 部署模式：1、Replica Set + Sharding ### 1.1.1准备工作">
+<meta name="twitter:image" content="https://rjgeek.github.io/images//2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_clip_image002ba1a8041-7d7d-49ca-95cd-882760f6d82a.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.ehcoo.com/e5-9b-bd-e7-bd-91-e5-8d-8f-e5-90-8c-e5-8a-9e-e5-85-ac-e4-b8-80-e7-ba-a7-e9-83-a8-e7-bd-b2-e4-b8-admongodb-e9-85-8d-e7-bd-ae-e6-93-8d-e4-bd-9c-e5-ae-9e-e4-be-8b.html"/>
+
+
+  <title> 【Mongodb】MongoDB分片备份策略示例与配置迁移示例 | Ehcoo </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="default">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?83e3b6b55c0e48f5d0848d6a14b76c02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+  
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ehcoo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about-me" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                【Mongodb】MongoDB分片备份策略示例与配置迁移示例
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2014-09-25T02:00:22+00:00" content="2014-09-25">
+              2014-09-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据库知识/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库知识</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/e5-9b-bd-e7-bd-91-e5-8d-8f-e5-90-8c-e5-8a-9e-e5-85-ac-e4-b8-80-e7-ba-a7-e9-83-a8-e7-bd-b2-e4-b8-admongodb-e9-85-8d-e7-bd-ae-e6-93-8d-e4-bd-9c-e5-ae-9e-e4-be-8b.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="e5-9b-bd-e7-bd-91-e5-8d-8f-e5-90-8c-e5-8a-9e-e5-85-ac-e4-b8-80-e7-ba-a7-e9-83-a8-e7-bd-b2-e4-b8-admongodb-e9-85-8d-e7-bd-ae-e6-93-8d-e4-bd-9c-e5-ae-9e-e4-be-8b.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+		  
+          
+          
+
+          
+		 
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>以下内容针对Linux系统配置MongoDB集群过程，具体的Windows平台自行进行修改：</p>
+<div>部署模式：</div><br><div><strong>1、Replica Set + Sharding </strong><br><div><br><br>### <a name="_Toc388704078"></a><a name="_Toc385360833"></a><a name="_Toc384758415"></a><span style="font-family: 'Arial','sans-serif'; mso-fareast-font-family: &lt;br /&gt;
+Arial;" lang="X-NONE">1.1.1<span style="font-weight: normal; font-size: 7pt; line-height: normal; font-family: 'Times New Roman';"><br></span></span><span style="font-family: 黑体; &lt;br /&gt;
+mso-ascii-font-family: 'Arial Unicode MS'; mso-hansi-font-family: 'Arial Unicode MS';" lang="X-NONE">准备工作</span><br><br><a id="more"></a><br><br><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">正式安装</span><span lang="EN-US">MongoDB</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">集群前需分别在三台服务器上做如下准备工作：</span><br><br><p class="MsoListParagraph" style="margin-left: 18.0pt; text-indent: 24.0pt; &lt;br /&gt;
+mso-list: l5 level1 lfo2;"><span style="font-family: 宋体; mso-bidi-font-family: 宋体;" lang="EN-US">1.<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">   </span></span><span style="font-family: 宋体;">创建安装<span lang="EN-US">Mongodb</span>所需用户：<span lang="EN-US">Mongo</span>，组：<span lang="EN-US">Mongodb</span></span><br><br><span style="font-family: 宋体; mso-bidi-font-family: 宋体;" lang="EN-US">2.<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">   </span></span><span style="font-family: 宋体;">创建程序数据存储目录<span lang="EN-US">:/data/db/shard1</span>、<span lang="EN-US">/data/db/shard2</span>、<span lang="EN-US">/data/db/shard3</span>、<span lang="EN-US">/data/db/config</span></span><br><br><span style="font-family: 宋体; mso-bidi-font-family: 宋体;" lang="EN-US">3.<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">   </span></span><span style="font-family: 宋体;">创建日志存储目录：<span lang="EN-US">/data/dblog/shard1</span>、<span lang="EN-US">/data/dblog/shard2</span>、<span lang="EN-US">/data/dblog/shard3</span>、<span lang="EN-US">/data/dblog/mongos</span>、<span lang="EN-US">/data/dblog/config</span></span><br><br><span style="font-family: 宋体; mso-bidi-font-family: 宋体;" lang="EN-US">4.<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">   </span></span><span style="font-family: 宋体;" lang="EN-US">Mongo</span><span style="font-family: 宋体;">用户对数据及日志存储目录拥有读写权限</span><br><br><span style="font-family: 宋体; mso-bidi-font-family: 宋体;" lang="EN-US">5.<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">   </span></span><span style="font-family: 宋体;">上传<span lang="EN-US">Mongodb</span>程序<span lang="EN-US">mongodb-linux-x86_64-2.4.3.tgz</span>到<span lang="EN-US">/home/mongo/</span>目录下，并解压。</span><br><br>### <a name="_Toc388704079"></a><a name="_Toc385360834"></a><a name="_Toc384758416"></a><span style="font-family: 'Arial','sans-serif'; mso-fareast-font-family: &lt;br /&gt;
+Arial;" lang="X-NONE">1.1.2<span style="font-weight: normal; font-size: 7pt; line-height: normal; font-family: 'Times New Roman';"><br></span></span><span style="font-family: 黑体; &lt;br /&gt;
+mso-ascii-font-family: 'Arial Unicode MS'; mso-hansi-font-family: 'Arial Unicode MS';" lang="X-NONE">创建</span><span lang="X-NONE"> shard</span><span style="font-family: 黑体; mso-ascii-font-family: 'Arial Unicode MS'; &lt;br /&gt;
+mso-hansi-font-family: 'Arial Unicode MS';" lang="X-NONE">服务</span><br><br><span lang="EN-US">1)<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">   </span></span>分别在三台服务器上配置环境变量，具体操作如下：<br><br><span lang="EN-US">[root@mongodb ~] su – mongo</span><br><br><span lang="EN-US">[mongo@mongodb ~] vi .bash_profile</span><br><br><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">然后在打开的环境变量文档的</span><span lang="EN-US">export PATH</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">后添加如下变量信息：</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span lang="EN-US">export MONGODB=/home/mongo/mongodb</span><br><br><span lang="EN-US">export MONGO_DATA=/data/db</span><br><br><span lang="EN-US">export MONGO_LOG=/data/dblog</span><br><br><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">其中</span><span lang="EN-US">MONGODB</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">为程序包路径，</span><span lang="EN-US">MONGO_DATA</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">为数据存放路径，</span><span lang="EN-US">MONGO_LOG</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">为日志存放路径</span><br><br></p><p class="MsoListParagraph" style="margin-left: 45.0pt; text-indent: -21.0pt; &lt;br /&gt;
+mso-char-indent-count: 0; mso-list: l4 level1 lfo3;"><span lang="EN-US">2)<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">   </span></span>创建<span lang="EN-US">mongodb</span>的启动脚本，具体操作如下：<br><br><span lang="EN-US">[mongo@mongodb ~] cd /home/mongo</span><br><br><span lang="EN-US">[mongo@mongodb ~] mkdir script</span><br><br><span lang="EN-US">[mongo@mongodb ~] cd script</span><br><br><span lang="EN-US">[mongo@mongodb script] vi startshard1.sh</span><br><br><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">然后在打开的文档中输入如下信息：</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span lang="EN-US">${MONGODB}/bin/mongod<span style="color: #ff0000;"> -fork </span>-shardsvr -replSet shard1 -port 10001<br>-dbpath ${MONGO_DATA}/shard1 -logpath ${MONGO_LOG}/shard1/shard1.log</span><br><br><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">保存后为刚创建的</span><span lang="EN-US">startshard1.sh</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">增加执行权限</span><br><br></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span lang="EN-US">[mongo@mongodb script] chmod 755 startshard1.sh</span><br><br><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">重复上述步骤在当前服务器上创建</span><span lang="EN-US">startshard2.sh</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">和</span><span lang="EN-US">startshard3.sh,</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">其中</span><span lang="EN-US">shard2</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">的端口为</span><span lang="EN-US">10002,shard3</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">的端口为</span><span lang="EN-US">10003,</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">并在其余两台服务器上创建</span><span lang="EN-US">startshard1.sh</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">、</span><span lang="EN-US">startshard2.sh</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">和</span><span lang="EN-US">startshard3.sh.</span><br><br></p><p class="MsoListParagraph" style="margin-left: 45.0pt; text-indent: -21.0pt; &lt;br /&gt;
+mso-char-indent-count: 0; mso-list: l4 level1 lfo3;"><span lang="EN-US">3)<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">   </span></span>启动每台服务器上的三个<span lang="EN-US">shard</span>服务<br><br><span lang="EN-US">[mongo@mongodb ~] cd /home/mongo/script</span><br><br><span lang="EN-US">[mongo@mongodb script] ./startshard1.sh</span><br><br><span lang="EN-US">[mongo@mongodb script] ./startshard2.sh</span><br><br><span lang="EN-US">[mongo@mongodb script] ./startshard3.sh</span><br><br><span lang="EN-US"><br></span><br><br>### <a name="_Toc384758419"></a><span style="font-family: Arial, sans-serif;" lang="X-NONE">1.1.3<span style="font-weight: normal; font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">     </span></span><span style="font-family: 黑体;" lang="X-NONE">初始化</span><span lang="X-NONE">replica set</span><br><br><span lang="EN-US">1)<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">   </span></span>连接<span lang="EN-US">mongodb 10001</span>端口初始化<span lang="EN-US">replica set</span>，具体操作如下：<br><br><span style="line-height: 20px; color: #333333; background-color: white; background-position: initial initial; background-repeat: initial initial;" lang="EN-US">[mongo@mongodb ~] cd ${MONGODB}bin</span><br><br><span style="line-height: 20px; color: #333333; background-color: white; background-position: initial initial; background-repeat: initial initial;" lang="EN-US">[mongo@mongodb ~] ./mongo –port</span><span style="line-height: 20px; color: red; background-color: white; background-position: initial initial; background-repeat: initial initial;" lang="EN-US"> </span><span style="line-height: 20px; color: #333333; background-color: white; background-position: initial initial; background-repeat: initial initial;" lang="EN-US">10001</span><br><br><span lang="EN-US">MongoDB shell version: 2.4.3</span><br><br><span lang="EN-US">connecting to: 127.0.0.1:10001/test</span><br><br><span lang="EN-US">&gt;config={_id:’shard1’,members:[{_id: 0, host: ‘<span style="color: red;">IP1</span>:10001’,priority:2},{_id: 1, host: ‘<span style="color: red;">IP2</span>:10001’ ,priority:1},{_id: 2, host: ‘<span style="color: red;">IP3</span>:10001’, “arbiterOnly”: true }]}</span><br><br><span lang="EN-US">&gt;rs.initiate(config)</span><br><br><span lang="EN-US">&gt;rs.status()</span><br><br><span style="font-family: 宋体; color: red;">其中</span><span style="color: red;" lang="EN-US">IP1,IP2,IP3</span><span style="font-family: 宋体; color: red;">为三台服务器的</span><span style="color: red;" lang="EN-US">IP</span><span style="font-family: 宋体; color: red;">。</span><br><br><span lang="EN-US">2)<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">   </span></span>连接<span lang="EN-US">mongodb 10002</span>端口初始化<span lang="EN-US">replica set</span>，具体操作如下：<br><br><span lang="EN-US">[mongo@mongodb ~] cd ${MONGODB}bin</span><br><br><span lang="EN-US">[mongo@mongodb ~] ./mongo –port 10002</span><br><br><span lang="EN-US">MongoDB shell version: 2.4.3</span><br><br><span lang="EN-US">connecting to: 127.0.0.1:10002/test</span><br><br><span lang="EN-US">&gt;config={_id:’shard2’,members:[{_id: 0, host: ‘<span style="color: red;">IP1</span>:10002’,arbiterOnly:true},{_id: 1, host: ‘<span style="color: red;">IP2</span>:10002’,priority:2},{_id: 2, host: ‘<span style="color: red;">IP3</span>:10002’,priority:1 }]}</span><br><br><span lang="EN-US">&gt;rs.initiate(config)</span><br><br><span lang="EN-US">&gt;rs.status()</span><br><br><span style="font-family: 宋体; color: red;">其中</span><span style="color: red;" lang="EN-US">IP1,IP2,IP3</span><span style="font-family: 宋体; color: red;">为三台服务器的</span><span style="color: red;" lang="EN-US">IP</span><span style="font-family: 宋体; color: red;">。</span><br><br><span lang="EN-US">3)<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">   </span></span>连接<span lang="EN-US">mongodb 10003</span>端口初始化<span lang="EN-US">replica set</span>，具体操作如下：<br><br><span lang="EN-US">[mongo@mongodb ~] cd ${MONGODB}bin</span><br><br><span lang="EN-US">[mongo@mongodb ~] ./mongo –port 100033</span><br><br><span lang="EN-US">MongoDB shell version: 2.4.3</span><br><br><span lang="EN-US">connecting to: 127.0.0.1:100033/test</span><br><br><span lang="EN-US">&gt;config={_id:’shard3’,members:[{_id: 0, host: ‘<span style="color: red;">IP1</span>:10003’ ,priority:1},{_id: 1, host: ‘<span style="color: red;">IP2</span>:10003’,arbiterOnly:true},{_id: 2, host: ‘<span style="color: red;">IP3</span>:10003’,priority:2 }]}</span><br><br><span lang="EN-US">&gt;rs.initiate(config)</span><br><br><span lang="EN-US">&gt;rs.status()</span><br><br><span style="font-family: 宋体; color: red;">其中</span><span style="color: red;" lang="EN-US">IP1,IP2,IP3</span><span style="font-family: 宋体; color: red;">为三台服务器的</span><span style="color: red;" lang="EN-US">IP</span><span style="font-family: 宋体; color: red;">。</span><br><br><span lang="EN-US">4)<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">   </span></span>验证<span lang="EN-US">replica set</span>信息<br><br><span style="font-family: 宋体;">此时分别连接</span><span lang="EN-US">10001</span><span style="font-family: 宋体;">、</span><span lang="EN-US">10002</span><span style="font-family: 宋体;">和</span><span lang="EN-US">10003</span><span style="font-family: 宋体;">端口，用执行</span><span lang="EN-US">rs.status()</span><span style="font-family: 宋体;">命令会看到如下图所示的信息：</span><br><br><span lang="EN-US"><img src="https://rjgeek.github.io/images//2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_clip_image002ba1a8041-7d7d-49ca-95cd-882760f6d82a.jpg" alt=""></span><br><br><div><span lang="EN-US"><br></span></div>
+
+</p><h3 id="lt-span-style-”font-family-‘Arial’-’sans-serif’-mso-fareast-font-family-lt-br-gt"><a href="#lt-span-style-”font-family-‘Arial’-’sans-serif’-mso-fareast-font-family-lt-br-gt" class="headerlink" title="&lt;span style=”font-family: ‘Arial’,’sans-serif’; mso-fareast-font-family: &lt;br /&gt;"></a><a name="_Toc388704080"></a><a name="_Toc385360835"></a><a name="_Toc384758417"></a>&lt;span style=”font-family: ‘Arial’,’sans-serif’; mso-fareast-font-family: &lt;br /&gt;</h3><p>Arial;” lang=”X-NONE”&gt;1.1.4<span style="font-weight: normal; font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">    </span><span style="font-family: 黑体; &lt;br /&gt;
+mso-ascii-font-family: 'Arial Unicode MS'; mso-hansi-font-family: 'Arial Unicode MS';" lang="X-NONE">创建</span><span lang="X-NONE">config servers</span><span style="font-family: 黑体; mso-ascii-font-family: &lt;br /&gt;
+'Arial Unicode MS'; mso-hansi-font-family: 'Arial Unicode MS';" lang="X-NONE">服务</span></p>
+<p><span lang="EN-US">1)<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">   </span></span>创建<span lang="EN-US">config</span>启动脚本，具体操作如下：</p>
+<p><span lang="EN-US">[mongo@mongodb ~] cd /home/mongo</span></p>
+<p><span lang="EN-US">[mongo@mongodb ~] cd script</span></p>
+<p><span lang="EN-US">[mongo@mongodb script] vi startconfig.sh</span></p>
+<p><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">然后在打开的文档中输入如下信息：</span></p>
+<p></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span lang="EN-US">${MONGODB}/bin/mongod -configsvr -port 20000 <span style="color: #ff0000;">-fork</span> -dbpath<br>${MONGO_DATA}/dbcfg -logpath ${MONGO_LOG}/dbcfg/dbcfg.log</span></p>
+<p><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">保存后为刚创建的</span><span lang="EN-US">startconfig.sh</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">增加执行权限</span></p>
+<p></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span lang="EN-US">[mongo@mongodb script] chmod 755 startconfig.sh</span></p>
+<p><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">重复上述步骤在其余两台服务器上创建</span><span lang="EN-US">startconfig.sh</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">。</span></p>
+<p></p><p class="MsoListParagraph" style="margin-left: 45.1pt; text-indent: -21.0pt; &lt;br /&gt;
+mso-char-indent-count: 0; mso-list: l2 level1 lfo4;"><span lang="EN-US">2)<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">   </span></span>启动三台服务器上的<span lang="EN-US">config</span>服务</p>
+<p><span lang="EN-US">[mongo@mongodb ~] cd /home/mongo/script</span></p>
+<p><span lang="EN-US">[mongo@mongodb script] ./startconfig.sh</span></p>
+<h3 id="lt-span-style-”font-family-‘Arial’-’sans-serif’-mso-fareast-font-family-lt-br-gt-1"><a href="#lt-span-style-”font-family-‘Arial’-’sans-serif’-mso-fareast-font-family-lt-br-gt-1" class="headerlink" title="&lt;span style=”font-family: ‘Arial’,’sans-serif’; mso-fareast-font-family: &lt;br /&gt;"></a><a name="_Toc388704081"></a><a name="_Toc385360836"></a><a name="_Toc384758418"></a>&lt;span style=”font-family: ‘Arial’,’sans-serif’; mso-fareast-font-family: &lt;br /&gt;</h3><p>Arial;” lang=”X-NONE”&gt;1.1.5<span style="font-weight: normal; font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">    </span><span style="font-family: 黑体; &lt;br /&gt;
+mso-ascii-font-family: 'Arial Unicode MS'; mso-hansi-font-family: 'Arial Unicode MS';" lang="X-NONE">创建</span><span style="font-family: 黑体; mso-ascii-font-family: 'Arial Unicode MS'; &lt;br /&gt;
+mso-hansi-font-family: 'Arial Unicode MS';" lang="X-NONE">服务</span></p>
+<p><span lang="EN-US">1)<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">   </span></span>创建<span lang="EN-US">mongos</span>启动脚本，具体操作如下：</p>
+<p><span lang="EN-US">[mongo@mongodb ~] cd /home/mongo</span></p>
+<p><span lang="EN-US">[mongo@mongodb ~] cd script</span></p>
+<p><span lang="EN-US">[mongo@mongodb script] vi startmongos.sh</span></p>
+<p><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">然后在打开的文档中输入如下信息：</span></p>
+<p></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span lang="EN-US">${MONGODB}/bin/mongos <span style="color: #ff0000;">-fork </span>-port 30000 -configdb “<span style="color: red;">IP1</span>:20000,<span style="color: red;">IP2</span>:20000,<span style="color: red;">IP3</span>:20000” -logpath<br>${MONGO_LOG}/mongos/mongos.log</span></p>
+<p><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman'; color: red;">其中</span><span style="color: red;" lang="EN-US">IP1,IP2,IP3</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman'; color: red;">分别为三台服务器的</span><span style="color: &lt;br /&gt;
+red;" lang="EN-US">IP</span></p>
+<p></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">保存后为刚创建的</span><span lang="EN-US">startconfig.sh</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">增加执行权限</span></p>
+<p></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span lang="EN-US">[mongo@mongodb script] chmod 755 startmongos.sh</span></p>
+<p><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">重复上述步骤在其余两台服务器上创建</span><span lang="EN-US">startmongos.sh</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">。</span></p>
+<p></p><p class="MsoListParagraph" style="margin-left: 45.1pt; text-indent: -21.0pt; &lt;br /&gt;
+mso-char-indent-count: 0; mso-list: l1 level1 lfo5;"><span lang="EN-US">2)<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">   </span></span>启动三台服务器上的<span lang="EN-US">mongos</span>服务</p>
+<p><span lang="EN-US">[mongo@mongodb ~] cd /home/mongo/script</span></p>
+<p><span lang="EN-US">[mongo@mongodb script] ./startmongos.sh</span></p>
+<h3 id="lt-span-style-”font-family-‘Arial’-’sans-serif’-mso-fareast-font-family-lt-br-gt-2"><a href="#lt-span-style-”font-family-‘Arial’-’sans-serif’-mso-fareast-font-family-lt-br-gt-2" class="headerlink" title="&lt;span style=”font-family: ‘Arial’,’sans-serif’; mso-fareast-font-family: &lt;br /&gt;"></a><a style="font-size: 1.3em; text-indent: 0cm; line-height: 1.5;" name="_Toc384758420"></a>&lt;span style=”font-family: ‘Arial’,’sans-serif’; mso-fareast-font-family: &lt;br /&gt;</h3><p>Arial;” lang=”X-NONE”&gt;1.1.6<span style="font-weight: normal; font-size: 7pt; line-height: normal; font-family: 'Times New Roman';"><br></span><span style="font-family: 黑体; &lt;br /&gt;
+mso-ascii-font-family: 'Arial Unicode MS'; mso-hansi-font-family: 'Arial Unicode MS';" lang="X-NONE">配置</span><span lang="X-NONE">Sharding</span><br><a name="_Toc388704082"></a></p>
+<p><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">在其中一台服务器上，连接</span><span lang="EN-US">mongod</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">服务，即路由节点</span><span lang="EN-US">30000</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">端口，具体操作如下：</span></p>
+<p></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span lang="EN-US">[mongo@mongodb ~] cd ${MONGODB}bin</span></p>
+<p><span lang="EN-US">[mongo@mongodb ~] ./mongo –port 30000</span></p>
+<p><span lang="EN-US">MongoDB shell version: 2.4.3</span></p>
+<p><span lang="EN-US">connecting to: 127.0.0.1:30000/test</span></p>
+<p><span style="color: #ff0000;">在这里需要 切换到 admin 库 </span></p>
+<p><span style="color: #ff0000;">&gt; use admin</span></p>
+<p><span lang="EN-US">&gt;db.runCommand({addshard:’shard1/10.1.195.47:10001,10.1.195.57:10001,10.1.195.67:10001’})</span></p>
+<p><span lang="EN-US">{ “shardAdded” : “shard1”, “ok” : 1 }</span></p>
+<p><span lang="EN-US">&gt;db.runCommand({addshard:”shard2/10.1.195.47:10002,10.1.195.57:10002,10.1.195.67:10002”})</span></p>
+<p><span lang="EN-US">{ “shardAdded” : “shard2”, “ok” : 1 }</span></p>
+<p><span lang="EN-US">&gt;db.runCommand({addshard:”shard3/10.1.195.47:10003,10.1.195.57:10003,10.1.195.67:10003”})</span></p>
+<p><span lang="EN-US">{ “shardAdded” : “shard3”, “ok” : 1 }</span></p>
+<p><span lang="EN-US">&gt;db.runCommand({enablesharding:”(dbname)”})</span></p>
+<h3 id="lt-span-style-”font-family-‘Arial’-’sans-serif’-mso-fareast-font-family-lt-br-gt-3"><a href="#lt-span-style-”font-family-‘Arial’-’sans-serif’-mso-fareast-font-family-lt-br-gt-3" class="headerlink" title="&lt;span style=”font-family: ‘Arial’,’sans-serif’; mso-fareast-font-family: &lt;br /&gt;"></a><a name="_Toc388704084"></a><a name="_Toc385360839"></a><a name="_Toc384758421"></a>&lt;span style=”font-family: ‘Arial’,’sans-serif’; mso-fareast-font-family: &lt;br /&gt;</h3><p>Arial; mso-fareast-language: ZH-CN;” lang=”X-NONE”&gt;1.1.7<span style="font-weight: normal; font-size: 7pt; line-height: normal; font-family: 'Times New Roman';">     </span><span style="font-family: 黑体; mso-ascii-font-family: 'Arial Unicode MS'; &lt;br /&gt;
+mso-hansi-font-family: 'Arial Unicode MS';" lang="X-NONE">配置</span><span lang="X-NONE">Collect</span><span lang="X-NONE">i</span><span lang="X-NONE">on</span><span style="font-family: 黑体; &lt;br /&gt;
+mso-ascii-font-family: 'Arial Unicode MS'; mso-hansi-font-family: 'Arial Unicode MS';" lang="X-NONE">分片</span></p>
+<p><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman'; mso-ansi-language: X-NONE;">为充分体现</span><span lang="X-NONE">mongodb</span><span style="font-family: 宋体; &lt;br /&gt;
+mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; &lt;br /&gt;
+mso-ansi-language: X-NONE;">分布式的优点，需对</span><span lang="X-NONE">mongodb</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; &lt;br /&gt;
+mso-hansi-font-family: 'Times New Roman'; mso-ansi-language: X-NONE;">的</span><span lang="X-NONE">collection</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman'; mso-ansi-language: X-NONE;">进行分片。</span><span lang="X-NONE">collection</span><span style="font-family: &lt;br /&gt;
+宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman'; &lt;br /&gt;
+mso-ansi-language: X-NONE;">分片使得数据被分散存储在不同服务器上，减少每个服务器上的数据量，即使要进行大量数据的写入、读取操作，处理起来也会很容易的。</span></p>
+<p></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">在其中一台服务器上，连接</span><span lang="EN-US">mongod</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">服务，即路由节点</span><span lang="EN-US">30000</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">端口，具体操作如下：</span></p>
+<p></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span lang="EN-US">[mongo@mongodb ~] cd ${MONGODB}bin</span></p>
+<p><span lang="EN-US">[mongo@mongodb ~] ./mongo –port 30000</span></p>
+<p><span lang="EN-US">MongoDB shell version: 2.4.3</span></p>
+<p><span lang="EN-US">connecting to: 127.0.0.1:30000/test</span></p>
+<p><span lang="EN-US">&gt;db.runCommand({“enablesharding”:”sgccoa”})</span></p>
+<p><span lang="EN-US">{“OK”:”1”}</span></p>
+<p><span lang="EN-US">&gt;db.runCommand({“shardcollection”:”sgccoa.XXX”,”key”:{“XXX”:”1”}})</span></p>
+<p><span lang="EN-US">{“collectionsharded”:”sgccoa.XXX”,”OK”:”1”}</span></p>
+<p></p><p class="MsoNormal" style="text-indent: 24.0pt; mso-char-indent-count: 2.0;"><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">由于协同办公一级部署系统关于</span><span lang="EN-US">mongodb</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">如何分片，研发暂未给出明确答复，故以上分片操作中</span><span lang="EN-US">XXX</span><span style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: &lt;br /&gt;
+'Times New Roman';">为不确定信息，可暂不进行分片操作。</span></p>
+<h2 id="1-2"><a href="#1-2" class="headerlink" title="1.2"></a><a name="_Toc388704085"></a><a name="_Toc385360840"></a><span lang="X-NONE">1.2<span style="font-weight: normal; font-size: 7pt; line-height: normal; font-family: 'Times New Roman';"></span></span></h2><p><span style="font-family: 黑体; &lt;br /&gt;
+mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE">如何验证</span><span lang="X-NONE">MongoDB</span><span style="font-family: 黑体; &lt;br /&gt;
+mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE">集群安装部署成功</span></p>
+<p></p></div><br></div><p></p>
+<div><span style="font-family: 黑体; &lt;br /&gt;
+mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE">   对于安装完成后的MongoDB，我们如何查看对应的状态呢，下面是具体的查询操作，以下的查询均基于生产环境实际操作截图：</span></div><br><div><span style="font-family: 黑体; &lt;br /&gt;
+mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE">–查看副本集的配置</span></div><br><div><span style="font-family: 黑体; &lt;br /&gt;
+mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE">1、shard1的副本集情况</span></div><br><div><span style="font-family: 黑体; &lt;br /&gt;
+mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE"><span style="font-family: 黑体; &lt;br /&gt;
+mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE"><img src="https://rjgeek.github.io/images//2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_559644114970fcdc2db003ee4d5eb3b4.png" alt=""></span></span><br><div><img src="https://rjgeek.github.io/images//2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_a851c3740c7f8ed8a623fe95a9d347ad.png" alt=""><br><div></div><br></div><br></div><br><div><span style="font-family: 黑体; &lt;br /&gt;
+mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE">2、shard2的副本集情况</span></div><br><div><span style="font-family: 黑体; &lt;br /&gt;
+mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE"><span style="font-family: 黑体; &lt;br /&gt;
+mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE"><img src="https://rjgeek.github.io/images//2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_908a45abc97733e8faefc6ad79532695.png" alt=""></span></span><br><div><img src="https://rjgeek.github.io/images//2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_d1cca730827559fd5eefebd0b72980e5.png" alt=""><br><div></div><br></div><br></div><br><div><span style="font-family: 黑体; &lt;br /&gt;
+mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE">3、shard3的副本集情况</span></div><br><div><span style="font-family: 黑体; &lt;br /&gt;
+mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE"><span style="font-family: 黑体; &lt;br /&gt;
+mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE"><img src="https://rjgeek.github.io/images//2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_81090258219c4eb30a3907d160865323.png" alt=""></span></span><br><div><img src="https://rjgeek.github.io/images//2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_836dde6525a281b02d51b9af2b0cf3a3.png" alt=""><br><div></div><br></div><br></div><br><div><span style="font-family: 黑体; &lt;br /&gt;
+mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE">–查看分片的配置</span></div><br><div><span style="font-family: 黑体; &lt;br /&gt;
+mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE"><br></span></div><br><div><span style="font-family: 黑体; &lt;br /&gt;
+mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE"><span style="font-family: 黑体; &lt;br /&gt;
+mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE"><img src="https://rjgeek.github.io/images//2015/01/wpid-6ee28ff2fe09e04487d6481316081b0f_83e74839797dd91bb712c55ee8b900ab.png" alt=""></span></span><br><div></div><br></div><br><div><span style="font-family: 黑体;">1.3 操作当某57磁盘空间沾满而47空间空闲时，将57中的副本集迁移到47中的操作过程：</span></div><br><div><span style="font-family: 黑体;">  1、首先连接到三个副本集上面，查看一下分布在57服务器上面的副本状态：</span></div><br><div><span style="font-family: 黑体;">  在57服务器上面部署的副本集情况为：</span></div><br><div><span style="font-family: 黑体;">    shard1:  57:10001 为secondary   副本节点 数据来自与primary节点，所以该节点可以删除</span></div><br><div><span style="font-family: 黑体;">    shard2:  57:10002 为primary      主节点，主要数据的存储目录，不建议删除</span></div><br><div><span style="font-family: 黑体;">    shard3:  57:10003 为arbiter      仲裁节点，数据量不大，不考虑迁移 </span></div><br><div><span style="font-family: 黑体;"> 故对shard1 在57上面的分布进行迁移</span></div><br><div><span style="font-family: 黑体;">    操作步骤：</span></div><br><div><span style="font-family: 黑体;">1、查看shard1副本集的primary节点，10.142.51.47:10001 </span></div><br><div><span style="font-family: 黑体;">    通过mongo -host 10.1.195.47 -port 10001 登录到shard1的主节点进行操作：</span></div><br><div><span style="font-family: 黑体;">    &gt;rs.remove(“10.1.195.57:10001”)–删除指定发副本集</span></div><br><div><span style="font-family: 黑体;">    &gt;rs.status()可以查看删除后的节点情况</span></div><br><div><span style="font-family: 黑体;">2、由于我们的副本将迁移到47上面，所以在47上面在开启一个mongod服务，作为节点，启动脚本如下：</span></div><br><div><span style="text-indent: 32px;">${MONGODB}/bin/mongod</span><span style="text-indent: 32px;"><span style="color: #ff0000;"> </span>-fork </span><span style="text-indent: 32px;">-shardsvr -replSet <span style="color: #ff0000;"><strong>shard1</strong></span> -port <strong><span style="color: #ff0000;">10004</span></strong> -dbpath ${MONGO_DATA}<strong><span style="color: #ff0000;">/shard4</span></strong> -logpath ${MONGO_LOG}/<strong><span style="color: #ff0000;">shard4/shard4.log</span></strong></span><span style="font-family: 黑体;"><br></span></div><br><div><span style="text-indent: 32px;"><strong><span style="color: #ff0000;"><br></span></strong></span></div><br><div><span style="text-indent: 32px;">如以上启动脚本所示： 我们删除的副本集的名称（shard1）和我们即将创建的mongod的名称必须一致，否则在添加的时候会出现问题，提示集合名称不匹配。</span></div><br><div><span style="text-indent: 32px;">前提：需要再对应的47服务器上面创建对应的目录结构。</span></div><br><div><span style="text-indent: 32px;"><br></span></div><br><div><span style="text-indent: 32px;">当新的副本集mongod创建完成后，</span></div><br><div><span style="text-indent: 32px;"> &gt;rs.add(“10.1.195.47:10004”) –方式一</span></div><br><div><span style="text-indent: 32px;">&gt;rs.add({_id:2,host:’10.1.195.47:10004’,priority:2})–方式二 利用配置形式创建可以指定优先级</span></div><br><div style="text-indent: 32px;">在添加成功后，我们再次查看配置</div><br><div style="text-indent: 32px;">&gt;rs.conf()</div><br><div style="text-indent: 32px;">&gt;rs.status()</div><br><div style="text-indent: 32px;"></div><br><div style="text-indent: 32px;">3、在以上的操作结束后，mongo会进行数据的备份过程，如果数据量大的话会比较耗时，如果数据量较大，建议将新建mongod的目录清空，让mongo进行整改数据库的备份，忽略掉匹配备份，比较省时。</div><br><div style="text-indent: 32px;">4、在以上创建完副本集后，再去查看分片的配置，发现分片的配置已经自动更新为 新增的mongod了。</div><br><div><span style="font-family: 黑体;"><br></span></div><br><div><span style="font-family: 黑体;"><br></span></div><br><div><span style="font-family: 黑体; &lt;br /&gt;
+mso-ascii-font-family: Arial; mso-hansi-font-family: Arial;" lang="X-NONE"><br></span></div><br><div><a href="http://www.wiz.cn/i/60efacb7" title="来自为知笔记(Wiz)" target="_blank" rel="external">来自为知笔记(Wiz)</a></div>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>your support will encourage me to continue to create!</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="RuJia Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Mongodb/" rel="tag">#Mongodb</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/c7e17ddcdd976d3300d357de40f10873.html" rel="next" title="【Jdk】32位redhat6系统安装jdk">
+                <i class="fa fa-chevron-left"></i> 【Jdk】32位redhat6系统安装jdk
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/a9f0ca6e8ec035725bb7b69972e4f315.html" rel="prev" title="【Nginx】32位redhat6系统安装nginx">
+                【Nginx】32位redhat6系统安装nginx <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          <pre><code><b>版权声明</b>:自由转载-非商用-非衍生-保持署名<a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" rel="external nofollow" >(创意共享3.0许可证)</a></code></pre>
+
+
+
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="RuJia" />
+          <p class="site-author-name" itemprop="name">RuJia</p>
+          <p class="site-description motion-element" itemprop="description">BlockChain,Distributed Computing</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rjgeek/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Others">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Others
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cs.bham.ac.uk/~mdr/" title="Professor Mark Ryan" target="_blank" rel="external nofollow" >Professor Mark Ryan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cs.bham.ac.uk/~rzb/" title="Dr Rami Bahsoon" target="_blank" rel="external nofollow" >Dr Rami Bahsoon</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sec.cs.bham.ac.uk/people/" title="The Security and Privacy Group" target="_blank" rel="external nofollow" >The Security and Privacy Group</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.yfgeek.com/" title="YFGeek" target="_blank" rel="external nofollow" >YFGeek</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://rjgeek.github.io/CV1.pdf" title="My CV" target="_blank" rel="external nofollow" >My CV</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-span-style-”font-family-‘Arial’-’sans-serif’-mso-fareast-font-family-lt-br-gt"><span class="nav-number">1.</span> <span class="nav-text"><span style=”font-family: ‘Arial’,’sans-serif’; mso-fareast-font-family: <br /></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-span-style-”font-family-‘Arial’-’sans-serif’-mso-fareast-font-family-lt-br-gt-1"><span class="nav-number">2.</span> <span class="nav-text"><span style=”font-family: ‘Arial’,’sans-serif’; mso-fareast-font-family: <br /></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-span-style-”font-family-‘Arial’-’sans-serif’-mso-fareast-font-family-lt-br-gt-2"><span class="nav-number">3.</span> <span class="nav-text"><span style=”font-family: ‘Arial’,’sans-serif’; mso-fareast-font-family: <br /></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-span-style-”font-family-‘Arial’-’sans-serif’-mso-fareast-font-family-lt-br-gt-3"><span class="nav-number">4.</span> <span class="nav-text"><span style=”font-family: ‘Arial’,’sans-serif’; mso-fareast-font-family: <br /></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2"><span class="nav-number"></span> <span class="nav-text">1.2</span></a></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RuJia</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+  <span id="busuanzi_container_site_pv">
+    Total visited 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  
+  <span id="busuanzi_container_site_uv">
+  Total visitors 本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'ehcoo';
+      var disqus_identifier = 'e5-9b-bd-e7-bd-91-e5-8d-8f-e5-90-8c-e5-8a-9e-e5-85-ac-e4-b8-80-e7-ba-a7-e9-83-a8-e7-bd-b2-e4-b8-admongodb-e9-85-8d-e7-bd-ae-e6-93-8d-e4-bd-9c-e5-ae-9e-e4-be-8b.html';
+      var disqus_title = "【Mongodb】MongoDB分片备份策略示例与配置迁移示例";
+      var disqus_url = 'http://www.ehcoo.com/e5-9b-bd-e7-bd-91-e5-8d-8f-e5-90-8c-e5-8a-9e-e5-85-ac-e4-b8-80-e7-ba-a7-e9-83-a8-e7-bd-b2-e4-b8-admongodb-e9-85-8d-e7-bd-ae-e6-93-8d-e4-bd-9c-e5-ae-9e-e4-be-8b.html';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

@@ -1,0 +1,1398 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+<meta name="google-site-verification" content="LzR3qfX_YDfkNEusKegSylZBjqRw3vczTwICGpJ1GRI" />
+<meta name="baidu-site-verification" content="IhNq56RJS1" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Ehcoo" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="本部分的描述仅适用于单一的Domino平台应用与构异系统实现单点登录。">
+<meta name="keywords" content="BlockChain,Distributed Computing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Single Sign On】Domino平台应用与构异系统实现单点登录">
+<meta property="og:url" content="http://www.ehcoo.com/1d59179ae8a72ce763744f4f829fdea8.html">
+<meta property="og:site_name" content="Ehcoo">
+<meta property="og:description" content="本部分的描述仅适用于单一的Domino平台应用与构异系统实现单点登录。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-c59a17b582e2766132b0a5b53ed25bca_clip_image0028f801b21-7107-401b-b63b-f58fb8b4f0dd.jpg">
+<meta property="og:image" content="https://rjgeek.github.io/images//2015/12/wpid-c59a17b582e2766132b0a5b53ed25bca_clip_image004612102fd-470a-4576-aa4c-4150baddb29b.jpg">
+<meta property="og:updated_time" content="2017-10-29T15:38:31.046Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【Single Sign On】Domino平台应用与构异系统实现单点登录">
+<meta name="twitter:description" content="本部分的描述仅适用于单一的Domino平台应用与构异系统实现单点登录。">
+<meta name="twitter:image" content="https://rjgeek.github.io/images//2015/12/wpid-c59a17b582e2766132b0a5b53ed25bca_clip_image0028f801b21-7107-401b-b63b-f58fb8b4f0dd.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.ehcoo.com/1d59179ae8a72ce763744f4f829fdea8.html"/>
+
+
+  <title> 【Single Sign On】Domino平台应用与构异系统实现单点登录 | Ehcoo </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="default">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?83e3b6b55c0e48f5d0848d6a14b76c02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+  
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ehcoo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about-me" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                【Single Sign On】Domino平台应用与构异系统实现单点登录
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-12-07T21:15:54+00:00" content="2015-12-07">
+              2015-12-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程语言/" itemprop="url" rel="index">
+                    <span itemprop="name">编程语言</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/1d59179ae8a72ce763744f4f829fdea8.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="1d59179ae8a72ce763744f4f829fdea8.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+		  
+          
+          
+
+          
+		 
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><span style="color: rgb(102, 102, 102); font-size: 10.5pt; line-height: 18pt;">本部分的描述仅适用于单一的</span><span lang="EN-US" style="color: rgb(102, 102, 102); font-size: 10.5pt; line-height: 18pt;">Domino</span><span style="color: rgb(102, 102, 102); font-size: 10.5pt; line-height: 18pt;">平台应用与构异系统实现单点登录。</span><a id="more"></a></p>
+<div class="MsoNormal" align="center" style="margin:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:18.0pt;word-break:break-all"><span lang="EN-US" style="font-size:10.5pt;color:#666666"><br><br><em> </em> *<br></span></div>
+
+<p><strong><span lang="EN-US" style="font-size:12.5pt;color:#666666">1.1 Domino LTPA Cookie </span>**</strong><span style="font-size:12.5pt;color:#666666">生成原理<span lang="EN-US"><o:p></o:p></span></span>**</p>
+<p><span style="font-size:10.5pt;color:#666666">在与<span lang="EN-US"> Domino </span>做<span lang="EN-US"> SSO </span>的时候，会使用<span lang="EN-US"> LTPA Token</span>的认证方式，本文描述它的生成原理，通过它我们可以自己编码生成身份认证的<span lang="EN-US"> cookie</span>，实现<span lang="EN-US"> SSO</span>。<span lang="EN-US"><o:p></o:p></span></span></p>
+<p><span style="font-size:10.5pt;color:#666666">首先，这个<span lang="EN-US"> cookie </span>由以下部分组成：<span lang="EN-US"><o:p></o:p></span></span></p>
+<p><span lang="EN-US" style="mso-bidi-font-size:10.5pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;color:#666666">·<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';"></span></span><span lang="EN-US" style="font-size:10.5pt;
+color:#666666">LTPA token </span><span style="font-size:10.5pt;color:#666666">版本（<span lang="EN-US">4</span>字节）<span lang="EN-US"><o:p></o:p></span></span></p>
+<p><span lang="EN-US" style="mso-bidi-font-size:10.5pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;color:#666666">·<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';"></span></span><span style="font-size:10.5pt;color:#666666">创建时间（<span lang="EN-US">8</span>字节）<span lang="EN-US"><o:p></o:p></span></span></p>
+<p><span lang="EN-US" style="mso-bidi-font-size:10.5pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;color:#666666">·<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';"></span></span><span style="font-size:10.5pt;color:#666666">过期时间（<span lang="EN-US">8</span>字节）<span lang="EN-US"><o:p></o:p></span></span></p>
+<p><span lang="EN-US" style="mso-bidi-font-size:10.5pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;color:#666666">·<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';"></span></span><span style="font-size:10.5pt;color:#666666">用户名（可变长度）<span lang="EN-US"><o:p></o:p></span></span></p>
+<p><span lang="EN-US" style="mso-bidi-font-size:10.5pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;color:#666666">·<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';"></span></span><span lang="EN-US" style="font-size:10.5pt;
+color:#666666">Domino LTPA </span><span style="font-size:10.5pt;color:#666666">密钥（<span lang="EN-US">20</span>字节）<span lang="EN-US"> <o:p></o:p></span></span></p>
+<p><span style="font-size:10.5pt;color:#666666">接下来分别说明各部分的具体内容：<span lang="EN-US"><o:p></o:p></span></span></p>
+<p><span lang="EN-US" style="mso-bidi-font-size:10.5pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;color:#666666">·<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';"></span></span><span lang="EN-US" style="font-size:10.5pt;
+color:#666666">LTPA token </span><span style="font-size:10.5pt;color:#666666">版本目前<span lang="EN-US"> Domino </span>只有一种值：<span lang="EN-US">0x0001<o:p></o:p></span></span></p>
+<p><span lang="EN-US" style="mso-bidi-font-size:10.5pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;color:#666666">·<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';"></span></span><span style="font-size:10.5pt;color:#666666">创建时间为以十六进制方式表示的<span lang="EN-US">Unix time</span>，例如<span lang="EN-US">:2009-04-09 13:52:42 (GMT +8) =<br>1239256362 = 49DD8D2A</span>。<span lang="EN-US"><o:p></o:p></span></span></p>
+<p><span lang="EN-US" style="mso-bidi-font-size:10.5pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;color:#666666">·<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';"></span></span><span style="font-size:10.5pt;color:#666666">过期时间<span lang="EN-US">=</span>创建时间<span lang="EN-US"> + SSO </span>配置文档的过期时间（<span lang="EN-US">LTPA_TokenExpiration</span>域）<span lang="EN-US"><o:p></o:p></span></span></p>
+<p><span lang="EN-US" style="mso-bidi-font-size:10.5pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;color:#666666">·<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';"></span></span><span style="font-size:10.5pt;color:#666666">用户名为<span lang="EN-US"> Names </span>中用户文档的<span lang="EN-US">FullName</span>域值；如：<span lang="EN-US">Squall Zhong/Digiwin<o:p></o:p></span></span></p>
+<p><span lang="EN-US" style="mso-bidi-font-size:10.5pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;color:#666666">·<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';"></span></span><span lang="EN-US" style="font-size:10.5pt;
+color:#666666">Domino LTPA </span><span style="font-size:10.5pt;color:#666666">密钥通过<span lang="EN-US"> Base64</span>编码后，保存在<span lang="EN-US"> SSO </span>配置文档的<span lang="EN-US">LTPA_DominoSecret</span>域中<span lang="EN-US"> <o:p></o:p></span></span></p>
+<p><span lang="EN-US" style="font-size:10.5pt;color:#666666;mso-no-proof:yes"><img src="https://rjgeek.github.io/images//2015/12/wpid-c59a17b582e2766132b0a5b53ed25bca_clip_image0028f801b21-7107-401b-b63b-f58fb8b4f0dd.jpg" alt="http://lh6.googleusercontent.com/9aNb90qGxfI2xo079GBnZU70rVkt0VA0PptmOwkXa3lMWTC4NsYGlyN9SSs2KXnf-umJAFKFSBHwUYyHD89laYLElg"></span><span lang="EN-US" style="font-size:10.5pt;
+color:#666666"><o:p></o:p></span></p>
+<p><span style="font-size:10.5pt;color:#666666">当然不能将密钥直接发送给浏览器，所以将上述部分合并起来（如上图），计算<span lang="EN-US"> SHA-1 </span>校验和。<span lang="EN-US"><o:p></o:p></span></span></p>
+<p><span lang="EN-US" style="font-size:10.5pt;color:#666666;
+mso-no-proof:yes"><img src="https://rjgeek.github.io/images//2015/12/wpid-c59a17b582e2766132b0a5b53ed25bca_clip_image004612102fd-470a-4576-aa4c-4150baddb29b.jpg" alt="http://lh5.googleusercontent.com/XLW2lNbFKVzFhL7hGYHbYxQFFy9VqrMdND0CRWaPYL8UyKzjOl7cPTiIjY_sJ5mP8QSNeAFZLT-8slUCXqXHKpvGSQ"></span><span lang="EN-US" style="font-size:10.5pt;
+color:#666666"><o:p></o:p></span></p>
+<p><span style="font-size:10.5pt;color:#666666">然后用<span lang="EN-US"> SHA-1 </span>校验和替换掉<span lang="EN-US"> Domino LTPA </span>密钥，最后再将内容通过<span lang="EN-US"> Base64 </span>编码，形成最终的<span lang="EN-US"> cookie </span>发送给浏览器（如上图）。这样如果<span lang="EN-US"> cookie </span>中的任何内容被修改，校验和就不对了，达到了防篡改的效果。所以最终<span lang="EN-US">LTPA<br>Cookie</span>所得到的值为以下公式组成：<span lang="EN-US"><o:p></o:p></span></span></p>
+<p><strong><span lang="EN-US" style="font-size:10.5pt;
+font-family:宋体;mso-bidi-font-family:宋体;color:#666666">SHA-1=LTPA</span>**</strong><span style="font-size:10.5pt;font-family:宋体;mso-bidi-font-family:宋体;color:#666666">版本号<span lang="EN-US">+</span>创建时间<span lang="EN-US">+</span>过期时间<span lang="EN-US">+</span>用户名<span lang="EN-US">+Domino LTPA </span>密钥</span>**<span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><strong><span lang="EN-US" style="font-size:10.5pt;
+font-family:宋体;mso-bidi-font-family:宋体;color:#666666">LTPA Cookie= Base64(LTPA</span>**</strong><span style="font-size:10.5pt;font-family:宋体;mso-bidi-font-family:宋体;color:#666666">版本号<span lang="EN-US">+</span>创建时间<span lang="EN-US">+</span>过期时间<span lang="EN-US">+</span>用户名<span lang="EN-US">+SHA-1)</span></span>**<span lang="EN-US" style="font-size:
+10.5pt;color:#666666"><o:p></o:p></span></p>
+<div class="MsoNormal" align="center" style="margin:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:18.0pt;word-break:break-all"><span lang="EN-US" style="font-size:10.5pt;color:#666666"><br><br><em> </em> *<br></span></div>
+
+<p><strong><span lang="EN-US" style="font-size:12.5pt;color:#666666">1.2 </span>**</strong><span style="font-size:12.5pt;color:#666666">异构系统所需信息<span lang="EN-US"><o:p></o:p></span></span>**</p>
+<p><span lang="EN-US" style="mso-bidi-font-size:10.5pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;color:#666666">·<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';"></span></span><span lang="EN-US" style="font-size:10.5pt;
+color:#666666">Domino </span><span style="font-size:10.5pt;color:#666666">所使用的<span lang="EN-US">DNS</span>域，如：<span lang="EN-US">vgolive.com<o:p></o:p></span></span></p>
+<p><span lang="EN-US" style="mso-bidi-font-size:10.5pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;color:#666666">·<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';"></span></span><span style="font-size:10.5pt;color:#666666">过期时间<span lang="EN-US">(</span>分钟<span lang="EN-US">)</span>，如：<span lang="EN-US">30<o:p></o:p></span></span></p>
+<p><span lang="EN-US" style="mso-bidi-font-size:10.5pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;color:#666666">·<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';"></span></span><span lang="EN-US" style="font-size:10.5pt;
+color:#666666">Domino LTPA </span><span style="font-size:10.5pt;color:#666666">密钥<span lang="EN-US"><o:p></o:p></span></span></p>
+<p><span lang="EN-US" style="mso-bidi-font-size:10.5pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;color:#666666">·<span style="font-size: 7pt; line-height: normal; font-family: 'Times New Roman';"></span></span><span lang="EN-US" style="font-size:10.5pt;
+color:#666666">Domino</span><span style="font-size:10.5pt;color:#666666">验证字名称，如：<span lang="EN-US">/O=VGOLive Technology <o:p></o:p></span></span></p>
+<p><span style="font-size:10.5pt;color:red">注：用户名可以通过<span lang="EN-US">Domino</span>验证字进行拼接，如异构系统中用户名为<span lang="EN-US">SquallZhong</span>，相应在<span lang="EN-US">Domino</span>中的<span lang="EN-US">DN</span>就是<span lang="EN-US">CN=SquallZhong/O=VGOLive<br>Technology</span>。此类情况仅限于<span lang="EN-US">Domino</span>中的<span lang="EN-US">CN</span>与异构系统中的用户名一致。如果不一致，需要异构系统做用户对应</span><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<div class="MsoNormal" align="center" style="margin:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:18.0pt;word-break:break-all"><span lang="EN-US" style="font-size:10.5pt;color:#666666"><br><br><em> </em> *<br></span></div>
+
+<p><strong><span lang="EN-US" style="font-size:12.5pt;color:#666666">1.3 </span>**</strong><span style="font-size:12.5pt;color:#666666">实现<span lang="EN-US"><o:p></o:p></span></span>**</p>
+<p><span lang="EN-US" style="font-size:10.5pt;color:#666666">Base64</span><span style="font-size:10.5pt;color:#666666">解码<span lang="EN-US">/</span>编码所需<span lang="EN-US">Jar</span>包：<strong><span lang="EN-US" style="font-family:宋体;
+mso-bidi-font-family:宋体">apache-commons-codec-1.3.jar</span>**</strong><span style="font-family:宋体;mso-bidi-font-family:宋体">以上</span>**<span lang="EN-US"><o:p></o:p></span></span></p>
+<p><span lang="EN-US" style="font-size:10.5pt;color:#666666">SHA-1</span><span style="font-size:10.5pt;color:#666666">的校验使用<strong><span lang="EN-US" style="font-family:宋体;mso-bidi-font-family:宋体">java.security.MessageDigest</span></strong>类<span lang="EN-US"><o:p></o:p></span></span></p>
+<p><span style="font-size:10.5pt;color:#666666">转换字符集使用：<strong><span lang="EN-US" style="font-family:宋体;mso-bidi-font-family:宋体">Cp850</span></strong><span lang="EN-US"><o:p></o:p></span></span></p>
+<div class="MsoNormal" align="center" style="margin:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:18.0pt;word-break:break-all"><span lang="EN-US" style="font-size:10.5pt;color:#666666"><br><br><em> </em> *<br></span></div>
+
+<p><strong><span lang="EN-US" style="font-size:11.5pt;color:#333333">1.3.1 </span>**</strong><span style="font-size:11.5pt;color:#333333">解析<span lang="EN-US"><o:p></o:p></span></span>**</p>
+<p><span lang="EN-US" style="font-size:10.5pt;
+color:#666666"><a href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;" title="show source" target="_blank" rel="external"><span style="color:#F03331;text-decoration:none;text-underline:
+none">show source</span></a><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;01&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">import</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;org.apache.commons.codec.binary.Base64;
+&lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;02…... &lt;/span&gt;</code><span lang="EN-US" style="font-size:
+10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;03&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">final</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;String CHARSET = &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">“Cp850”</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;; &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;04&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">byte</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;[] dominoSecret =
+Base64.decodeBase64(ltpaDominoSecret.getBytes()); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;05&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">byte</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;[] ltpa =
+Base64.decodeBase64(ltpaToken.getBytes()); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;06ByteArrayInputStream stream = &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">new</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;ByteArrayInputStream(ltpa); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;07&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">int</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;usernameLength = ltpa.length
+– &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;
+color:#666666">40</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;
+color:#666666&quot;&gt;; &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;
+color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;08&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">byte</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;header[] = &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">new</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">byte</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;[&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">4</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;]; &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;09&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">byte</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;creation[] = &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">new</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">byte</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;[&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">8</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;]; &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;10&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">byte</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;expires[] = &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">new</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">byte</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;[&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">8</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;]; &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;11&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">byte</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;username[] = &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">new</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">byte</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;[usernameLength]; &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;12&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">byte</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;[] sha = &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">new</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">byte</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;[&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">20</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;]; &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;13// &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;
+color:#666666&quot;&gt;读取&lt;span lang=&quot;EN-US&quot;&gt;LTPAToken&lt;/span&gt;版本号 &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;14stream.read(header, &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">0</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;, &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">4</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;15&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">if</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;(header[&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">0</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;] != &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">0</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;|| header[&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">1</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;] != &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">1</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;|| header[&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">2</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;] != &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">2</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;|| header[&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">3</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;] != &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">3</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;) &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;16&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">throw</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">new</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;IllegalArgumentException(&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">“Invalid<br>ltpaToken format”</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;
+color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;17&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;读取开始时间 &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;18&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp; </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;stream.read(creation, &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">0</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;, &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">8</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;19&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp; </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;读取到期时间 &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;20&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp; </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;stream.read(expires, &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">0</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;, &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">8</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;21&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp; </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;读取&lt;span lang=&quot;EN-US&quot;&gt;Domino&lt;/span&gt;用户&lt;span lang=&quot;EN-US&quot;&gt;DN &lt;/span&gt;&lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;
+color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;22&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp; </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;stream.read(username, &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">0</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;, usernameLength); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;23&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp; </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;读取&lt;span lang=&quot;EN-US&quot;&gt;SHA&lt;/span&gt;校验和 &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;24&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp; </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;stream.read(sha, &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">0</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;, &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">20</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;25&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;转换用户名 &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;26&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp; </span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">char</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;characters[] = &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">new</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">char</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;[usernameLength]; &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;27&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp; </span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">try</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;{ &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;28&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;InputStreamReader isr = &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">new</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;InputStreamReader( &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;29&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">new</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;ByteArrayInputStream(username),
+&lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;30&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;CHARSET); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;31&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;isr.read(characters); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;32&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;} &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">catch</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;(Exception e) { &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;33&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;} &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;34&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;获得&lt;span lang=&quot;EN-US&quot;&gt;Domino&lt;/span&gt;用户&lt;span lang=&quot;EN-US&quot;&gt;DN &lt;/span&gt;&lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;
+color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;35&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;String dn = &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">new</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;String(characters); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;36&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;获得创建时间 &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;37&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp; </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;Date creationDate = &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">new</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;Date( &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;38&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;Long.parseLong(&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">new</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;String(creation), &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">16</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;) * &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">1000</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;39&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;获得到期时间 &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;40&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp; </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;Date expiresDate = &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">new</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;Date( &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;41&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;Long.parseLong(&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">new</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;String(expires), &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">16</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;) * &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">1000</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;42…... &lt;/span&gt;</code><span lang="EN-US" style="font-size:
+10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;43// &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;
+color:#666666&quot;&gt;创建&lt;span lang=&quot;EN-US&quot;&gt;LTPA Token &lt;/span&gt;&lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;44&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;ByteArrayOutputStream ostream
+= &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;
+color:#666666">new</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;ByteArrayOutputStream(); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;45&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">try</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;{ &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;46&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// LTPA Token&lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;版本号 &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;47&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;ostream.write(header); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;48&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;创建时间 &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;49&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;ostream.write(creation); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;50&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;过期时间 &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;51&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;ostream.write(expires); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;52&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// Domino&lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;用户&lt;span lang=&quot;EN-US&quot;&gt;DN&lt;/span&gt;，如&lt;span lang=&quot;EN-US&quot;&gt;CN=SquallZhong/O=DigiWin &lt;/span&gt;&lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;53&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;ostream.write(username); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;54&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// Domino LTPA &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;密钥 &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;55&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;ostream.write(dominoSecret); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;56&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;ostream.close(); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;57&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;} &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">catch</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;(IOException e) { &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;58&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">throw</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">new</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;RuntimeException(e); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;59&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;} &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;60&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;进行&lt;span lang=&quot;EN-US&quot;&gt; SHA-1 &lt;/span&gt;校验和 &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;61&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;MessageDigest md; &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;62&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">try</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;{ &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;63&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;md =
+MessageDigest.getInstance(&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">“SHA-1”</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;64&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;md.reset(); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;65&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;} &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">catch</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;(NoSuchAlgorithmException e)
+{ &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;66&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">throw</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">new</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;RuntimeException(e); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;67&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;} &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;68&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">byte</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;[] digest =
+md.digest(ostream.toByteArray()); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;69&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;完成&lt;span lang=&quot;EN-US&quot;&gt; SHA-1 &lt;/span&gt;校验和，&lt;span lang=&quot;EN-US&quot;&gt;digest&lt;/span&gt;长度为&lt;span lang=&quot;EN-US&quot;&gt;20 &lt;/span&gt;&lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;70&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">boolean</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;valid =
+MessageDigest.isEqual(digest, sha);&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666"> </span></span><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<div class="MsoNormal" align="center" style="margin:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:18.0pt;word-break:break-all"><span lang="EN-US" style="font-size:10.5pt;color:#666666"><br><br><em> </em> *<br></span></div>
+
+<p><strong><span lang="EN-US" style="font-size:11.5pt;color:#333333">1.3.2 </span>**</strong><span style="font-size:11.5pt;color:#333333">生成<span lang="EN-US"><o:p></o:p></span></span>**</p>
+<p><span lang="EN-US" style="font-size:10.5pt;
+color:#666666"><a href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;" title="show source" target="_blank" rel="external"><span style="color:#F03331;text-decoration:none;text-underline:
+none">show source</span></a><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;01&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;/** &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;02&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp; </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;* &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;为指定用户创建有效的&lt;span lang=&quot;EN-US&quot;&gt;LTPA Token.&lt;/span&gt;创建时间为&lt;span lang=&quot;EN-US&quot;&gt;&amp;lt;tt&amp;gt;now&amp;lt;/tt&amp;gt;. &lt;/span&gt;&lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;03&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp; </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;* &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;04&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp; </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;* @param username &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;05&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp; </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;*&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;-
+&lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;用户名，注：使用用户全称，如：&lt;span lang=&quot;EN-US&quot;&gt;CN=SquallZhong/O=VGOLive Technology &lt;/span&gt;&lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;06&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp; </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;* @param creationTime &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;07&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp; </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;*&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;-
+&lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;创建时间 &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;08&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp; </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;* @param durationMinutes &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;09&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp; </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;*&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;-
+&lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;到期时间，单位：分钟 &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;10@param ltpaSecretStr &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;11&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp; </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;*&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;-
+Domino Ltpa &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;加密字符串
+&lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;12&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp; </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;* @return - &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;返回已&lt;span lang=&quot;EN-US&quot;&gt;Base64&lt;/span&gt;编码的&lt;span lang=&quot;EN-US&quot;&gt;Ltpa Cookie. &lt;/span&gt;&lt;/span&gt;</code><span lang="EN-US" style="font-size:
+10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;13&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp; </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;* @throws
+NoSuchAlgorithmException &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;
+color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;14&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp; </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;* @throws
+Base64DecodeException &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;
+color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;15&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp; </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;*/&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;16&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">public</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">static</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;String createLtpaToken(String
+username, &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;17&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;GregorianCalendar
+creationTime, &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">int</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;durationMinutes, &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;18&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;String ltpaSecretStr) &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">throws</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;NoSuchAlgorithmException { &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;19&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// Base64&lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;解码&lt;span lang=&quot;EN-US&quot;&gt;ltpaSecretStr &lt;/span&gt;&lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;20&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">byte</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;[] ltpaSecret =
+Base64.decodeBase64(ltpaSecretStr.getBytes()); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;21&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;用户名字节数组 &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;22&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">byte</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;[] usernameArray =
+username.getBytes(); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;
+color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;23&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">byte</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;[] workingBuffer = &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">new</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">byte</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;[preUserDataLength &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;24&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;+ usernameArray.length +
+ltpaSecret.length]; &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;
+color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;25&amp;nbsp;&lt;/span&gt;</code><span lang="EN-US" style="font-size:
+10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;26&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;设置&lt;span lang=&quot;EN-US&quot;&gt;ltpaToken&lt;/span&gt;版本至&lt;span lang=&quot;EN-US&quot;&gt;workingBuffer &lt;/span&gt;&lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;27&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;System.arraycopy(ltpaTokenVersion,
+&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;
+color:#666666">0</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;
+color:#666666&quot;&gt;, workingBuffer, &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">0</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;, &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;28&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;ltpaTokenVersion.length); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;29&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;获得过期时间，过期时间&lt;span lang=&quot;EN-US&quot;&gt;=&lt;/span&gt;当前时间&lt;span lang=&quot;EN-US&quot;&gt;+&lt;/span&gt;到期时间&lt;span lang=&quot;EN-US&quot;&gt;(&lt;/span&gt;分钟&lt;span lang=&quot;EN-US&quot;&gt;) &lt;/span&gt;&lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;30&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;GregorianCalendar
+expirationDate = (GregorianCalendar) creationTime &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;31&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;.clone(); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;32&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;expirationDate.add(Calendar.MINUTE,
+durationMinutes); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;
+color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;33&amp;nbsp;&lt;/span&gt;</code><span lang="EN-US" style="font-size:
+10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;34&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;转换创建时间至&lt;span lang=&quot;EN-US&quot;&gt;16&lt;/span&gt;进制字符串 &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;35&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;String hex = dateStringFiller
+&lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;36&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;+ Integer.toHexString( &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;37&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;(&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">int</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;)
+(creationTime.getTimeInMillis() / &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">1000</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;)) &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;38&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;.toUpperCase(); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;39&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;设置创建时间至&lt;span lang=&quot;EN-US&quot;&gt;workingBuffer &lt;/span&gt;&lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;40&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;System.arraycopy(hex.getBytes(),
+hex.getBytes().length &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;
+color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;41&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;- dateStringLength,
+workingBuffer, creationDatePosition, &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;42&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;dateStringLength); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;43&amp;nbsp;&lt;/span&gt;</code><span lang="EN-US" style="font-size:
+10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;44&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;转换过期时间至&lt;span lang=&quot;EN-US&quot;&gt;16&lt;/span&gt;进制字符串 &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;45&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;hex = dateStringFiller &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;46&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;+ Integer.toHexString( &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;47&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;(&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">int</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;)
+(expirationDate.getTimeInMillis() / &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">1000</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;)) &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;48&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;.toUpperCase(); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;49&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;设置过期时间至&lt;span lang=&quot;EN-US&quot;&gt;workingBuffer &lt;/span&gt;&lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;50&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;System.arraycopy(hex.getBytes(),
+hex.getBytes().length &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;
+color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;51&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;- dateStringLength,
+workingBuffer, expirationDatePosition, &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;52&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;dateStringLength); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;53&amp;nbsp;&lt;/span&gt;</code><span lang="EN-US" style="font-size:
+10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;54&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;设置用户全称至&lt;span lang=&quot;EN-US&quot;&gt;workingBuffer &lt;/span&gt;&lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;55&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;System.arraycopy(usernameArray,
+&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;
+color:#666666">0</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;
+color:#666666&quot;&gt;, workingBuffer, preUserDataLength, &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;56&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;usernameArray.length); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;57&amp;nbsp;&lt;/span&gt;</code><span lang="EN-US" style="font-size:
+10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;58&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;设置已&lt;span lang=&quot;EN-US&quot;&gt;Base64&lt;/span&gt;解码&lt;span lang=&quot;EN-US&quot;&gt;ltpaSecret&lt;/span&gt;至&lt;span lang=&quot;EN-US&quot;&gt;workingBuffer &lt;/span&gt;&lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;59&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;System.arraycopy(ltpaSecret, &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">0</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;, workingBuffer, preUserDataLength
+&lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;60&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;+ usernameArray.length,
+ltpaSecret.length); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;
+color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;61&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;创建&lt;span lang=&quot;EN-US&quot;&gt;Hash&lt;/span&gt;字符串 &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;62&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">byte</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;[] hash =
+createHash(workingBuffer); &lt;/span&gt;</code><span lang="EN-US" style="font-size:
+10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;63&amp;nbsp;&lt;/span&gt;</code><span lang="EN-US" style="font-size:
+10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;64&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// ltpaToken&lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;版本&lt;span lang=&quot;EN-US&quot;&gt;+&lt;/span&gt;开始时间&lt;span lang=&quot;EN-US&quot;&gt;(16&lt;/span&gt;进制&lt;span lang=&quot;EN-US&quot;&gt;)+&lt;/span&gt;到期时间&lt;span lang=&quot;EN-US&quot;&gt;(16&lt;/span&gt;进制&lt;span lang=&quot;EN-US&quot;&gt;)+&lt;/span&gt;用户全名&lt;span lang=&quot;EN-US&quot;&gt;+SHA-1(ltpaToken&lt;/span&gt;版本&lt;span lang=&quot;EN-US&quot;&gt;+&lt;/span&gt;开始时间&lt;span lang=&quot;EN-US&quot;&gt;(16&lt;/span&gt;进制&lt;span lang=&quot;EN-US&quot;&gt;)+&lt;/span&gt;到期时间&lt;span lang=&quot;EN-US&quot;&gt;(16&lt;/span&gt;进制&lt;span lang=&quot;EN-US&quot;&gt;)+&lt;/span&gt;用户全名&lt;span lang=&quot;EN-US&quot;&gt;) &lt;/span&gt;&lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;65&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">byte</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;[] outputBuffer = &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">new</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">byte</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;[preUserDataLength +
+usernameArray.length &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;
+color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;66&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;+ hashLength]; &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;67&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;System.arraycopy(workingBuffer,
+&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;
+color:#666666">0</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;
+color:#666666&quot;&gt;, outputBuffer, &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">0</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;, preUserDataLength &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;68&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;+ usernameArray.length); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;69&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;System.arraycopy(hash, &lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">0</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;, outputBuffer,
+preUserDataLength &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;
+color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;70&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;+ usernameArray.length,
+hashLength); &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;71&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;// &lt;/span&gt;``&lt;span style=&quot;font-size:12.0pt;color:#666666&quot;&gt;返回已&lt;span lang=&quot;EN-US&quot;&gt;Base64&lt;/span&gt;编码的&lt;span lang=&quot;EN-US&quot;&gt;outputBuffer &lt;/span&gt;&lt;/span&gt;</code><span lang="EN-US" style="font-size:
+10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;72&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">return</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666">new</span></span><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666"> </span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;String(Base64.encodeBase64(outputBuffer));
+&lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;73&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:10.5pt;color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;</span></span><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:12.0pt;color:#666666&quot;&gt;} &lt;/span&gt;</code><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;74…...&lt;/span&gt;</code><span class="block"><span lang="EN-US" style="font-size:12.0pt;color:#666666"> </span></span><span lang="EN-US" style="font-size:10.5pt;color:#666666"><o:p></o:p></span></p>
+<p><code>&lt;span lang=&quot;EN-US&quot; style=&quot;font-size:
+12.0pt;color:#666666&quot;&gt;
+&lt;/span&gt;</code></p>
+<font color="#666666" face="monospace" size="3">本文与同事在2013年设计一级部署系统架构时所定，同事曾经发表于<a href="http://wenku.baidu.com/link?url=PeEZDCBIhZjTEQffdDMbBvMdpJGaW-WuLNhiJeLwf4jPh-om0Z8bRwNY_LDJiVd0ZqDHyUQ-D9C-WlTGhAVGZ2oma4AU2-tcD-u1JLuN3ne" target="_blank" rel="external">百度文库</a></font>
+
+<font color="#666666" face="monospace" size="3"><br></font>
+
+<font color="#666666" face="monospace" size="3"><br></font>
+
+<font color="#666666" face="monospace" size="3"><br></font>
+
+<font color="#666666" face="monospace" size="3"><br></font>
+
+<font color="#666666" face="monospace" size="3"><br></font>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>your support will encourage me to continue to create!</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="RuJia Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/e2c6f029977a8f38d983f0f2fdaa1d69.html" rel="next" title="【密码知识】An introduction to Digital Signatures(数字证书的介绍)">
+                <i class="fa fa-chevron-left"></i> 【密码知识】An introduction to Digital Signatures(数字证书的介绍)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/aaf5ef736546f8609aab82ef94134980.html" rel="prev" title="【Mongodb】Mongodb常用查询命令总结">
+                【Mongodb】Mongodb常用查询命令总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          <pre><code><b>版权声明</b>:自由转载-非商用-非衍生-保持署名<a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" rel="external nofollow" >(创意共享3.0许可证)</a></code></pre>
+
+
+
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="RuJia" />
+          <p class="site-author-name" itemprop="name">RuJia</p>
+          <p class="site-description motion-element" itemprop="description">BlockChain,Distributed Computing</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rjgeek/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Others">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Others
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cs.bham.ac.uk/~mdr/" title="Professor Mark Ryan" target="_blank" rel="external nofollow" >Professor Mark Ryan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cs.bham.ac.uk/~rzb/" title="Dr Rami Bahsoon" target="_blank" rel="external nofollow" >Dr Rami Bahsoon</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sec.cs.bham.ac.uk/people/" title="The Security and Privacy Group" target="_blank" rel="external nofollow" >The Security and Privacy Group</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.yfgeek.com/" title="YFGeek" target="_blank" rel="external nofollow" >YFGeek</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://rjgeek.github.io/CV1.pdf" title="My CV" target="_blank" rel="external nofollow" >My CV</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RuJia</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+  <span id="busuanzi_container_site_pv">
+    Total visited 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  
+  <span id="busuanzi_container_site_uv">
+  Total visitors 本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'ehcoo';
+      var disqus_identifier = '1d59179ae8a72ce763744f4f829fdea8.html';
+      var disqus_title = "【Single Sign On】Domino平台应用与构异系统实现单点登录";
+      var disqus_url = 'http://www.ehcoo.com/1d59179ae8a72ce763744f4f829fdea8.html';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

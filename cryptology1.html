@@ -1,0 +1,1001 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+<meta name="google-site-verification" content="LzR3qfX_YDfkNEusKegSylZBjqRw3vczTwICGpJ1GRI" />
+<meta name="baidu-site-verification" content="IhNq56RJS1" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="密码学，非对称秘钥，签名算法" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="引文 密码学是研究编制密码和破译密码的技术科学。研究密码变化的客观规律，应用于编制密码以保守通信秘密的，称为编码学；应用于破译密码以获取通信情报的，称为破译学，总称密码学。  在《一万字带您走进密码学的世界（上）》的文章中我们探讨了对称密码体系，哈希函数等技术，本文继续探讨密码学剩余的部分，本文的主要内容包括，非对称密码体系，签名算法等，因为本部分是区块链技术的基石，所以我会讲的更加详细一点，虽然">
+<meta name="keywords" content="密码学，非对称秘钥，签名算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【密码学】一万字带您走进密码学的世界（下）">
+<meta property="og:url" content="http://www.ehcoo.com/cryptology1.html">
+<meta property="og:site_name" content="Ehcoo">
+<meta property="og:description" content="引文 密码学是研究编制密码和破译密码的技术科学。研究密码变化的客观规律，应用于编制密码以保守通信秘密的，称为编码学；应用于破译密码以获取通信情报的，称为破译学，总称密码学。  在《一万字带您走进密码学的世界（上）》的文章中我们探讨了对称密码体系，哈希函数等技术，本文继续探讨密码学剩余的部分，本文的主要内容包括，非对称密码体系，签名算法等，因为本部分是区块链技术的基石，所以我会讲的更加详细一点，虽然">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://www.ehcoo.com/images/2017/01/cryptology1_6.jpg?t=2>">
+<meta property="og:image" content="http://www.ehcoo.com/images/2017/01/cryptology1_0.jpg?t=2%3E">
+<meta property="og:image" content="http://www.ehcoo.com/images/2017/01/cryptology1_1.png?t=2%3E">
+<meta property="og:image" content="http://www.ehcoo.com/images/2017/01/cryptology1_2.png?t=2%3E">
+<meta property="og:image" content="http://www.ehcoo.com/images/2017/01/cryptology1_3.png?t=2%3E">
+<meta property="og:image" content="http://www.ehcoo.com/images/2017/01/cryptology1_8.png?t=2%3E">
+<meta property="og:image" content="http://www.ehcoo.com/images/2017/01/cryptology1_7.png?t=2%3E">
+<meta property="og:image" content="http://www.ehcoo.com/images/2017/01/cryptology1_4.jpg?t=1%3E">
+<meta property="og:image" content="http://www.ehcoo.com/images/2017/01/cryptology1_5.jpg?t=2%3E">
+<meta property="og:updated_time" content="2017-10-29T15:38:31.050Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【密码学】一万字带您走进密码学的世界（下）">
+<meta name="twitter:description" content="引文 密码学是研究编制密码和破译密码的技术科学。研究密码变化的客观规律，应用于编制密码以保守通信秘密的，称为编码学；应用于破译密码以获取通信情报的，称为破译学，总称密码学。  在《一万字带您走进密码学的世界（上）》的文章中我们探讨了对称密码体系，哈希函数等技术，本文继续探讨密码学剩余的部分，本文的主要内容包括，非对称密码体系，签名算法等，因为本部分是区块链技术的基石，所以我会讲的更加详细一点，虽然">
+<meta name="twitter:image" content="http://www.ehcoo.com/images/2017/01/cryptology1_6.jpg?t=2>">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.ehcoo.com/cryptology1.html"/>
+
+
+  <title> 【密码学】一万字带您走进密码学的世界（下） | Ehcoo </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="default">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?83e3b6b55c0e48f5d0848d6a14b76c02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+  
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ehcoo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about-me" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                【密码学】一万字带您走进密码学的世界（下）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-01-12T16:20:09+00:00" content="2017-01-12">
+              2017-01-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/密码学/" itemprop="url" rel="index">
+                    <span itemprop="name">密码学</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/cryptology1.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="cryptology1.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+		  
+          
+          
+
+          
+		 
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="引文"><a href="#引文" class="headerlink" title="引文"></a>引文</h2><blockquote>
+<p>密码学是研究编制密码和破译密码的技术科学。研究密码变化的客观规律，应用于编制密码以保守通信秘密的，称为编码学；应用于破译密码以获取通信情报的，称为破译学，总称密码学。</p>
+</blockquote>
+<p>在<a href="cryptology.html">《一万字带您走进密码学的世界（上）》</a>的文章中我们探讨了对称密码体系，哈希函数等技术，本文继续探讨密码学剩余的部分，本文的主要内容包括，非对称密码体系，签名算法等，因为本部分是区块链技术的基石，所以我会讲的更加详细一点，虽然我已经尽最大努力使思想简化，但是其中的数学理论对于很多人还是很晦涩，建议读者开始之前先读下<a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E8%AE%BA" target="_blank" rel="external">数论</a>的有关知识。本部分的主要结构如下：</p>
+<p><img src="http://www.ehcoo.com/images/2017/01/cryptology1_6.jpg?t=2>" width="85%" height="65%" alt="图片名称" align="center"></p>
+<a id="more"></a>
+<h2 id="非对称密码"><a href="#非对称密码" class="headerlink" title="非对称密码"></a>非对称密码</h2><p>前面的文章我们探讨了对称加密，在对称秘钥加密的体系中，加密和解密使用同一个秘钥，显而易见的是这种方式存在一个很严重的弊端，那就是秘钥的分发和管理，一旦秘钥在分发过程中被人窃取，加密形同虚设。秘钥的管理也相当繁琐，如下图，如果我们要同时与n个人通信，那么每个人都将保存n-1个秘钥。</p>
+<p><img src="../images/2017/01/cryptology1_0.jpg?t=2>" width="85%" height="65%" alt="图片名称" align="center"></p>
+<p>非对称的存在的意义就是为了克服这些问题，在非对称秘钥体系中，通信双方各有一个公钥和私钥，加密者使用私钥进行加密，然后传递解密者，解密者使用对方的公钥直接就可以解开，不存在秘钥秘钥传递的问题，为了更好的解释这个问题，下面用个简单的例子讲解一下。</p>
+<h3 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h3><p>Alice和Bob用传统信件进行沟通，假设Alice和Bob不相信有邮政系统，他们想在通信的时候把信件用箱子锁住，并且在箱子外面加上一个锁。</p>
+<p>在公钥加密体系中，Alice首先将消息放在盒子中，然后锁上盒子用她的钥匙，然后将盒子发给bob，Bob收到盒子后然后用钥匙打开，很显然，这个钥匙一定是alice钥匙的副本，不然打不开</p>
+<p><img src="../images/2017/01/cryptology1_1.png?t=2>" width="85%" height="65%" alt="图片名称" align="center"></p>
+<p>在上面的例子中我们知道，秘钥交换是一定存在的，在沟通之前一定要进行秘钥的交换，那么有没有其他的方案可以不进行秘钥交换呢，答案是有的，Alice首先将消息放在盒子中，然后锁上盒子用她的钥匙，然后将盒子发给bob，Bob收到盒子后然后用锁锁上，然后在返回给Alice，这个时候盒子上是有两把锁的，然后Alice去掉自己的锁，这样盒子上就剩下Bob的一把锁了，然后在将盒子发给Bob，Bob用自己的钥匙打开自己的锁，就看到其中的消息。</p>
+<p><img src="../images/2017/01/cryptology1_2.png?t=2>" width="85%" height="65%" alt="图片名称" align="center"></p>
+<p>上面的方法是可以实现不用秘钥交换，但是确定就是过于复杂，那么有没有更好的方式呢？在对称密码体系中，问题将变得简单，Bob直接将自己的打开的锁发给Alice，Alice收到锁后，然后用这个锁加密锁住装有消息的盒子，然后发给Bob，Bob可以很轻易的打开自己的锁。</p>
+<p><img src="../images/2017/01/cryptology1_3.png?t=2>" width="85%" height="65%" alt="图片名称" align="center"></p>
+<p>在这个方法中一个重要的环节就是在已知Bob的锁和箱子的时候时候，没有BOb的钥匙是一定是打不开，在显示生活中很容易理解，可以在计算机的世界中如何寻找到这样合适的算法，目前已知的算法有两种，一种是基于离散对数的问题，另一种是椭圆曲线连对数问题，在下面的算法中我们着重讲解离散对数的问题。</p>
+<h3 id="Diffie-Hellman密钥交换"><a href="#Diffie-Hellman密钥交换" class="headerlink" title="Diffie-Hellman密钥交换"></a>Diffie-Hellman密钥交换</h3><p>Diffie-Hellman密钥交换首次出现在Diffie和Hellman的论文中，这篇影响深远的论文奠定了公开密钥密码编码学，因此该算法通常称之为Diffie-Hellman密钥交换。这种密钥交换技术的目的在于使得两个用户安全地交换一个秘密密钥以便用于以后的报文加密。 </p>
+<p>Diffie-Hellman加密算法的有效性依赖于计算离散对数的难度。简言之，可以如下定义离散对数：</p>
+<blockquote>
+<p>首先定义一个素数p的原根，为其各次幂产生从1 到p-1的所有整数根，也就是说，如果a是素数p的一个原根，那么数值 $a mod p$,$a_1 mod p$,…,ap-1 mod p 是各不相同的整数，并且以某种排列方式组成了从1到p-1的所有整数。对于一个整数b和素数p的一个原根a，可以找到惟一的指数i，使得 b = ai mod p 其中0 ≤ i ≤ (p-1）指数i称为b的以a为基数的模p的离散对数或者指数，该值被记为inda，p(b)。</p>
+</blockquote>
+<p>上面的一段引用看的一脸懵逼对吧，其实我也有又这样的感觉，我始终觉得一个优秀的学术工作者，要写出能读懂的文章，而不是别人看不懂的东西去彰显自己的高大上。好了就不吐槽了，我们开始用简单的例子解释上面的意思</p>
+<p>首先说取摩运算，就是我们经常说的取余，比如我们对3对12进行取余就是3,9对12取余就是9,27对12取余就是3 简单点说：<br>$3^x mod 12= y $ 其中 $x \in (1,2,3…n)$  在这里如果我们已知x，可以很轻易的计算出y的值，及时x的值比较大，利用计算机也可以很轻易的算出，但是如果已经y,即使用高性能的计算机也很难计算出x,这就是离散对数的问题。</p>
+<p>离散对数公钥加密算法是目前最为热门的公钥加密算法 ，其安全性要远远高于基于大数分解的RSA算法，首先说明一下上述三位科学家公钥密码体制的运作过程（假定A和B两个人要在一个不安全通道如因特网上形成密钥以备日后加密解密所用）。  </p>
+<p>首先，A、B两人要共同公开约定一个素数q和有限域Fq中的一个生成元g；<br>A选定一个随机数a∈{1，2，…，q-1}（a可以认为是A之私钥），并将$g^a(mod \quad q)$传送给B；<br>B选定一个随机数b∈{1，2，…，q-1}（b可以认为是B之私钥），并将$g^b(mod \quad q)$传送给A；<br>此时A可以算出$(g^b)^a(mod \quad q)$，B也可以算出$(g^a)^b(mod \quad q)$，由于<br>$(g^b)^a(mod \quad q) = (g^a)^b(mod \quad q) = g^{ab}(mod \quad q)$，  </p>
+<p>因此，A和B就形成了一个公共的密钥$g^{ab}(mod \quad q)$，日后便可以此钥来进行传统的加密解密计算，从而达到在不安全的通道上进行保密通讯的目的。  显然，敌方可以截获到$g，q，g^a(mod \quad q)，g^b(mod \quad q)$。因此，如果敌方有快速的求解离散对数的算法，就能从已截获的上述信息中迅速求出a或b，从而算出$g^ab(mod \quad q)$。遗憾的是，目前世界上根本就没有快速的求解离散对数的算法，因此当所选的有限域Fq很大时，a或b就很难算出。<br>Diffie-Hellman的算法举例可以参考我之前的文章<a href="http://www.ehcoo.com/Diffie-Hellman.html">《【密码学】Diffie-Hellman密钥交换》</a></p>
+<h3 id="ElGamal算法"><a href="#ElGamal算法" class="headerlink" title="ElGamal算法"></a>ElGamal算法</h3><p>在密码学中，ElGamal加密系统是一个基于迪菲-赫尔曼密钥交换的非对称加密算法。它在1985年由塔希尔·盖莫尔提出。GnuPG和PGP等很多密码学系统中都应用到了ElGamal算法。<br>ElGamal加密算法可以定义在任何循环群$ {\displaystyle G}$ 上。它的安全性取决于 ${\displaystyle G}$ 上的离散对数难题。<br>ElGamal 加密被用于免费的GNU隐私保护软件、PGP 近期的版本和其他密码系统中</p>
+<p><img src="../images/2017/01/cryptology1_8.png?t=2>" width="85%" height="65%" alt="图片名称" align="center"></p>
+<p>此部分的详细讲解，请看下篇文章<a href="cryptology.html">《【密码学】ElGamal算法详解》</a></p>
+<h3 id="Cramer-Shoup-加密系统"><a href="#Cramer-Shoup-加密系统" class="headerlink" title="Cramer-Shoup 加密系统"></a>Cramer-Shoup 加密系统</h3><p>Cramer–Shoup 系统是一个非对称秘钥加密算法，而且被证实是第一个针对适应性选择米文攻击所采用的标准加密猜想所用的安全有效的项目。其安全性是基于决定性Diffie–Hellman猜想的计算难解性（广泛接受，但未被证实）的计算难解性的。由 Ronald Cramer （罗纳德·克莱默）和 Victor Shoup （维克多·苏伯）于1998年研发，是 ElGamal 加密系统的延伸。与 ElGamal 相反，它具有很强的延展性，Cramer–Shoup 添加了另外的成分来确保甚至是遭受广泛的攻击时保证其非延展性。这一非延展性是通过使用抗撞击哈希函数和额外的计算而取得的，导致了密文是 ElGamal 的两倍大</p>
+<h3 id="ECC-椭圆曲线算法"><a href="#ECC-椭圆曲线算法" class="headerlink" title="ECC 椭圆曲线算法"></a>ECC 椭圆曲线算法</h3><p>椭圆曲线密码学（英语：Elliptic curve cryptography，缩写为ECC），一种建立公开金钥加密的算法，基于椭圆曲线数学。椭圆曲线在密码学中的使用是在1985年由Neal Koblitz和Victor Miller分别独立提出的。</p>
+<p>ECC的主要优势是在某些情况下它比其他的方法使用更小的密钥——比如RSA加密算法——提供相当的或更高等级的安全。ECC的另一个优势是可以定义群之间的双线性映射，基于Weil对或是Tate对；双线性映射已经在密码学中发现了大量的应用，例如基于身份的加密。不过一个缺点是加密和解密操作的实现比其他机制花费的时间长。</p>
+<h3 id="RSA加密算法"><a href="#RSA加密算法" class="headerlink" title="RSA加密算法"></a>RSA加密算法</h3><p>RSA加密算法是一种非对称加密算法。在公开密钥加密和电子商业中RSA被广泛使用。RSA是1977年由罗纳德·李维斯特（Ron Rivest）、阿迪·萨莫尔（Adi Shamir）和伦纳德·阿德曼（Leonard Adleman）一起提出的。当时他们三人都在麻省理工学院工作。RSA就是他们三人姓氏开头字母拼在一起组成的。</p>
+<p><img src="../images/2017/01/cryptology1_7.png?t=2>" width="85%" height="65%" alt="图片名称" align="center"></p>
+<p>因为此部分是区块链的算法结合比较紧密，我将花更多的篇幅讲解，从上面的讲解我们知道，我们需要构建一个锁和一把钥匙，然后将锁分配给每个人，然后自己保留钥匙，在这里这把锁就相当于相当于公钥，自己的钥匙就相当于私钥，下面我们开始用离散对数问题来构建我们的公钥和私钥。虽然在部分我会尽量写的详细，但是在开始之前，读者最好能对数论知识有个基本的了解，可以参数我之前的文章<a href="http://www.ehcoo.com/rsa.html">《【密码学】RSA算法解析-数论基础》</a></p>
+<p>我们前面已经提到离散对数的问题，形如<br>$$m^e mod  \quad N = c$$<br>我们在已知c和N和m的情况下很难图导出e.同样的道理，你在已知c和N和e,的情况下也很难推出来m,这就是一个典型的单项函数</p>
+<p><img src="../images/2017/01/cryptology1_4.jpg?t=1>" width="85%" height="65%" alt="图片名称" align="center"></p>
+<p>m是明文，c是密文，e是加密的钥匙，d是解密的钥匙，按照我们上面的解释，在下面的加密解密过程都是严谨的单向过程<br>$$m^e mod  \quad N = c  \quad\quad公式1$$<br>我们找到一个d使下面的公式也成立<br>$$c^d mod  \quad N = m \quad\quad公式2$$<br>1.接下来我们的目标就是找到合适的e和d,我们开始推导，将公式1带入到公式2中<br>$$（m^e mod  \quad N）^d mod  \quad N = m \quad\quad公式3$$<br>$$（m^e）^d mod  \quad N = m \quad\quad公式4$$<br>$$ m^{ed} mod  \quad N = m \quad\quad公式5$$<br>2.我们将一个数n的子集存在互质关系个数定义为φ(n),那么一个合数的公约数是不固定的，但是一个素数的公约数一定只有自己，所以对于素数φ(n) = n-1  这个求解过程叫欧拉函数，可以参考我之前的<a href="http://www.ehcoo.com/rsa.html#欧拉函数">文章</a><br>3.欧拉函数主要应用在欧拉定理上，”欧拉定理”指的是：如果两个正整数m和N互质，则n的欧拉函数 φ(n) 可以让下面的等式成立：<br>$$m^{\phi({n})}\equiv 1(mod\quad N) \quad\quad公式6$$<br>转换后就是：<br>$$m^{\phi({n})} mod\quad N \equiv 1 \quad\quad公式7 $$<br>然后两边同时乘以m<br>$$m^{\phi({n})+1} mod\quad N \equiv m \quad\quad公式8$$<br>有上面的公式5我们知道<br>$$ m^{ed} mod  \quad N = m \quad\quad公式5$$<br>因此可以得出<br>$$ m^{ed} mod  \quad N = m^{\phi({n})+1} mod\quad N $$<br>$$ed = \phi({n})+1$$<br>$$ed - \phi({n}) y = 1 \quad\quad\quad此处增加y表示任意数字$$<br>我们目前已经知道的条件，我们已知N，一般N都是两个素数的乘积，已经知道加密秘钥e,求解解密秘钥d<br>为了便于讲解，我们假设在这里N=77，则$phi({n})=6*10 = 60$, e等于67，则计算过程如下，<br>$$67d - 60 y = 1$$<br>以为y可以为负数，因此<br>这是有一个二项式的接，其实有多个答案，我们只需获取其中一个就可以，根据欧几里得拓展定理可以算出私钥d的值为43，计算机过程参考<a href="http://www.ehcoo.com/rsa_extend.html">《【密码学】RSA算法解析-加密解密》</a><br>最终加密过程<br>$$75^{67}\equiv c(mod\quad 77)$$<br>在计算机中可以很轻易的计算出c=26<br>解密过程<br>$$26^{43}\equiv m(mod\quad 77)$$<br>在计算机中可以很轻易的计算出m=75</p>
+<h4 id="演示代码"><a href="#演示代码" class="headerlink" title="演示代码"></a>演示代码</h4><p><img src="../images/2017/01/cryptology1_5.jpg?t=2>" width="85%" height="65%" alt="图片名称" align="center"></p>
+<p>python源码地址：<br><a href="https://cloud.sagemath.com/projects/dc18d6fb-c4ae-47c4-8ea4-b2a1887ccb6b/files/RSA_CASE.sagews" target="_blank" rel="external">https://cloud.sagemath.com/projects/dc18d6fb-c4ae-47c4-8ea4-b2a1887ccb6b/files/RSA_CASE.sagews</a></p>
+<p>到这里RSA完整的讲完了，虽然我已经写得很详细了，但是肯定还是有些读者不能完全理解，如果还是不能理解，建议先学习点数论的知识预热。</p>
+<h2 id="签名算法"><a href="#签名算法" class="headerlink" title="签名算法"></a>签名算法</h2><p>我们在讨论签名算法之前，先来回忆一下之前讲的hash函数，我们有一份文件可以计算出他的Hash值，一旦文件被篡改做产生的Hash值也将变化，Hash函数解决了完整性的问题，然而并没有解决认证的问题，如果攻击者不但把文件给篡改了还把hash值给改了，这样接收者就察觉不到文件已经出了问题。</p>
+<p>我们需要一种签名机制，这种签名机制能保证所有人都能对文件的完整性进行认证，同时又能验证这份文件确实是发送者发的，攻击者无法伪造这个签名。</p>
+<h3 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h3><p>数字签名常常和哈希函数在一起使用，给定一段明文M，我们可以计算出明文的哈希值h(M),然后将哈希值进行某种加密S后，附在明文上，结构如下：<br>$$M|S(h(M))$$<br>在上述结构主要依赖于哈希值不存在对撞，即不同的明文之间不会存在相同的哈希值，实际上每种公钥加密体系都能实现，下面我们主要探究3种： Schnorr签名，Digital Signature Algorithm（数字证书签名），RSA签名</p>
+<h3 id="Schnorr签名"><a href="#Schnorr签名" class="headerlink" title="Schnorr签名"></a>Schnorr签名</h3><p>Schnorr签名是基于ElGamal算法的，它的安全性取决于离散对数的难题。</p>
+<h3 id="DSA签名"><a href="#DSA签名" class="headerlink" title="DSA签名"></a>DSA签名</h3><p>使用SHA哈希加密函数，它的安全性也取决于离散对数的难题。它是1990被提出，并且已经被US FIPS所接受，他的具体原理如下：<br>1.选择一个1024位的素数p,此时有一个群组$Z_p$<br>2.选择另一个160位的素数q，q除以p-1和q都在群组$G_q$中，并且群组$G_q$属于$Z_p$<br>3.其中要到的哈希算法是SHA-1<br><strong>秘钥生成：</strong><br>1.选择p和q,条件就是上面所表达的，换成数学的表达方式就是$p=zq+1$ 并且z属于群组$Z_p$<br>2.选择一个g，使下面的公式成立，$ jz = g(mod \quad p) $ 并且 $1&lt;j&lt;p$<br>3.在范围${1,…..q-1}$ 的选择一个随机数x<br>4.计算出来$y=g^x mod \quad p$<br>5.其中公钥就是$K^1 = (p,q,g,y)$,私钥就是$K^2 = (p,q,g,x)$<br><strong>签名过程：</strong><br>1.在范围${1,…..q-1}$的选择一个随机数r<br>2.计算出来$s=(g^r mod \quad p ) mod \quad q $<br>3.计算出$t=((SHA-1(M)+xs)r^{-1}) mod \quad q$<br>4.将签名结果$(s,t)$附属在消息上。<br><strong>验签过程：</strong><br>1.计算出$u_1 = (SHA-1(M)t^{-1}) mod \quad q $<br>2.计算出$u_2 =(s*t^{-1}) mod \quad q$<br>3.计算签名$s^1 = ((g^{u_1}y^{u_2})mod \quad p) mod \quad q$<br>4.比较$s^1$是否与s相同   </p>
+<h3 id="RSA签名"><a href="#RSA签名" class="headerlink" title="RSA签名"></a>RSA签名</h3><p>一种从RSA算法演变而来的签名，它的安全性取决大素数分解难题。下面我们来看看具体的实现过程<br><strong>秘钥生成</strong><br>1.选择两个大素数，p和q<br>2.计算出他们的欧拉函数，$\phi(n) = (p-1)(q-1) $<br>3.我们选择一个整数e&gt;1,并使$gcd(e,\phi(n))=1$ 即e要和欧拉函数（非公约的个数），互为素数。<br>4.我们使$de = 1( mod \phi(n)) $ ,根据欧几里得拓展定理计算出d.<br>5.然后我们就得到了公钥$K1= (e,n)$，然后对外发布公钥<br>6.私钥就是$k2=d$    </p>
+<p><strong>签名过程：</strong><br>我们假设需要加密的信息为M，其中M在${1,,,,n-1}$这个范围内，h为哈希加密函数，则签名的过程如下：<br>$$s=h(M)^d mod \quad n$$<br><strong>验签过程：</strong><br>计算出明文的哈希值h(M)比较h(M)是否和$s^e\quad n$相应，如果相同则验签成功。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文主要阐述了密码学中的<font color="#00ffff">非对称密码和签名算法</font>，不得不说对于一个开发人员来说，今天的讲解过的理论化，但是理论是实践的基础，不是吗？</p>
+<h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><p>本文45%为翻译组合,<strong>55%为原创</strong></p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p><a href="http://www.jiamisoft.com/blog/index.php/3165-diffie-hellmanjiamisuanfa.html" target="_blank" rel="external">http://www.jiamisoft.com/blog/index.php/3165-diffie-hellmanjiamisuanfa.html</a><br><a href="https://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95" target="_blank" rel="external">https://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95</a><br><a href="http://baike.baidu.com/link?url=14BKIalgIoeD2Wbq7X6rxUBoYrTEHlhxlX3x337N7_7qLaDh6XMK1MMStd5zIfROme-meST7ZJPQqWDjb7MgUJHxPiVeEJqeP2PB1i2eSNOZAzy_c-BgpCQLLUjn1GHg" target="_blank" rel="external">http://baike.baidu.com/link?url=14BKIalgIoeD2Wbq7X6rxUBoYrTEHlhxlX3x337N7_7qLaDh6XMK1MMStd5zIfROme-meST7ZJPQqWDjb7MgUJHxPiVeEJqeP2PB1i2eSNOZAzy_c-BgpCQLLUjn1GHg</a><br><a href="https://www.khanacademy.org/computing/computer-science/cryptography/modern-crypt/v/checkpoint-advanced-lessons" target="_blank" rel="external">https://www.khanacademy.org/computing/computer-science/cryptography/modern-crypt/v/checkpoint-advanced-lessons</a> <a href="http://en.wikipedia.org/wiki/Cramer–Shoup_cryptosystem" target="_blank" rel="external">http://en.wikipedia.org/wiki/Cramer–Shoup_cryptosystem</a><br><a href="https://zh.wikipedia.org/wiki/%E6%A4%AD%E5%9C%86%E6%9B%B2%E7%BA%BF%E5%AF%86%E7%A0%81%E5%AD%A6" target="_blank" rel="external">https://zh.wikipedia.org/wiki/%E6%A4%AD%E5%9C%86%E6%9B%B2%E7%BA%BF%E5%AF%86%E7%A0%81%E5%AD%A6</a>  </p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>your support will encourage me to continue to create!</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="RuJia Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/密码学/" rel="tag">#密码学</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/technicalTebt.html" rel="next" title="【系统架构】数据库演进过程中的技术债务探讨">
+                <i class="fa fa-chevron-left"></i> 【系统架构】数据库演进过程中的技术债务探讨
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/complexity.html" rel="prev" title="【算法整理】听说你写的算法很牛？-优质算法衡量标准探讨">
+                【算法整理】听说你写的算法很牛？-优质算法衡量标准探讨 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          <pre><code><b>版权声明</b>:自由转载-非商用-非衍生-保持署名<a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" rel="external nofollow" >(创意共享3.0许可证)</a></code></pre>
+
+
+
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="RuJia" />
+          <p class="site-author-name" itemprop="name">RuJia</p>
+          <p class="site-description motion-element" itemprop="description">BlockChain,Distributed Computing</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rjgeek/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Others">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Others
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cs.bham.ac.uk/~mdr/" title="Professor Mark Ryan" target="_blank" rel="external nofollow" >Professor Mark Ryan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cs.bham.ac.uk/~rzb/" title="Dr Rami Bahsoon" target="_blank" rel="external nofollow" >Dr Rami Bahsoon</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sec.cs.bham.ac.uk/people/" title="The Security and Privacy Group" target="_blank" rel="external nofollow" >The Security and Privacy Group</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.yfgeek.com/" title="YFGeek" target="_blank" rel="external nofollow" >YFGeek</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://rjgeek.github.io/CV1.pdf" title="My CV" target="_blank" rel="external nofollow" >My CV</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引文"><span class="nav-number">1.</span> <span class="nav-text">引文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非对称密码"><span class="nav-number">2.</span> <span class="nav-text">非对称密码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一个简单的例子"><span class="nav-number">2.1.</span> <span class="nav-text">一个简单的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Diffie-Hellman密钥交换"><span class="nav-number">2.2.</span> <span class="nav-text">Diffie-Hellman密钥交换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ElGamal算法"><span class="nav-number">2.3.</span> <span class="nav-text">ElGamal算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cramer-Shoup-加密系统"><span class="nav-number">2.4.</span> <span class="nav-text">Cramer-Shoup 加密系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ECC-椭圆曲线算法"><span class="nav-number">2.5.</span> <span class="nav-text">ECC 椭圆曲线算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RSA加密算法"><span class="nav-number">2.6.</span> <span class="nav-text">RSA加密算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#演示代码"><span class="nav-number">2.6.1.</span> <span class="nav-text">演示代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#签名算法"><span class="nav-number">3.</span> <span class="nav-text">签名算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设计原则"><span class="nav-number">3.1.</span> <span class="nav-text">设计原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Schnorr签名"><span class="nav-number">3.2.</span> <span class="nav-text">Schnorr签名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DSA签名"><span class="nav-number">3.3.</span> <span class="nav-text">DSA签名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RSA签名"><span class="nav-number">3.4.</span> <span class="nav-text">RSA签名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#声明"><span class="nav-number">5.</span> <span class="nav-text">声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">6.</span> <span class="nav-text">引用</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RuJia</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+  <span id="busuanzi_container_site_pv">
+    Total visited 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  
+  <span id="busuanzi_container_site_uv">
+  Total visitors 本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'ehcoo';
+      var disqus_identifier = 'cryptology1.html';
+      var disqus_title = "【密码学】一万字带您走进密码学的世界（下）";
+      var disqus_url = 'http://www.ehcoo.com/cryptology1.html';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
