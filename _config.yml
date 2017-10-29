@@ -99,8 +99,8 @@ deploy:
 # ---------------------------------------------------------------
 
 # Schemes  #nextµÄÈý¸öscheme
-#scheme: Muse
-scheme: Mist
+scheme: Muse
+#scheme: Mist
 #scheme: Pisces
 
 
