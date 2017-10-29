@@ -85,7 +85,8 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: hexo-theme-next-master
+#theme: hexo-theme-next-master
+theme: hexo-theme-colorfulNext-master
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
