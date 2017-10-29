@@ -99,9 +99,9 @@ deploy:
 # ---------------------------------------------------------------
 
 # Schemes  #next的三个scheme
-scheme: Muse
+#scheme: Muse
 #scheme: Mist
-#scheme: Pisces
+scheme: Pisces
 
 
 # Social links   #社交链接
