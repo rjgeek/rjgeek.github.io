@@ -1,0 +1,61 @@
+# Lang
+language: en
+
+# Dark Mode
+dark: false
+
+# Header
+menu:
+  Home: /
+  Archives: /archives
+  About: /about
+
+# Your Feed Location
+#rss: /atom.xml
+
+# Content
+fancybox: true
+
+
+# Miscellaneous
+google_analytics:
+favicon: /favicon.ico
+twitter:
+google_plus:
+fb_admins:
+fb_app_id:
+
+
+# Profile
+nickname: NickName
+description: Lorem ipsum dolor sit amet, **consectetur adipiscing elit.** Fusce eget urna vitae velit *eleifend interdum at ac nisi. In nec ligula lacus. Cum sociis natoque* penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed eu cursus erat, ut dapibus quam. Aliquam eleifend dolor vitae [libero pharetra](http://hexo.io) adipiscing. Etiam adipiscing dolor a quam tempor, eu convallis nulla varius. Aliquam sollicitudin risus a porta aliquam.
+
+# Load fontawesome icons? Also see the links option
+icons: true
+
+# Footer area links
+# NOTICE) If you set "icons: false" link names will be clear text
+# If "icons: true" link names will interpreted as fontawesome icon names
+# NOTICE) Use the fontawesome icon names without the fa- prefix (http://fontawesome.io/cheatsheet/)
+links:
+  book: /archives/
+  globe: https://github.com/geekplux/hexo-theme-typing
+  twitter: https://twitter.com/
+  github-alt: https://github.com/
+  youtube-play: https://www.youtube.com/
+  stack-overflow: https://stackoverflow.com/
+  google-plus: https://plus.google.com/
+  rss: /atom.xml
+
+
+# Info
+archive_footer_content: Lorem ipsum dolor sit amet, **consectetur adipiscing elit.** Fusce eget urna vitae velit *eleifend interdum at ac nisi. In nec ligula lacus. Cum sociis natoque* penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed eu cursus erat, ut dapibus quam. Archive
+post_footer_content: ipsum dolor sit amet, **consectetur adipiscing elit.** Fusce eget urna vitae velit *eleifend interdum at ac nisi. In nec ligula lacus. Cum sociis natoque* penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed eu cursus erat, ut dapibus quam. Post
+
+# Gitment
+gitment:
+  owner:
+  repo:
+  client:
+    id:
+    secret:

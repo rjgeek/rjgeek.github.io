@@ -1,0 +1,31 @@
+{
+  "name": "hexo-theme-typing",
+  "description": "a pure and fresh Hexo theme.",
+  "version": "1.2.2",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "hexo",
+    "theme",
+    "typing"
+  ],
+  "author": {
+    "name": "geekplux",
+    "email": "geekplux@gmail.com",
+    "url": "github.com/geekplux"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "gitment": "^0.0.3",
+    "normalize.css": "^4.2.0",
+    "typo.css": "^2.1.2"
+  },
+  "devDependencies": {
+    "cssnano": "^3.7.3",
+    "postcss-cli": "^2.5.2",
+    "postcss-import": "^8.1.2",
+    "precss": "^1.4.0"
+  }
+}
