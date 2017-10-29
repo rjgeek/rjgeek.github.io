@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Haojen # your blog title name
+title: Ehcoo # your blog title name
 subtitle:  
-author: Haojen Ma # 作者
+author: Ehcoo  # 作者
 language: 
 timezone: 
 
 # custom Site settings
 # more detail check out docs
-SEOTitle: Haojen's blog 
+SEOTitle: Ehcoo's blog 
 header-img: //o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg
-email: HaojenMa@gmail.com
+email: EhcooMa@gmail.com
 description: "马浩珍在 Github 上的个人博客"
 keyword: # seo key words
 
@@ -22,16 +22,16 @@ favicon: # your favicon png
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://haojen.github.io
+url: http://Ehcoo.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
 # SNS settings
 # RSS:
-weibo_username: haojen
+weibo_username: Ehcoo
 zhihu_username: megahertz
-github_username: haojen
+github_username: Ehcoo
 twitter_username: ehazon
 facebook_username:  
 linkedin_username:  
